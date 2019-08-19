@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="计算图是TensorFlow的核心概念，使用图（Graph）来表示计算任务，由节点和边组成。TensorFlow由前端负责构建计算图，后端负责执行计算图。为了执行图的计算，图必须在会话（Session）里面启动，会话将图的操作分发到CPU、GPU等设备上执行。下面将介绍如何在TensorFlow里面创建会话、图以及基本操作。">
+<meta name="keywords" content="TensorFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow学习笔记2：图(Graph)与会话(Session)机制">
+<meta property="og:url" content="http://yoursite.com/2019/08/06/tf学习笔记2/index.html">
+<meta property="og:site_name" content="浅笑の博客">
+<meta property="og:description" content="计算图是TensorFlow的核心概念，使用图（Graph）来表示计算任务，由节点和边组成。TensorFlow由前端负责构建计算图，后端负责执行计算图。为了执行图的计算，图必须在会话（Session）里面启动，会话将图的操作分发到CPU、GPU等设备上执行。下面将介绍如何在TensorFlow里面创建会话、图以及基本操作。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/TYchJjHiKGDp.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/fqcuyTov5FHS.png?imageslim">
+<meta property="og:updated_time" content="2019-08-16T12:53:30.584Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TensorFlow学习笔记2：图(Graph)与会话(Session)机制">
+<meta name="twitter:description" content="计算图是TensorFlow的核心概念，使用图（Graph）来表示计算任务，由节点和边组成。TensorFlow由前端负责构建计算图，后端负责执行计算图。为了执行图的计算，图必须在会话（Session）里面启动，会话将图的操作分发到CPU、GPU等设备上执行。下面将介绍如何在TensorFlow里面创建会话、图以及基本操作。">
+<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/TYchJjHiKGDp.png?imageslim">
+  <link rel="alternate" href="/atom.xml" title="浅笑の博客" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/2019/08/06/tf学习笔记2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>TensorFlow学习笔记2：图(Graph)与会话(Session)机制 | 浅笑の博客</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">浅笑の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我们的征途是星辰大海</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">19</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">40</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/06/tf学习笔记2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zheng Yujie">
+      <meta itemprop="description" content="C++/Python/深度学习">
+      <meta itemprop="image" content="/images/1.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅笑の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">TensorFlow学习笔记2：图(Graph)与会话(Session)机制
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-06 15:35:13" itemprop="dateCreated datePublished" datetime="2019-08-06T15:35:13+08:00">2019-08-06</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-16 20:53:30" itemprop="dateModified" datetime="2019-08-16T20:53:30+08:00">2019-08-16</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/08/06/tf学习笔记2/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/06/tf学习笔记2/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>3.4k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>3 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/TYchJjHiKGDp.png?imageslim" alt="mark"><br>计算图是TensorFlow的核心概念，使用图（Graph）来表示计算任务，由节点和边组成。TensorFlow由前端负责构建计算图，后端负责执行计算图。<br>为了执行图的计算，图必须在会话（Session）里面启动，会话将图的操作分发到CPU、GPU等设备上执行。<br>下面将介绍如何在TensorFlow里面创建会话、图以及基本操作。</p>
+<a id="more"></a>
+<h1 id="图-Graph"><a href="#图-Graph" class="headerlink" title="图(Graph)"></a>图(Graph)</h1><p>TensorFlow Python库已经有一个默认图 (default graph)，如果没有创建新的计算图，则默认情况下是在这个default graph里面创建节点和边。<br>在图里面添加节点非常方便。例如现在要创建这样的计算图，两个张量相加，如下图：<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/fqcuyTov5FHS.png?imageslim" alt="mark"><br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf </span><br><span class="line">a=tf.constant([1.0,2.0], name=&apos;a&apos;) </span><br><span class="line">b=tf.constant([3.0,4.0], name=&apos;b&apos;) </span><br><span class="line">result = tf.add(a,b)</span><br></pre></td></tr></table></figure></p>
+<p>现在默认图就有了三个节点，两个constant()，和一个add()。<br>为了真正使两个张量相加并得到结果，就必须在会话里面启动这个图。</p>
+<h1 id="会话-Session"><a href="#会话-Session" class="headerlink" title="会话(Session)"></a>会话(Session)</h1><h2 id="会话的创建"><a href="#会话的创建" class="headerlink" title="会话的创建"></a>会话的创建</h2><p>要启动计算图，首先要创建一个Session对象。<br>使用tf.Session()创建会话，调用run()函数执行计算图。如果没有传入任何创建参数，会话构造器将启动默认图。如果要指定某个计算图，则传入计算图参数（如g1），则创建会话方式为tf.Session(graph=g1)创建会话（Session）主要有以下三种方式：</p>
+<ol>
+<li><p>创建一个会话</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#启动默认图</span><br><span class="line">sess=tf.Session()</span><br><span class="line">result_value = sess.run(result)</span><br><span class="line">print(result_value)</span><br><span class="line"># ==&gt; [4.0 6.0]</span><br><span class="line"></span><br><span class="line"># 任务完成, 关闭会话.</span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个会话</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">with tf.Session() as sess:</span><br><span class="line">    result_value = sess.run(result)</span><br><span class="line">    print(result_value)</span><br><span class="line">    # ==&gt; [4.0 6.0]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个默认会话</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sess=tf.Session()</span><br><span class="line">with sess.as_default():</span><br><span class="line">    result_value = result.eval()</span><br><span class="line">    print(result_value)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>当指定默认会话后，可以通过tf.Tensor.eval函数来计算一个张量的取值。</p>
+<ol>
+<li>创建一个交互式会话<br>在交互式环境下（例如IPython），使用设置默认会话的方式来获取张量的取值更加方便，TensorFlow提供了一种在交互式环境下直接构建默认会话的函数：tf.InteractiveSession，该函数会自动将生成的会话注册为默认会话，使用 tf.Tensor.eval()代替 Session.run()，代码如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sess= tf.InteractiveSession()</span><br><span class="line">result_value = result.eval()</span><br><span class="line">print(result_value)</span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Fetch-取回"><a href="#Fetch-取回" class="headerlink" title="Fetch(取回)"></a>Fetch(取回)</h2><p>在使用sess.run( )运行图时，我们可以传入fetches，用于取回某些操作或tensor的输出内容。fetches可以是list，tuple，namedtuple，dict中的任意一个。fetches可以是一个列表，在op的一次运行中一起获得（而不是逐个去获取 tensor）多个tensor值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c = sess.run(a)            # fetches可以为单个数a</span><br><span class="line">d = sess.run([a, b])       # fetches可以为一个列表[a, b]</span><br></pre></td></tr></table></figure></p>
+<h2 id="Feed-注入"><a href="#Feed-注入" class="headerlink" title="Feed(注入)"></a>Feed(注入)</h2><p>TensorFlow提供了feed注入机制, 它可以临时替代graph中任意op操作的输入tensor，可以对graph中任何操作提交补丁（直接插入一个tensor）。<br>feed机制只在调用它的方法内有效，方法结束，feed就会消失。最常见的用例是把某些特殊操作为feed注入的对象。你可以提供数据feed_dict，作为sess.run( )调用的参数。使用tf.placeholder( )，为某些操作的输入创建占位符。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">x = np.ones((2, 3))</span><br><span class="line">y = np.ones((3, 2)) </span><br><span class="line"></span><br><span class="line">input1 = tf.placeholder(tf.int32)</span><br><span class="line">input2 = tf.placeholder(tf.int32)</span><br><span class="line"></span><br><span class="line">output = tf.matmul(input1, input2)</span><br><span class="line"></span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">    print(sess.run(output, feed_dict = &#123;input1:x, input2:y&#125;))</span><br></pre></td></tr></table></figure></p>
+<p>如果没有正确提供tf.placeholder( )，feed操作将产生错误。注意，feed注入的值不能是tf的tensor对象，应该是Python常量、字符串、列表、numpy ndarrays，或者TensorHandles。</p>
+<h1 id="构建多个计算图"><a href="#构建多个计算图" class="headerlink" title="构建多个计算图"></a>构建多个计算图</h1><p>在TensorFlow中可以构建多个计算图，计算图之间的张量和运算是不会共享的，通过这种方式，可以在同个项目中构建多个网络模型，而相互之间不会受影响。<br>使用tf.Graph()函数构建图，构建多个计算图的方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># 构建计算图g1</span><br><span class="line">g1=tf.Graph()</span><br><span class="line">with g1.as_default():</span><br><span class="line">    # 在计算图g1中定义变量&apos;v&apos;,并设置初始值为0。</span><br><span class="line">    v=tf.get_variable(&apos;v&apos;,initializer=tf.zeros_initializer()(shape = [1]))</span><br><span class="line">    </span><br><span class="line"># 构建计算图g2</span><br><span class="line">g2=tf.Graph()</span><br><span class="line">with g2.as_default():</span><br><span class="line">    # 在计算图g2中定义变量&apos;v&apos;,并设置初始值微1。</span><br><span class="line">    v=tf.get_variable(&apos;v&apos;,initializer=tf.ones_initializer()(shape = [1]))</span><br><span class="line"></span><br><span class="line"># 在计算图g1中读取变量&apos;v&apos;的取值</span><br><span class="line">with tf.Session(graph=g1) as sess:</span><br><span class="line">    tf.global_variables_initializer().run()</span><br><span class="line">    with tf.variable_scope(&apos;&apos;,reuse=True):</span><br><span class="line">        print(sess.run(tf.get_variable(&apos;v&apos;)))</span><br><span class="line">        # 输出结果[0.]</span><br><span class="line"></span><br><span class="line"># 在计算图g2中读取变量&apos;v&apos;的取值</span><br><span class="line">with tf.Session(graph=g2) as sess:</span><br><span class="line">    tf.global_variables_initializer().run()</span><br><span class="line">    with tf.variable_scope(&apos;&apos;,reuse=True):</span><br><span class="line">        print(sess.run(tf.get_variable(&apos;v&apos;)))</span><br><span class="line">        # 输出结果[1.]。</span><br></pre></td></tr></table></figure></p>
+<h1 id="指定运行设备"><a href="#指定运行设备" class="headerlink" title="指定运行设备"></a>指定运行设备</h1><p>如果电脑有多个GPU，可以在图、会话中指定要运行的设备</p>
+<ul>
+<li><p><strong>在图中指定运行设备</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g=tf.Graph()</span><br><span class="line"># 指定计算运行的设备。</span><br><span class="line">with g.device(&apos;/gpu:0&apos;):</span><br><span class="line">    result=tf.add(a,b)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>在会话中指定运行设备</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">with tf.Session() as sess:</span><br><span class="line">  with tf.device(&quot;/gpu:0&quot;):</span><br><span class="line">    result=tf.add(a,b)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>运行的设备用字符串进行标识，目前支持的设备包括：<br>“/cpu:0”: 机器的 CPU<br>“/gpu:0”: 机器的第一个 GPU，如果有的话<br>“/gpu:1”: 机器的第二个 GPU，以此类推</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/TensorFlow/" rel="tag"># TensorFlow</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/06/tf学习笔记1/" rel="next" title="TensorFlow学习笔记1：张量与变量">
+                  <i class="fa fa-chevron-left"></i> TensorFlow学习笔记1：张量与变量
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/06/tf学习笔记3/" rel="prev" title="TensorFlow学习笔记3：激励函数">
+                  TensorFlow学习笔记3：激励函数 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/1.jpeg"
+      alt="Zheng Yujie">
+  <p class="site-author-name" itemprop="name">Zheng Yujie</p>
+  <div class="site-description motion-element" itemprop="description">C++/Python/深度学习</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://github.com/zhengyujie" title="GitHub &rarr; https://github.com/zhengyujie" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="mailto:zhengyujie97@126.com" title="E-Mail &rarr; mailto:zhengyujie97@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://music.163.com/#/playlist?id=327924141" title="Music &rarr; https://music.163.com/#/playlist?id=327924141" rel="noopener" target="_blank"><i class="fa fa-fw fa-headphones"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://www.google.com" title="Google &rarr; https://www.google.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-heart"></i>
+      FRIENDS
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://139.196.87.110:8080/" title="http://139.196.87.110:8080/" rel="noopener" target="_blank">RUIKO SATEN</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#图-Graph"><span class="nav-number">1.</span> <span class="nav-text">图(Graph)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#会话-Session"><span class="nav-number">2.</span> <span class="nav-text">会话(Session)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#会话的创建"><span class="nav-number">2.1.</span> <span class="nav-text">会话的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fetch-取回"><span class="nav-number">2.2.</span> <span class="nav-text">Fetch(取回)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feed-注入"><span class="nav-number">2.3.</span> <span class="nav-text">Feed(注入)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建多个计算图"><span class="nav-number">3.</span> <span class="nav-text">构建多个计算图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指定运行设备"><span class="nav-number">4.</span> <span class="nav-text">指定运行设备</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
+    <span class="post-meta-divider">|</span>
+    <span title="站点总字数">全站共163k字</span>
+    <span class="post-meta-divider">|</span>
+    <span title="站点阅读时长">阅读时长2:29</span>
+</div>
+
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,07,26,00,00,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: true,
+    appId: 'QhpM05HufWMwqxw5TW8GGKHt-gzGzoHsz',
+    appKey: 'ReXaLSgoPNRCjW8dT9eEyR25',
+    placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧！',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

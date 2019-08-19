@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="VGGNetVGGNet是牛津大学计算机视觉组(Visual Geometry Group)和Google DeepMind公司一起研发的深度卷积神经网络。VGGNet探索了卷积神经网络的深度和其性能之间的关系，通过反复堆叠3×3的小型卷积核和2×2的最大池化层，VGGNet成功地构筑了16~19层深的卷积神经网络。到目前为止，VGGNet还经常被用来提取图像的特征。VGGNet训练后的模型参数在">
+<meta name="keywords" content="卷积网络,TensorFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow学习笔记9：VGGNet-16">
+<meta property="og:url" content="http://yoursite.com/2019/08/08/tf学习笔记9/index.html">
+<meta property="og:site_name" content="浅笑の博客">
+<meta property="og:description" content="VGGNetVGGNet是牛津大学计算机视觉组(Visual Geometry Group)和Google DeepMind公司一起研发的深度卷积神经网络。VGGNet探索了卷积神经网络的深度和其性能之间的关系，通过反复堆叠3×3的小型卷积核和2×2的最大池化层，VGGNet成功地构筑了16~19层深的卷积神经网络。到目前为止，VGGNet还经常被用来提取图像的特征。VGGNet训练后的模型参数在">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/a259vKoJSqwF.png?imageslim">
+<meta property="og:updated_time" content="2019-08-16T12:55:06.672Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TensorFlow学习笔记9：VGGNet-16">
+<meta name="twitter:description" content="VGGNetVGGNet是牛津大学计算机视觉组(Visual Geometry Group)和Google DeepMind公司一起研发的深度卷积神经网络。VGGNet探索了卷积神经网络的深度和其性能之间的关系，通过反复堆叠3×3的小型卷积核和2×2的最大池化层，VGGNet成功地构筑了16~19层深的卷积神经网络。到目前为止，VGGNet还经常被用来提取图像的特征。VGGNet训练后的模型参数在">
+<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/a259vKoJSqwF.png?imageslim">
+  <link rel="alternate" href="/atom.xml" title="浅笑の博客" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/2019/08/08/tf学习笔记9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>TensorFlow学习笔记9：VGGNet-16 | 浅笑の博客</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">浅笑の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我们的征途是星辰大海</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">19</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">40</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/tf学习笔记9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zheng Yujie">
+      <meta itemprop="description" content="C++/Python/深度学习">
+      <meta itemprop="image" content="/images/1.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅笑の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">TensorFlow学习笔记9：VGGNet-16
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-08 18:38:17" itemprop="dateCreated datePublished" datetime="2019-08-08T18:38:17+08:00">2019-08-08</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-16 20:55:06" itemprop="dateModified" datetime="2019-08-16T20:55:06+08:00">2019-08-16</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/08/08/tf学习笔记9/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/08/tf学习笔记9/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>6k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>5 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="VGGNet"><a href="#VGGNet" class="headerlink" title="VGGNet"></a>VGGNet</h1><p>VGGNet是牛津大学计算机视觉组(Visual Geometry Group)和Google DeepMind公司一起研发的深度卷积神经网络。VGGNet探索了卷积神经网络的深度和其性能之间的关系，通过反复堆叠3×3的小型卷积核和2×2的最大池化层，VGGNet成功地构筑了16~19层深的卷积神经网络。到目前为止，VGGNet还经常被用来提取图像的特征。VGGNet训练后的模型参数在其官方网站上开源了，可用来在domain specific的图像分类任务上进行再训练(相当于提供了非常好的初始化权重)。</p>
+<a id="more"></a>
+<h1 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h1><p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/a259vKoJSqwF.png?imageslim" alt="mark"></p>
+<p>VGGNet有5段卷积，每一段内有2~3个卷积层，每段卷积的尾部会连接一个最大池化层来缩小图片的尺寸。每段内的卷积核数量一样，越靠后的段的卷积核数量越多，卷积核数量核段的关系:64-128-256-512-512。在段内有多个完全一样的3×3的卷积层堆叠在一起的情况，在卷积神经网络中这其实是一种非常有用的设计。两个3×3的卷积层串联相当于1个5×5的卷积层，即一个像素会和周围5×5的像素产生关联，也就是感受野为5×5。而3个3×3的卷积层串联的效果则相当于1个7×7的卷积层。同时，3个3×3卷积层比1个7×7的卷积层有着更少的参数，(3<em>3</em>3)/(7*7)=55%。最重要的是，3个3×3的卷积层拥有比1个7×7的卷积层更多的非线性变换，3个3×3的卷积层使用了3次RELU激活函数，而1个7×7的卷积层只使用了1次，这样可以让卷积神经网络对特征的学习能力更强。</p>
+<h1 id="TensorFlow实现"><a href="#TensorFlow实现" class="headerlink" title="TensorFlow实现"></a>TensorFlow实现</h1><ol>
+<li><p>卷积层函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">定义卷积层函数</span></span><br><span class="line"><span class="string">input_op:输入的tensor</span></span><br><span class="line"><span class="string">name：该层的名称</span></span><br><span class="line"><span class="string">kh:卷积核的高</span></span><br><span class="line"><span class="string">kw:卷积核的宽</span></span><br><span class="line"><span class="string">n_out:卷积核的数量(输出通道数)</span></span><br><span class="line"><span class="string">dh:步长的高</span></span><br><span class="line"><span class="string">dw:步长的宽</span></span><br><span class="line"><span class="string">p:参数列表</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_op</span><span class="params">(input_op,name,kh,kw,n_out,dh,dw,p)</span>:</span></span><br><span class="line">    n_in = input_op.get_shape()[<span class="number">-1</span>].value</span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(name) <span class="keyword">as</span> scope:</span><br><span class="line">        <span class="comment">#初始化权重</span></span><br><span class="line">        kernel = tf.get_variable(scope+<span class="string">"w"</span>,shape=[kh,kw,n_in,n_out],dtype=tf.float32,initializer=tf.contrib.layers.xavier_initializer_conv2d())</span><br><span class="line">                                 </span><br><span class="line">        <span class="comment">#卷积</span></span><br><span class="line">        conv = tf.nn.conv2d(input_op,kernel,(<span class="number">1</span>,dh,dw,<span class="number">1</span>),padding=<span class="string">"SAME"</span>)</span><br><span class="line">        <span class="comment">#初始化偏置</span></span><br><span class="line">        bias_init_val = tf.constant(<span class="number">0.0</span>,shape=[n_out],dtype=tf.float32)</span><br><span class="line">        biases = tf.Variable(bias_init_val,trainable=<span class="literal">True</span>,name=<span class="string">"b"</span>)</span><br><span class="line">        z = tf.nn.bias_add(conv,biases)</span><br><span class="line">        activation = tf.nn.relu(z,name=scope)</span><br><span class="line">        <span class="comment">#保存参数</span></span><br><span class="line">        p += [kernel,biases]</span><br><span class="line">    <span class="keyword">return</span> activation</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全连接层函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">定义全连接层函数</span></span><br><span class="line"><span class="string">input_op:输入的tensor</span></span><br><span class="line"><span class="string">name:该层的名称</span></span><br><span class="line"><span class="string">n_out:输出的通道数</span></span><br><span class="line"><span class="string">p:参数列表</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fc_op</span><span class="params">(input_op,name,n_out,p)</span>:</span></span><br><span class="line">    n_in = input_op.get_shape()[<span class="number">-1</span>].value</span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(name) <span class="keyword">as</span> scope:</span><br><span class="line">        <span class="comment">#初始化全连接的权重</span></span><br><span class="line">        kernel = tf.get_variable(scope+<span class="string">"w"</span>,shape=[n_in,n_out],dtype=tf.float32,initializer=tf.contrib.layers.xavier_initializer())              </span><br><span class="line">        <span class="comment">#初始化全连接层的偏置</span></span><br><span class="line">        biases = tf.Variable(tf.constant(<span class="number">0.1</span>,shape=[n_out],dtype=tf.float32),name=<span class="string">"b"</span>)</span><br><span class="line">        <span class="comment">#将输入与权重的乘法和偏置的加法合并</span></span><br><span class="line">        activation = tf.nn.relu_layer(input_op,kernel,biases,name=scope)</span><br><span class="line">        <span class="comment">#保存参数</span></span><br><span class="line">        p += [kernel,biases]</span><br><span class="line">        <span class="keyword">return</span> activation</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最大池化层函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">定义最大池化层</span></span><br><span class="line"><span class="string">input_op:输入的tensor</span></span><br><span class="line"><span class="string">name:该层的名称</span></span><br><span class="line"><span class="string">kh:池化层的高</span></span><br><span class="line"><span class="string">kw:池化层的宽</span></span><br><span class="line"><span class="string">dh:步长的高</span></span><br><span class="line"><span class="string">dw:步长的宽</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_pool</span><span class="params">(input_op,name,kh,kw,dh,dw)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> tf.nn.max_pool(input_op,ksize=[<span class="number">1</span>,kh,kw,<span class="number">1</span>],strides=[<span class="number">1</span>,dh,dw,<span class="number">1</span>],padding=<span class="string">"SAME"</span>,name=name)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>VGG实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">VGG16</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inference_op</span><span class="params">(input_op,keep_prob)</span>:</span></span><br><span class="line">    p = []</span><br><span class="line">    <span class="comment">#第一层的第一层卷积</span></span><br><span class="line">    conv1_1 = conv_op(input_op,name=<span class="string">"conv1_1"</span>,kh=<span class="number">3</span>,kw=<span class="number">3</span>,n_out=<span class="number">64</span>,dh=<span class="number">1</span>,dw=<span class="number">1</span>,p=p)</span><br><span class="line">    <span class="comment">#第一层的第二层卷积</span></span><br><span class="line">    conv1_2 = conv_op(conv1_1,name=<span class="string">"conv1_2"</span>,kh=<span class="number">3</span>,kw=<span class="number">3</span>,n_out=<span class="number">64</span>,dh=<span class="number">1</span>,dw=<span class="number">1</span>,p=p)</span><br><span class="line">    <span class="comment">#最大池化层</span></span><br><span class="line">    pool1 = max_pool(conv1_2,name=<span class="string">"pool1"</span>,kh=<span class="number">2</span>,kw=<span class="number">2</span>,dw=<span class="number">2</span>,dh=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#第二层的第一层卷积</span></span><br><span class="line">    conv2_1 = conv_op(pool1,name=<span class="string">"conv2_1"</span>,kh=<span class="number">3</span>,kw=<span class="number">3</span>,n_out=<span class="number">128</span>,dh=<span class="number">1</span>,dw=<span class="number">1</span>,p=p)</span><br><span class="line">    <span class="comment">#第二层的第二层卷积</span></span><br><span class="line">    conv2_2 = conv_op(conv2_1,name=<span class="string">"conv2_2"</span>,kh=<span class="number">3</span>,kw=<span class="number">3</span>,n_out=<span class="number">128</span>,dh=<span class="number">1</span>,dw=<span class="number">1</span>,p=p)</span><br><span class="line">    <span class="comment">#第二层的最大池化</span></span><br><span class="line">    pool2 = max_pool(conv2_2,name=<span class="string">"pool2"</span>,kh=<span class="number">2</span>,kw=<span class="number">2</span>,dh=<span class="number">2</span>,dw=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#第三层</span></span><br><span class="line">    conv3_1 = conv_op(pool2,name=<span class="string">"conv3_1"</span>,kh=<span class="number">3</span>,kw=<span class="number">3</span>,n_out=<span class="number">256</span>,dh=<span class="number">1</span>,dw=<span class="number">1</span>,p=p)</span><br><span class="line">    conv3_2 = conv_op(conv3_1,name=<span class="string">"conv3_2"</span>,kh=<span class="number">3</span>,kw=<span class="number">3</span>,n_out=<span class="number">256</span>,dh=<span class="number">1</span>,dw=<span class="number">1</span>,p=p)</span><br><span class="line">    conv3_3 = conv_op(conv3_2,name=<span class="string">"conv3_3"</span>,kh=<span class="number">3</span>,kw=<span class="number">3</span>,n_out=<span class="number">256</span>,dh=<span class="number">1</span>,dw=<span class="number">1</span>,p=p)</span><br><span class="line">    pool3 = max_pool(conv3_3,name=<span class="string">"pool3"</span>,kh=<span class="number">2</span>,kw=<span class="number">2</span>,dh=<span class="number">2</span>,dw=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#第四层</span></span><br><span class="line">    conv4_1 = conv_op(pool3,name=<span class="string">"conv4_1"</span>,kh=<span class="number">3</span>,kw=<span class="number">3</span>,n_out=<span class="number">512</span>,dh=<span class="number">1</span>,dw=<span class="number">1</span>,p=p)</span><br><span class="line">    conv4_2 = conv_op(conv4_1,name=<span class="string">"conv4_2"</span>,kh=<span class="number">3</span>,kw=<span class="number">3</span>,n_out=<span class="number">512</span>,dh=<span class="number">1</span>,dw=<span class="number">1</span>,p=p)</span><br><span class="line">    conv4_3 = conv_op(conv4_2,name=<span class="string">"conv4_3"</span>,kh=<span class="number">3</span>,kw=<span class="number">3</span>,n_out=<span class="number">512</span>,dh=<span class="number">1</span>,dw=<span class="number">1</span>,p=p)</span><br><span class="line">    pool4 = max_pool(conv4_3,name=<span class="string">"pool4"</span>,kh=<span class="number">2</span>,kw=<span class="number">2</span>,dh=<span class="number">2</span>,dw=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#第五层</span></span><br><span class="line">    conv5_1 = conv_op(pool4,name=<span class="string">"conv5_1"</span>,kh=<span class="number">3</span>,kw=<span class="number">3</span>,n_out=<span class="number">512</span>,dh=<span class="number">1</span>,dw=<span class="number">1</span>,p=p)</span><br><span class="line">    conv5_2 = conv_op(conv5_1,name=<span class="string">"conv5_2"</span>,kh=<span class="number">3</span>,kw=<span class="number">3</span>,n_out=<span class="number">512</span>,dh=<span class="number">1</span>,dw=<span class="number">1</span>,p=p)</span><br><span class="line">    conv5_3 = conv_op(conv5_2,name=<span class="string">"conv5_3"</span>,kh=<span class="number">3</span>,kw=<span class="number">3</span>,n_out=<span class="number">512</span>,dh=<span class="number">1</span>,dw=<span class="number">1</span>,p=p)</span><br><span class="line">    pool5 = max_pool(conv5_3,name=<span class="string">"pool5"</span>,kh=<span class="number">2</span>,kw=<span class="number">2</span>,dh=<span class="number">2</span>,dw=<span class="number">2</span>)</span><br><span class="line">    <span class="comment">#将pool5展平</span></span><br><span class="line">    pool5_shape = pool5.get_shape()</span><br><span class="line">    flattened_shape = pool5_shape[<span class="number">1</span>].value * pool5_shape[<span class="number">2</span>].value * pool5_shape[<span class="number">3</span>].value</span><br><span class="line">    resh1 = tf.reshape(pool5,[<span class="number">-1</span>,flattened_shape],name=<span class="string">"resh1"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#全连接层</span></span><br><span class="line">    fc6 = fc_op(resh1,name=<span class="string">"fc6"</span>,n_out=<span class="number">4096</span>,p=p)</span><br><span class="line">    fc6_drop = tf.nn.dropout(fc6,keep_prob,name=<span class="string">"fc6_drop"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#全连接层</span></span><br><span class="line">    fc7 = fc_op(fc6_drop,name=<span class="string">"fc7"</span>,n_out=<span class="number">4096</span>,p=p)</span><br><span class="line">    fc7_drop = tf.nn.dropout(fc7,keep_prob,name=<span class="string">"fc7_drop"</span>)</span><br><span class="line"></span><br><span class="line">    fc8 = fc_op(fc7_drop,name=<span class="string">"fc8"</span>,n_out=<span class="number">1000</span>,p=p)</span><br><span class="line">    softmax = tf.nn.softmax(fc8)</span><br><span class="line">    predictions = tf.argmax(softmax,<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> predictions,softmax,fc8,p</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>性能统计 性能统计模块主要统计网络迭代一次所需时间，由于刚开始运行程序的时候GPU需要加载内存会比较慢，所以统计通10次迭代以后才开始。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">num_batches = <span class="number">100</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">time_tensorflow_run</span><span class="params">(session,target,feed,info_string)</span>:</span></span><br><span class="line">    num_steps_burn_in = <span class="number">10</span></span><br><span class="line">    total_duration = <span class="number">0.0</span></span><br><span class="line">    total_duration_squared = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num_batches + num_steps_burn_in):</span><br><span class="line">        start_time = time.time()</span><br><span class="line">        _= session.run(target,feed_dict=feed)</span><br><span class="line">        duration = time.time() - start_time</span><br><span class="line">        <span class="keyword">if</span> i &gt; num_steps_burn_in:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> i % <span class="number">10</span>:</span><br><span class="line">                print(<span class="string">"%s：step:%d,duration:%.3f"</span>%(datetime.now(),i-num_steps_burn_in,duration))</span><br><span class="line">                total_duration += duration</span><br><span class="line">                total_duration_squared += duration * duration</span><br><span class="line">    mn = total_duration / num_batches</span><br><span class="line">    vr = total_duration_squared / num_batches - mn * mn</span><br><span class="line">    sd = math.sqrt(vr)</span><br><span class="line">    print(<span class="string">"%s：%s across %d steps,%.3f +/- %.3f sec / batch"</span>%(datetime.now(),info_string,num_batches,mn,sd))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>训练过程 通过使用random_normal来随机产生224×224的图片，进行测试。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">batch_size = <span class="number">32</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_benchmark</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">with</span> tf.Graph().as_default():</span><br><span class="line">        image_size = <span class="number">224</span></span><br><span class="line">        images = tf.Variable(tf.random_normal([batch_size,image_size,image_size,<span class="number">3</span>],dtype=tf.float32,stddev=<span class="number">0.1</span>))</span><br><span class="line">        keep_prob = tf.placeholder(tf.float32)</span><br><span class="line">        predictions,softmax,fc8,p=inference_op(images,keep_prob)</span><br><span class="line">        init = tf.global_variables_initializer()</span><br><span class="line">        sess = tf.Session()</span><br><span class="line">        sess.run(init)</span><br><span class="line">        time_tensorflow_run(sess,predictions,&#123;keep_prob:<span class="number">1.0</span>&#125;,<span class="string">"Forward"</span>)</span><br><span class="line">        objective = tf.nn.l2_loss(fc8)</span><br><span class="line">        grad = tf.gradients(objective,p)</span><br><span class="line">        time_tensorflow_run(sess,grad,&#123;keep_prob:<span class="number">0.5</span>&#125;,<span class="string">"Forward-backward"</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    run_benchmark()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/卷积网络/" rel="tag"># 卷积网络</a>
+            
+              <a href="/tags/TensorFlow/" rel="tag"># TensorFlow</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/08/tf学习笔记8/" rel="next" title="TensorFlow学习笔记8：AlexNet">
+                  <i class="fa fa-chevron-left"></i> TensorFlow学习笔记8：AlexNet
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/08/tensorflow-slim/" rel="prev" title="Tensorflow-Slim简介">
+                  Tensorflow-Slim简介 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/1.jpeg"
+      alt="Zheng Yujie">
+  <p class="site-author-name" itemprop="name">Zheng Yujie</p>
+  <div class="site-description motion-element" itemprop="description">C++/Python/深度学习</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://github.com/zhengyujie" title="GitHub &rarr; https://github.com/zhengyujie" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="mailto:zhengyujie97@126.com" title="E-Mail &rarr; mailto:zhengyujie97@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://music.163.com/#/playlist?id=327924141" title="Music &rarr; https://music.163.com/#/playlist?id=327924141" rel="noopener" target="_blank"><i class="fa fa-fw fa-headphones"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://www.google.com" title="Google &rarr; https://www.google.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-heart"></i>
+      FRIENDS
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://139.196.87.110:8080/" title="http://139.196.87.110:8080/" rel="noopener" target="_blank">RUIKO SATEN</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VGGNet"><span class="nav-number">1.</span> <span class="nav-text">VGGNet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络结构"><span class="nav-number">2.</span> <span class="nav-text">网络结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorFlow实现"><span class="nav-number">3.</span> <span class="nav-text">TensorFlow实现</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
+    <span class="post-meta-divider">|</span>
+    <span title="站点总字数">全站共163k字</span>
+    <span class="post-meta-divider">|</span>
+    <span title="站点阅读时长">阅读时长2:29</span>
+</div>
+
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,07,26,00,00,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: true,
+    appId: 'QhpM05HufWMwqxw5TW8GGKHt-gzGzoHsz',
+    appKey: 'ReXaLSgoPNRCjW8dT9eEyR25',
+    placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧！',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

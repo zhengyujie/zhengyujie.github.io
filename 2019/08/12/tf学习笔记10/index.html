@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="Inception V3结构">
+<meta name="keywords" content="卷积网络,TensorFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow学习笔记10：Inception V3">
+<meta property="og:url" content="http://yoursite.com/2019/08/12/tf学习笔记10/index.html">
+<meta property="og:site_name" content="浅笑の博客">
+<meta property="og:description" content="Inception V3结构">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/OtRKyOfuqBS3.png?imageslim">
+<meta property="og:updated_time" content="2019-08-16T12:55:31.691Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TensorFlow学习笔记10：Inception V3">
+<meta name="twitter:description" content="Inception V3结构">
+<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/OtRKyOfuqBS3.png?imageslim">
+  <link rel="alternate" href="/atom.xml" title="浅笑の博客" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/2019/08/12/tf学习笔记10/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>TensorFlow学习笔记10：Inception V3 | 浅笑の博客</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">浅笑の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我们的征途是星辰大海</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">19</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">40</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/12/tf学习笔记10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zheng Yujie">
+      <meta itemprop="description" content="C++/Python/深度学习">
+      <meta itemprop="image" content="/images/1.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅笑の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">TensorFlow学习笔记10：Inception V3
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-12 18:38:17" itemprop="dateCreated datePublished" datetime="2019-08-12T18:38:17+08:00">2019-08-12</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-16 20:55:31" itemprop="dateModified" datetime="2019-08-16T20:55:31+08:00">2019-08-16</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/08/12/tf学习笔记10/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/12/tf学习笔记10/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>25k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>22 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Inception-V3结构"><a href="#Inception-V3结构" class="headerlink" title="Inception V3结构"></a>Inception V3结构</h1><p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/OtRKyOfuqBS3.png?imageslim" alt="mark"></p>
+<a id="more"></a>
+<p>值得借鉴的设计CNN的思想和Trick：</p>
+<ul>
+<li>Factorization into small convolutions很有效，可以降低参数量，减轻过拟合，增加网络非线性的表达能力。</li>
+<li>卷积网络从输入到输出，应该让图片尺寸逐渐减少，输出通道逐渐增加，即让空间结构简化，将空间信息转化为高阶抽象的特征信息。</li>
+<li>Inception Module用多个分支提取不同抽象程度的高阶特征的思路很有效，可以丰富网络的表达能力。</li>
+</ul>
+<h1 id="TensorFlow实现"><a href="#TensorFlow实现" class="headerlink" title="TensorFlow实现"></a>TensorFlow实现</h1><h2 id="定义函数-inception-v3-arg-scope"><a href="#定义函数-inception-v3-arg-scope" class="headerlink" title="定义函数 inception_v3_arg_scope"></a>定义函数 inception_v3_arg_scope</h2><p>函数 inception_v3_arg_scope 用来生成网络中经常用到的函数的默认参数，比如卷记的激活函数，权重初始化方式，标准化器等等。接下来嵌套一个<code>slim.arg_scope</code>，对卷积层生成函数<code>slim.conv2d</code>的几个人参数赋予默认值。最后返回定义好的scope。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> tensorflow.contrib.slim <span class="keyword">as</span> slim</span><br><span class="line"><span class="comment">#定义简单的函数产生截断的正态分布</span></span><br><span class="line">trunc_normal = <span class="keyword">lambda</span> stddev:tf.truncated_normal_initializer(<span class="number">0.0</span>,stddev)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">定义函数 inception_v3_arg_scope 用来生成网络中经常用到的函数的默认参数</span></span><br><span class="line"><span class="string">L2正则的Weight_decay默认值为0.0004</span></span><br><span class="line"><span class="string">标准差stddev默认值为0.1</span></span><br><span class="line"><span class="string">参数batch_norm_var_collection默认值为moving_vars</span></span><br><span class="line"><span class="string">batch normalization参数字典：</span></span><br><span class="line"><span class="string">    衰减系数decay为0.9997</span></span><br><span class="line"><span class="string">    epsilon为0.001</span></span><br><span class="line"><span class="string">    updates_collections为tf.GraphKeys.UPDATE_OPS</span></span><br><span class="line"><span class="string">    字典variables_collections:</span></span><br><span class="line"><span class="string">        beta和gamma设置为None</span></span><br><span class="line"><span class="string">        moving_mean和moving_variance设置为batch_norm_var_collection</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inception_v3_arg_scope</span><span class="params">(weight_decay=<span class="number">0.00004</span>,stddev=<span class="number">0.1</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                        batch_norm_var_collection=<span class="string">"moving_vars"</span>)</span>:</span></span><br><span class="line">    batch_norm_params = &#123;</span><br><span class="line">        <span class="string">"decay"</span>:<span class="number">0.9997</span>,<span class="string">"epsilon"</span>:<span class="number">0.001</span>,<span class="string">"updates_collections"</span>:tf.GraphKeys.UPDATE_OPS,</span><br><span class="line">        <span class="string">"variables_collections"</span>:&#123;</span><br><span class="line">            <span class="string">"beta"</span>:<span class="literal">None</span>,<span class="string">"gamma"</span>:<span class="literal">None</span>,<span class="string">"moving_mean"</span>:[batch_norm_var_collection],</span><br><span class="line">            <span class="string">"moving_variance"</span>:[batch_norm_var_collection]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    嵌套slim.arg_scope</span></span><br><span class="line"><span class="string">    权重初始化器weight_initializer设置为trunc_normal(stddev)</span></span><br><span class="line"><span class="string">    激活函数设置为ReLU</span></span><br><span class="line"><span class="string">    标准化器设置为slim.batch_norm</span></span><br><span class="line"><span class="string">    标准化器的参数设置为batch_norm_patams</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">with</span> slim.arg_scope([slim.conv2d,slim.fully_connected],</span><br><span class="line">                        weights_regularizer=slim.l2_regularizer(weight_decay)):</span><br><span class="line">        <span class="comment">#对卷积层生成函数的几个参数赋予默认值</span></span><br><span class="line">        <span class="keyword">with</span> slim.arg_scope([slim.conv2d],</span><br><span class="line">                            weights_regularizer = tf.truncated_normal_initializer(stddev=stddev),</span><br><span class="line">                            activation_fc = tf.nn.relu,</span><br><span class="line">                            normalizer_fc = slim.batch_norm,</span><br><span class="line">                            normalizer_params = batch_norm_params) <span class="keyword">as</span> scope:</span><br><span class="line">            <span class="keyword">return</span> scope</span><br></pre></td></tr></table></figure></p>
+<h2 id="定义Inception-V3的卷积部分"><a href="#定义Inception-V3的卷积部分" class="headerlink" title="定义Inception V3的卷积部分"></a>定义Inception V3的卷积部分</h2><p>它可以生成Inception V3网络的卷积部分。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">定义Inception V3的卷积部分</span></span><br><span class="line"><span class="string">inputs为输入图片数据的tensor</span></span><br><span class="line"><span class="string">scope为包含了函数默认参数的环境</span></span><br><span class="line"><span class="string">用字典表end_points来保存某些关键节点供之后使用</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inception_v3_base</span><span class="params">(inputs,scope=None)</span>:</span></span><br><span class="line">    end_points = &#123;&#125;</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(scope,<span class="string">"InceptionV3"</span>,[inputs]):</span><br><span class="line">        <span class="comment">#对slim.conv2d,slim.max_pool2d,slim.avg_pool2d三个函数的参数设置默认值</span></span><br><span class="line">        <span class="keyword">with</span> slim.arg_scope([slim.conv2d,slim.max_pool2d,slim.avg_pool2d],stride = <span class="number">1</span>,padding = <span class="string">"VALID"</span>):                               </span><br><span class="line">            <span class="comment">#各参数分别为输入的tensor,输出的通道,卷积核尺寸,步长stride，padding模式</span></span><br><span class="line">            net = slim.conv2d(inputs,num_outputs=<span class="number">32</span>,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],stride=<span class="number">2</span>,scope=<span class="string">"Conv2d_1a_3x3"</span>)</span><br><span class="line">            net = slim.conv2d(net,num_outputs=<span class="number">32</span>,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],scope=<span class="string">"Conv2d_2a_3x3"</span>)</span><br><span class="line">            net = slim.conv2d(net,num_outputs=<span class="number">64</span>,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],padding=<span class="string">"SAME"</span>,scope=<span class="string">"Conv2d_2b_3x3"</span>)</span><br><span class="line">            net = slim.max_pool2d(net,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],stride=<span class="number">2</span>,scope=<span class="string">"MaxPool_3a_3x3"</span>)</span><br><span class="line">            net = slim.conv2d(net,num_outputs=<span class="number">80</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_3b_1x1"</span>)</span><br><span class="line">            net = slim.conv2d(net,num_outputs=<span class="number">192</span>,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],scope=<span class="string">"Conv2d_4a_3x3"</span>)</span><br><span class="line">            net = slim.max_pool2d(net,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],stride=<span class="number">2</span>,scope=<span class="string">"MaxPool_5a_3x3"</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="定义第一个Inception模块"><a href="#定义第一个Inception模块" class="headerlink" title="定义第一个Inception模块"></a>定义第一个Inception模块</h3><ul>
+<li><p><strong>第一个Inception Module</strong><br>  第一个Inception Module名称为Mixed_5b。这个Inception Module中有4个分支：</p>
+<ol>
+<li>第一个分支有64输出通道的1×1卷积</li>
+<li>第二个分支有48输出通道的1×1卷积，连接有64输出通道的5×5卷积</li>
+<li>第三个分支有64输出通道的1×1卷积，再连续连接两个有96通道的3×3卷积</li>
+<li><p>第四个分支有为3×3的平均池化，连接有32输出通道的1×1卷积</p>
+<p>最后使用<code>tf.concat</code>将四个分支的输出合并在一起，生成这个Inception Module的最终输出。4个分支的输出通道数之和为64+64+96+32=256，即最终输出的图片尺寸为35×35×256。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定义第一个Inception模块组</span></span><br><span class="line"><span class="keyword">with</span> slim.arg_scope([slim.conv2d,slim.max_pool2d,slim.avg_pool2d],</span><br><span class="line">                    stride = <span class="number">1</span>,padding = <span class="string">"SAME"</span>):</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Mixed_5b"</span>):</span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_0"</span>):</span><br><span class="line">            batch_0 = slim.conv2d(net,num_outputs=<span class="number">64</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_1"</span>):</span><br><span class="line">            batch_1 = slim.conv2d(net,num_outputs=<span class="number">48</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">            batch_1 = slim.conv2d(batch_1,num_outputs=<span class="number">64</span>,kernel_size=[<span class="number">5</span>,<span class="number">5</span>],scope=<span class="string">"Conv2d_0b_5x5"</span>)</span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_2"</span>):</span><br><span class="line">            batch_2 = slim.conv2d(net,num_outputs=<span class="number">64</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">            batch_2 = slim.conv2d(batch_2,num_outputs=<span class="number">96</span>,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],scope=<span class="string">"Conv2d_0b_3x3"</span>)</span><br><span class="line">            batch_2 = slim.conv2d(batch_2,num_outputs=<span class="number">96</span>,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],scope=<span class="string">"Conv2d_0c_3x3"</span>)</span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_3"</span>):</span><br><span class="line">            batch_3 = slim.avg_pool2d(net,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],scope=<span class="string">"AvgPool_0a_3x3"</span>)</span><br><span class="line">            batch_3 = slim.conv2d(batch_3,num_outputs=<span class="number">32</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0b_1x1"</span>)</span><br><span class="line"> </span><br><span class="line">        net = tf.concat([batch_0,batch_1,batch_2,batch_3],<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p><strong>第二个Inception Module</strong><br>  第二个Inception Module的名称为Mixed_5c。它同样也有四个分支，唯一不同的是第四个分支最后接的是64输出通道的1×1卷积。因此我们输出的tensor的最终尺寸为35×5×288。</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第二个Inception模块</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"Mixed_5c"</span>):</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_0"</span>):</span><br><span class="line">        batch_0 = slim.conv2d(net, num_outputs=<span class="number">64</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_1"</span>):</span><br><span class="line">        batch_1 = slim.conv2d(net, num_outputs=<span class="number">48</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0b_1x1"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">64</span>, kernel_size=[<span class="number">5</span>, <span class="number">5</span>], scope=<span class="string">"Conv2d_0c_5x5"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_2"</span>):</span><br><span class="line">        batch_2 = slim.conv2d(net, num_outputs=<span class="number">64</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">96</span>, kernel_size=[<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">"Conv2d_0b_3x3"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">96</span>, kernel_size=[<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">"Conv2d_0c_3x3"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_3"</span>):</span><br><span class="line">        batch_3 = slim.avg_pool2d(net, kernel_size=[<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">"AvgPool_0a_3x3"</span>)</span><br><span class="line">        batch_3 = slim.conv2d(batch_3, num_outputs=<span class="number">64</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0b_1x1"</span>)</span><br><span class="line">    </span><br><span class="line">    net = tf.concat([batch_0, batch_1, batch_2, batch_3], <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>第三个Inception Module</strong><br>  第三个Inception Module的名称为Mixed_5d，和上一个Inception Module完全相同。</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第三个Inception模块</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"Mixed_5d"</span>):</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_0"</span>):</span><br><span class="line">        batch_0 = slim.conv2d(net, num_outputs=<span class="number">64</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_1"</span>):</span><br><span class="line">        batch_1 = slim.conv2d(net, num_outputs=<span class="number">48</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0b_1x1"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">64</span>, kernel_size=[<span class="number">5</span>, <span class="number">5</span>], scope=<span class="string">"Conv2d_0c_5x5"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_2"</span>):</span><br><span class="line">        batch_2 = slim.conv2d(net, num_outputs=<span class="number">64</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">96</span>, kernel_size=[<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">"Conv2d_0b_3x3"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">96</span>, kernel_size=[<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">"Conv2d_0c_3x3"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_3"</span>):</span><br><span class="line">        batch_3 = slim.avg_pool2d(net, kernel_size=[<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">"AvgPool_0a_3x3"</span>)</span><br><span class="line">        batch_3 = slim.conv2d(batch_3, num_outputs=<span class="number">64</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0b_1x1"</span>)</span><br><span class="line"></span><br><span class="line">    net = tf.concat([batch_0, batch_1, batch_2, batch_3], <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="定义第二个Inception模块组"><a href="#定义第二个Inception模块组" class="headerlink" title="定义第二个Inception模块组"></a>定义第二个Inception模块组</h3><p>第二个Inception模块组是一个非常大的模块组，包含了5个Inception Module。其中第二个到第五个Inception Module的结构非常相似。</p>
+<ul>
+<li><p><strong>第一个Inception Module</strong><br>  第一个Inception Module的名称为Mixed_6a，包含三个分支：</p>
+<ol>
+<li>第一个分支为384通道的3×3卷积，步长为2</li>
+<li>第二个分支有三层，分别为64输出通道的1×1卷积，和两个96输出通道的3×3卷积，最后一层的步长为2。</li>
+<li>第三个分支为3×3的池化层，步长为2<br>最后用<code>tf.concat</code>将三个分支在输出通道上合并，最后的输出尺寸为17×17×(384+96+256)=17×17×768<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义第二个Inception模块组,第一个Inception模块</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"Mixed_6a"</span>):</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_0"</span>):</span><br><span class="line">        batch_0 = slim.conv2d(net, num_outputs=<span class="number">384</span>, kernel_size=[<span class="number">3</span>,<span class="number">3</span>],</span><br><span class="line">                                stride=<span class="number">2</span>, padding=<span class="string">"VALID"</span>,scope=<span class="string">"Conv2d_1a_1x1"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_1"</span>):</span><br><span class="line">        batch_1 = slim.conv2d(net, num_outputs=<span class="number">64</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">96</span>, kernel_size=[<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">"Conv2d_0b_3x3"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">96</span>, kernel_size=[<span class="number">3</span>, <span class="number">3</span>],</span><br><span class="line">                                stride=<span class="number">2</span>, padding=<span class="string">"VALID"</span>,scope=<span class="string">"Conv2d_1a_1x1"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_2"</span>):</span><br><span class="line">        batch_2 = slim.max_pool2d(net,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],stride=<span class="number">2</span>,padding=<span class="string">"VALID"</span>,</span><br><span class="line">                                    scope=<span class="string">"MaxPool_1a_3x3"</span>)</span><br><span class="line"></span><br><span class="line">    net = tf.concat([batch_0, batch_1, batch_2], <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p><strong>第二个Inception Module</strong><br>  名称为Mixed_6b，它有四个分支：</p>
+<ol>
+<li>第一个分支为193输出通道的1×1卷积</li>
+<li>第二个分支有三个卷积层，分别为128输出通道的1×1卷积，128输出通道的1×7卷积，以及192输出通道的7×1卷积，这里用到了Factorization into small convolutions思想，串联的1×7卷积和7×1卷积相当于合成一个7×7卷积。大大减少了参数，减轻了过拟合，同事多了一个激活函数增加了非线性特征变换。</li>
+<li>第三个分支有五个卷积层，分别为128输出通道的1×1卷积，128输出通道的7×1卷积，128输出通道的1×1卷积，128输出通道的1×7卷积，128输出通道的7×1卷积和192输出通道的1×7卷积</li>
+<li>第四个分支为3×3的平均池化层，再连接192输出通道的1×1卷积。<br>最后四个分支合并，输出的tensor尺寸为17×17×(192+192+192+192)=17×17×768<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义第二个Inception模块组,第一个Inception模块</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"Mixed_6b"</span>):</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_0"</span>):</span><br><span class="line">        batch_0 = slim.conv2d(net,num_outputs=<span class="number">192</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_1"</span>):</span><br><span class="line">        batch_1 = slim.conv2d(net, num_outputs=<span class="number">128</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">128</span>, kernel_size=[<span class="number">1</span>,<span class="number">7</span>], scope=<span class="string">"Conv2d_0b_1x7"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">7</span>, <span class="number">1</span>],scope=<span class="string">"Conv2d_0c_7x1"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_2"</span>):</span><br><span class="line">        batch_2 = slim.conv2d(net, num_outputs=<span class="number">128</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">128</span>, kernel_size=[<span class="number">7</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0b_7x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">128</span>, kernel_size=[<span class="number">1</span>, <span class="number">7</span>], scope=<span class="string">"Conv2d_0c_1x7"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">128</span>, kernel_size=[<span class="number">7</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0d_7x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">1</span>, <span class="number">7</span>], scope=<span class="string">"Conv2d_0e_1x7"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_3"</span>):</span><br><span class="line">        batch_3 = slim.avg_pool2d(net, kernel_size=[<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">"AvgPool_0a_3x3"</span>)</span><br><span class="line">        batch_3 = slim.conv2d(batch_3, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0b_1x1"</span>)</span><br><span class="line"></span><br><span class="line">    net = tf.concat([batch_0, batch_1, batch_2,batch_3], <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p><strong>第三个Inception Module</strong><br>  名称为Mixed_6c，和前一个Inception Module非常相似，唯一不同的地方就是第二和第三分支中前几个卷积层的输出通道从128变成了160。</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义第二个Inception模块组,第三个Inception模块</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"Mixed_6c"</span>):</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_0"</span>):</span><br><span class="line">        batch_0 = slim.conv2d(net,num_outputs=<span class="number">192</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_1"</span>):</span><br><span class="line">        batch_1 = slim.conv2d(net, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">1</span>,<span class="number">7</span>], scope=<span class="string">"Conv2d_0b_1x7"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">7</span>, <span class="number">1</span>],scope=<span class="string">"Conv2d_0c_7x1"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_2"</span>):</span><br><span class="line">        batch_2 = slim.conv2d(net, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">7</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0b_7x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">1</span>, <span class="number">7</span>], scope=<span class="string">"Conv2d_0c_1x7"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">7</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0d_7x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">1</span>, <span class="number">7</span>], scope=<span class="string">"Conv2d_0e_1x7"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_3"</span>):</span><br><span class="line">        batch_3 = slim.avg_pool2d(net, kernel_size=[<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">"AvgPool_0a_3x3"</span>)</span><br><span class="line">        batch_3 = slim.conv2d(batch_3, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0b_1x1"</span>)</span><br><span class="line"></span><br><span class="line">    net = tf.concat([batch_0, batch_1, batch_2,batch_3], <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>第四个Inception Module</strong><br>  名称为Mixed_d，和Mixed_6c完全一致。</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义第二个Inception模块组,第四个Inception模块</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"Mixed_6d"</span>):</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_0"</span>):</span><br><span class="line">        batch_0 = slim.conv2d(net,num_outputs=<span class="number">192</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_1"</span>):</span><br><span class="line">        batch_1 = slim.conv2d(net, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">1</span>,<span class="number">7</span>], scope=<span class="string">"Conv2d_0b_1x7"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">7</span>, <span class="number">1</span>],scope=<span class="string">"Conv2d_0c_7x1"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_2"</span>):</span><br><span class="line">        batch_2 = slim.conv2d(net, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">7</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0b_7x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">1</span>, <span class="number">7</span>], scope=<span class="string">"Conv2d_0c_1x7"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">7</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0d_7x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">1</span>, <span class="number">7</span>], scope=<span class="string">"Conv2d_0e_1x7"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_3"</span>):</span><br><span class="line">        batch_3 = slim.avg_pool2d(net, kernel_size=[<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">"AvgPool_0a_3x3"</span>)</span><br><span class="line">        batch_3 = slim.conv2d(batch_3, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0b_1x1"</span>)</span><br><span class="line"></span><br><span class="line">    net = tf.concat([batch_0, batch_1, batch_2,batch_3], <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>第五个Inception Module</strong><br>  名称为Mixed_6e，和前两个Inception Module也完全一致。这是第二个Inception模块组的最后一个Inception Module。我们将Mixed_6e存储于end_points中，作为Auxiliary Classifier辅助模型的分类。</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义第二个Inception模块组,第五个Inception模块</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"Mixed_6e"</span>):</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_0"</span>):</span><br><span class="line">        batch_0 = slim.conv2d(net,num_outputs=<span class="number">192</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_1"</span>):</span><br><span class="line">        batch_1 = slim.conv2d(net, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">1</span>,<span class="number">7</span>], scope=<span class="string">"Conv2d_0b_1x7"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">7</span>, <span class="number">1</span>],scope=<span class="string">"Conv2d_0c_7x1"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_2"</span>):</span><br><span class="line">        batch_2 = slim.conv2d(net, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">7</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0b_7x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">1</span>, <span class="number">7</span>], scope=<span class="string">"Conv2d_0c_1x7"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">160</span>, kernel_size=[<span class="number">7</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0d_7x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">1</span>, <span class="number">7</span>], scope=<span class="string">"Conv2d_0e_1x7"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_3"</span>):</span><br><span class="line">        batch_3 = slim.avg_pool2d(net, kernel_size=[<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">"AvgPool_0a_3x3"</span>)</span><br><span class="line">        batch_3 = slim.conv2d(batch_3, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0b_1x1"</span>)</span><br><span class="line"></span><br><span class="line">    net = tf.concat([batch_0, batch_1, batch_2,batch_3], <span class="number">3</span>)</span><br><span class="line"><span class="comment">#第二个模块组的最后一个Inception模块，将Mixed_6e存储于end_points中</span></span><br><span class="line">end_points[<span class="string">"Mixed_6e"</span>] = net</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="定义第三个Inception模块组"><a href="#定义第三个Inception模块组" class="headerlink" title="定义第三个Inception模块组"></a>定义第三个Inception模块组</h3><p>第三个Inception模块组包含了3个Inception Module。其中后两个Inception Module的结构非常相似。</p>
+<ul>
+<li><p><strong>第一个Inception Module</strong><br>  名称为Mixed_7a，包含了三个分支：</p>
+<ol>
+<li>第一个分支为192输出通道的1×1卷积，再接320输出通道的3×3卷积，步长为2</li>
+<li>第二个分支有四个卷积层，分别为192输出通道的1×1卷积，192输出通道的1×7卷积，192输出通道的7×1卷积和192输出通道的3×3卷积。最后一个卷积层步长为2，padding为VALID</li>
+<li>第三个分支为一个3×3最大池化层，步长为2，padding为VALID。<br>最后合并得到的tensor尺寸为为3×3×(320+192+768)=8×8×1280。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义第三个Inception模块组,第一个Inception模块</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"Mixed_7a"</span>):</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_0"</span>):</span><br><span class="line">        batch_0 = slim.conv2d(net, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_0 = slim.conv2d(net, num_outputs=<span class="number">320</span>, kernel_size=[<span class="number">3</span>, <span class="number">3</span>],stride=<span class="number">2</span>,</span><br><span class="line">                                padding=<span class="string">"VALID"</span>,scope=<span class="string">"Conv2d_1a_3x3"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_1"</span>):</span><br><span class="line">        batch_1 = slim.conv2d(net, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">1</span>,<span class="number">7</span>], scope=<span class="string">"Conv2d_0b_1x7"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">7</span>, <span class="number">1</span>],scope=<span class="string">"Conv2d_0c_7x1"</span>)</span><br><span class="line">        batch_1 = slim.conv2d(batch_1, num_outputs=<span class="number">192</span>, kernel_size=[<span class="number">3</span>, <span class="number">3</span>], stride=<span class="number">2</span>,</span><br><span class="line">                                padding=<span class="string">"VALID"</span>,scope=<span class="string">"Conv2d_1a_3x3"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_2"</span>):</span><br><span class="line">        batch_2 = slim.max_pool2d(net, kernel_size=[<span class="number">3</span>, <span class="number">3</span>], stride=<span class="number">2</span>, padding=<span class="string">"VALID"</span>,</span><br><span class="line">                                    scope=<span class="string">"MaxPool_1a_3x3"</span>)</span><br><span class="line"></span><br><span class="line">    net = tf.concat([batch_0, batch_1, batch_2], <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p><strong>第二个Inception Module</strong><br>  名称为Mixed_7b，它有四个分支：</p>
+<ol>
+<li>第一个分支为320输出通道的1×1卷积</li>
+<li>第二个分支先是一个384输出通道的1×1卷积，随后在分支内开两个分支，分别为384输出通道的1×3卷积和384输出通道的3×1卷积，然后用<code>tf.concat</code>合并，得到的tensor的尺寸为8×8×(384+384)=8×8×768</li>
+<li>第三个分支先是48输出通道的1×1卷积，然后是384输出通道的3×3卷积，然后同样在分支内拆成两个分支，分别为384输出通道的1×3卷积和384输出通道的3×1卷积</li>
+<li>第四个分支为一个3×3的平均池化层后接一个192输出通道的1×1卷积。<br>最后合并得到的tensor的尺寸为8×8×(320+768+768+192)=8×8×2048<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义第三个Inception模块组,第二个Inception模块</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"Mixed_7b"</span>):</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_0"</span>):</span><br><span class="line">        batch_0 = slim.conv2d(net, num_outputs=<span class="number">320</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>],scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_1"</span>):</span><br><span class="line">        batch_1 = slim.conv2d(net, num_outputs=<span class="number">384</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_1 = tf.concat([</span><br><span class="line">            slim.conv2d(batch_1,num_outputs=<span class="number">384</span>,kernel_size=[<span class="number">1</span>,<span class="number">3</span>],scope=<span class="string">"Conv2d_0b_1x3"</span>),</span><br><span class="line">            slim.conv2d(batch_1,num_outputs=<span class="number">384</span>,kernel_size=[<span class="number">3</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0b_3x1"</span>)],axis=<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_2"</span>):</span><br><span class="line">        batch_2 = slim.conv2d(net,num_outputs=<span class="number">448</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        batch_2 = slim.conv2d(batch_2,num_outputs=<span class="number">384</span>,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],scope=<span class="string">"Conv2d_0b_3x3"</span>)</span><br><span class="line">        batch_2 = tf.concat([</span><br><span class="line">            slim.conv2d(batch_2,num_outputs=<span class="number">384</span>,kernel_size=[<span class="number">1</span>,<span class="number">3</span>],scope=<span class="string">"Conv2d_0c_1x3"</span>),</span><br><span class="line">            slim.conv2d(batch_2,num_outputs=<span class="number">384</span>,kernel_size=[<span class="number">3</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0d_3x1"</span>)],axis=<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_3"</span>):</span><br><span class="line">        batch_3 = slim.avg_pool2d(net,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],scope=<span class="string">"AvgPool_0a_3x3"</span>)</span><br><span class="line">        batch_3 = slim.conv2d(batch_3,num_outputs=<span class="number">192</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0b_1x1"</span>)</span><br><span class="line"></span><br><span class="line">net = tf.concat([batch_0, batch_1, batch_2,batch_3], <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p><em>第三个Inception Module*</em><br>  名称为Mixed_7c，它和前一个Inception Module完全一致。最后我们返回这个Inception Module的结果，作为inception_v3_base函数的最终输出</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    <span class="comment"># 定义第三个Inception模块组,第三个Inception模块</span></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">"Mixed_7c"</span>):</span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_0"</span>):</span><br><span class="line">            batch_0 = slim.conv2d(net, num_outputs=<span class="number">320</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>],scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_1"</span>):</span><br><span class="line">            batch_1 = slim.conv2d(net, num_outputs=<span class="number">384</span>, kernel_size=[<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">            batch_1 = tf.concat([</span><br><span class="line">                slim.conv2d(batch_1,num_outputs=<span class="number">384</span>,kernel_size=[<span class="number">1</span>,<span class="number">3</span>],scope=<span class="string">"Conv2d_0b_1x3"</span>),</span><br><span class="line">                slim.conv2d(batch_1,num_outputs=<span class="number">384</span>,kernel_size=[<span class="number">3</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0b_3x1"</span>)],axis=<span class="number">3</span>)</span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_2"</span>):</span><br><span class="line">            batch_2 = slim.conv2d(net,num_outputs=<span class="number">448</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0a_1x1"</span>)</span><br><span class="line">            batch_2 = slim.conv2d(batch_2,num_outputs=<span class="number">384</span>,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],scope=<span class="string">"Conv2d_0b_3x3"</span>)</span><br><span class="line">            batch_2 = tf.concat([</span><br><span class="line">                slim.conv2d(batch_2,num_outputs=<span class="number">384</span>,kernel_size=[<span class="number">1</span>,<span class="number">3</span>],scope=<span class="string">"Conv2d_0c_1x3"</span>),</span><br><span class="line">                slim.conv2d(batch_2,num_outputs=<span class="number">384</span>,kernel_size=[<span class="number">3</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0d_3x1"</span>)],axis=<span class="number">3</span>)</span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">"Branch_3"</span>):</span><br><span class="line">            batch_3 = slim.avg_pool2d(net,kernel_size=[<span class="number">3</span>,<span class="number">3</span>],scope=<span class="string">"AvgPool_0a_3x3"</span>)</span><br><span class="line">            batch_3 = slim.conv2d(batch_3,num_outputs=<span class="number">192</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_0b_1x1"</span>)</span><br><span class="line"> </span><br><span class="line">    net = tf.concat([batch_0, batch_1, batch_2,batch_3], <span class="number">3</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">return</span> net,end_points</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="实现Inception-v3函数"><a href="#实现Inception-v3函数" class="headerlink" title="实现Inception_v3函数"></a>实现Inception_v3函数</h2><p>实现Inception V3网络的最后一部分——全局平均池化，Softmax和Auxiliary Logits。</p>
+<ul>
+<li><p><strong>函数Inception_v3的输入参数</strong></p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inception_v3</span><span class="params">(inputs,num_classes=<span class="number">1000</span>,is_training=True,droupot_keep_prob = <span class="number">0.8</span>,prediction_fn = slim.softmax,spatial_squeeze = True,reuse = None, scope=<span class="string">"InceptionV3"</span>)</span>:</span> </span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">InceptionV3整个网络的构建</span></span><br><span class="line"><span class="string">param :</span></span><br><span class="line"><span class="string">inputs -- 输入tensor</span></span><br><span class="line"><span class="string">num_classes -- 最后分类数目</span></span><br><span class="line"><span class="string">is_training -- 是否是训练过程</span></span><br><span class="line"><span class="string">droupot_keep_prob -- dropout保留节点比例</span></span><br><span class="line"><span class="string">prediction_fn -- 最后分类函数，默认为softmax</span></span><br><span class="line"><span class="string">patial_squeeze -- 是否对输出去除维度为1的维度</span></span><br><span class="line"><span class="string">reuse -- 是否对网络和Variable重复使用</span></span><br><span class="line"><span class="string">scope -- 函数默认参数环境</span></span><br><span class="line"><span class="string">return:</span></span><br><span class="line"><span class="string">logits -- 最后输出结果</span></span><br><span class="line"><span class="string">end_points -- 包含辅助节点的重要节点字典表</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Auxiliary Logits部分的逻辑</strong><br>  Auxiliary Logits作为辅助分类的节点，对分类结果预测有很大的帮助。通过end_points得到Mixed_6e后：</p>
+<ul>
+<li>连接一个5×5的平均池化，步长为3，padding设为VALID，这样输出的尺寸就从17×17×768变成5×5×768。</li>
+<li>接着连接一个128输出通道的1×1卷积和一个768输出通道的5×5卷积，这里权重初始化方式重设为标准差为0.01的正态分布，padding设置为VALID，输出尺寸变为1×1×768</li>
+<li>然后再接一个输出通道为num_classes的1×1卷积，不设激活函数和规范化函数权重初始方式重设为标准差为0.001的正态分布，这样输出就变成了1×1×1000</li>
+<li>最后使用<code>tf.squeeze</code>函数消除输出tensor中前两个为1的维度。将辅助分类节点的输出aux_logits储存到字典表end_points中。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">aux_logits = end_points[<span class="string">"Mixed_6e"</span>]</span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"AuxLogits"</span>):</span><br><span class="line">    aux_logits = slim.avg_pool2d(aux_logits,kernel_size=[<span class="number">5</span>,<span class="number">5</span>],stride=<span class="number">3</span>,</span><br><span class="line">                                    padding=<span class="string">"VALID"</span>,scope=<span class="string">"Avgpool_1a_5x5"</span>)</span><br><span class="line">    aux_logits = slim.conv2d(aux_logits,num_outputs=<span class="number">128</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_1b_1x1"</span>)</span><br><span class="line">    aux_logits = slim.conv2d(aux_logits,num_outputs=<span class="number">768</span>,kernel_size=[<span class="number">5</span>,<span class="number">5</span>],</span><br><span class="line">                                weights_initializer=trunc_normal(<span class="number">0.01</span>),padding=<span class="string">"VALID"</span>,</span><br><span class="line">                                scope=<span class="string">"Conv2d_2a_5x5"</span>)</span><br><span class="line">    aux_logits = slim.conv2d(aux_logits,num_outputs=num_classes,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">                                activation_fn=<span class="literal">None</span>,normalizer_fn=<span class="literal">None</span>,</span><br><span class="line">                                weights_initializer=trunc_normal(<span class="number">0.001</span>),scope=<span class="string">"Conv2d_1b_1x1"</span>)</span><br><span class="line">    <span class="comment">#消除tensor中前两个维度为1的维度</span></span><br><span class="line">    <span class="keyword">if</span> spatial_squeeze:</span><br><span class="line">        aux_logits = tf.squeeze(aux_logits,axis=[<span class="number">1</span>,<span class="number">2</span>],name=<span class="string">"SpatialSqueeze"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#将辅助节点分类的输出aux_logits存到end_points中</span></span><br><span class="line">    end_points[<span class="string">"AuxLogits"</span>] = aux_logits</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>分类预测部分逻辑</strong><br>  得到Mixed_7e即最后一个卷积层的输出后：</p>
+<ul>
+<li>接一个8×8全局平均池化，padding设置为VALID，tensor的尺寸就变成了1×1×2048</li>
+<li>然后接一个Dropout层，节点保留率为dropout_keep_prob</li>
+<li>接着连接一个输出通道为1000的1×1卷积，激活函数和规范化函数设为空</li>
+<li>然后用<code>tf.squeeze</code>去除输出tensor中维数为1的维度</li>
+<li>最后连接一个Softmax对结果进行分类预测，输出的结果存储到end_points中<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#正常分类预测</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">"Logits"</span>):</span><br><span class="line">    net = slim.avg_pool2d(net,kernel_size=[<span class="number">8</span>,<span class="number">8</span>],padding=<span class="string">"VALID"</span>,</span><br><span class="line">                            scope=<span class="string">"Avgpool_1a_8x8"</span>)</span><br><span class="line">    net = slim.dropout(net,keep_prob=droupot_keep_prob,scope=<span class="string">"Dropout_1b"</span>)</span><br><span class="line">    end_points[<span class="string">"Logits"</span>] = net</span><br><span class="line"></span><br><span class="line">    logits = slim.conv2d(net,num_outputs=num_classes,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],activation_fn=<span class="literal">None</span>,</span><br><span class="line">                            normalizer_fn=<span class="literal">None</span>,scope=<span class="string">"Conv2d_1c_1x1"</span>)</span><br><span class="line">    <span class="keyword">if</span> spatial_squeeze:</span><br><span class="line">        logits = tf.squeeze(logits,axis=[<span class="number">1</span>,<span class="number">2</span>],name=<span class="string">"SpatialSqueeze"</span>)</span><br><span class="line"></span><br><span class="line">end_points[<span class="string">"Logits"</span>] = logits</span><br><span class="line">end_points[<span class="string">"Predictions"</span>] = prediction_fn(logits,scope=<span class="string">"Predictions"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>inception_v3函数实现代码汇总：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inception_v3</span><span class="params">(inputs,num_classes=<span class="number">1000</span>,is_training=True,droupot_keep_prob = <span class="number">0.8</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 prediction_fn = slim.softmax,spatial_squeeze = True,reuse = None,scope=<span class="string">"InceptionV3"</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    InceptionV3整个网络的构建</span></span><br><span class="line"><span class="string">    param :</span></span><br><span class="line"><span class="string">    inputs -- 输入tensor</span></span><br><span class="line"><span class="string">    num_classes -- 最后分类数目</span></span><br><span class="line"><span class="string">    is_training -- 是否是训练过程</span></span><br><span class="line"><span class="string">    droupot_keep_prob -- dropout保留节点比例</span></span><br><span class="line"><span class="string">    prediction_fn -- 最后分类函数，默认为softmax</span></span><br><span class="line"><span class="string">    patial_squeeze -- 是否对输出去除维度为1的维度</span></span><br><span class="line"><span class="string">    reuse -- 是否对网络和Variable重复使用</span></span><br><span class="line"><span class="string">    scope -- 函数默认参数环境</span></span><br><span class="line"><span class="string">    return:</span></span><br><span class="line"><span class="string">    logits -- 最后输出结果</span></span><br><span class="line"><span class="string">    end_points -- 包含辅助节点的重要节点字典表</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(scope,<span class="string">"InceptionV3"</span>,[inputs,num_classes],</span><br><span class="line">                           reuse=reuse) <span class="keyword">as</span> scope:</span><br><span class="line">        <span class="keyword">with</span> slim.arg_scope([slim.batch_norm,slim.dropout],</span><br><span class="line">                            is_training = is_training):</span><br><span class="line">            net,end_points = inception_v3_base(inputs,scope=scope)     <span class="comment">#前面定义的整个卷积网络部分</span></span><br><span class="line"> </span><br><span class="line">            <span class="comment">#辅助分类节点部分</span></span><br><span class="line">            <span class="keyword">with</span> slim.arg_scope([slim.conv2d,slim.max_pool2d,slim.avg_pool2d],</span><br><span class="line">                                stride = <span class="number">1</span>,padding = <span class="string">"SAME"</span>):</span><br><span class="line">                <span class="comment">#通过end_points取到Mixed_6e</span></span><br><span class="line">                aux_logits = end_points[<span class="string">"Mixed_6e"</span>]</span><br><span class="line">                <span class="keyword">with</span> tf.variable_scope(<span class="string">"AuxLogits"</span>):</span><br><span class="line">                    aux_logits = slim.avg_pool2d(aux_logits,kernel_size=[<span class="number">5</span>,<span class="number">5</span>],stride=<span class="number">3</span>,</span><br><span class="line">                                                 padding=<span class="string">"VALID"</span>,scope=<span class="string">"Avgpool_1a_5x5"</span>)</span><br><span class="line">                    aux_logits = slim.conv2d(aux_logits,num_outputs=<span class="number">128</span>,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],scope=<span class="string">"Conv2d_1b_1x1"</span>)</span><br><span class="line">                    aux_logits = slim.conv2d(aux_logits,num_outputs=<span class="number">768</span>,kernel_size=[<span class="number">5</span>,<span class="number">5</span>],</span><br><span class="line">                                             weights_initializer=trunc_normal(<span class="number">0.01</span>),padding=<span class="string">"VALID"</span>,</span><br><span class="line">                                             scope=<span class="string">"Conv2d_2a_5x5"</span>)</span><br><span class="line">                    aux_logits = slim.conv2d(aux_logits,num_outputs=num_classes,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">                                             activation_fn=<span class="literal">None</span>,normalizer_fn=<span class="literal">None</span>,</span><br><span class="line">                                             weights_initializer=trunc_normal(<span class="number">0.001</span>),scope=<span class="string">"Conv2d_1b_1x1"</span>)</span><br><span class="line">                    <span class="comment">#消除tensor中前两个维度为1的维度</span></span><br><span class="line">                    <span class="keyword">if</span> spatial_squeeze:</span><br><span class="line">                        aux_logits = tf.squeeze(aux_logits,axis=[<span class="number">1</span>,<span class="number">2</span>],name=<span class="string">"SpatialSqueeze"</span>)</span><br><span class="line"> </span><br><span class="line">                    end_points[<span class="string">"AuxLogits"</span>] = aux_logits    <span class="comment">#将辅助节点分类的输出aux_logits存到end_points中</span></span><br><span class="line"> </span><br><span class="line">                <span class="comment">#正常分类预测</span></span><br><span class="line">                <span class="keyword">with</span> tf.variable_scope(<span class="string">"Logits"</span>):</span><br><span class="line">                    net = slim.avg_pool2d(net,kernel_size=[<span class="number">8</span>,<span class="number">8</span>],padding=<span class="string">"VALID"</span>,</span><br><span class="line">                                          scope=<span class="string">"Avgpool_1a_8x8"</span>)</span><br><span class="line">                    net = slim.dropout(net,keep_prob=droupot_keep_prob,scope=<span class="string">"Dropout_1b"</span>)</span><br><span class="line">                    end_points[<span class="string">"Logits"</span>] = net</span><br><span class="line"> </span><br><span class="line">                    logits = slim.conv2d(net,num_outputs=num_classes,kernel_size=[<span class="number">1</span>,<span class="number">1</span>],activation_fn=<span class="literal">None</span>,</span><br><span class="line">                                         normalizer_fn=<span class="literal">None</span>,scope=<span class="string">"Conv2d_1c_1x1"</span>)</span><br><span class="line">                    <span class="keyword">if</span> spatial_squeeze:</span><br><span class="line">                        logits = tf.squeeze(logits,axis=[<span class="number">1</span>,<span class="number">2</span>],name=<span class="string">"SpatialSqueeze"</span>)</span><br><span class="line">                </span><br><span class="line">                end_points[<span class="string">"Logits"</span>] = logits</span><br><span class="line">                end_points[<span class="string">"Predictions"</span>] = prediction_fn(logits,scope=<span class="string">"Predictions"</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> logits,end_points</span><br></pre></td></tr></table></figure></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/卷积网络/" rel="tag"># 卷积网络</a>
+            
+              <a href="/tags/TensorFlow/" rel="tag"># TensorFlow</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/09/论文阅读笔记10/" rel="next" title="论文阅读笔记10：FCOS:Fully Convolutional One-Stage Object Detection">
+                  <i class="fa fa-chevron-left"></i> 论文阅读笔记10：FCOS:Fully Convolutional One-Stage Object Detection
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/12/tf学习笔记11/" rel="prev" title="TensorFlow学习笔记11：ResNet">
+                  TensorFlow学习笔记11：ResNet <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/1.jpeg"
+      alt="Zheng Yujie">
+  <p class="site-author-name" itemprop="name">Zheng Yujie</p>
+  <div class="site-description motion-element" itemprop="description">C++/Python/深度学习</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://github.com/zhengyujie" title="GitHub &rarr; https://github.com/zhengyujie" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="mailto:zhengyujie97@126.com" title="E-Mail &rarr; mailto:zhengyujie97@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://music.163.com/#/playlist?id=327924141" title="Music &rarr; https://music.163.com/#/playlist?id=327924141" rel="noopener" target="_blank"><i class="fa fa-fw fa-headphones"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://www.google.com" title="Google &rarr; https://www.google.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-heart"></i>
+      FRIENDS
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://139.196.87.110:8080/" title="http://139.196.87.110:8080/" rel="noopener" target="_blank">RUIKO SATEN</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Inception-V3结构"><span class="nav-number">1.</span> <span class="nav-text">Inception V3结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorFlow实现"><span class="nav-number">2.</span> <span class="nav-text">TensorFlow实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义函数-inception-v3-arg-scope"><span class="nav-number">2.1.</span> <span class="nav-text">定义函数 inception_v3_arg_scope</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义Inception-V3的卷积部分"><span class="nav-number">2.2.</span> <span class="nav-text">定义Inception V3的卷积部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义第一个Inception模块"><span class="nav-number">2.2.1.</span> <span class="nav-text">定义第一个Inception模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义第二个Inception模块组"><span class="nav-number">2.2.2.</span> <span class="nav-text">定义第二个Inception模块组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义第三个Inception模块组"><span class="nav-number">2.2.3.</span> <span class="nav-text">定义第三个Inception模块组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现Inception-v3函数"><span class="nav-number">2.3.</span> <span class="nav-text">实现Inception_v3函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
+    <span class="post-meta-divider">|</span>
+    <span title="站点总字数">全站共163k字</span>
+    <span class="post-meta-divider">|</span>
+    <span title="站点阅读时长">阅读时长2:29</span>
+</div>
+
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,07,26,00,00,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: true,
+    appId: 'QhpM05HufWMwqxw5TW8GGKHt-gzGzoHsz',
+    appKey: 'ReXaLSgoPNRCjW8dT9eEyR25',
+    placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧！',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

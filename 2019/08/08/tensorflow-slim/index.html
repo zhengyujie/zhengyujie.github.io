@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="Slim简介slim是一个使构建，训练，评估神经网络变得简单的库。它可以消除原生tensorflow里面很多重复的模板性的代码，让代码更紧凑，更具备可读性。另外slim提供了很多计算机视觉方面的著名模型（VGG, AlexNet等），我们不仅可以直接使用，甚至能以各种方式进行扩展。  导入Slim1import tensorflow.contrib.slim as slim   TF-Slim的优">
+<meta name="keywords" content="TensorFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tensorflow-Slim简介">
+<meta property="og:url" content="http://yoursite.com/2019/08/08/tensorflow-slim/index.html">
+<meta property="og:site_name" content="浅笑の博客">
+<meta property="og:description" content="Slim简介slim是一个使构建，训练，评估神经网络变得简单的库。它可以消除原生tensorflow里面很多重复的模板性的代码，让代码更紧凑，更具备可读性。另外slim提供了很多计算机视觉方面的著名模型（VGG, AlexNet等），我们不仅可以直接使用，甚至能以各种方式进行扩展。  导入Slim1import tensorflow.contrib.slim as slim   TF-Slim的优">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-08T04:49:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tensorflow-Slim简介">
+<meta name="twitter:description" content="Slim简介slim是一个使构建，训练，评估神经网络变得简单的库。它可以消除原生tensorflow里面很多重复的模板性的代码，让代码更紧凑，更具备可读性。另外slim提供了很多计算机视觉方面的著名模型（VGG, AlexNet等），我们不仅可以直接使用，甚至能以各种方式进行扩展。  导入Slim1import tensorflow.contrib.slim as slim   TF-Slim的优">
+  <link rel="alternate" href="/atom.xml" title="浅笑の博客" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/2019/08/08/tensorflow-slim/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Tensorflow-Slim简介 | 浅笑の博客</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">浅笑の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我们的征途是星辰大海</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">19</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">40</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/tensorflow-slim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zheng Yujie">
+      <meta itemprop="description" content="C++/Python/深度学习">
+      <meta itemprop="image" content="/images/1.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅笑の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Tensorflow-Slim简介
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-08 20:25:20 / 修改时间：12:49:22" itemprop="dateCreated datePublished" datetime="2019-08-08T20:25:20+08:00">2019-08-08</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/08/08/tensorflow-slim/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/08/tensorflow-slim/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>4.4k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>4 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Slim简介"><a href="#Slim简介" class="headerlink" title="Slim简介"></a>Slim简介</h1><p>slim是一个使构建，训练，评估神经网络变得简单的库。它可以消除原生tensorflow里面很多重复的模板性的代码，让代码更紧凑，更具备可读性。另外slim提供了很多计算机视觉方面的著名模型（VGG, AlexNet等），我们不仅可以直接使用，甚至能以各种方式进行扩展。</p>
+<ul>
+<li>导入Slim<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow.contrib.slim <span class="keyword">as</span> slim</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="TF-Slim的优点"><a href="#TF-Slim的优点" class="headerlink" title="TF-Slim的优点"></a>TF-Slim的优点</h1><ul>
+<li>允许用户通过减少模板代码使得模型更加简洁。这个可以通过使用argument scoping和大量的高层layers、variables来实现</li>
+<li>通过使用常用的正则化（ regularizers）使得建立模型更加简单；</li>
+<li>一些广泛使用的计算机视觉相关的模型（比如VGG，AlexNet）已经在slim中定义好了，用户可以很方便的使用；这些既可以当成黑盒使用，也可以被扩展使用，比如添加一些“multiple heads”到不同的内部的层；</li>
+<li>Slim使得扩展复杂模型变得容易，可以使用已经存在的模型的checkpoints来开始训练算法。</li>
+</ul>
+<h1 id="TF-Slim的主要组件"><a href="#TF-Slim的主要组件" class="headerlink" title="TF-Slim的主要组件"></a>TF-Slim的主要组件</h1><p>TF-Slim由几个独立存在的组件组成，主要包括以下几个：</p>
+<ul>
+<li><p><strong>arg_scope</strong><br>  提供一个新的作用域（scope），称为arg_scope，在该作用域（scope）中，用户可以定义一些默认的参 数，用于特定的操作；<br>  如果你的网络中有大量的相同的参数：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">net = slim.conv2d(inputs, <span class="number">64</span>, [<span class="number">11</span>, <span class="number">11</span>], <span class="number">4</span>, padding=<span class="string">'SAME'</span>,</span><br><span class="line">              weights_initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.01</span>),</span><br><span class="line">              weights_regularizer=slim.l2_regularizer(<span class="number">0.0005</span>), scope=<span class="string">'conv1'</span>)</span><br><span class="line">net = slim.conv2d(net, <span class="number">128</span>, [<span class="number">11</span>, <span class="number">11</span>], padding=<span class="string">'VALID'</span>,</span><br><span class="line">              weights_initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.01</span>),</span><br><span class="line">              weights_regularizer=slim.l2_regularizer(<span class="number">0.0005</span>), scope=<span class="string">'conv2'</span>)</span><br><span class="line">net = slim.conv2d(net, <span class="number">256</span>, [<span class="number">11</span>, <span class="number">11</span>], padding=<span class="string">'SAME'</span>,</span><br><span class="line">              weights_initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.01</span>),</span><br><span class="line">              weights_regularizer=slim.l2_regularizer(<span class="number">0.0005</span>), scope=<span class="string">'conv3'</span>)</span><br></pre></td></tr></table></figure>
+<p>  用arg_scope处理一下：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> slim.arg_scope([slim.conv2d], padding=<span class="string">'SAME'</span>,</span><br><span class="line">                  weights_initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.01</span>)</span><br><span class="line">                  weights_regularizer=slim.l2_regularizer(<span class="number">0.0005</span>)):</span><br><span class="line">    net = slim.conv2d(inputs, <span class="number">64</span>, [<span class="number">11</span>, <span class="number">11</span>], scope=<span class="string">'conv1'</span>)</span><br><span class="line">    net = slim.conv2d(net, <span class="number">128</span>, [<span class="number">11</span>, <span class="number">11</span>], padding=<span class="string">'VALID'</span>, scope=<span class="string">'conv2'</span>)</span><br><span class="line">    net = slim.conv2d(net, <span class="number">256</span>, [<span class="number">11</span>, <span class="number">11</span>], scope=<span class="string">'conv3'</span>)</span><br></pre></td></tr></table></figure>
+<p>  arg_scope在作用范围内定义了指定层的默认参数，若想特别指定某些层的参数，可以重新赋值（相当于重写）</p>
+</li>
+<li><p><strong>data</strong><br>  包含TF-Slim的dataset定义，data providers，parallel_reader，和 decoding utilities；</p>
+</li>
+<li><strong>evaluation</strong><br>  包含用于模型评估的常规函数；</li>
+<li><p><strong>layers</strong><br>  包含用于建立模型的高级layers；<br>  比如分别用TensorFlow和Slim实现一个卷积层的案例：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#tensorflow实现卷积层</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'conv1_1'</span>) <span class="keyword">as</span> scope:</span><br><span class="line">    kernel = tf.Variable(tf.truncated_normal([<span class="number">3</span>, <span class="number">3</span>, <span class="number">64</span>, <span class="number">128</span>], dtype=tf.float32,</span><br><span class="line">                                       stddev=<span class="number">1e-1</span>), name=<span class="string">'weights'</span>)</span><br><span class="line">    conv = tf.nn.conv2d(input, kernel, [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line">    biases = tf.Variable(tf.constant(<span class="number">0.0</span>, shape=[<span class="number">128</span>], dtype=tf.float32),</span><br><span class="line">                   trainable=<span class="literal">True</span>, name=<span class="string">'biases'</span>)</span><br><span class="line">    bias = tf.nn.bias_add(conv, biases)</span><br><span class="line">    conv1 = tf.nn.relu(bias, name=scope)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#slim实现卷积层</span></span><br><span class="line">net = slim.conv2d(input, <span class="number">128</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'conv1_1'</span>)</span><br></pre></td></tr></table></figure>
+<p>  另外，比较吸引人的是slim中的repeat和stack操作，假设定义三个相同的卷积层，</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net = slim.conv2d(net, <span class="number">256</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'conv3_1'</span>)</span><br><span class="line">net = slim.conv2d(net, <span class="number">256</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'conv3_2'</span>)</span><br><span class="line">net = slim.conv2d(net, <span class="number">256</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'conv3_3'</span>)</span><br><span class="line">net = slim.max_pool2d(net, [<span class="number">2</span>, <span class="number">2</span>], scope=<span class="string">'pool2'</span>)</span><br></pre></td></tr></table></figure>
+<p>  在slim中的repeat操作可减少代码量：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net = slim.repeat(net, <span class="number">3</span>, slim.conv2d, <span class="number">256</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'conv3'</span>)</span><br><span class="line">net = slim.max_pool2d(net, [<span class="number">2</span>, <span class="number">2</span>], scope=<span class="string">'pool2'</span>)</span><br></pre></td></tr></table></figure>
+<p>  stack是处理卷积核或者输出不一样的情况：假设定义三层FC：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Verbose way:</span></span><br><span class="line">x = slim.fully_connected(x, <span class="number">32</span>, scope=<span class="string">'fc/fc_1'</span>)</span><br><span class="line">x = slim.fully_connected(x, <span class="number">64</span>, scope=<span class="string">'fc/fc_2'</span>)</span><br><span class="line">x = slim.fully_connected(x, <span class="number">128</span>, scope=<span class="string">'fc/fc_3'</span>)</span><br></pre></td></tr></table></figure>
+<p>  使用stack操作：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slim.stack(x, slim.fully_connected, [<span class="number">32</span>, <span class="number">64</span>, <span class="number">128</span>], scope=<span class="string">'fc'</span>)</span><br></pre></td></tr></table></figure>
+<p>  卷积层使用stack操作：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 普通方法:</span></span><br><span class="line">x = slim.conv2d(x, <span class="number">32</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'core/core_1'</span>)</span><br><span class="line">x = slim.conv2d(x, <span class="number">32</span>, [<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">'core/core_2'</span>)</span><br><span class="line">x = slim.conv2d(x, <span class="number">64</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'core/core_3'</span>)</span><br><span class="line">x = slim.conv2d(x, <span class="number">64</span>, [<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">'core/core_4'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 简便方法:</span></span><br><span class="line">slim.stack(x, slim.conv2d, [(<span class="number">32</span>, [<span class="number">3</span>, <span class="number">3</span>]), (<span class="number">32</span>, [<span class="number">1</span>, <span class="number">1</span>]), (<span class="number">64</span>, [<span class="number">3</span>, <span class="number">3</span>]), (<span class="number">64</span>, [<span class="number">1</span>, <span class="number">1</span>])], scope=<span class="string">'core'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>learning</strong><br>  包含一些用于训练模型的常规函数；</p>
+</li>
+<li><strong>losses</strong><br>  包含一些用于loss function的函数；</li>
+<li><strong>metrics</strong><br>  包含一些热门的评价标准；</li>
+<li><strong>nets</strong><br>  包含一些热门的网络定义，如VGG，AlexNet等模型；</li>
+<li><strong>queues</strong><br>  提供一个内容管理者，使得可以很容易、很安全地启动和关闭QueueRunners；</li>
+<li><strong>regularizers</strong><br>  包含权重正则化；</li>
+<li><strong>variables</strong><br>  提供一个方便的封装，用于变量创建和使用。<br>  变量分为两类：模型变量和局部变量。局部变量是不作为模型参数保存的，而模型变量会再save的时候保存下来。诸如global_step之类的就是局部变量。slim中可以写明变量存放的设备，正则和初始化规则。还有获取变量的函数也需要注意一下，get_variables是返回所有的变量。<br>  slim中定义一个变量的实例：  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Model Variables</span></span><br><span class="line">weights = slim.model_variable(<span class="string">'weights'</span>,</span><br><span class="line">                            shape=[<span class="number">10</span>, <span class="number">10</span>, <span class="number">3</span> , <span class="number">3</span>],</span><br><span class="line">                            initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.1</span>),</span><br><span class="line">                            regularizer=slim.l2_regularizer(<span class="number">0.05</span>),</span><br><span class="line">                            device=<span class="string">'/CPU:0'</span>)</span><br><span class="line">model_variables = slim.get_model_variables()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Regular variables</span></span><br><span class="line">my_var = slim.variable(<span class="string">'my_var'</span>,</span><br><span class="line">                    shape=[<span class="number">20</span>, <span class="number">1</span>],</span><br><span class="line">                    initializer=tf.zeros_initializer())</span><br><span class="line">regular_variables_and_model_variables = slim.get_variables()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/TensorFlow/" rel="tag"># TensorFlow</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/08/tf学习笔记9/" rel="next" title="TensorFlow学习笔记9：VGGNet-16">
+                  <i class="fa fa-chevron-left"></i> TensorFlow学习笔记9：VGGNet-16
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/09/论文阅读笔记10/" rel="prev" title="论文阅读笔记10：FCOS:Fully Convolutional One-Stage Object Detection">
+                  论文阅读笔记10：FCOS:Fully Convolutional One-Stage Object Detection <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/1.jpeg"
+      alt="Zheng Yujie">
+  <p class="site-author-name" itemprop="name">Zheng Yujie</p>
+  <div class="site-description motion-element" itemprop="description">C++/Python/深度学习</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://github.com/zhengyujie" title="GitHub &rarr; https://github.com/zhengyujie" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="mailto:zhengyujie97@126.com" title="E-Mail &rarr; mailto:zhengyujie97@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://music.163.com/#/playlist?id=327924141" title="Music &rarr; https://music.163.com/#/playlist?id=327924141" rel="noopener" target="_blank"><i class="fa fa-fw fa-headphones"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://www.google.com" title="Google &rarr; https://www.google.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-heart"></i>
+      FRIENDS
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://139.196.87.110:8080/" title="http://139.196.87.110:8080/" rel="noopener" target="_blank">RUIKO SATEN</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Slim简介"><span class="nav-number">1.</span> <span class="nav-text">Slim简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TF-Slim的优点"><span class="nav-number">2.</span> <span class="nav-text">TF-Slim的优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TF-Slim的主要组件"><span class="nav-number">3.</span> <span class="nav-text">TF-Slim的主要组件</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
+    <span class="post-meta-divider">|</span>
+    <span title="站点总字数">全站共163k字</span>
+    <span class="post-meta-divider">|</span>
+    <span title="站点阅读时长">阅读时长2:29</span>
+</div>
+
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2019,07,26,00,00,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: true,
+    appId: 'QhpM05HufWMwqxw5TW8GGKHt-gzGzoHsz',
+    appKey: 'ReXaLSgoPNRCjW8dT9eEyR25',
+    placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧！',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
