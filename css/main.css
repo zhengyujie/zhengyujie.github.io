@@ -1661,7 +1661,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #d9ffb6;
+  background: #ff837d;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2883,10 +2883,8 @@ main {
 }
 .tag-cloud a {
   border: 0px;
-  background-color: #f5f5f5;
   padding: 0px 10px;
   border-radius: 10px;
-  border-bottom: 2px solid;
 }
 nav.pagination {
   margin-top: 10px;
@@ -2898,15 +2896,15 @@ nav.pagination {
   display: inline-block;
   font-size: 1.2em;
   margin-right: 10px;
-  background-color: #c9e7d4;
   padding: 0px 10px;
   border-radius: 8px;
+  color: #fff;
 }
 .home-post-tags a {
-  background-color: #d7f1d9;
   border-radius: 4px;
   padding: 3px;
   margin: 0px 4px;
+  color: #fff;
 }
 .container.sidebar-position-left {
   background-color: #aadab8;
@@ -2919,4 +2917,28 @@ nav.pagination {
 }
 header#header {
   padding: 0px 8px;
+}
+.posts-expand .post-title-link {
+  color: #83a;
+}
+.category-all-page .category-list-item {
+  margin: 20px 10px;
+  text-align: center;
+}
+a.category-list-link {
+  border: 0px;
+  padding: 10px;
+  background-color: #aadab8;
+  border-radius: 10px;
+  margin: 10px;
+}
+.about-me {
+  font-size: 1.5em;
+  text-align: center;
+  color: #008000;
+}
+.welcome {
+  font-size: 1.5em;
+  text-align: center;
+  color: #008000;
 }

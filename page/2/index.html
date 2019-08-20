@@ -173,7 +173,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">40</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">43</span></a>
 
   </li>
       
@@ -199,7 +199,20 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">40</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">41</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-guestbook">
+      
+    
+      
+    
+
+    <a href="/guestbook/" rel="section"><i class="menu-item-icon fa fa-fw fa-paper-plane-o"></i> <br>留言板</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -253,6 +266,173 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/09/论文阅读笔记10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zheng Yujie">
+      <meta itemprop="description" content="C++/Python/深度学习">
+      <meta itemprop="image" content="/images/1.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅笑の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/08/09/论文阅读笔记10/" class="post-title-link" itemprop="url">论文阅读笔记10：FCOS:Fully Convolutional One-Stage Object Detection</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-09 10:21:15" itemprop="dateCreated datePublished" datetime="2019-08-09T10:21:15+08:00">2019-08-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-19 16:10:23" itemprop="dateModified" datetime="2019-08-19T16:10:23+08:00">2019-08-19</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/08/09/论文阅读笔记10/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/09/论文阅读笔记10/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>8.2k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>7 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>论文地址：<a href="https://arxiv.org/pdf/1904.01355.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1904.01355.pdf</a><br>代码地址：<a href="https://github.com/tianzhi0549/FCOS" target="_blank" rel="noopener">https://github.com/tianzhi0549/FCOS</a></p>
+</blockquote>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>我们提出了一种全卷积的 one-stage 目标检测器（FCOS, Fully Convolutional One Stage）, 它以对每个像素进行预测的方式来解决目标检测问题，类似于语义分割。几乎所有的 SOTA 物体检测器，如 RetinaNet，SSD，YOLOv3 和 Faster R-CNN 都依赖于预定义的 anchor box。相比之下，我们提出的 FCOS 不需要 anchor box，同时也不需要 proposals (即 One-Stage)。通过消除对预定义 anchor 的依赖，FCOS 完全避免了与 anchor box 相关的复杂计算，例如在训练期间计算 overlapping 并显着减少 training memory footprint。更重要的是，我们还避免了与 anchor 相关的所有超参数，这些参数通常对最终检测性能非常敏感。凭借唯一的后处理操作非最大抑制（NMS），我们的 FCOS 优于之前的 anchor-based one-stage detectors，并且结构更简单。我们首次展示了一种更加简单灵活的检测框架，可以提高检测精度。我们希望 FCOS 框架可以作为许多其他实例级任务简单而强大的替代方案。</p>
+          
+            <div class="home-post-tags">
+              
+                <a href="/tags/目标检测/" rel="tag">目标检测</a>
+              
+                <a href="/tags/anchor-free/" rel="tag">anchor-free</a>
+              
+                <a href="/tags/论文笔记/" rel="tag">论文笔记</a>
+              
+                <a href="/tags/关键点检测/" rel="tag">关键点检测</a>
+              
+              <script type="text/javascript">
+                var tagsall=document.getElementsByClassName("home-post-tags")
+                for (var i = tagsall.length - 1; i >= 0; i--){
+                    var tags=tagsall[i].getElementsByTagName("a");
+                    for (var j = tags.length - 1; j >= 0; j--) {
+                        var r=Math.floor(Math.random()*255);
+                        var g=Math.floor(Math.random()*255);
+                        var b=Math.floor(Math.random()*255);
+                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                    }
+                }
+              </script>
+            </div>
+          
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/09/论文阅读笔记10/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/tensorflow-slim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -293,7 +473,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-19 16:18:34" itemprop="dateModified" datetime="2019-08-19T16:18:34+08:00">2019-08-19</time>
+                <time title="修改时间：2019-08-20 13:11:06" itemprop="dateModified" datetime="2019-08-20T13:11:06+08:00">2019-08-20</time>
               </span>
             
           
@@ -358,206 +538,29 @@
 
       
           <h1 id="Slim简介"><a href="#Slim简介" class="headerlink" title="Slim简介"></a>Slim简介</h1><p>slim是一个使构建，训练，评估神经网络变得简单的库。它可以消除原生tensorflow里面很多重复的模板性的代码，让代码更紧凑，更具备可读性。另外slim提供了很多计算机视觉方面的著名模型（VGG, AlexNet等），我们不仅可以直接使用，甚至能以各种方式进行扩展。</p>
-<ul>
-<li>导入Slim<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow.contrib.slim <span class="keyword">as</span> slim</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="TF-Slim的优点"><a href="#TF-Slim的优点" class="headerlink" title="TF-Slim的优点"></a>TF-Slim的优点</h1><ul>
-<li>允许用户通过减少模板代码使得模型更加简洁。这个可以通过使用argument scoping和大量的高层layers、variables来实现</li>
-<li>通过使用常用的正则化（ regularizers）使得建立模型更加简单；</li>
-<li>一些广泛使用的计算机视觉相关的模型（比如VGG，AlexNet）已经在slim中定义好了，用户可以很方便的使用；这些既可以当成黑盒使用，也可以被扩展使用，比如添加一些“multiple heads”到不同的内部的层；</li>
-<li>Slim使得扩展复杂模型变得容易，可以使用已经存在的模型的checkpoints来开始训练算法。</li>
-</ul>
-<h1 id="TF-Slim的主要组件"><a href="#TF-Slim的主要组件" class="headerlink" title="TF-Slim的主要组件"></a>TF-Slim的主要组件</h1><p>TF-Slim由几个独立存在的组件组成，主要包括以下几个：</p>
-<ul>
-<li><p><strong>arg_scope</strong><br>  提供一个新的作用域（scope），称为arg_scope，在该作用域（scope）中，用户可以定义一些默认的参 数，用于特定的操作；<br>  如果你的网络中有大量的相同的参数：</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">net = slim.conv2d(inputs, <span class="number">64</span>, [<span class="number">11</span>, <span class="number">11</span>], <span class="number">4</span>, padding=<span class="string">'SAME'</span>,</span><br><span class="line">              weights_initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.01</span>),</span><br><span class="line">              weights_regularizer=slim.l2_regularizer(<span class="number">0.0005</span>), scope=<span class="string">'conv1'</span>)</span><br><span class="line">net = slim.conv2d(net, <span class="number">128</span>, [<span class="number">11</span>, <span class="number">11</span>], padding=<span class="string">'VALID'</span>,</span><br><span class="line">              weights_initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.01</span>),</span><br><span class="line">              weights_regularizer=slim.l2_regularizer(<span class="number">0.0005</span>), scope=<span class="string">'conv2'</span>)</span><br><span class="line">net = slim.conv2d(net, <span class="number">256</span>, [<span class="number">11</span>, <span class="number">11</span>], padding=<span class="string">'SAME'</span>,</span><br><span class="line">              weights_initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.01</span>),</span><br><span class="line">              weights_regularizer=slim.l2_regularizer(<span class="number">0.0005</span>), scope=<span class="string">'conv3'</span>)</span><br></pre></td></tr></table></figure>
-<p>  用arg_scope处理一下：</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> slim.arg_scope([slim.conv2d], padding=<span class="string">'SAME'</span>,</span><br><span class="line">                  weights_initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.01</span>)</span><br><span class="line">                  weights_regularizer=slim.l2_regularizer(<span class="number">0.0005</span>)):</span><br><span class="line">    net = slim.conv2d(inputs, <span class="number">64</span>, [<span class="number">11</span>, <span class="number">11</span>], scope=<span class="string">'conv1'</span>)</span><br><span class="line">    net = slim.conv2d(net, <span class="number">128</span>, [<span class="number">11</span>, <span class="number">11</span>], padding=<span class="string">'VALID'</span>, scope=<span class="string">'conv2'</span>)</span><br><span class="line">    net = slim.conv2d(net, <span class="number">256</span>, [<span class="number">11</span>, <span class="number">11</span>], scope=<span class="string">'conv3'</span>)</span><br></pre></td></tr></table></figure>
-<p>  arg_scope在作用范围内定义了指定层的默认参数，若想特别指定某些层的参数，可以重新赋值（相当于重写）</p>
-</li>
-<li><p><strong>data</strong><br>  包含TF-Slim的dataset定义，data providers，parallel_reader，和 decoding utilities；</p>
-</li>
-<li><strong>evaluation</strong><br>  包含用于模型评估的常规函数；</li>
-<li><p><strong>layers</strong><br>  包含用于建立模型的高级layers；<br>  比如分别用TensorFlow和Slim实现一个卷积层的案例：</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#tensorflow实现卷积层</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'conv1_1'</span>) <span class="keyword">as</span> scope:</span><br><span class="line">    kernel = tf.Variable(tf.truncated_normal([<span class="number">3</span>, <span class="number">3</span>, <span class="number">64</span>, <span class="number">128</span>], dtype=tf.float32,</span><br><span class="line">                                       stddev=<span class="number">1e-1</span>), name=<span class="string">'weights'</span>)</span><br><span class="line">    conv = tf.nn.conv2d(input, kernel, [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line">    biases = tf.Variable(tf.constant(<span class="number">0.0</span>, shape=[<span class="number">128</span>], dtype=tf.float32),</span><br><span class="line">                   trainable=<span class="literal">True</span>, name=<span class="string">'biases'</span>)</span><br><span class="line">    bias = tf.nn.bias_add(conv, biases)</span><br><span class="line">    conv1 = tf.nn.relu(bias, name=scope)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#slim实现卷积层</span></span><br><span class="line">net = slim.conv2d(input, <span class="number">128</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'conv1_1'</span>)</span><br></pre></td></tr></table></figure>
-<p>  另外，比较吸引人的是slim中的repeat和stack操作，假设定义三个相同的卷积层，</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net = slim.conv2d(net, <span class="number">256</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'conv3_1'</span>)</span><br><span class="line">net = slim.conv2d(net, <span class="number">256</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'conv3_2'</span>)</span><br><span class="line">net = slim.conv2d(net, <span class="number">256</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'conv3_3'</span>)</span><br><span class="line">net = slim.max_pool2d(net, [<span class="number">2</span>, <span class="number">2</span>], scope=<span class="string">'pool2'</span>)</span><br></pre></td></tr></table></figure>
-<p>  在slim中的repeat操作可减少代码量：</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net = slim.repeat(net, <span class="number">3</span>, slim.conv2d, <span class="number">256</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'conv3'</span>)</span><br><span class="line">net = slim.max_pool2d(net, [<span class="number">2</span>, <span class="number">2</span>], scope=<span class="string">'pool2'</span>)</span><br></pre></td></tr></table></figure>
-<p>  stack是处理卷积核或者输出不一样的情况：假设定义三层FC：</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Verbose way:</span></span><br><span class="line">x = slim.fully_connected(x, <span class="number">32</span>, scope=<span class="string">'fc/fc_1'</span>)</span><br><span class="line">x = slim.fully_connected(x, <span class="number">64</span>, scope=<span class="string">'fc/fc_2'</span>)</span><br><span class="line">x = slim.fully_connected(x, <span class="number">128</span>, scope=<span class="string">'fc/fc_3'</span>)</span><br></pre></td></tr></table></figure>
-<p>  使用stack操作：</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slim.stack(x, slim.fully_connected, [<span class="number">32</span>, <span class="number">64</span>, <span class="number">128</span>], scope=<span class="string">'fc'</span>)</span><br></pre></td></tr></table></figure>
-<p>  卷积层使用stack操作：</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 普通方法:</span></span><br><span class="line">x = slim.conv2d(x, <span class="number">32</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'core/core_1'</span>)</span><br><span class="line">x = slim.conv2d(x, <span class="number">32</span>, [<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">'core/core_2'</span>)</span><br><span class="line">x = slim.conv2d(x, <span class="number">64</span>, [<span class="number">3</span>, <span class="number">3</span>], scope=<span class="string">'core/core_3'</span>)</span><br><span class="line">x = slim.conv2d(x, <span class="number">64</span>, [<span class="number">1</span>, <span class="number">1</span>], scope=<span class="string">'core/core_4'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 简便方法:</span></span><br><span class="line">slim.stack(x, slim.conv2d, [(<span class="number">32</span>, [<span class="number">3</span>, <span class="number">3</span>]), (<span class="number">32</span>, [<span class="number">1</span>, <span class="number">1</span>]), (<span class="number">64</span>, [<span class="number">3</span>, <span class="number">3</span>]), (<span class="number">64</span>, [<span class="number">1</span>, <span class="number">1</span>])], scope=<span class="string">'core'</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>learning</strong><br>  包含一些用于训练模型的常规函数；</p>
-</li>
-<li><strong>losses</strong><br>  包含一些用于loss function的函数；</li>
-<li><strong>metrics</strong><br>  包含一些热门的评价标准；</li>
-<li><strong>nets</strong><br>  包含一些热门的网络定义，如VGG，AlexNet等模型；</li>
-<li><strong>queues</strong><br>  提供一个内容管理者，使得可以很容易、很安全地启动和关闭QueueRunners；</li>
-<li><strong>regularizers</strong><br>  包含权重正则化；</li>
-<li><strong>variables</strong><br>  提供一个方便的封装，用于变量创建和使用。<br>  变量分为两类：模型变量和局部变量。局部变量是不作为模型参数保存的，而模型变量会再save的时候保存下来。诸如global_step之类的就是局部变量。slim中可以写明变量存放的设备，正则和初始化规则。还有获取变量的函数也需要注意一下，get_variables是返回所有的变量。<br>  slim中定义一个变量的实例：  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Model Variables</span></span><br><span class="line">weights = slim.model_variable(<span class="string">'weights'</span>,</span><br><span class="line">                            shape=[<span class="number">10</span>, <span class="number">10</span>, <span class="number">3</span> , <span class="number">3</span>],</span><br><span class="line">                            initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.1</span>),</span><br><span class="line">                            regularizer=slim.l2_regularizer(<span class="number">0.05</span>),</span><br><span class="line">                            device=<span class="string">'/CPU:0'</span>)</span><br><span class="line">model_variables = slim.get_model_variables()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Regular variables</span></span><br><span class="line">my_var = slim.variable(<span class="string">'my_var'</span>,</span><br><span class="line">                    shape=[<span class="number">20</span>, <span class="number">1</span>],</span><br><span class="line">                    initializer=tf.zeros_initializer())</span><br><span class="line">regular_variables_and_model_variables = slim.get_variables()</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/tf学习笔记8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zheng Yujie">
-      <meta itemprop="description" content="C++/Python/深度学习">
-      <meta itemprop="image" content="/images/1.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="浅笑の博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/08/tf学习笔记8/" class="post-title-link" itemprop="url">TensorFlow学习笔记8：AlexNet</a>
           
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-08 18:38:17" itemprop="dateCreated datePublished" datetime="2019-08-08T18:38:17+08:00">2019-08-08</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-19 16:14:48" itemprop="dateModified" datetime="2019-08-19T16:14:48+08:00">2019-08-19</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/08/08/tf学习笔记8/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/08/tf学习笔记8/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-          
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>13k</span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span>11 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h1><p>AlexNet是Hinton的学生Alex Krizhevsky在2012年提出的深度卷积神经网络，它是LeNet一种更深更宽的版本。在AlexNet上首次应用了几个trick，ReLU、Dropout和LRN。AlexNet包含了6亿3000万个连接，6000万个参数和65万个神经元，有5个卷积层，3个全连接层。在ILSVRC 2012比赛中，AlexNet以top-5的错误率为16.4%的显著优势夺得冠军，第二名的成绩是26.2%。AlexNet的trick主要包括：</p>
-          
-            
-              
-            
             <div class="home-post-tags">
               
-                <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
+                <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
               
-                <a href="/tags/卷积网络/" rel="tag"><i class="fa fa-tag"></i> 卷积网络</a>
-              
-                <a href="/tags/AlexNet/" rel="tag"><i class="fa fa-tag"></i> AlexNet</a>
-              
+              <script type="text/javascript">
+                var tagsall=document.getElementsByClassName("home-post-tags")
+                for (var i = tagsall.length - 1; i >= 0; i--){
+                    var tags=tagsall[i].getElementsByTagName("a");
+                    for (var j = tags.length - 1; j >= 0; j--) {
+                        var r=Math.floor(Math.random()*255);
+                        var g=Math.floor(Math.random()*255);
+                        var b=Math.floor(Math.random()*255);
+                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                    }
+                }
+              </script>
             </div>
           
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/08/tf学习笔记8/#more" rel="contents">
+              <a class="btn" href="/2019/08/08/tensorflow-slim/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -701,23 +704,201 @@
       
           <h1 id="VGGNet"><a href="#VGGNet" class="headerlink" title="VGGNet"></a>VGGNet</h1><p>VGGNet是牛津大学计算机视觉组(Visual Geometry Group)和Google DeepMind公司一起研发的深度卷积神经网络。VGGNet探索了卷积神经网络的深度和其性能之间的关系，通过反复堆叠3×3的小型卷积核和2×2的最大池化层，VGGNet成功地构筑了16~19层深的卷积神经网络。到目前为止，VGGNet还经常被用来提取图像的特征。VGGNet训练后的模型参数在其官方网站上开源了，可用来在domain specific的图像分类任务上进行再训练(相当于提供了非常好的初始化权重)。</p>
           
-            
-              
-            
             <div class="home-post-tags">
               
-                <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
+                <a href="/tags/卷积网络/" rel="tag">卷积网络</a>
               
-                <a href="/tags/卷积网络/" rel="tag"><i class="fa fa-tag"></i> 卷积网络</a>
+                <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
               
-                <a href="/tags/VGGNet/" rel="tag"><i class="fa fa-tag"></i> VGGNet</a>
+                <a href="/tags/VGGNet/" rel="tag">VGGNet</a>
               
+              <script type="text/javascript">
+                var tagsall=document.getElementsByClassName("home-post-tags")
+                for (var i = tagsall.length - 1; i >= 0; i--){
+                    var tags=tagsall[i].getElementsByTagName("a");
+                    for (var j = tags.length - 1; j >= 0; j--) {
+                        var r=Math.floor(Math.random()*255);
+                        var g=Math.floor(Math.random()*255);
+                        var b=Math.floor(Math.random()*255);
+                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                    }
+                }
+              </script>
             </div>
           
           <!--noindex-->
           
             <div class="post-button text-center">
               <a class="btn" href="/2019/08/08/tf学习笔记9/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/tf学习笔记8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zheng Yujie">
+      <meta itemprop="description" content="C++/Python/深度学习">
+      <meta itemprop="image" content="/images/1.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅笑の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/08/08/tf学习笔记8/" class="post-title-link" itemprop="url">TensorFlow学习笔记8：AlexNet</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-08 18:38:17" itemprop="dateCreated datePublished" datetime="2019-08-08T18:38:17+08:00">2019-08-08</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-19 16:14:48" itemprop="dateModified" datetime="2019-08-19T16:14:48+08:00">2019-08-19</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/08/08/tf学习笔记8/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/08/tf学习笔记8/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>13k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>11 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h1><p>AlexNet是Hinton的学生Alex Krizhevsky在2012年提出的深度卷积神经网络，它是LeNet一种更深更宽的版本。在AlexNet上首次应用了几个trick，ReLU、Dropout和LRN。AlexNet包含了6亿3000万个连接，6000万个参数和65万个神经元，有5个卷积层，3个全连接层。在ILSVRC 2012比赛中，AlexNet以top-5的错误率为16.4%的显著优势夺得冠军，第二名的成绩是26.2%。AlexNet的trick主要包括：</p>
+          
+            <div class="home-post-tags">
+              
+                <a href="/tags/卷积网络/" rel="tag">卷积网络</a>
+              
+                <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
+              
+                <a href="/tags/AlexNet/" rel="tag">AlexNet</a>
+              
+              <script type="text/javascript">
+                var tagsall=document.getElementsByClassName("home-post-tags")
+                for (var i = tagsall.length - 1; i >= 0; i--){
+                    var tags=tagsall[i].getElementsByTagName("a");
+                    for (var j = tags.length - 1; j >= 0; j--) {
+                        var r=Math.floor(Math.random()*255);
+                        var g=Math.floor(Math.random()*255);
+                        var b=Math.floor(Math.random()*255);
+                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                    }
+                }
+              </script>
+            </div>
+          
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/08/tf学习笔记8/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -861,17 +1042,26 @@
       
           <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>用Tensorflow实现一个完整的卷积神经网络，用这个卷积神经网络来识别手写数字数据集（MNIST）。</p>
           
-            
-              
-            
             <div class="home-post-tags">
               
-                <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
+                <a href="/tags/卷积网络/" rel="tag">卷积网络</a>
               
-                <a href="/tags/卷积网络/" rel="tag"><i class="fa fa-tag"></i> 卷积网络</a>
+                <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
               
-                <a href="/tags/MNIST/" rel="tag"><i class="fa fa-tag"></i> MNIST</a>
+                <a href="/tags/MNIST/" rel="tag">MNIST</a>
               
+              <script type="text/javascript">
+                var tagsall=document.getElementsByClassName("home-post-tags")
+                for (var i = tagsall.length - 1; i >= 0; i--){
+                    var tags=tagsall[i].getElementsByTagName("a");
+                    for (var j = tags.length - 1; j >= 0; j--) {
+                        var r=Math.floor(Math.random()*255);
+                        var g=Math.floor(Math.random()*255);
+                        var b=Math.floor(Math.random()*255);
+                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                    }
+                }
+              </script>
             </div>
           
           <!--noindex-->
@@ -1021,15 +1211,24 @@
       
           <h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><p>逻辑回归是应用非常广泛的一个分类机器学习算法，它将数据拟合到一个logit函数(或者叫做logistic函数)中，从而能够完成对事件发生的概率进行预测。</p>
           
-            
-              
-            
             <div class="home-post-tags">
               
-                <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
+                <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
               
-                <a href="/tags/逻辑回归/" rel="tag"><i class="fa fa-tag"></i> 逻辑回归</a>
+                <a href="/tags/逻辑回归/" rel="tag">逻辑回归</a>
               
+              <script type="text/javascript">
+                var tagsall=document.getElementsByClassName("home-post-tags")
+                for (var i = tagsall.length - 1; i >= 0; i--){
+                    var tags=tagsall[i].getElementsByTagName("a");
+                    for (var j = tags.length - 1; j >= 0; j--) {
+                        var r=Math.floor(Math.random()*255);
+                        var g=Math.floor(Math.random()*255);
+                        var b=Math.floor(Math.random()*255);
+                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                    }
+                }
+              </script>
             </div>
           
           <!--noindex-->
@@ -1179,15 +1378,24 @@
       
           <h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><p>线性回归（Linear Regression）是一种通过属性的线性组合来进行预测的线性模型，其目的是找到一条直线或者一个平面或者更高维的超平面，使得预测值与真实值之间的误差最小化。</p>
           
-            
-              
-            
             <div class="home-post-tags">
               
-                <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
+                <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
               
-                <a href="/tags/线性回归/" rel="tag"><i class="fa fa-tag"></i> 线性回归</a>
+                <a href="/tags/线性回归/" rel="tag">线性回归</a>
               
+              <script type="text/javascript">
+                var tagsall=document.getElementsByClassName("home-post-tags")
+                for (var i = tagsall.length - 1; i >= 0; i--){
+                    var tags=tagsall[i].getElementsByTagName("a");
+                    for (var j = tags.length - 1; j >= 0; j--) {
+                        var r=Math.floor(Math.random()*255);
+                        var g=Math.floor(Math.random()*255);
+                        var b=Math.floor(Math.random()*255);
+                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                    }
+                }
+              </script>
             </div>
           
           <!--noindex-->
@@ -1337,15 +1545,24 @@
       
           <h1 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h1><p>损失函数（loss function）是机器学习中非常重要的内容，它是度量模型输出值与目标值的差异，也就是作为评估模型效果的一种重要指标，损失函数越小，表明模型的鲁棒性就越好。</p>
           
-            
-              
-            
             <div class="home-post-tags">
               
-                <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
+                <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
               
-                <a href="/tags/损失函数/" rel="tag"><i class="fa fa-tag"></i> 损失函数</a>
+                <a href="/tags/损失函数/" rel="tag">损失函数</a>
               
+              <script type="text/javascript">
+                var tagsall=document.getElementsByClassName("home-post-tags")
+                for (var i = tagsall.length - 1; i >= 0; i--){
+                    var tags=tagsall[i].getElementsByTagName("a");
+                    for (var j = tags.length - 1; j >= 0; j--) {
+                        var r=Math.floor(Math.random()*255);
+                        var g=Math.floor(Math.random()*255);
+                        var b=Math.floor(Math.random()*255);
+                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                    }
+                }
+              </script>
             </div>
           
           <!--noindex-->
@@ -1495,15 +1712,24 @@
       
           <h1 id="激励函数的作用"><a href="#激励函数的作用" class="headerlink" title="激励函数的作用"></a>激励函数的作用</h1><p>激励函数的作用就是将多个线性输入转换为非线性的关系。如果不使用激励函数，神经网络的每层都只是做线性变换，即使是多层输入叠加后也还是线性变换。通过使用激励函数引入非线性因素后，使神经网络的表示能力更强了。</p>
           
-            
-              
-            
             <div class="home-post-tags">
               
-                <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
+                <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
               
-                <a href="/tags/激励函数/" rel="tag"><i class="fa fa-tag"></i> 激励函数</a>
+                <a href="/tags/激励函数/" rel="tag">激励函数</a>
               
+              <script type="text/javascript">
+                var tagsall=document.getElementsByClassName("home-post-tags")
+                for (var i = tagsall.length - 1; i >= 0; i--){
+                    var tags=tagsall[i].getElementsByTagName("a");
+                    for (var j = tags.length - 1; j >= 0; j--) {
+                        var r=Math.floor(Math.random()*255);
+                        var g=Math.floor(Math.random()*255);
+                        var b=Math.floor(Math.random()*255);
+                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                    }
+                }
+              </script>
             </div>
           
           <!--noindex-->
@@ -1653,13 +1879,22 @@
       
           <p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/TYchJjHiKGDp.png?imageslim" alt="mark"><br>计算图是TensorFlow的核心概念，使用图（Graph）来表示计算任务，由节点和边组成。TensorFlow由前端负责构建计算图，后端负责执行计算图。<br>为了执行图的计算，图必须在会话（Session）里面启动，会话将图的操作分发到CPU、GPU等设备上执行。<br>下面将介绍如何在TensorFlow里面创建会话、图以及基本操作。</p>
           
-            
-              
-            
             <div class="home-post-tags">
               
-                <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
+                <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
               
+              <script type="text/javascript">
+                var tagsall=document.getElementsByClassName("home-post-tags")
+                for (var i = tagsall.length - 1; i >= 0; i--){
+                    var tags=tagsall[i].getElementsByTagName("a");
+                    for (var j = tags.length - 1; j >= 0; j--) {
+                        var r=Math.floor(Math.random()*255);
+                        var g=Math.floor(Math.random()*255);
+                        var b=Math.floor(Math.random()*255);
+                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                    }
+                }
+              </script>
             </div>
           
           <!--noindex-->
@@ -1689,173 +1924,11 @@
   </article>
 
     
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/06/tf学习笔记1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zheng Yujie">
-      <meta itemprop="description" content="C++/Python/深度学习">
-      <meta itemprop="image" content="/images/1.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="浅笑の博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/06/tf学习笔记1/" class="post-title-link" itemprop="url">TensorFlow学习笔记1：张量与变量</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-06 14:53:36" itemprop="dateCreated datePublished" datetime="2019-08-06T14:53:36+08:00">2019-08-06</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-19 16:12:45" itemprop="dateModified" datetime="2019-08-19T16:12:45+08:00">2019-08-19</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/08/06/tf学习笔记1/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/06/tf学习笔记1/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-          
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>3.3k</span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span>3 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="张量的概念"><a href="#张量的概念" class="headerlink" title="张量的概念"></a>张量的概念</h1><p>TensorFlow用张量这种数据结构来表示所有的数据.你可以把一个张量想象成一个n维的数组或列表.一个张量有一个静态类型和动态类型的维数.张量可以在图中的节点之间流通.零阶张量表示标量，一阶张量表示向量，也就是一个以为数组，第n阶张量为矩阵，也就是一个n维数组。<br>但张量在tf中并不是采用数组的形式，只是对TF的运算结果的引用。</p>
-<p>一个张量包含三个属性：名字name ，维度shape，类型 dtype：</p>
-<ul>
-<li>name：张量的唯一标识。命名规范：“node:src_input” 。node 表示图的节点的名称，src_input 表示张量来自节点的第几个输入（从0开始）</li>
-<li>shape：描述张量的维度信息。</li>
-<li>dtype：每一个张量有一个唯一的类型。不同类型计算会报错。</li>
-</ul>
-          
-            
-              
-            
-            <div class="home-post-tags">
-              
-                <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
-              
-            </div>
-          
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/06/tf学习笔记1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1891,7 +1964,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2009,7 +2082,13 @@
         
           
         
-        <span class="site-state-item-count">40</span>
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -2065,7 +2144,7 @@
   <div class="widget-wrap">
     <div id="myCanvasContainer" class="widget tagcloud">
       <canvas width="250" height="250" id="resCanvas" style="width=100%">
-        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AlexNet/">AlexNet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/">CUDA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coding/">Coding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deformable-Convolution/">Deformable Convolution</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Embedding/">Embedding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Focal-Loss/">Focal Loss</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Heatmap/">Heatmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/InceptionNet/">InceptionNet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MNIST/">MNIST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NexT/">NexT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyTorch/">PyTorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python库/">Python库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/R-CNN/">R-CNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResNet/">ResNet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VGGNet/">VGGNet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Valine/">Valine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anchor-free/">anchor-free</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuDNN/">cuDNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/">mathjax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关键点检测/">关键点检测</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卷积网络/">卷积网络</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感受野/">感受野</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/损失函数/">损失函数</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/注意力机制/">注意力机制</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码解读/">源码解读</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/激励函数/">激励函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目标检测/">目标检测</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/空洞卷积/">空洞卷积</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统安装/">系统安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性回归/">线性回归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/论文笔记/">论文笔记</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逻辑回归/">逻辑回归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a><span class="tag-list-count">1</span></li></ul>
+        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AlexNet/">AlexNet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/">CUDA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coding/">Coding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deformable-Convolution/">Deformable Convolution</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Embedding/">Embedding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Focal-Loss/">Focal Loss</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Heatmap/">Heatmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/InceptionNet/">InceptionNet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MNIST/">MNIST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NexT/">NexT</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyTorch/">PyTorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python库/">Python库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/R-CNN/">R-CNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResNet/">ResNet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VGGNet/">VGGNet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Valine/">Valine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anchor-free/">anchor-free</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuDNN/">cuDNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/">mathjax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关键点检测/">关键点检测</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卷积网络/">卷积网络</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感受野/">感受野</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/损失函数/">损失函数</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/注意力机制/">注意力机制</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码解读/">源码解读</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/激励函数/">激励函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目标检测/">目标检测</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/空洞卷积/">空洞卷积</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统安装/">系统安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性回归/">线性回归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/论文笔记/">论文笔记</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逻辑回归/">逻辑回归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a><span class="tag-list-count">1</span></li></ul>
       </canvas>
     </div>
   </div>
@@ -2110,9 +2189,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
     <span class="post-meta-divider">|</span>
-    <span title="站点总字数">全站共163k字</span>
+    <span title="站点总字数">全站共167k字</span>
     <span class="post-meta-divider">|</span>
-    <span title="站点阅读时长">阅读时长2:29</span>
+    <span title="站点阅读时长">阅读时长2:32</span>
 </div>
 
 <span id="sitetime"></span>
@@ -2240,19 +2319,19 @@
   
     
       
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
         
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
       
     
       
