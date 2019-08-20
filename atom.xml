@@ -328,13 +328,13 @@
       <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="目标检测" scheme="http://yoursite.com/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
-    
       <category term="anchor-free" scheme="http://yoursite.com/tags/anchor-free/"/>
     
-      <category term="论文笔记" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+      <category term="目标检测" scheme="http://yoursite.com/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
     
       <category term="关键点检测" scheme="http://yoursite.com/tags/%E5%85%B3%E9%94%AE%E7%82%B9%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="论文笔记" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   

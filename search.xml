@@ -330,13 +330,13 @@
       
         <tags>
             
-            <tag> 目标检测 </tag>
-            
             <tag> anchor-free </tag>
             
-            <tag> 论文笔记 </tag>
+            <tag> 目标检测 </tag>
             
             <tag> 关键点检测 </tag>
+            
+            <tag> 论文笔记 </tag>
             
         </tags>
       
@@ -871,13 +871,13 @@
       
         <tags>
             
-            <tag> 目标检测 </tag>
-            
             <tag> anchor-free </tag>
             
-            <tag> 论文笔记 </tag>
+            <tag> 目标检测 </tag>
             
             <tag> 关键点检测 </tag>
+            
+            <tag> 论文笔记 </tag>
             
         </tags>
       
@@ -902,13 +902,13 @@
       
         <tags>
             
-            <tag> 目标检测 </tag>
-            
             <tag> anchor-free </tag>
             
-            <tag> 论文笔记 </tag>
+            <tag> 目标检测 </tag>
             
             <tag> 关键点检测 </tag>
+            
+            <tag> 论文笔记 </tag>
             
             <tag> Heatmap </tag>
             
@@ -1074,15 +1074,15 @@
       
         <tags>
             
-            <tag> 目标检测 </tag>
-            
             <tag> anchor-free </tag>
             
-            <tag> 论文笔记 </tag>
+            <tag> 目标检测 </tag>
             
             <tag> 关键点检测 </tag>
             
             <tag> Focal Loss </tag>
+            
+            <tag> 论文笔记 </tag>
             
         </tags>
       
@@ -1186,13 +1186,13 @@
       
         <tags>
             
-            <tag> 目标检测 </tag>
-            
             <tag> anchor-free </tag>
             
-            <tag> 论文笔记 </tag>
+            <tag> 目标检测 </tag>
             
             <tag> 关键点检测 </tag>
+            
+            <tag> 论文笔记 </tag>
             
             <tag> Deformable Convolution </tag>
             
