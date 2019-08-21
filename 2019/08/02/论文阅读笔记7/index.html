@@ -29,7 +29,7 @@
     version: '7.3.0',
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
     save_scroll: false,
     copycode: {"enable":false,"show_result":false,"style":null},
     fancybox: false,
@@ -307,18 +307,6 @@
               <time title="创建时间：2019-08-02 14:51:00" itemprop="dateCreated datePublished" datetime="2019-08-02T14:51:00+08:00">2019-08-02</time>
             </span>
           
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-19 16:08:30" itemprop="dateModified" datetime="2019-08-19T16:08:30+08:00">2019-08-19</time>
-              </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -333,14 +321,6 @@
             </span>
           
 
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
           
   
   <span class="post-meta-item">
@@ -365,16 +345,6 @@
                 <span class="post-meta-item-text">本文字数：</span>
               
               <span>4.4k</span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span>4 分钟</span>
             </span>
           
 
@@ -557,15 +527,8 @@ L_b(x) = \left\{
   </div>
 
   <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
+    <div class="sidebar-innerer">
+
       
 
       <div class="site-overview-wrap sidebar-panel">
@@ -766,6 +729,65 @@ L_b(x) = \left\{
   </div>
 </div>
 
+<div class="blog-overview">
+  <div class="item_headline"><i class="fa fa-line-chart" aria-hidden="true"></i><span>网站资讯</span></div>
+  <div class="blog-info">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <li class="blog-info-list">
+      <span class="blog-info-name">文章数目</span>
+      <span class="blogs-count">41</span>
+    </li>
+    <li class="blog-info-list">
+      <span class="blog-info-name">运行天数</span>
+      <span class="days-count" id="sitedays"></span>
+      <script language=javascript>
+        function siteTime(){
+          window.setTimeout("siteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth()+1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+          year - 作为date对象的年份，为4位年份值
+          month - 0-11之间的整数，做为date对象的月份
+          day - 1-31之间的整数，做为date对象的天数
+          hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+          minutes - 0-59之间的整数，做为date对象的分钟数
+          seconds - 0-59之间的整数，做为date对象的秒数
+          microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+          var t1 = Date.UTC(2019,07,26,00,00,00); //北京时间2018-2-13 00:00:00
+          var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+          var diff = t2-t1;
+          var diffYears = Math.floor(diff/years);
+          var diffDays = Math.floor((diff/days)-diffYears*365);
+          document.getElementById("sitedays").innerHTML=diffDays+" 天 ";
+        }
+        siteTime();
+      </script>
+    </li>
+    <li class="blog-info-list">
+      <span class="blog-info-list">访问数</span>
+      <span class="site-uv" title="总访客量">
+        <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      </span>
+    </li>
+    <li class="blog-info-list">
+      <span class="blog-info-name">点击量</span>
+      <span class="site-pv" title="总访问量">
+        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      </span>
+    </li>
+  </div>
+</div>
+
 <div class="sidebar-categoreus">
   <div class="item_headline">
     <i class="fa fa-folder-open" aria-hidden="true"></i>
@@ -780,29 +802,245 @@ L_b(x) = \left\{
 
 
 
-<div class="link-of-blogroll">
-  <div class="item_headline">
-    <i class="fa fa-handshake-o" aria-hidden="true">
-    </i><span>友情链接</span>
-  </div>
-    <div class="links-of-blogroll motion-element links-of-blogroll-block">
-      <div class="links-of-blogroll-title">
-        <i class="fa  fa-fw fa-heart"></i>
-        FRIENDS
-      </div>
-      <ul class="links-of-blogroll-list">
-          <li class="links-of-blogroll-item">
-            <a href="http://139.196.87.110:8080/" title="http://139.196.87.110:8080/" rel="noopener" target="_blank">RUIKO SATEN</a>
-          </li>
-        
-      </ul>
-    </div>
-</div>
+
 
         </div>
+        <div class="link-of-blogroll">
+          <div class="item_headline">
+            <i class="fa fa-handshake-o" aria-hidden="true">
+            </i><span>友情链接</span>
+          </div>
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-heart"></i>
+                FRIENDS
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://139.196.87.110:8080/" title="http://139.196.87.110:8080/" rel="noopener" target="_blank">RUIKO SATEN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+        </div>
       </div>
+
+      
+
+      
+
+    </div>
+
+    <div class="sidebar-inner">
       <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+        <div class="author-overview">
+            <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+              
+                <img class="site-author-image" itemprop="image"
+                  src="/images/1.jpeg"
+                  alt="Zheng Yujie">
+              
+              <p class="site-author-name" itemprop="name">Zheng Yujie</p>
+              <div class="site-description motion-element" itemprop="description">C++/Python/深度学习</div>
+            </div>
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                  
+                    <a href="/archives/">
+                  
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                  
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                  
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://github.com/zhengyujie" title="GitHub &rarr; https://github.com/zhengyujie" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="mailto:zhengyujie97@126.com" title="E-Mail &rarr; mailto:zhengyujie97@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://music.163.com/#/playlist?id=327924141" title="Music &rarr; https://music.163.com/#/playlist?id=327924141" rel="noopener" target="_blank"><i class="fa fa-fw fa-headphones"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://www.google.com" title="Google &rarr; https://www.google.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+
+          
+        </div>
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active" id="post-toc-wrap">
+          <div class="item_headline">
+            <i class="fa fa-list" aria-hidden="true">
+            </i><span>目录</span>
+          </div>
           <div class="post-toc">
 
             
@@ -817,11 +1055,6 @@ L_b(x) = \left\{
           </div>
         </div>
       <!--/noindex-->
-      
-        <div class="back-to-top motion-element">
-          <i class="fa fa-arrow-up"></i>
-          <span>0%</span>
-        </div>
       
 
     </div>
@@ -841,67 +1074,11 @@ L_b(x) = \left\{
   <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
     <span class="post-meta-divider">|</span>
     <span title="站点总字数">全站共167k字</span>
-    <span class="post-meta-divider">|</span>
-    <span title="站点阅读时长">阅读时长2:32</span>
 </div>
 
-<span id="sitetime"></span>
-<script language=javascript>
-	function siteTime(){
-		window.setTimeout("siteTime()", 1000);
-		var seconds = 1000;
-		var minutes = seconds * 60;
-		var hours = minutes * 60;
-		var days = hours * 24;
-		var years = days * 365;
-		var today = new Date();
-		var todayYear = today.getFullYear();
-		var todayMonth = today.getMonth()+1;
-		var todayDate = today.getDate();
-		var todayHour = today.getHours();
-		var todayMinute = today.getMinutes();
-		var todaySecond = today.getSeconds();
-		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
-		year - 作为date对象的年份，为4位年份值
-		month - 0-11之间的整数，做为date对象的月份
-		day - 1-31之间的整数，做为date对象的天数
-		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
-		minutes - 0-59之间的整数，做为date对象的分钟数
-		seconds - 0-59之间的整数，做为date对象的秒数
-		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
-		var t1 = Date.UTC(2019,07,26,00,00,00); //北京时间2018-2-13 00:00:00
-		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
-		var diff = t2-t1;
-		var diffYears = Math.floor(diff/years);
-		var diffDays = Math.floor((diff/days)-diffYears*365);
-		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
-		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
-		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
-		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
-	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
-	siteTime();
-</script>
+
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-user"></i>
-    </span>
-    <span class="site-uv" title="总访客量">
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-    </span>
-  
-    <span class="post-meta-divider">|</span>
-  
-    <span class="post-meta-item-icon">
-      <i class="fa fa-eye"></i>
-    </span>
-    <span class="site-pv" title="总访问量">
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-    </span>
-  
-</div>
 
 
 
@@ -913,6 +1090,10 @@ L_b(x) = \left\{
         
       </div>
     </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        <span>0%</span>
+      </div>
 
     
 
