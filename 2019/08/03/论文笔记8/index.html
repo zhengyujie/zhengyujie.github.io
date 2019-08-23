@@ -54,26 +54,22 @@
   };
 </script>
 
-  <meta name="description" content="论文地址：https://arxiv.org/abs/1904.08189代码地址：https://github.com/Duankaiwen/CenterNet  Abstract目标检测中，基于关键点的方法经常出现大量不正确的边界框，主要是由于缺乏对相关剪裁区域的额外监督造成的。本文提出一种有效的方法，以最小的资源探索剪裁区域的视觉模式。本文提出的CenterNet是一个单阶段的关键点检测模">
-<meta name="keywords" content="目标检测,anchor-free,论文笔记,关键点检测">
+  <meta name="description" content="论文地址：https://arxiv.org/abs/1711.07971v3代码地址：https://github.com/facebookresearch/video-nonlocal-net  Abstract不论是卷积网络还是递归网络，它们都是作用在某一块局部区域(local neighborhood)的operations。在本文中，我们提出了non-local operations作">
+<meta name="keywords" content="卷积网络,注意力机制,论文笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="论文阅读笔记５：CenterNet:Keypoint Triplets for Object Detection">
-<meta property="og:url" content="http://yoursite.com/2019/07/31/论文阅读笔记5/index.html">
+<meta property="og:title" content="论文阅读笔记8：Non-local Neural Networks">
+<meta property="og:url" content="http://zhengyujie.cn/2019/08/03/论文笔记8/index.html">
 <meta property="og:site_name" content="浅笑の博客">
-<meta property="og:description" content="论文地址：https://arxiv.org/abs/1904.08189代码地址：https://github.com/Duankaiwen/CenterNet  Abstract目标检测中，基于关键点的方法经常出现大量不正确的边界框，主要是由于缺乏对相关剪裁区域的额外监督造成的。本文提出一种有效的方法，以最小的资源探索剪裁区域的视觉模式。本文提出的CenterNet是一个单阶段的关键点检测模">
+<meta property="og:description" content="论文地址：https://arxiv.org/abs/1711.07971v3代码地址：https://github.com/facebookresearch/video-nonlocal-net  Abstract不论是卷积网络还是递归网络，它们都是作用在某一块局部区域(local neighborhood)的operations。在本文中，我们提出了non-local operations作">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/S6eAnW6ACWt4.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/NBiSY1pGPExb.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/tpzAgOVQ6w05.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/1ntAyvp5mdn5.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/UgBB4Ir7T0n2.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/m19Pji4uD5je.png?imageslim">
-<meta property="og:updated_time" content="2019-08-19T08:06:49.997Z">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/n4fEfPnQpfvj.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/VEm37JhI3itw.png?imageslim">
+<meta property="og:updated_time" content="2019-08-19T08:08:51.637Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="论文阅读笔记５：CenterNet:Keypoint Triplets for Object Detection">
-<meta name="twitter:description" content="论文地址：https://arxiv.org/abs/1904.08189代码地址：https://github.com/Duankaiwen/CenterNet  Abstract目标检测中，基于关键点的方法经常出现大量不正确的边界框，主要是由于缺乏对相关剪裁区域的额外监督造成的。本文提出一种有效的方法，以最小的资源探索剪裁区域的视觉模式。本文提出的CenterNet是一个单阶段的关键点检测模">
-<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/S6eAnW6ACWt4.png?imageslim">
-  <link rel="canonical" href="http://yoursite.com/2019/07/31/论文阅读笔记5/">
+<meta name="twitter:title" content="论文阅读笔记8：Non-local Neural Networks">
+<meta name="twitter:description" content="论文地址：https://arxiv.org/abs/1711.07971v3代码地址：https://github.com/facebookresearch/video-nonlocal-net  Abstract不论是卷积网络还是递归网络，它们都是作用在某一块局部区域(local neighborhood)的operations。在本文中，我们提出了non-local operations作">
+<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/n4fEfPnQpfvj.png?imageslim">
+  <link rel="canonical" href="http://zhengyujie.cn/2019/08/03/论文笔记8/">
 
 
 <script id="page-configurations">
@@ -87,7 +83,7 @@
   };
 </script>
 
-  <title>论文阅读笔记５：CenterNet:Keypoint Triplets for Object Detection | 浅笑の博客</title>
+  <title>论文阅读笔记8：Non-local Neural Networks | 浅笑の博客</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -277,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/31/论文阅读笔记5/">
+    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/03/论文笔记8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zheng Yujie">
@@ -289,7 +285,7 @@
       <meta itemprop="name" content="浅笑の博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">论文阅读笔记５：CenterNet:Keypoint Triplets for Object Detection
+        <h1 class="post-title" itemprop="name headline">论文阅读笔记8：Non-local Neural Networks
 
           
         </h1>
@@ -305,7 +301,7 @@
                 
               
 
-              <time title="创建时间：2019-07-31 14:26:58" itemprop="dateCreated datePublished" datetime="2019-07-31T14:26:58+08:00">2019-07-31</time>
+              <time title="创建时间：2019-08-03 09:47:36" itemprop="dateCreated datePublished" datetime="2019-08-03T09:47:36+08:00">2019-08-03</time>
             </span>
           
             <span class="post-meta-item">
@@ -333,7 +329,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/07/31/论文阅读笔记5/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/07/31/论文阅读笔记5/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2019/08/03/论文笔记8/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/03/论文笔记8/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -345,7 +341,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>3.5k</span>
+              <span>5.1k</span>
             </span>
           
 
@@ -359,42 +355,78 @@
 
       
         <blockquote>
-<p>论文地址：<a href="https://arxiv.org/abs/1904.08189" target="_blank" rel="noopener">https://arxiv.org/abs/1904.08189</a><br>代码地址：<a href="https://github.com/Duankaiwen/CenterNet" target="_blank" rel="noopener">https://github.com/Duankaiwen/CenterNet</a></p>
+<p>论文地址：<a href="https://arxiv.org/abs/1711.07971v3" target="_blank" rel="noopener">https://arxiv.org/abs/1711.07971v3</a><br>代码地址：<a href="https://github.com/facebookresearch/video-nonlocal-net" target="_blank" rel="noopener">https://github.com/facebookresearch/video-nonlocal-net</a></p>
 </blockquote>
-<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>目标检测中，基于关键点的方法经常出现大量不正确的边界框，主要是由于缺乏对相关剪裁区域的额外监督造成的。本文提出一种有效的方法，以最小的资源探索剪裁区域的视觉模式。本文提出的CenterNet是一个单阶段的关键点检测模型。CenterNet通过检测每个目标物看作是一个三个关键点，而不是一对关键点，这样做同时提高了准确率及召回率。本文还设计了另外两个模型，cascade corner pooling及center pooling，容易获得从左上角及右下角的丰富信息，同时在中间区域获得更多的识别信息。在ＭＳ-COCO数据集中ＣenterNet的AP达到了47.0%。</p>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>不论是卷积网络还是递归网络，它们都是作用在某一块局部区域(local neighborhood)的operations。在本文中，我们提出了non-local operations作为一种通用的神经网络的building blocks来捕捉基于long-range的依赖关系。受到经典的non-local means方法的启发，本文的non-local operation会将某一位置的响应当做是一种从特征图谱所有位置的加权和来计算。该building block可以插入到现在计算机视觉的许多模型当中，进而可以提升分类，检测，分割等视觉任务的性能表现。</p>
 <a id="more"></a>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>本文改进了CornerNet，增加了一个观察每个候选区域的视觉模式的功能，进而可以判断每个边界框的正确性。CenterNet通过增加一个关键点来探索proposal中间区域（近似几何中心）的信息，本文创新点在于，如果预测的边界框与ground truth有较高的IoU,则中心关键点预测出相同类别的概率要高，反之亦然。因此，在进行inference时，当通过一组关键点产生了一个边界框，我们继续观察是否具有同类别的一个关键点落入区域的中心，即使用三个点表示目标。<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/S6eAnW6ACWt4.png?imageslim" alt="mark"><br>为了更好的检测中心的关键点即角点，提出了两个方法来丰富中心点及角点的信息。</p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>捕获long-range dependencies在深度神经网络中具有重要意义。对于图片数据，long-distance dependencies以深度堆叠的卷积网络形成的更大的感受野为模型。</p>
+<p>不管是卷积操作还是recurrent操作都是在空间或者时间的local neighborhood上进行的；因此long-rangedependencies只能通过重复执行这些操作，通过数据逐步传递信号来得到。重复的local操作有一些限制：</p>
 <ul>
-<li><strong>center pooling</strong>：用于预测中心关键点的分支，有利于中心获得更多目标物的中心区域，进而更易感知proposal的中心区域。通过取中心位置横向与纵向响应值的和的最大值实现此方法。</li>
-<li><strong>cascade corner pooling</strong>：增加原始的corner pooling感知内部信息的功能。结合了feature map中目标物内部及边界方向的响应值和的最大值来预测角点。经试验证实，此方法在存在feature-level 噪声的情况下更加稳定，有助于准确率及召回率的提升。</li>
+<li>它的计算很低效</li>
+<li>它导致了需要认真对待的优化困难</li>
+<li>这些challenges make multi-hop dependency modeling，比如较远的两个位置之间的信息前向和反向传播会比较困难(这段没看懂)</li>
 </ul>
+<p>本文中，我们提出了non-local操作，来作为一个在深度神经网络中的高效，简单以及通用的组件老捕捉long-range dependencies。我们提出的non-local操作源自计算机视觉中经典的non-local mean操作。我们的non-local操作计算一个位置的响应作为输入的feature map上的所有位置的加权和来计算。这些位置可以在空间，时间或者时空中，所以我们的操作适用于图片，序列以及视频问题。</p>
+<p>使用non-local的一些优点：</p>
+<ul>
+<li>相比于 CNN 和 RNN 的逐步计算的劣势, non-local 操作 可以直接从任意两点中获取到 long-range dependencies.</li>
+<li>根据实验结果可知, non-local operations 是十分高效的, 并且即使在只有几层网络层时, 也能取得很好的效果.</li>
+<li>最后, 本文的 nocal operaions 会维持输入变量的尺寸大小, 并且可以很容易的与现有的其他 operations 结合使用.</li>
+</ul>
+<p>我们用 video classification 任务来展示 non-local 的有效性. 在视频数据中, long-range interactions 不仅出现在 空间位置上的 distant pixels, 还会出现在时间维度上的 distant pixels. 通过一个单一的 non-local block (basic unit), 以前馈的方式，便可以捕获到这些 spacetime dependencies, 如果将多个 non-local block 组合起来形成 non-local neural networks, 便可以提高 video classification 任务的准确度(不加任何tricks). 另外, non-local 网络要比 3D 卷积网络的计算性价比更高. 为了说明 non-local 的一般性, 我们还在 COCO 数据集上进行了目标检测/分割, 姿态识别等任务的实验, 在基于 MaskRCNN 的网络基础上, 我们的 non-local blocks 可以用较少的计算开销进一步提升模型的精度.</p>
 <h1 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h1><ul>
-<li><strong>Two-stage approaches</strong><br>把目标检测task分为两个stages：提取RoIs,然后对RoIs进行分类和回归。</li>
-<li><strong>One-stage approaches</strong><br>移除RoI提取步骤，直接对候选的anchor boxs进行分类和回归</li>
+<li><p><strong>Non-local image processing</strong></p>
+</li>
+<li><p><strong>Graphical models</strong></p>
+</li>
+<li><p><strong>Feedforward  modeling  for  sequences</strong></p>
+</li>
+<li><p><strong>Self-attention</strong></p>
+</li>
+<li><p><strong>Interaction networks</strong></p>
+</li>
+<li><p><strong>Video classification architectures</strong></p>
+</li>
 </ul>
-<h1 id="Our-Approach"><a href="#Our-Approach" class="headerlink" title="Our Approach"></a>Our Approach</h1><h2 id="baseline-and-Motivation"><a href="#baseline-and-Motivation" class="headerlink" title="baseline and Motivation"></a>baseline and Motivation</h2><p>本论文的 baseline 为 CornerNet，因此首先讨论 CornerNet 为什么容易产生很多的误检。首先，CornerNet 通过检测角点确定目标，而不是通过初始候选框 anchor 的回归确定目标，由于没有了 anchor 的限制，使得任意两个角点都可以组成一个目标框，这就对判断两个角点是否属于同一物体的算法要求很高，一但准确度差一点，就会产生很多错误目标框。其次，恰恰这个算法有缺陷。因为此算法在判断两个角点是否属于同一物体时，缺乏全局信息的辅助，因此很容易把原本不是同一物体的两个角点看成是一对角点，因此产生了很多错误目标框。最后，角点的特征对边缘比较敏感，这导致很多角点同样对背景的边缘很敏感，因此在背景处也检测到了错误的角点。综上原因，使得 CornerNet 产生了很多误检。</p>
-<p>我们分析出了 CornerNet 的问题后，接下来就是找出解决之道，关键问题在于让网络具备感知物体内部信息的能力。一个较容易想到的方法是把 CornerNet 变成一个 two-stage 的方法，即利用 RoI pooling 或 RoI align 提取预测框的内部信息，从而获得感知能力。但这样做开销很大，因此我们提出了用关键点三元组来检测目标，这样使得我们的方法在 one-stage 的前提下就能获得感知物体内部信息的能力。并且开销较小，因为我们只需关注物体的中心，从而避免了 RoI pooling 或 RoI align 关注物体内部的全部信息。</p>
-<h2 id="Object-Detecton-as-Keypoint-Triplets"><a href="#Object-Detecton-as-Keypoint-Triplets" class="headerlink" title="Object Detecton as Keypoint Triplets"></a>Object Detecton as Keypoint Triplets</h2><p>网络通过 center pooling 和 cascade corner pooling 分别得到 center heatmap 和 corner heatmaps，用来预测关键点的位置。得到角点的位置和类别后，通过 offsets 将角点的位置映射到输入图片的对应位置，然后通过 embedings 判断哪两个角点属于同一个物体，以便组成一个检测框。正如前文所说，组合过程中由于缺乏来自目标区域内部信息的辅助，从而导致大量的误检。为了解决这一问题，CenterNet 不仅预测角点，还预测中心点。我们对每个预测框定义一个中心区域，通过判断每个目标框的中心区域是否含有中心点，若有则保留，并且此时框的 confidence 为中心点，左上角点和右下角点的confidence的平均，若无则去除，使得网络具备感知目标区域内部信息的能力，能够有效除错误的目标框。<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/NBiSY1pGPExb.png?imageslim" alt="mark"><br>我们发现中心区域的尺度会影响错误框去除效果。中心区域过小导致很多准确的小尺度的目标也会被去除，而中心区域过大导致很多大尺度的错误目标框无法被去除，因此我们提出了尺度可调节的中心区域定义法。</p>
+<h1 id="Non-local-Neural-Network"><a href="#Non-local-Neural-Network" class="headerlink" title="Non-local Neural Network"></a>Non-local Neural Network</h1><p>下面首先给出 non-local operations 的一般性定义, 然后会给出几种特定的变体</p>
+<h2 id="Formulation"><a href="#Formulation" class="headerlink" title="Formulation"></a>Formulation</h2><p>遵循non-local mean操作，我们定义了一个在深度神经网络中通用的non-local操作：</p>
 <script type="math/tex; mode=display">
-\left\{ 
-\begin{array}{c}
-    ctl_{x}=\frac{(n+1)tl_x+(n-1)br_x}{2n} \\ 
-    ctl_{y}=\frac{(n+1)tl_y+(n-1)br_y}{2n} \\ 
-    cbr_{x}=\frac{(n-1)tl_x+(n+1)br_x}{2n} \\
-    cbr_{y}=\frac{(n-1)tl_y+(n+1)br_y}{2n}
-\end{array}
-\right.</script><p>该方法可以在预测框的尺度较大时定义一个相对较小的中心区域，在预测框的尺度较小时预测一个相对较大的中心区域。如图所示。<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/tpzAgOVQ6w05.png?imageslim" alt="mark"><br>$n$决定了中心区域的尺度。在本文中，对于尺度小于或者大于150的边界框，$n$分别取值为3或5。</p>
-<h2 id="Enriching-Center-and-Corner-Information"><a href="#Enriching-Center-and-Corner-Information" class="headerlink" title="Enriching Center and Corner Information"></a>Enriching Center and Corner Information</h2><p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/1ntAyvp5mdn5.png?imageslim" alt="mark"></p>
+y_i=\frac{1}{C(x)}\sum_{\forall j}f(x_i,x_j)g(x_j)</script><p>上式中,$i$代表了output中计算响应的位置的index，而$j$枚举了所有可能的position。x是input signal(一般为特征图谱)，y是output signal(与x的size相同)。f会返回一个标量(表示i与j之间的relationship)，g也会返回一个标量，代表在j位置上的input signal。通过系数$C(x)$对响应进行归一化。</p>
+<p>该公式的 non-local 特性主要体现在考虑了所有可能的 position (∀j), 而卷积网络只会考虑 output position 周围位置的像素点。</p>
+<p>non-local操作不同于全连接层。non-local计算的响应是基于不同位置之间的relationship，而全连接层使用的是学习的权重。换句话说，在全连接层中，$x_i$和$x_j$之间的relationship并不是input data的函数。另外，我们的公式支持不同的输入尺寸，同时在输出中保留对应的尺寸。</p>
+<p>non-local是一个非常灵活的模块, 它可以被添加到深度神经网络的浅层网络当中去(不像fc那样处于深层网络), 这使得我们可以构建更加丰富的模型结构来结合non-local和local信息。</p>
+<h2 id="Instantiations"><a href="#Instantiations" class="headerlink" title="Instantiations"></a>Instantiations</h2><p>接下来我们介绍介个不同版本的$f$函数以及$g$函数。我们会在实验中证明我们的non-local模型对这些函数的选择并不敏感。 这意味着non-local的通用性正是提升各个模型在不同任务上性能表现的主要原因。</p>
+<p>出于简洁，我们把$g$函数考虑成线性形式：$g(x_i)=W_g*x_j$，$W_j$是个需要被学习的权重矩阵，在实现时，通常会通过1×1(或 1×1×1)的卷积来实现。</p>
+<p>接下来我们讨论$f$函数的选择：</p>
 <ul>
-<li><strong>Center pooling</strong><br>一个物体的中心并不一定含有很强的，易于区分于其他类别的语义信息。例如，一个人的头部含有很强的，易于区分于其他类别的语义信息，但是其中心往往位于人的中部。我们提出了center pooling 来丰富中心点特征。center pooling提取中心点水平方向和垂直方向的最大值并相加，以此给中心点提供所处位置以外的信息。这一操作使中心点有机会获得更易于区分于其他类别的语义信息。Center pooling 可通过不同方向上的 corner pooling 的组合实现。一个水平方向上的取最大值操作可由 left pooling 和 right pooling通过串联实现，同理，一个垂直方向上的取最大值操作可由 top pooling 和 bottom pooling通过串联实现</li>
-<li><p><strong>Cascade corner pooling</strong><br>一般情况下角点位于物体外部，所处位置并不含有关联物体的语义信息，这为角点的检测带来了困难。传统做法 corner pooling，它提取物体边界最大值并相加，该方法只能提供关联物体边缘语义信息，对于更加丰富的物体内部语义信息则很难提取到。cascade corner pooling 首先提取物体边界最大值，然后在边界最大值处继续向内部(图中沿虚线方向)提取提最大值，并与边界最大值相加，以此给角点特征提供更加丰富的关联物体语义信息。Cascade corner pooling 也可通过不同方向上的 corner pooling 的组合实现。<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/UgBB4Ir7T0n2.png?imageslim" alt="mark"></p>
-<h2 id="Training-and-Inference"><a href="#Training-and-Inference" class="headerlink" title="Training and Inference"></a>Training and Inference</h2></li>
-<li><p><strong>Training</strong> 输入图像的分辨率为512×512，heatmaps的大小为128×128，我们使用数据增强来训练一个鲁棒的模型。用Adam来优化训练的损失：</p>
-<script type="math/tex; mode=display">L=L_{det}^{co}+L_{det}^{ce}+\alpha L_{pull}^{co}+\beta L_{push}^{co}+\gamma(L_{off}^{co}+L_{off}^{ce})</script></li>
+<li><p><strong>Gaussian</strong><br>一个最自然的选择就是高斯函数：</p>
+<script type="math/tex; mode=display">
+f(x_i,x_j)=e^{x_i^Tx_j}</script><p>这里$x_i^Tx_j$为两个向量的点积，会返回一个标量，有时候也可以使用欧几里得距离，不过点积的实现更加容易。归一化参数为$C(x)=\sum_{\forall j}f(x_i,x_j)$。</p>
+</li>
+<li><p><strong>Embedded Gaussian</strong><br>高数函数的一个简单拓展就是在embedding space中计算相似度：</p>
+<script type="math/tex; mode=display">
+f(x_i,x_j)=e^{\theta(x_i)^T\phi(x_j)}</script><p>其中$\theta(x_i)=W_\theta x_i$，$\phi(x_j)=W_\phi x_j$为两个embeddings。和上述一样，我们设定$C(x)=\sum_{\forall j}f(x_i,x_j)$。<br>我们发现self-attention模块其实就是non-local的embedded Gaussian版本的一种特殊情况。对于给定的$i$，$\frac{f(x_i,x_j)}{C(x)}$就变成了计算所有的$j$的softmax，即$y=softmax(x^T W_\theta^T W_\phi x)g(x)$，这就是self-attention的表达形式。这样我们就将self-attention模型和传统的非局部均值联系在了一起，并且将sequential self-attention network推广到了更具一般性的space/spacetime non-local network，可以在图像、视频识别任务中使用。</p>
+</li>
+<li><p><strong>Dot produt</strong><br>$f$也可以定义为点乘相似度：</p>
+<script type="math/tex; mode=display">
+f(x_i,x_j)=\theta(x_i)^T \phi(x_j)</script><p>这里我们采用embedded版本。在这种情况中，我们设置归一化参数$C(x)=N$，$N$为在$x$中的所有位置的个数，而不是$f$之和，因为这样能够简化梯度计算。这种形式的归一化是有必要的，因为输入的size是变化的，所以用x的size作为归一化参数有一定道理。<br>dot product和embeded gaussian的版本的主要区别在于是否做softmax，softmax在这里的作用相当于是一个激活函数。</p>
+</li>
+<li><p><strong>Concatenation</strong><br>Concatenation是在Relation Network中使用的pairwise function。于是我们也设计了一个concatenation版本的$f$：</p>
+<script type="math/tex; mode=display">
+f(x_i,x_j)=ReLU(w_f^T[\theta(x_i),\phi(x_j)])</script><p>这里中括号中的代表concatenation，$w_f$是能够将concatenation向量转化为一个标量的权重向量。这里设置$C(x)=N$。</p>
+</li>
 </ul>
-<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><ul>
-<li><strong>Comparisons with State-of-the-art Detectors</strong><br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/m19Pji4uD5je.png?imageslim" alt="mark"></li>
+<p>以上我们定义了多种变种，这说明了我们的non-local操作的灵活性，我们相信也会有别的变种能够提升性能。</p>
+<h2 id="Non-local-Block"><a href="#Non-local-Block" class="headerlink" title="Non-local Block"></a>Non-local Block</h2><p>我们将上面介绍的公式(non-local operation)包装进一个 non-local block 中, 使其可以整合到许多现有的网络结构当中, 我们将 non-local 定义成如下格式:</p>
+<script type="math/tex; mode=display">
+z_i=W_z y_i+x_i</script><p>$y_i$由上述公式得到，“$+x_i$”代表一个残差连接。残差连接使得我们可以将一个新的non-local block插入一个预先训练好的模型，而不会破坏其原有的结构（如$W_z=0$作为初始化则完全和原始结构一致）。下图演示了一个non-local block。<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/n4fEfPnQpfvj.png?imageslim" alt="mark"><br>non-local block的pairwise的计算可以是非常轻量级的，如果它用在高层级，较小的feature map上的话。比如，图2上的典型值是T=4，H=W=14 or 7。通过矩阵运算来计算parwise function的值就和计算一个conv layer的计算量类似。另外我们还通过以下方式使其更高效。</p>
+<ul>
+<li><strong>Implementation of Non-local Blocks</strong><br>我们设置 $W_g$，$W_\theta$，$W_\phi$的通道数为$x$通道数目的一半，这样就形成了一个bottleneck，就能够减少一半的计算量。$W_z$再重新放大到$x$的通道数目，以保证输入输出维度一致。<br>还有个下采样的trick可以进一步采用，就是将non-local的公式改为$y_i=\frac{1}{C(\hat{x})}\sum_{\forall j}f(x_i,\hat{x}_j)g(\hat{x}_j)$，其中$\hat{x}_j$是$x_j$下采样得到的，比如通过pooling。我们将这个方式在空间域上使用，可以减少1/4的pairwise function的计算量。这个trick髌骨会改变non-local的行为，而是使计算变得稀疏了。可以通过在上图中的$\phi$以及$g$后面增加一个max pooling层来实现。</li>
 </ul>
+<h1 id="Video-Classification-Models"><a href="#Video-Classification-Models" class="headerlink" title="Video Classification Models"></a>Video Classification Models</h1><p>没看</p>
+<h1 id="Experiments-on-Video-Classification"><a href="#Experiments-on-Video-Classification" class="headerlink" title="Experiments on Video Classification"></a>Experiments on Video Classification</h1><p>没看</p>
+<h1 id="Extension-Experiments-on-COCO"><a href="#Extension-Experiments-on-COCO" class="headerlink" title="Extension:Experiments on COCO"></a>Extension:Experiments on COCO</h1><p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/VEm37JhI3itw.png?imageslim" alt="mark"></p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>我们提出了一种新的神经网络，能够通过non-local操作捕捉 long-range dependencies。我们的non-local blocks能够与任何已存在的结构结合。我们展示了non-local modeling在视频分类，目标检测，语义分割以及姿态估计中的重要性。在所有的任务中，简单的添加一个non-local blocks就可以在baseline上获得稳定的提升。我们希望non-local layers会成为未来网络结构中的一个重要组成部分。</p>
 
     </div>
 
@@ -410,13 +442,11 @@
           
           <div class="post-tags" id="post-tags">
             
-              <a href="/tags/目标检测/" rel="tag"><i class="fa fa-tag"></i> 目标检测</a>
+              <a href="/tags/卷积网络/" rel="tag"><i class="fa fa-tag"></i> 卷积网络</a>
             
-              <a href="/tags/anchor-free/" rel="tag"><i class="fa fa-tag"></i> anchor-free</a>
+              <a href="/tags/注意力机制/" rel="tag"><i class="fa fa-tag"></i> 注意力机制</a>
             
               <a href="/tags/论文笔记/" rel="tag"><i class="fa fa-tag"></i> 论文笔记</a>
-            
-              <a href="/tags/关键点检测/" rel="tag"><i class="fa fa-tag"></i> 关键点检测</a>
             
           </div>
           <script type="text/javascript">
@@ -438,8 +468,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/07/30/论文阅读笔记4/" rel="next" title="论文阅读笔记4：CornerNet:Detecting Objects as Paired Keypoints">
-                  <i class="fa fa-chevron-left"></i> 论文阅读笔记4：CornerNet:Detecting Objects as Paired Keypoints
+                <a href="/2019/08/02/论文笔记7/" rel="next" title="论文阅读笔记7：Libra R-CNN:Towards Balanced Learning for Object Detection">
+                  <i class="fa fa-chevron-left"></i> 论文阅读笔记7：Libra R-CNN:Towards Balanced Learning for Object Detection
                 </a>
               
             </div>
@@ -448,8 +478,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/07/31/SENet/" rel="prev" title="Squeeze-and-Excitation Networks(SENet)">
-                  Squeeze-and-Excitation Networks(SENet) <i class="fa fa-chevron-right"></i>
+                <a href="/2019/08/05/论文笔记9/" rel="prev" title="论文阅读笔记9：Scale-Aware Trident Networks for Object Detection">
+                  论文阅读笔记9：Scale-Aware Trident Networks for Object Detection <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -706,7 +736,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Our-Approach"><span class="nav-number">4.</span> <span class="nav-text">Our Approach</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#baseline-and-Motivation"><span class="nav-number">4.1.</span> <span class="nav-text">baseline and Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-Detecton-as-Keypoint-Triplets"><span class="nav-number">4.2.</span> <span class="nav-text">Object Detecton as Keypoint Triplets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enriching-Center-and-Corner-Information"><span class="nav-number">4.3.</span> <span class="nav-text">Enriching Center and Corner Information</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-and-Inference"><span class="nav-number">4.4.</span> <span class="nav-text">Training and Inference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-number">5.</span> <span class="nav-text">Experiments</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Non-local-Neural-Network"><span class="nav-number">4.</span> <span class="nav-text">Non-local Neural Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Formulation"><span class="nav-number">4.1.</span> <span class="nav-text">Formulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instantiations"><span class="nav-number">4.2.</span> <span class="nav-text">Instantiations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Non-local-Block"><span class="nav-number">4.3.</span> <span class="nav-text">Non-local Block</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Video-Classification-Models"><span class="nav-number">5.</span> <span class="nav-text">Video Classification Models</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments-on-Video-Classification"><span class="nav-number">6.</span> <span class="nav-text">Experiments on Video Classification</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Extension-Experiments-on-COCO"><span class="nav-number">7.</span> <span class="nav-text">Extension:Experiments on COCO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-number">8.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
             
 
           </div>
@@ -773,6 +803,15 @@
 
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 
 

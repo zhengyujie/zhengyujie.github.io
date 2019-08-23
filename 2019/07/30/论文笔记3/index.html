@@ -54,25 +54,24 @@
   };
 </script>
 
-  <meta name="description" content="论文地址：https://arxiv.org/pdf/1904.07850.pdf论文代码：https://github.com/xingyizhou/CenterNet  Abstract目标检测识别往往在图像上将目标以轴对称的框形式框出。大多成功的目标检测器都先穷举出潜在目标位置，然后对该位置进行分类，这种做法浪费时间，低效，还需要额外的后处理。本文中，我们采用不同的方法，构建模型时将目标作">
-<meta name="keywords" content="目标检测,anchor-free,论文笔记,关键点检测,Focal Loss">
+  <meta name="description" content="论文地址：https://arxiv.org/pdf/1903.06586.pdf论文代码：https://github.com/implus/SKNet  Abstract在标准的卷积网络中，每层网络中神经元的感受野的大小都是相同的。在神经学中，视觉神经元感受野的大小是由刺激机制构建的，而在卷积网络中却很少考虑这个因素。本文提出的方法可以使神经元对于不同尺寸的输入信息进行自适应的调整其感受野的">
+<meta name="keywords" content="卷积网络,注意力机制,论文笔记,感受野">
 <meta property="og:type" content="article">
-<meta property="og:title" content="论文阅读笔记2：Objects as Points">
-<meta property="og:url" content="http://yoursite.com/2019/07/29/论文阅读笔记2/index.html">
+<meta property="og:title" content="论文阅读笔记3：Selective Kernel Networks">
+<meta property="og:url" content="http://zhengyujie.cn/2019/07/30/论文笔记3/index.html">
 <meta property="og:site_name" content="浅笑の博客">
-<meta property="og:description" content="论文地址：https://arxiv.org/pdf/1904.07850.pdf论文代码：https://github.com/xingyizhou/CenterNet  Abstract目标检测识别往往在图像上将目标以轴对称的框形式框出。大多成功的目标检测器都先穷举出潜在目标位置，然后对该位置进行分类，这种做法浪费时间，低效，还需要额外的后处理。本文中，我们采用不同的方法，构建模型时将目标作">
+<meta property="og:description" content="论文地址：https://arxiv.org/pdf/1903.06586.pdf论文代码：https://github.com/implus/SKNet  Abstract在标准的卷积网络中，每层网络中神经元的感受野的大小都是相同的。在神经学中，视觉神经元感受野的大小是由刺激机制构建的，而在卷积网络中却很少考虑这个因素。本文提出的方法可以使神经元对于不同尺寸的输入信息进行自适应的调整其感受野的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/GLEG226YnzAL.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/UL4RQSnlxtm8.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/dFbxUqWF31Xr.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/wOOp7nG5FUAw.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/jiA2m9tPNenL.png?imageslim">
-<meta property="og:updated_time" content="2019-08-19T08:04:04.493Z">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/rBQK3LMJSQBa.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/Pf4spQPdb7Fm.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/JMgYO8YaevDQ.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/U2Y13ykzBOS0.png?imageslim">
+<meta property="og:updated_time" content="2019-08-19T08:04:49.597Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="论文阅读笔记2：Objects as Points">
-<meta name="twitter:description" content="论文地址：https://arxiv.org/pdf/1904.07850.pdf论文代码：https://github.com/xingyizhou/CenterNet  Abstract目标检测识别往往在图像上将目标以轴对称的框形式框出。大多成功的目标检测器都先穷举出潜在目标位置，然后对该位置进行分类，这种做法浪费时间，低效，还需要额外的后处理。本文中，我们采用不同的方法，构建模型时将目标作">
-<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/GLEG226YnzAL.png?imageslim">
-  <link rel="canonical" href="http://yoursite.com/2019/07/29/论文阅读笔记2/">
+<meta name="twitter:title" content="论文阅读笔记3：Selective Kernel Networks">
+<meta name="twitter:description" content="论文地址：https://arxiv.org/pdf/1903.06586.pdf论文代码：https://github.com/implus/SKNet  Abstract在标准的卷积网络中，每层网络中神经元的感受野的大小都是相同的。在神经学中，视觉神经元感受野的大小是由刺激机制构建的，而在卷积网络中却很少考虑这个因素。本文提出的方法可以使神经元对于不同尺寸的输入信息进行自适应的调整其感受野的">
+<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/rBQK3LMJSQBa.png?imageslim">
+  <link rel="canonical" href="http://zhengyujie.cn/2019/07/30/论文笔记3/">
 
 
 <script id="page-configurations">
@@ -86,7 +85,7 @@
   };
 </script>
 
-  <title>论文阅读笔记2：Objects as Points | 浅笑の博客</title>
+  <title>论文阅读笔记3：Selective Kernel Networks | 浅笑の博客</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -276,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/29/论文阅读笔记2/">
+    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/07/30/论文笔记3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zheng Yujie">
@@ -288,7 +287,7 @@
       <meta itemprop="name" content="浅笑の博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">论文阅读笔记2：Objects as Points
+        <h1 class="post-title" itemprop="name headline">论文阅读笔记3：Selective Kernel Networks
 
           
         </h1>
@@ -304,7 +303,7 @@
                 
               
 
-              <time title="创建时间：2019-07-29 09:50:59" itemprop="dateCreated datePublished" datetime="2019-07-29T09:50:59+08:00">2019-07-29</time>
+              <time title="创建时间：2019-07-30 09:44:10" itemprop="dateCreated datePublished" datetime="2019-07-30T09:44:10+08:00">2019-07-30</time>
             </span>
           
             <span class="post-meta-item">
@@ -332,7 +331,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/07/29/论文阅读笔记2/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/07/29/论文阅读笔记2/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2019/07/30/论文笔记3/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/07/30/论文笔记3/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -344,7 +343,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>3.9k</span>
+              <span>3.3k</span>
             </span>
           
 
@@ -358,65 +357,63 @@
 
       
         <blockquote>
-<p>论文地址：<a href="https://arxiv.org/pdf/1904.07850.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1904.07850.pdf</a><br>论文代码：<a href="https://github.com/xingyizhou/CenterNet" target="_blank" rel="noopener">https://github.com/xingyizhou/CenterNet</a></p>
+<p>论文地址：<a href="https://arxiv.org/pdf/1903.06586.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1903.06586.pdf</a><br>论文代码：<a href="https://github.com/implus/SKNet" target="_blank" rel="noopener">https://github.com/implus/SKNet</a></p>
 </blockquote>
-<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>目标检测识别往往在图像上将目标以轴对称的框形式框出。大多成功的目标检测器都先穷举出潜在目标位置，然后对该位置进行分类，这种做法浪费时间，低效，还需要额外的后处理。本文中，我们采用不同的方法，构建模型时将目标作为一个点——即目标BBox的中心点。我们的检测器采用关键点估计来找到中心点，并回归到其他目标属性，例如尺寸，3D位置，方向，甚至姿态。我们基于中心点的方法，称为：CenterNet，相比较于基于BBox的检测器，我们的模型是端到端可微的，更简单，更快，更精确。我们的模型实现了速度和精确的最好权衡，以下是其性能：<br>MS COCO dataset, with 28:1% AP at 142 FPS, 37:4% AP at 52 FPS, and 45:1% AP with multi-scale testing at 1.4 FPS.</p>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>在标准的卷积网络中，每层网络中神经元的感受野的大小都是相同的。在神经学中，视觉神经元感受野的大小是由刺激机制构建的，而在卷积网络中却很少考虑这个因素。本文提出的方法可以使神经元对于不同尺寸的输入信息进行自适应的调整其感受野的大小。building block为Selective Kernel单元。其存在多个分支，每个分支的卷积核的尺寸都不同。不同尺寸的卷积核最后通过softmax进行融合。分支中不同注意力在fusion layer产生不同的有效感受野。多个SK单元进行堆叠构成Selective  Kernel  Networks  (SKNets)。详细分析显示SKNet里的神经元可以根据输入通过适应性的调整感受野的大小来捕捉不同尺度的目标object。</p>
 <a id="more"></a>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>当前的目标检测用一个紧紧包含目标的轴对称的边界框来表示每一个目标。对于每一个目标，使用分类器来确定每个框中是否为特定的目标还是背景。</p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>在上世纪猫的前视觉皮层神经元的局部感受野激发了卷积网络的产生。在视觉皮层中，相同区域的神经元的局部感受野的大小是不同的，从而可以在相同的处理阶段中获得不同尺寸的空间信息。该思想被Inception系列网络完美的应用，在其building block中，3x3,5x5,7x7的卷积通过简单的拼接来得到多尺寸信息。</p>
+<p>然而，在设计卷积网络时，神经元感受野的其他属性并没有被考虑到。比如感受野尺寸的自适应调整。大量实验证明，视觉皮层的神经元的感受野尺寸并不是固定的，而是受激励调制的。像Inception这种具有多个分支的网络其内部存在一种潜在的机制可以在下一个卷积层根据输入的内容调整神经元感受野的大小，这是因为下一个卷积层通过线性组合将不同分支的特征进行融合。但是线性组合的方法不足于提供网络强大的调整能力。</p>
+<p>本文提出了一种非线性的方法聚合来自不同核的特征进而实现感受野不同尺寸的调整。引入了”Selective Kernel”卷积，其包含了三个操作：Split,Fuse,Select：</p>
 <ul>
-<li><p><strong>One-stage detectors</strong> 在图像上滑动复杂排列的可能bbox（即锚点）,然后直接对框进行分类，而不会指定框中内容。</p>
-</li>
-<li><p><strong>Two-stage detectors</strong> 对每个潜在框重新计算图像特征，然后将那些特征进行分类。</p>
-</li>
-<li><p><strong>Post-processing</strong> 也即是non-maxima suppression(非极大值抑制)，通过计算IoU来移除对同一个instance的重复检测。这种后处理很难区分和训练，因此现有大多检测器都不是端到端可训练的。</p>
-</li>
+<li>Split操作产生多个不同核尺寸的通道对应于神经元的不同感受野尺寸。</li>
+<li>Fuse操作组合融合来自多通道的信息从而获得一个全局及可理解性的表示用于进行权重选择。</li>
+<li>Select操作根据挑选得到的权重对不同核尺寸的feature map进行融合。</li>
 </ul>
-<p>本文提出了一种简便和高效的方法。使用目标边界框中心的一个点来代表目标。然后在中心点位置回归出目标的一些属性，例如：size, dimension, 3D extent, orientation, pose。 而目标检测问题变成了一个标准的关键点估计问题。我们仅仅将图像传入全卷积网络，得到一个heatmap，heatmap峰值点即中心点，每个特征图的峰值点位置预测了目标的宽高信息。不需要NMS做后处理。</p>
 <h1 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h1><ul>
-<li><strong>Object  detection  by  region  classification</strong> RCNN Fast-RCNN</li>
-<li><strong>Object detection with implicit anchors</strong> Faster-RCNN通过检测网络生成region proposal。在低分辨率图像网格周围采样固定形状的边界框(anchors)，对每个anchor进行是否为前景的分类。然后对每一个前景样本进行多类别分类，得到最终的结果。<br>我们的方法类似于anchor-based单阶段的方法，一个中心点可以看做一个形状未知的anchor。然而，存在一些重要的不同点：<ul>
-<li>我们分配的锚点仅仅是放在位置上，没有尺寸框。没有手动设置的阈值做前后景分类。（像Faster RCNN会将与GT IOU &gt;0.7的作为前景，&lt;0.3的作为背景，其他不管）</li>
-<li>每个目标仅仅有一个正的锚点，因此不会用到NMS，我们提取关键点特征图上局部峰值点（local peaks）</li>
-<li>CenterNet 相比较传统目标检测而言（缩放16倍尺度），使用更大分辨率的输出特征图（缩放了4倍），因此无需用到多重特征图锚点</li>
+<li>Multi-batch convolutional network<ul>
+<li>Highway network</li>
+<li>ResNet</li>
+<li>FractalNets and Multilevel ResNets</li>
+<li>TnceptionNets</li>
 </ul>
 </li>
-<li><strong>Object detection by keypoint estimation</strong> CornerNet检测边界框的两个角点作为关键点，ExtremeNet检测所有物体的上下左右以及中心店来检测目标。然而它们都需要在关键点检测后加上一个grouping阶段，这会显著拖慢它们的算法。而CenterNet只是对每个目标简单的提取一个中心店，因此不需要grouping以及post-processing。</li>
-</ul>
-<h1 id="Preliminary"><a href="#Preliminary" class="headerlink" title="Preliminary"></a>Preliminary</h1><p>用$I\in R^{W×H×3}$表示长为H宽为W的输入图像。我们的目标是产生一个关键点heat map $Y\in[0,1]^{\frac{W}{R}×\frac{H}{R}×C}$,R为输出步长，C为关键点的类别数量。$\hat{Y}_{xyz}=1$表示检测到的关键点，$\hat{Y}_{xyz}=0$表示背景。我们采用了几个不同的全卷积编码-解码网络来预测图像 I 得到的$\hat{Y}$：</p>
-<ul>
-<li>stacked hourglass network</li>
-<li>upconvolutional residual networks (ResNet)</li>
-<li>deep layer aggregation (DLA)</li>
-</ul>
-<p>对于类别为c的真实框的关键点$p\in R^2$，我们计算它在低分辨率上对应的关键点为$\overline{p}=\lfloor\frac{p}{R}\rfloor$。我们将GT关键点通过高斯核$Y_{xyz}=exp{(-\frac{(x-\overline{p}_{x})^2+(y-\overline{p}_{y})^2}{2\sigma_{p}^2})}$分散到heat map  $Y\in[0,1]^{\frac{W}{R}×\frac{H}{R}×C}$上，其中$\sigma_{p}$是目标尺度自适应的标准方差。如果对于同个类 c （同个关键点或是目标类别）有两个高斯函数发生重叠，我们选择元素级最大的。训练目标函数如下，像素级逻辑回归的focal loss：<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/GLEG226YnzAL.png?imageslim" alt="mark"></p>
-<p>由于图像下采样时，GT的关键点会因数据是离散的而产生偏差，我们对每个中心点附加预测了个局部偏移$\hat{O}\in R^{\frac{W}{R}×\frac{H}{R}×2}$,所有类别 c 共享同个偏移预测，这个偏移同个 L1 loss来训练：<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/UL4RQSnlxtm8.png?imageslim" alt="mark"><br>只会在关键点$\overline{p}$位置 做监督操作，其他位置无视。<br>关于这个损失函数补充一点解释。这个损失函数与focal loss类似，对于easy example的中心店，适当减少其训练比重也就是loss值。</p>
-<ul>
-<li>当$Y_{xyc}=1$时，$(1-\hat{Y}_{xyc})^\alpha$就充当了矫正的作用。<ul>
-<li>当$\hat{Y}_{xyc}$接近于1时，说明是容易检测出来的点，这个值就会相应比较低。</li>
-<li>当$\hat{Y}_{xyc}$接近于0时，说明这个中心点还没有学习到，那么就要增大其训练比重，因此这个值就会比较大。</li>
+<li>Grouped/depthwise/dilated convolutions<ul>
+<li>Grouped convolution 减少了参数个数以及计算成本，首次应用于AlexNet。使用grouped convolution，ResNeXts也能够提升准确率。</li>
+<li>Depthwise convolution grouped convolution的特殊情况，groups的个数等于通道的个数。</li>
+<li>Dilated convolutions 可以指数式扩大感受野，而且不会loss of coverage。<br>在SK convolution中，大尺寸的卷积核被设计成grouped/depthwise/dilated convolutions的集合，来避免沉重的开销。</li>
 </ul>
 </li>
-<li>当otherwise时，$(1-Y_{xyc})^\beta$和$(\hat{Y}_{xyc})^\alpha$协同进行矫正。<ul>
-<li>当$\hat{Y}_{xyc}$越接近1时，说明样本越容易被误检，需要增加对其的惩罚，通过$(\hat{Y}_{xyc})^\alpha$来实现。</li>
-<li>由于正负样本的数量很不平衡，我们需要抑制负样本的训练比重。由于检测到的负样本在正样本即中心点周围的可能性比较高，所以它们的$(1-Y_{xyc})$接近于1。因此可以通过$(1-Y_{xyc})^\beta$来实现。</li>
+<li>Attention mechanisms<br>设计一系列的注意力分配系数，也就是一系列权重参数，可以用来强调或选择目标处理对象的重要信息，并且抑制一些无关的细节信息。</li>
+<li>Dynamic convolutions<ul>
+<li>Dynamic Filter 只能适应性的改变filters的参数而不是卷积核大小的调整</li>
+<li>Active Convo-lution 使用偏移来增强卷积中的位置采样</li>
+<li>De-formable Convolutional Networks 动态地产生位置偏移</li>
 </ul>
 </li>
 </ul>
-<h1 id="Objects-as-Points"><a href="#Objects-as-Points" class="headerlink" title="Objects as Points"></a>Objects as Points</h1><p>用$(x_{1}^{(k)},y_{1}^{(k)},x_{2}^{(k)},y_{2}^{(k)})$来表示类别为$c_{k}$的object$k$的边界框。那么它的中心点即为$(\frac{x_{1}^{(k)}+x_{2}^{(k)}}{2},\frac{y_{1}^{(k)}+y_{2}^{(k)}}{2})$。我们用关键点估计$\hat{Y}$来得到所有的中心点。另外，我们为每个目标 k 回归出目标的尺寸$s_{k}=(x_{2}^{(k)}-x_{1}^{(k)},y_{2}^{(k)}-y_{1}^{(k)})$。为了减少计算负担，我们为每个目标种类使用单一的尺寸预测$\hat{S}\in R^{\frac{W}{R}×\frac{H}{R}×2}$,我们在中心点位置添加了 L1 loss:</p>
-<p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/dFbxUqWF31Xr.png?imageslim" alt="mark"></p>
-<p>我们不将scale进行归一化，直接使用原始像素坐标。为了调节该loss的影响，将其乘了个系数，整个训练的目标loss函数为：</p>
-<p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/wOOp7nG5FUAw.png?imageslim" alt="mark"></p>
-<p>整个网络预测会在每个位置输出 C+4个值(即关键点类别C, 偏移量的x,y，尺寸的w,h)，所有输出共享一个全卷积的backbone。</p>
-<p><strong>From points to bounding boxes</strong></p>
-<p>在推理的时候，我们分别提取热力图上每个类别的峰值点。如何得到这些峰值点呢？做法是将热力图上的所有响应点与其连接的8个临近点进行比较，如果该点响应值大于或等于其八个临近点值则保留，最后我们保留所有满足之前要求的前100个峰值点。</p>
+<h1 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h1><h2 id="Selective-Kernel-Convolution"><a href="#Selective-Kernel-Convolution" class="headerlink" title="Selective Kernel Convolution"></a>Selective Kernel Convolution</h2><p>SK convolution 包含三个操作——Split,Fuse以及Select，如下图所示：<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/rBQK3LMJSQBa.png?imageslim" alt="mark"><br>在这个例子中由两个分支，因此只有两个不同的卷积核，单它很容易拓展成多个分支。</p>
 <ul>
-<li>关键点检测结果 $\hat{P}=\lbrace(\hat{x}_{i},\hat{y}_{i})\rbrace_{i=1}^{n}$</li>
-<li>偏移检测结果 $\hat{O}_{\hat{x}_{i},\hat{y}_{i}}=(\delta\hat{x}_{i},\delta\hat{y}_{i})$</li>
-<li>尺度检测结果 $\hat{S}_{\hat{x}_{i},\hat{y}_{i}}=(\hat{w}_{i},\hat{h}_{i})$</li>
+<li><p>Split：给定feature map $X\in R^{H^{‘}×W^{‘}×C^{‘}}$,我们先执行两个卷积核大小分别为3和5的变换$\overline{T}:X\rightarrow \overline{U}\in R^{R×W×C}$以及$\hat{T}:X\rightarrow \hat{U}\in R^{R×W×C}$两种变换都是由一系列高效的grouped/depthwise convolution，Batch Normalization以及ReLU函数组成。为了更加高效，5<em>5的卷积核由3</em>3空洞为2的空洞卷积代替。</p>
+</li>
+<li><p>Fuse：基本的想法是使用gates来控制来自多个分支的带着不同尺度信息的information流入下一层的神经元。为了实现这个目标，gates需要聚合来自所有分支的information。我们首先通过一个逐元素的summation：</p>
+<script type="math/tex; mode=display">U=\overline{U}+\hat{U}</script><p>然后我们编码这个全局信息通过全局平均池化来生成逐通道的统计量$s\in R^{C}$s中的第c个元素通过在U的HxW维度上进行压缩计算得到：</p>
+<script type="math/tex; mode=display">s_{c}=F_{gp}(U_{c})=\frac{1}{H×W}\sum_{i=1}^{H}\sum_{j=1}^{W}U_{c}(i,j)</script><p>然后产生一个用于指导精确性以及适应性选择的紧凑的feature$z\in R^{d×1}$。通过一个全连接层得到，同时，进行了降维处理：</p>
+<script type="math/tex; mode=display">z=F_{fc}(s)=\delta(B(Ws))</script><p>$\delta$为ReLU函数，B为Batch Normalization。为了验证W中d的作用，引入了一个衰减率r，如下，其中C代表通道数，L为d的最小值。</p>
+<script type="math/tex; mode=display">d=max(C/r,L)</script></li>
+<li><p>Select：通道间的soft attention可以选择不同尺寸的信息，其被紧凑的特征信息Z引导。在channel-wise应用softmax操作。</p>
+<script type="math/tex; mode=display">a_{c}=\frac{e^{A_{c}z}}{e^{A_{c}z+e^{B_{c}z}}} \quad b_{c}=\frac{e^{B_{c}z}}{e^{A_{c}z+e^{B_{c}z}}}</script><p>$A,B\in R^{C×d}$，个人理解矩阵A和B就是两个全连接的权值矩阵，这里就存在一个疑问，那么生成向量z的意义是什么，可以直接在向量s上做全连接。向量a和b分别为$\overline{U}$以及$\hat{U}$的soft attention vector。$A_{c}$为矩阵A的第c行，$a_{c}$为向量a的第c个元素。在两个分支的情况中，矩阵B是多余的，因为$a_{c}+b_{c}=1$。最后的feature map$V$通过不同卷积核的注意力权重得到：</p>
+<script type="math/tex; mode=display">V_{c}=a_{c}\cdot \overline{U}+b_{c}\cdot \hat{U},\quad a_{c}+b_{c}=1</script><p>$V=[V_{1},V_{2},…,V_{C}],\quad V_{c}\in R^{H×W}$</p>
+</li>
 </ul>
-<p>根据以上结果得到在$(\hat{x}_{i},\hat{y}_{i})$的边界框：</p>
-<p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/jiA2m9tPNenL.png?imageslim" alt="mark"></p>
-<p>所有的输出都直接从关键点估计得到，无需基于IOU的NMS或者其他后处理。</p>
+<h2 id="Network-Architecture"><a href="#Network-Architecture" class="headerlink" title="Network Architecture"></a>Network Architecture</h2><p>和ResNeXt类似，SKNet也主要由一堆名为“SK unit”的repeated bottleneck blocks组成。每一个SK unit由1<em>1的卷积，SK卷积以及1</em>1卷积组成。ResNeXt中所有具有较大尺寸的卷积核都替换为SK卷积，从而可以使网络选择合适的感受野大小。<br>在SK单元中，存在三个重要的超参数，来决定SK卷积的最终设置：</p>
+<ul>
+<li>路径的数量M，决定了聚合多少种不同尺寸的卷积核。</li>
+<li>组数G，控制每一条路径的基数</li>
+<li>衰减率r，控制在fuse操作中参数的个数</li>
+</ul>
+<p>网络结构如下：<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/Pf4spQPdb7Fm.png?imageslim" alt="mark"></p>
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/JMgYO8YaevDQ.png?imageslim" alt="mark"></p>
+<p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/U2Y13ykzBOS0.png?imageslim" alt="mark"></p>
 
     </div>
 
@@ -432,15 +429,13 @@
           
           <div class="post-tags" id="post-tags">
             
-              <a href="/tags/目标检测/" rel="tag"><i class="fa fa-tag"></i> 目标检测</a>
+              <a href="/tags/卷积网络/" rel="tag"><i class="fa fa-tag"></i> 卷积网络</a>
             
-              <a href="/tags/anchor-free/" rel="tag"><i class="fa fa-tag"></i> anchor-free</a>
+              <a href="/tags/注意力机制/" rel="tag"><i class="fa fa-tag"></i> 注意力机制</a>
             
               <a href="/tags/论文笔记/" rel="tag"><i class="fa fa-tag"></i> 论文笔记</a>
             
-              <a href="/tags/关键点检测/" rel="tag"><i class="fa fa-tag"></i> 关键点检测</a>
-            
-              <a href="/tags/Focal-Loss/" rel="tag"><i class="fa fa-tag"></i> Focal Loss</a>
+              <a href="/tags/感受野/" rel="tag"><i class="fa fa-tag"></i> 感受野</a>
             
           </div>
           <script type="text/javascript">
@@ -462,8 +457,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/07/26/next主题个性化设置/" rel="next" title="next主题个性化设置">
-                  <i class="fa fa-chevron-left"></i> next主题个性化设置
+                <a href="/2019/07/29/python-argparse/" rel="next" title="Python——argparse模块">
+                  <i class="fa fa-chevron-left"></i> Python——argparse模块
                 </a>
               
             </div>
@@ -472,8 +467,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/07/29/hexo上传图片/" rel="prev" title="Hexo上传图片">
-                  Hexo上传图片 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/07/30/论文笔记4/" rel="prev" title="论文阅读笔记4：CornerNet:Detecting Objects as Paired Keypoints">
+                  论文阅读笔记4：CornerNet:Detecting Objects as Paired Keypoints <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -730,7 +725,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-work"><span class="nav-number">3.</span> <span class="nav-text">Related work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Preliminary"><span class="nav-number">4.</span> <span class="nav-text">Preliminary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Objects-as-Points"><span class="nav-number">5.</span> <span class="nav-text">Objects as Points</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-work"><span class="nav-number">3.</span> <span class="nav-text">Related work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Methods"><span class="nav-number">4.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Selective-Kernel-Convolution"><span class="nav-number">4.1.</span> <span class="nav-text">Selective Kernel Convolution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-Architecture"><span class="nav-number">4.2.</span> <span class="nav-text">Network Architecture</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-number">5.</span> <span class="nav-text">Experiments</span></a></li></ol></div>
             
 
           </div>
@@ -797,6 +792,15 @@
 
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 
 

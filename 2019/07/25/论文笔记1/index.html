@@ -54,24 +54,26 @@
   };
 </script>
 
-  <meta name="description" content="论文地址：https://arxiv.org/pdf/1903.06586.pdf论文代码：https://github.com/implus/SKNet  Abstract在标准的卷积网络中，每层网络中神经元的感受野的大小都是相同的。在神经学中，视觉神经元感受野的大小是由刺激机制构建的，而在卷积网络中却很少考虑这个因素。本文提出的方法可以使神经元对于不同尺寸的输入信息进行自适应的调整其感受野的">
-<meta name="keywords" content="卷积网络,注意力机制,论文笔记,感受野">
+  <meta name="description" content="论文地址：https://arxiv.org/abs/1904.11490论文代码：未公布  Abstract当前主流的目标检测网络，对于bounding box的依赖很严重，无论是one-stage还是two-stage的检测器，都需要bounding box对目标区域进行提取，划分，然后进行分类和回归。但是这些bounding box都是规则且相对固定的候选框，只能对目标提供一个较为粗糙的定">
+<meta name="keywords" content="目标检测,anchor-free,Deformable Convolution,论文笔记,关键点检测">
 <meta property="og:type" content="article">
-<meta property="og:title" content="论文阅读笔记3：Selective Kernel Networks">
-<meta property="og:url" content="http://yoursite.com/2019/07/30/论文阅读笔记3/index.html">
+<meta property="og:title" content="论文阅读笔记1：RepPoints:Point Set Representation for Object Detection">
+<meta property="og:url" content="http://zhengyujie.cn/2019/07/25/论文笔记1/index.html">
 <meta property="og:site_name" content="浅笑の博客">
-<meta property="og:description" content="论文地址：https://arxiv.org/pdf/1903.06586.pdf论文代码：https://github.com/implus/SKNet  Abstract在标准的卷积网络中，每层网络中神经元的感受野的大小都是相同的。在神经学中，视觉神经元感受野的大小是由刺激机制构建的，而在卷积网络中却很少考虑这个因素。本文提出的方法可以使神经元对于不同尺寸的输入信息进行自适应的调整其感受野的">
+<meta property="og:description" content="论文地址：https://arxiv.org/abs/1904.11490论文代码：未公布  Abstract当前主流的目标检测网络，对于bounding box的依赖很严重，无论是one-stage还是two-stage的检测器，都需要bounding box对目标区域进行提取，划分，然后进行分类和回归。但是这些bounding box都是规则且相对固定的候选框，只能对目标提供一个较为粗糙的定">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/rBQK3LMJSQBa.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/Pf4spQPdb7Fm.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/JMgYO8YaevDQ.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/U2Y13ykzBOS0.png?imageslim">
-<meta property="og:updated_time" content="2019-08-19T08:04:49.597Z">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/YN1n83VRQuLV.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/7urfHbbDBTBK.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/snvnCe1X2Yrl.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/ilphoMobOhuc.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/CjChbYWDvgGU.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/yfz1L28KuvKm.png?imageslim">
+<meta property="og:updated_time" content="2019-08-19T08:02:52.573Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="论文阅读笔记3：Selective Kernel Networks">
-<meta name="twitter:description" content="论文地址：https://arxiv.org/pdf/1903.06586.pdf论文代码：https://github.com/implus/SKNet  Abstract在标准的卷积网络中，每层网络中神经元的感受野的大小都是相同的。在神经学中，视觉神经元感受野的大小是由刺激机制构建的，而在卷积网络中却很少考虑这个因素。本文提出的方法可以使神经元对于不同尺寸的输入信息进行自适应的调整其感受野的">
-<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/rBQK3LMJSQBa.png?imageslim">
-  <link rel="canonical" href="http://yoursite.com/2019/07/30/论文阅读笔记3/">
+<meta name="twitter:title" content="论文阅读笔记1：RepPoints:Point Set Representation for Object Detection">
+<meta name="twitter:description" content="论文地址：https://arxiv.org/abs/1904.11490论文代码：未公布  Abstract当前主流的目标检测网络，对于bounding box的依赖很严重，无论是one-stage还是two-stage的检测器，都需要bounding box对目标区域进行提取，划分，然后进行分类和回归。但是这些bounding box都是规则且相对固定的候选框，只能对目标提供一个较为粗糙的定">
+<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/YN1n83VRQuLV.png?imageslim">
+  <link rel="canonical" href="http://zhengyujie.cn/2019/07/25/论文笔记1/">
 
 
 <script id="page-configurations">
@@ -85,7 +87,7 @@
   };
 </script>
 
-  <title>论文阅读笔记3：Selective Kernel Networks | 浅笑の博客</title>
+  <title>论文阅读笔记1：RepPoints:Point Set Representation for Object Detection | 浅笑の博客</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -275,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/论文阅读笔记3/">
+    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/07/25/论文笔记1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zheng Yujie">
@@ -287,7 +289,7 @@
       <meta itemprop="name" content="浅笑の博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">论文阅读笔记3：Selective Kernel Networks
+        <h1 class="post-title" itemprop="name headline">论文阅读笔记1：RepPoints:Point Set Representation for Object Detection
 
           
         </h1>
@@ -303,7 +305,7 @@
                 
               
 
-              <time title="创建时间：2019-07-30 09:44:10" itemprop="dateCreated datePublished" datetime="2019-07-30T09:44:10+08:00">2019-07-30</time>
+              <time title="创建时间：2019-07-25 21:42:22" itemprop="dateCreated datePublished" datetime="2019-07-25T21:42:22+08:00">2019-07-25</time>
             </span>
           
             <span class="post-meta-item">
@@ -331,7 +333,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/07/30/论文阅读笔记3/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/07/30/论文阅读笔记3/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2019/07/25/论文笔记1/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/07/25/论文笔记1/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -343,7 +345,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>3.3k</span>
+              <span>4.1k</span>
             </span>
           
 
@@ -357,63 +359,74 @@
 
       
         <blockquote>
-<p>论文地址：<a href="https://arxiv.org/pdf/1903.06586.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1903.06586.pdf</a><br>论文代码：<a href="https://github.com/implus/SKNet" target="_blank" rel="noopener">https://github.com/implus/SKNet</a></p>
+<p>论文地址：<a href="https://arxiv.org/abs/1904.11490" target="_blank" rel="noopener">https://arxiv.org/abs/1904.11490</a><br>论文代码：未公布</p>
 </blockquote>
-<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>在标准的卷积网络中，每层网络中神经元的感受野的大小都是相同的。在神经学中，视觉神经元感受野的大小是由刺激机制构建的，而在卷积网络中却很少考虑这个因素。本文提出的方法可以使神经元对于不同尺寸的输入信息进行自适应的调整其感受野的大小。building block为Selective Kernel单元。其存在多个分支，每个分支的卷积核的尺寸都不同。不同尺寸的卷积核最后通过softmax进行融合。分支中不同注意力在fusion layer产生不同的有效感受野。多个SK单元进行堆叠构成Selective  Kernel  Networks  (SKNets)。详细分析显示SKNet里的神经元可以根据输入通过适应性的调整感受野的大小来捕捉不同尺度的目标object。</p>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>当前主流的目标检测网络，对于bounding box的依赖很严重，无论是one-stage还是two-stage的检测器，都需要bounding box对目标区域进行提取，划分，然后进行分类和回归。但是这些bounding box都是规则且相对固定的候选框，只能对目标提供一个较为粗糙的定位，这就导致bounding box提取出来的特征也是粗糙的。本文提出了RepPoints（representive points），通过一组有代表性的点，实现对目标的更精细表示，对于后续的分类和定位都有帮助。在训练过程中，给定Ground Truth的位置和识别目标，RepPoints学会自动排列代表性点，限定目标的空间范围，并表示语义上重要的局部区域。整个过程都不需要anchor进行bounding box的采样，是名副其实的anchor-free。实验表明，基于RepPoints的网络结构，在没采用多尺度训练的情况下，在COCO数据集上，AP指标上达到了42.8%。</p>
 <a id="more"></a>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>在上世纪猫的前视觉皮层神经元的局部感受野激发了卷积网络的产生。在视觉皮层中，相同区域的神经元的局部感受野的大小是不同的，从而可以在相同的处理阶段中获得不同尺寸的空间信息。该思想被Inception系列网络完美的应用，在其building block中，3x3,5x5,7x7的卷积通过简单的拼接来得到多尺寸信息。</p>
-<p>然而，在设计卷积网络时，神经元感受野的其他属性并没有被考虑到。比如感受野尺寸的自适应调整。大量实验证明，视觉皮层的神经元的感受野尺寸并不是固定的，而是受激励调制的。像Inception这种具有多个分支的网络其内部存在一种潜在的机制可以在下一个卷积层根据输入的内容调整神经元感受野的大小，这是因为下一个卷积层通过线性组合将不同分支的特征进行融合。但是线性组合的方法不足于提供网络强大的调整能力。</p>
-<p>本文提出了一种非线性的方法聚合来自不同核的特征进而实现感受野不同尺寸的调整。引入了”Selective Kernel”卷积，其包含了三个操作：Split,Fuse,Select：</p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>目标检测一直是计算机视觉中的基础且热门领域，为诸如分割，跟踪等任务提供辅助。随着深度学习的迅速发展，目标检测网络取得了迅速的发展进步，代表性网络如Faster R-CNN, YOLO，Ssd等都有很好的表现。纵观所有的目标检测网络，都绕不开bounding box的存在，bounding box包围图像的目标区域，作为整个目标检测中的基本处理单元。基于提取的bounding box，进一步进行分类和位置回归处理。bounding box的应用很大程度源于网络结构的评价指标，即预估框和GT框的重叠覆盖程度。还有一个原因是因为bounding box这种规则的形状对特征提取和后续的池化处理提供了便利。虽然如此，但是bounding box只是对目标的粗糙提取，这种提取可能并不符合目标的姿态和形状，因此提取出来的内容势必会包括一些背景信息等无关信息，这可能会产生较低质量的特征，从而影响目标检测的分类性能。</p>
+<p>本文提出了一种全新的方法RepPoints，通过一组点集提供更细粒度的位置表示和便于分类的信息。如下图所示：RepPoints是一系列点组成的集合，这些点分布在目标的空间范围和具有重要语义信息的位置。RepPoints的训练由目标定位和识别共同驱动，RepPoints与GT bounding box紧密结合，引导检测器正确分类目标。这种方法摆脱了bounding box的限制，更没有了anchor的烦恼。</p>
+<p>为了证明ReoPoints的强大，本文利用一个可变形卷积实现了目标检测网络，该网络在保持特征提取方便的同时，提供了适合于指导自适应采样的识别反馈。接下来会有详细介绍。</p>
+<p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/YN1n83VRQuLV.png?imageslim" alt="mark"></p>
+<h1 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h1><ul>
+<li><p><strong>Bounding boxes for the object detection problem</strong><br>Bounding box流行的主要原因有：</p>
 <ul>
-<li>Split操作产生多个不同核尺寸的通道对应于神经元的不同感受野尺寸。</li>
-<li>Fuse操作组合融合来自多通道的信息从而获得一个全局及可理解性的表示用于进行权重选择。</li>
-<li>Select操作根据挑选得到的权重对不同核尺寸的feature map进行融合。</li>
-</ul>
-<h1 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h1><ul>
-<li>Multi-batch convolutional network<ul>
-<li>Highway network</li>
-<li>ResNet</li>
-<li>FractalNets and Multilevel ResNets</li>
-<li>TnceptionNets</li>
+<li>Bounding box可以很便捷的进行注释而且几乎没有歧义，同时在最后的认知阶段可以提供高效的进准定位。</li>
+<li>不管是过去，还是在深度学习领域，几乎所有的图片特征提取都是以网格的形式作为输入。因此，应用bounding box可以很方便的促进特征提取</li>
 </ul>
 </li>
-<li>Grouped/depthwise/dilated convolutions<ul>
-<li>Grouped convolution 减少了参数个数以及计算成本，首次应用于AlexNet。使用grouped convolution，ResNeXts也能够提升准确率。</li>
-<li>Depthwise convolution grouped convolution的特殊情况，groups的个数等于通道的个数。</li>
-<li>Dilated convolutions 可以指数式扩大感受野，而且不会loss of coverage。<br>在SK convolution中，大尺寸的卷积核被设计成grouped/depthwise/dilated convolutions的集合，来避免沉重的开销。</li>
-</ul>
-</li>
-<li>Attention mechanisms<br>设计一系列的注意力分配系数，也就是一系列权重参数，可以用来强调或选择目标处理对象的重要信息，并且抑制一些无关的细节信息。</li>
-<li>Dynamic convolutions<ul>
-<li>Dynamic Filter 只能适应性的改变filters的参数而不是卷积核大小的调整</li>
-<li>Active Convo-lution 使用偏移来增强卷积中的位置采样</li>
-<li>De-formable Convolutional Networks 动态地产生位置偏移</li>
-</ul>
+<li><p><strong>Bounding boxes in modern object detectors</strong><br>bounding box表示出现在多阶段识别模式的几乎所有阶段：1）作为anchors。2）作为object proposals。3）作为最终的localization targets。</p>
 </li>
 </ul>
-<h1 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h1><h2 id="Selective-Kernel-Convolution"><a href="#Selective-Kernel-Convolution" class="headerlink" title="Selective Kernel Convolution"></a>Selective Kernel Convolution</h2><p>SK convolution 包含三个操作——Split,Fuse以及Select，如下图所示：<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/rBQK3LMJSQBa.png?imageslim" alt="mark"><br>在这个例子中由两个分支，因此只有两个不同的卷积核，单它很容易拓展成多个分支。</p>
 <ul>
-<li><p>Split：给定feature map $X\in R^{H^{‘}×W^{‘}×C^{‘}}$,我们先执行两个卷积核大小分别为3和5的变换$\overline{T}:X\rightarrow \overline{U}\in R^{R×W×C}$以及$\hat{T}:X\rightarrow \hat{U}\in R^{R×W×C}$两种变换都是由一系列高效的grouped/depthwise convolution，Batch Normalization以及ReLU函数组成。为了更加高效，5<em>5的卷积核由3</em>3空洞为2的空洞卷积代替。</p>
-</li>
-<li><p>Fuse：基本的想法是使用gates来控制来自多个分支的带着不同尺度信息的information流入下一层的神经元。为了实现这个目标，gates需要聚合来自所有分支的information。我们首先通过一个逐元素的summation：</p>
-<script type="math/tex; mode=display">U=\overline{U}+\hat{U}</script><p>然后我们编码这个全局信息通过全局平均池化来生成逐通道的统计量$s\in R^{C}$s中的第c个元素通过在U的HxW维度上进行压缩计算得到：</p>
-<script type="math/tex; mode=display">s_{c}=F_{gp}(U_{c})=\frac{1}{H×W}\sum_{i=1}^{H}\sum_{j=1}^{W}U_{c}(i,j)</script><p>然后产生一个用于指导精确性以及适应性选择的紧凑的feature$z\in R^{d×1}$。通过一个全连接层得到，同时，进行了降维处理：</p>
-<script type="math/tex; mode=display">z=F_{fc}(s)=\delta(B(Ws))</script><p>$\delta$为ReLU函数，B为Batch Normalization。为了验证W中d的作用，引入了一个衰减率r，如下，其中C代表通道数，L为d的最小值。</p>
-<script type="math/tex; mode=display">d=max(C/r,L)</script></li>
-<li><p>Select：通道间的soft attention可以选择不同尺寸的信息，其被紧凑的特征信息Z引导。在channel-wise应用softmax操作。</p>
-<script type="math/tex; mode=display">a_{c}=\frac{e^{A_{c}z}}{e^{A_{c}z+e^{B_{c}z}}} \quad b_{c}=\frac{e^{B_{c}z}}{e^{A_{c}z+e^{B_{c}z}}}</script><p>$A,B\in R^{C×d}$，个人理解矩阵A和B就是两个全连接的权值矩阵，这里就存在一个疑问，那么生成向量z的意义是什么，可以直接在向量s上做全连接。向量a和b分别为$\overline{U}$以及$\hat{U}$的soft attention vector。$A_{c}$为矩阵A的第c行，$a_{c}$为向量a的第c个元素。在两个分支的情况中，矩阵B是多余的，因为$a_{c}+b_{c}=1$。最后的feature map$V$通过不同卷积核的注意力权重得到：</p>
-<script type="math/tex; mode=display">V_{c}=a_{c}\cdot \overline{U}+b_{c}\cdot \hat{U},\quad a_{c}+b_{c}=1</script><p>$V=[V_{1},V_{2},…,V_{C}],\quad V_{c}\in R^{H×W}$</p>
-</li>
-</ul>
-<h2 id="Network-Architecture"><a href="#Network-Architecture" class="headerlink" title="Network Architecture"></a>Network Architecture</h2><p>和ResNeXt类似，SKNet也主要由一堆名为“SK unit”的repeated bottleneck blocks组成。每一个SK unit由1<em>1的卷积，SK卷积以及1</em>1卷积组成。ResNeXt中所有具有较大尺寸的卷积核都替换为SK卷积，从而可以使网络选择合适的感受野大小。<br>在SK单元中，存在三个重要的超参数，来决定SK卷积的最终设置：</p>
+<li><p><strong>Other representations for object detection</strong><br>最近的目标检测Bottom-up approaches：</p>
 <ul>
-<li>路径的数量M，决定了聚合多少种不同尺寸的卷积核。</li>
-<li>组数G，控制每一条路径的基数</li>
-<li>衰减率r，控制在fuse操作中参数的个数</li>
+<li>CornerNet 预测左上以及右下的角点，应用专门的grouping方法来获得object的bounding box</li>
+<li>ExtremeNet 定位object在x和y方向上的极点来预测bounding box</li>
 </ul>
-<p>网络结构如下：<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/Pf4spQPdb7Fm.png?imageslim" alt="mark"></p>
-<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/JMgYO8YaevDQ.png?imageslim" alt="mark"></p>
-<p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/U2Y13ykzBOS0.png?imageslim" alt="mark"></p>
+</li>
+<li><p><strong>Deformation  modeling  in  object  recognition</strong></p>
+</li>
+</ul>
+<h1 id="The-RepPoints-Representation"><a href="#The-RepPoints-Representation" class="headerlink" title="The RepPoints Representation"></a>The RepPoints Representation</h1><h2 id="Bounding-Box-Representation"><a href="#Bounding-Box-Representation" class="headerlink" title="Bounding Box Representation"></a>Bounding Box Representation</h2><ul>
+<li><strong>Review of Multi-Stage Object Detectors</strong></li>
+</ul>
+<p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/7urfHbbDBTBK.png?imageslim" alt="mark"></p>
+<ul>
+<li><strong>Bounding Box Regression</strong><br>边界框回归的过程不再赘述</li>
+</ul>
+<h2 id="RepPoints"><a href="#RepPoints" class="headerlink" title="RepPoints"></a>RepPoints</h2><p>正如前面讨论的，4-d的bounding box是目标位置的粗糙表达，边界框只考虑目标的矩形空间范围，不考虑形状、姿态和语义上重要的局部区域的位置，但恰恰是这些区域，可用于更好的定位和更好的对象特征提取。为了克服这些局限，RepPoints建立一组自适应的特征点集$R\in\lbrace(x_{k},y_{k})\rbrace_{k=1}^{n}$其中n是构成点集的点数量，在本文中，n被设置为9，也就是抽样9个点</p>
+<ul>
+<li><p><strong>RepPoints refinement</strong><br>对R中的每一个点预测一组偏移$\lbrace(\Delta x_{k},\Delta y_{k})\rbrace_{k=1}^{n}$。因此refinement的过程就可以简单的表示为：$R_{r}=\lbrace(x_{k}+\Delta x_{k},y_{k}+\Delta y_{k})\rbrace$</p>
+</li>
+<li><p><strong>Converting RepPoints to bounding box</strong><br>得到一组点后，接下来就把这些点转化为bounding box ,我们定义一个转换函数T:$R_{p}\rightarrow B_{p}$,<br>$R_{p}$为object $P$的RepPoints,$B_{p}$表示一个pseudo box，转换函数有三种形式：</p>
+<ul>
+<li>T=T1：Min-max function. 在x,y两个坐标轴方向上，寻找点集中的极值点来表示bouning box，一般来说，有两个点就能构成一个bounding box</li>
+<li>T = T2: Partial min-max function. 先从点集中选取相应的子集，将选取出的点利用（1）式方法，构成bounding box</li>
+<li>T = T3: Moment-based function.计算点集中所有点的均值作为bounding box的中心点坐标，二阶矩作为bounding box的宽和高。“矩”是一组点组成的模型的特定的数量测度，关于二阶矩，可以简单理解为随机变量的方差。</li>
+</ul>
+</li>
+<li><p><strong>Learning RepPoints</strong><br>RepPoints的学习是目标定位损失以及目标认知损失共同驱动的。关于目标定位的损失，需要我们利用上文中提到的转换函数T生成一个pseudo box，然后利用bounding box和GT bounding box进行运算。在本文中，作者在左上角和右下角之间的距离运用smooth L1，进行位置回归。</p>
+</li>
+</ul>
+<h1 id="RPDet-an-Anchor-Free-Detector"><a href="#RPDet-an-Anchor-Free-Detector" class="headerlink" title="RPDet: an Anchor Free Detector"></a>RPDet: an Anchor Free Detector</h1><p>为了验证利用RepPoints代替bounding box候选的可行和强大，设计了一个anchor-free的网络结构，整个网络是由两个基于可变形卷积的识别阶段组成。作者将RepPoints和可变形卷积很好的结合起来。<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/snvnCe1X2Yrl.png?imageslim" alt="mark"></p>
+<p>目标表示的演化过程：<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/ilphoMobOhuc.png?imageslim" alt="mark"></p>
+<ul>
+<li><p><strong>Center point based initial object representation</strong><br>我们和YOLO和DenseBox一样使用中心点作为ojects的初始表示，使之成为一个anchor-free的目标检测器。中心点表示的一个重要好处就是它的假设空间相比于anchor-based更tight。</p>
+</li>
+<li><p><strong>Utilization  of  RepPoints</strong><br>the first set of RepPoints通过一个常规的3*3卷积得到，这些RepPoints的学习由两个objectives驱动：</p>
+<ul>
+<li>pseudo box和ground-truth bbox之间的左上以及右下角点的距离loss</li>
+<li>随后阶段的认知loss<br>the second set of RepPoints表示最终的object定位，只由点之间的距离loss驱动。</li>
+</ul>
+</li>
+<li><p><strong>Other details</strong><br>不再叙述</p>
+</li>
+</ul>
+<h1 id="Deformable-Convolution"><a href="#Deformable-Convolution" class="headerlink" title="Deformable Convolution"></a>Deformable Convolution</h1><p>研究发现，标准卷积中的规则采样格点采样是导致网络难以适应几何形变的“罪魁祸首”，为了削弱这个限制，对卷积核中每个采样点为位置都增加一个偏移量，可以实现在当前位置附近随意采样而不局限于规则的格点，如下图是常见的采样点和可变形卷积采样点的对比。其中（a）是规则的采样点，(b)(c)(d)是在规则采样点的基础上，加上一个偏移量，使得采样点的位置发生变化</p>
+<p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/CjChbYWDvgGU.png?imageslim" alt="mark"></p>
+<p>可变形卷积的目的是提升形变的建模能力。通过可变形卷积（deformable conv）和可变形感兴趣区域池化（deformable ROI Pooling）这两个模块，基于一个平行网络学习一个偏移量（offset），使得卷积核在feature map上的采样点发生偏移，集中于我们感兴趣的区域。我们可以用下列网络结构来看：以一个feature map作为输入，常规的采样点如绿框所示，是规则且局限的，而可变形卷积的做法是，增加一路网络，经过卷积之后，输出一个维度为2N的map，其中N是采样点数量，2N是说明学习x,y两个方向的偏移，这样，对于每一个原始的采样点，我们都学习到了它在x,y两个方向上的偏移，即下图offsets map，指示了原始的采样点在融合x,y两个方向的偏移量后，最终的偏移方向。然后，将原始采样点与offset对应融合，得到最终采样位置，经过卷积运算，得到输出feature map上的结果。</p>
+<p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/yfz1L28KuvKm.png?imageslim" alt="mark"></p>
+<p>非常需要注意的一个点是，可变形卷积的可变形体现在采样点不是局限规则的，而不是卷积核是可变形的</p>
 
     </div>
 
@@ -429,13 +442,15 @@
           
           <div class="post-tags" id="post-tags">
             
-              <a href="/tags/卷积网络/" rel="tag"><i class="fa fa-tag"></i> 卷积网络</a>
+              <a href="/tags/目标检测/" rel="tag"><i class="fa fa-tag"></i> 目标检测</a>
             
-              <a href="/tags/注意力机制/" rel="tag"><i class="fa fa-tag"></i> 注意力机制</a>
+              <a href="/tags/anchor-free/" rel="tag"><i class="fa fa-tag"></i> anchor-free</a>
+            
+              <a href="/tags/Deformable-Convolution/" rel="tag"><i class="fa fa-tag"></i> Deformable Convolution</a>
             
               <a href="/tags/论文笔记/" rel="tag"><i class="fa fa-tag"></i> 论文笔记</a>
             
-              <a href="/tags/感受野/" rel="tag"><i class="fa fa-tag"></i> 感受野</a>
+              <a href="/tags/关键点检测/" rel="tag"><i class="fa fa-tag"></i> 关键点检测</a>
             
           </div>
           <script type="text/javascript">
@@ -457,18 +472,14 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/07/29/python-argparse/" rel="next" title="Python——argparse模块">
-                  <i class="fa fa-chevron-left"></i> Python——argparse模块
-                </a>
-              
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/07/30/论文阅读笔记4/" rel="prev" title="论文阅读笔记4：CornerNet:Detecting Objects as Paired Keypoints">
-                  论文阅读笔记4：CornerNet:Detecting Objects as Paired Keypoints <i class="fa fa-chevron-right"></i>
+                <a href="/2019/07/26/hexo简介和安装/" rel="prev" title="hexo的简介和安装">
+                  hexo的简介和安装 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -725,7 +736,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-work"><span class="nav-number">3.</span> <span class="nav-text">Related work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Methods"><span class="nav-number">4.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Selective-Kernel-Convolution"><span class="nav-number">4.1.</span> <span class="nav-text">Selective Kernel Convolution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-Architecture"><span class="nav-number">4.2.</span> <span class="nav-text">Network Architecture</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-number">5.</span> <span class="nav-text">Experiments</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-RepPoints-Representation"><span class="nav-number">4.</span> <span class="nav-text">The RepPoints Representation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bounding-Box-Representation"><span class="nav-number">4.1.</span> <span class="nav-text">Bounding Box Representation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RepPoints"><span class="nav-number">4.2.</span> <span class="nav-text">RepPoints</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RPDet-an-Anchor-Free-Detector"><span class="nav-number">5.</span> <span class="nav-text">RPDet: an Anchor Free Detector</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Deformable-Convolution"><span class="nav-number">6.</span> <span class="nav-text">Deformable Convolution</span></a></li></ol></div>
             
 
           </div>
@@ -792,6 +803,15 @@
 
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 
 

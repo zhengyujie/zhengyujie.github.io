@@ -58,7 +58,7 @@
 <meta name="keywords" content="卷积网络,空洞卷积">
 <meta property="og:type" content="article">
 <meta property="og:title" content="空洞卷积(Dilated Convolution)学习笔记">
-<meta property="og:url" content="http://yoursite.com/2019/08/13/dilated_conv/index.html">
+<meta property="og:url" content="http://zhengyujie.cn/2019/08/13/dilated_conv/index.html">
 <meta property="og:site_name" content="浅笑の博客">
 <meta property="og:description" content="前言引入空洞卷积不得不提的是感受野，感受野就是卷积神经网络的每一层输出的特征图(feature map)上的像素点在原图像上映射的区域大小。空洞卷积主要为了解决图像分割中的一些问题而提出的，在FCN中通过pooling增大感受野缩小图像尺寸，然后通过upsampling还原图像尺寸，但是这个过程中造成了精度的损失，那么为了减小这种损失理所当然想到的是去掉pooling层，然而这样就导致特征图感受野">
 <meta property="og:locale" content="zh-CN">
@@ -69,7 +69,7 @@
 <meta name="twitter:title" content="空洞卷积(Dilated Convolution)学习笔记">
 <meta name="twitter:description" content="前言引入空洞卷积不得不提的是感受野，感受野就是卷积神经网络的每一层输出的特征图(feature map)上的像素点在原图像上映射的区域大小。空洞卷积主要为了解决图像分割中的一些问题而提出的，在FCN中通过pooling增大感受野缩小图像尺寸，然后通过upsampling还原图像尺寸，但是这个过程中造成了精度的损失，那么为了减小这种损失理所当然想到的是去掉pooling层，然而这样就导致特征图感受野">
 <meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/yljmAFjJxXBF.png?imageslim">
-  <link rel="canonical" href="http://yoursite.com/2019/08/13/dilated_conv/">
+  <link rel="canonical" href="http://zhengyujie.cn/2019/08/13/dilated_conv/">
 
 
 <script id="page-configurations">
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/dilated_conv/">
+    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/13/dilated_conv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zheng Yujie">
@@ -752,6 +752,15 @@
 
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 
 

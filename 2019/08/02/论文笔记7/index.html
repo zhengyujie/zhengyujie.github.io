@@ -54,27 +54,26 @@
   };
 </script>
 
-  <meta name="description" content="论文地址：https://arxiv.org/pdf/1811.05181.pdf代码地址：https://github.com/libuyu/GHM_Detection  Abstract尽管单阶段的检测器速度较快，但在训练时存在以下几点不足，正负样本之间的巨大差距，同样，easy,hard样本的巨大差距。本文从梯度角度出发，指出了上面两个不足带来的影响。然后，作者进一步提出了梯度协调机制(G">
-<meta name="keywords" content="损失函数,目标检测,论文笔记">
+  <meta name="description" content="Abstract相比模型的结构，关注度较少的训练过程对于检测器的成功检测也是十分重要的。本文发现，检测性能主要受限于训练过程中的三个levels上的不平衡——sample level,feature level,objective level的不平衡问题。为此，提出了Libra R-CNN，用于对平衡目标检测的学习的简单有效的框架。主要包含三个创新点：  IoU-balanced sampling">
+<meta name="keywords" content="目标检测,论文笔记,R-CNN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="论文阅读笔记6：Gradient Harmonized Single-stage Detector">
-<meta property="og:url" content="http://yoursite.com/2019/08/01/论文阅读笔记6/index.html">
+<meta property="og:title" content="论文阅读笔记7：Libra R-CNN:Towards Balanced Learning for Object Detection">
+<meta property="og:url" content="http://zhengyujie.cn/2019/08/02/论文笔记7/index.html">
 <meta property="og:site_name" content="浅笑の博客">
-<meta property="og:description" content="论文地址：https://arxiv.org/pdf/1811.05181.pdf代码地址：https://github.com/libuyu/GHM_Detection  Abstract尽管单阶段的检测器速度较快，但在训练时存在以下几点不足，正负样本之间的巨大差距，同样，easy,hard样本的巨大差距。本文从梯度角度出发，指出了上面两个不足带来的影响。然后，作者进一步提出了梯度协调机制(G">
+<meta property="og:description" content="Abstract相比模型的结构，关注度较少的训练过程对于检测器的成功检测也是十分重要的。本文发现，检测性能主要受限于训练过程中的三个levels上的不平衡——sample level,feature level,objective level的不平衡问题。为此，提出了Libra R-CNN，用于对平衡目标检测的学习的简单有效的框架。主要包含三个创新点：  IoU-balanced sampling">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/G6cs0JroT6y5.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/r0Gj6X6iRyFj.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/a3YO5XCsPIS3.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/wWnNVGPxv4PO.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/dqeRz7wD70bm.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/oui6JLhpLsVF.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/9VcFcLujS5rv.png?imageslim">
-<meta property="og:updated_time" content="2019-08-19T08:08:07.037Z">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/q3vL1XM9MFRh.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/hlFBxlrr83YA.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/vRBnS7n9jp4x.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/pHl8soHrBW8h.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/fmtNaY8jrC0S.png?imageslim">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/gWwND5mex8zj.png?imageslim">
+<meta property="og:updated_time" content="2019-08-19T08:08:30.709Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="论文阅读笔记6：Gradient Harmonized Single-stage Detector">
-<meta name="twitter:description" content="论文地址：https://arxiv.org/pdf/1811.05181.pdf代码地址：https://github.com/libuyu/GHM_Detection  Abstract尽管单阶段的检测器速度较快，但在训练时存在以下几点不足，正负样本之间的巨大差距，同样，easy,hard样本的巨大差距。本文从梯度角度出发，指出了上面两个不足带来的影响。然后，作者进一步提出了梯度协调机制(G">
-<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/G6cs0JroT6y5.png?imageslim">
-  <link rel="canonical" href="http://yoursite.com/2019/08/01/论文阅读笔记6/">
+<meta name="twitter:title" content="论文阅读笔记7：Libra R-CNN:Towards Balanced Learning for Object Detection">
+<meta name="twitter:description" content="Abstract相比模型的结构，关注度较少的训练过程对于检测器的成功检测也是十分重要的。本文发现，检测性能主要受限于训练过程中的三个levels上的不平衡——sample level,feature level,objective level的不平衡问题。为此，提出了Libra R-CNN，用于对平衡目标检测的学习的简单有效的框架。主要包含三个创新点：  IoU-balanced sampling">
+<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/q3vL1XM9MFRh.png?imageslim">
+  <link rel="canonical" href="http://zhengyujie.cn/2019/08/02/论文笔记7/">
 
 
 <script id="page-configurations">
@@ -88,7 +87,7 @@
   };
 </script>
 
-  <title>论文阅读笔记6：Gradient Harmonized Single-stage Detector | 浅笑の博客</title>
+  <title>论文阅读笔记7：Libra R-CNN:Towards Balanced Learning for Object Detection | 浅笑の博客</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -278,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/01/论文阅读笔记6/">
+    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/02/论文笔记7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zheng Yujie">
@@ -290,7 +289,7 @@
       <meta itemprop="name" content="浅笑の博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">论文阅读笔记6：Gradient Harmonized Single-stage Detector
+        <h1 class="post-title" itemprop="name headline">论文阅读笔记7：Libra R-CNN:Towards Balanced Learning for Object Detection
 
           
         </h1>
@@ -306,7 +305,7 @@
                 
               
 
-              <time title="创建时间：2019-08-01 15:42:05" itemprop="dateCreated datePublished" datetime="2019-08-01T15:42:05+08:00">2019-08-01</time>
+              <time title="创建时间：2019-08-02 14:51:00" itemprop="dateCreated datePublished" datetime="2019-08-02T14:51:00+08:00">2019-08-02</time>
             </span>
           
             <span class="post-meta-item">
@@ -334,7 +333,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/08/01/论文阅读笔记6/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/01/论文阅读笔记6/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2019/08/02/论文笔记7/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/02/论文笔记7/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -346,7 +345,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>2.7k</span>
+              <span>4.4k</span>
             </span>
           
 
@@ -359,107 +358,89 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<p>论文地址：<a href="https://arxiv.org/pdf/1811.05181.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1811.05181.pdf</a><br>代码地址：<a href="https://github.com/libuyu/GHM_Detection" target="_blank" rel="noopener">https://github.com/libuyu/GHM_Detection</a></p>
-</blockquote>
-<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>尽管单阶段的检测器速度较快，但在训练时存在以下几点不足，正负样本之间的巨大差距，同样，easy,hard样本的巨大差距。本文从梯度角度出发，指出了上面两个不足带来的影响。然后，作者进一步提出了梯度协调机制(GHM)用于避开上面的不足。GHM的思想可以嵌入到用于分类的交叉熵损失或者用于回归的Smooth-L1损失中，最后，本文修改过的损失函数GHM-C与GHM-R用于平衡anchor分类及回归二者的梯度。提出的`模型在COCO测试集上的mAP达到了41.6，与$Focal Loss(FL)+SL_{1}$相比，超过了0.8。</p>
+        <h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>相比模型的结构，关注度较少的训练过程对于检测器的成功检测也是十分重要的。本文发现，检测性能主要受限于训练过程中的三个levels上的不平衡——sample level,feature level,objective level的不平衡问题。为此，提出了Libra R-CNN，用于对平衡目标检测的学习的简单有效的框架。主要包含三个创新点：</p>
+<ul>
+<li>IoU-balanced sampling 用于减少采样过程中的不平衡</li>
+<li>balanced feature pyramid 用于减少feature 的不平衡</li>
+<li>balanced L1 loss 用于减少objective level的不平衡。</li>
+</ul>
+<p>它在MSCOCO上的Average Precision(AP)相比FPN Faster R-CNN以及RetinaNet分别高出了2.5和2个点。</p>
 <a id="more"></a>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>但阶段检测器在训练时面临的最具挑战性的问题就是easy和hard样本以及positive和negative样本之间的严重不平衡。巨大数量的easy以及背景样本影响了检测器的训练。归功于proposal-driven机制，这个问题在二阶段检测器中并不存在。后来，出现了基于OHEM的样本挖掘技术，但这种方法舍弃了大部分样本，训练也不是很高效，后来Focal Loss通过修改损失函数来调整不平衡问题。但是Focal loss引入了两个超参数，需要进行大量的实验进行调试，同时，Focal loss是一种静态损失，对数据集的分布不敏感，而在训练过程中，数据集的分布是会发生变化的。<br>本文指出类别不平衡主要归结于难度的不平衡，而难度的不平衡可以归结为，gradient norm分布的不平衡。如果一个正样本很容易被分类，则该样本为easy example同时模型从中得到的信息量较少，比如，通过这个样本，只产生了一点梯度信息。模型应该关注这个被分错的样本无论它属于哪个类别。从整体上来看，负样本易于多为easy examples，而hard examples通常为为正样本。因此，两种不平衡可以归结为属性上的不平衡。<br>此外，上面两种类型的不平衡(hard/easy , positive/negative)可以由gradient norm的分布表示。带有gradient norm的样本密度，被称为梯度密度，如下图左侧所示，由于存在大量的简单负样本，gradient norm较小的样本的密度很大。虽然一个简单样本对整体的梯度贡献很小，但大量的简单样本作用后会占据训练的主导，使训练过程并不是很高效。另外我们发现gradient norm较大的样本(hard examples)的密度也大于中间样本的密度。<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/G6cs0JroT6y5.png?imageslim" alt="mark"><br>得益于对gradient norm的分布的分析，我们提出了一个 gradient harmonizing mechanism (GHM)来高效的训练单阶段的目标检测模型，这个机制着重于不同样本的梯度分布的harmony。GHM先统计具有相似梯度密度的样本的数量，对每一个样本根据其密度添加一个harmonizing参数。使用GHM来训练，每种样本的分布会趋于平衡，训练过程会变得更高效和稳定。<br>在实验中，对梯度的改变可以通过对损失函数的重新设计来等效的实现。我们把GHM嵌入分类损失，命名为GHM-C损失，同样我们也在回归分支中使用了GHM，命名为GHM-R损失。<br>我们的最主要贡献：</p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>目标检测的训练过程成功与否主要依靠以下三个关键方面：</p>
+<ul>
+<li>选择的区域样本是否具有代表性</li>
+<li>是否充分利用了提取的视觉特征</li>
+<li><p>设计的目标函数是否是最优的<br>然而，本文发现在典型的训练过程中上述三个方面中存在这严重的不平衡问题。这些不平衡问题会使得网络的结构无法得到完全开发进而影响整体的目标检测性能。如下图所示：<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/q3vL1XM9MFRh.png?imageslim" alt="mark"></p>
+</li>
+<li><p><strong>Sample level imbalance</strong><br>当在训练一个检测器时，困难样本是最具有价值的，因为它们更有利于提升目标检测的性能。然而，基于随机采样机制造成的结果一般是使挑选的样本趋向于easy类型,harde mining算法如OHEM可以更多的关注hard samples。然而，这些方法对噪声标签比较敏感，容易造成大量的内存及计算量的消耗。Focal Loss应用于单阶段的效果较好，但是，扩展到大部分样本为简单负样本的双阶段检测模型中，效果一般。</p>
+</li>
+<li><p><strong>Feature level imbalance</strong><br>在backbone中深层具有更多的语义信息，而较低层为更多的内容描述等细节信息。FPN及PANet等通过侧连接来进行特征融合，因此，低层特征与高层特征可以对目标检测进行补充。用来来整合金字塔的特征表示的方法决定着目标检测的性能。本文认为，融合的信息应该平衡地包含每个分辨率的信息。但上述方法使得融合的特征更多关注于相邻的分辨率而不是其他分辨率。在信息传递过程中，每次融合操作，会使得非相邻层级的语义信息变得稀释。</p>
+</li>
+<li><p><strong>Objective level imbalance</strong><br>检测器包含分类及定位两个任务。因此，在训练目标函数中结合两个不同的目标。如果二者不是平衡的，一个目标可能会被限制，进而导致整体不好的效果。此情形同样适用于训练过程中的样本，如果不平衡，由简单样本产生的小梯度值会淹没hard样本产生的较大的梯度值，进而限制了后续的一些强化操作。因此，针对最优收敛，本文平衡了相关的任务及样本。</p>
+</li>
+</ul>
+<p>为解决上述问题，提出了简单有效的Libra R-CNN框架。三点创新如下：</p>
 <ol>
-<li>我们揭示了单阶段检测器在gradient norm分布方面存在显著不足的基本原理，并且提出了一种新的梯度平衡机制(GHM)来处理这个问题。</li>
-<li>我们提出了GHM-C以及GHM-R，它们纠正了不同样本的梯度分布，并且对超参数具有鲁棒性。</li>
-<li>通过使用GHM，我们可以轻松地训练单阶段检测器，无需任何数据采样策略，并且在COCO基准测试中取得了state-of-the-art的结果。</li>
+<li>IoU-balanced sampling:根据assigned ground-truth进行mine hard samples</li>
+<li>balanced feature pyramid:利用相同深度融合的平衡后的语义特征增强多层次的特征。</li>
+<li>balanced L1 loss：增强重要的梯度，进而对分类，粗定位，细定位进行再平衡。</li>
+</ol>
+<p>我们总结了我们的主要贡献：</p>
+<ol>
+<li>我们系统的重新审视了检测器的训练过程。我们的研究揭露了限制检测器性能的三个levels上的不平衡问题。</li>
+<li>我们提出了Libra R-CNN，一个通过结合三个组件来重新平衡检测器的框架。</li>
+<li>我们在MS COCO上测试了我们提出的框架，获得了在当前最先进的检测器(包库单阶段以及二阶段)上的显著提升。</li>
 </ol>
 <h1 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h1><ul>
-<li><strong>Object Detection</strong></li>
-<li><strong>Object Function for Object Detector</strong></li>
+<li><strong>Model architectures for object detection</strong></li>
+<li><strong>Balanced learning for object detection</strong><ul>
+<li>Sample level imbalance</li>
+<li>Feature level imbalance</li>
+<li>Objective level imbalance</li>
 </ul>
-<h1 id="Gradient-Harmonizing-Mechanism"><a href="#Gradient-Harmonizing-Mechanism" class="headerlink" title="Gradient Harmonizing Mechanism"></a>Gradient Harmonizing Mechanism</h1><h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>对于一个候选框，它的真实标签为$p^{*}\in\lbrace0,1\rbrace$，预测的值为$p\in[0,1]$，采用二元交叉熵损失：</p>
+</li>
+</ul>
+<h1 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h1><p>Libra R-CNN的全貌如下：<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/hlFBxlrr83YA.png?imageslim" alt="mark"><br>我们的目标是使用一个整体平衡的设计来减轻在检测器训练过程中存在的不平衡问题，从而尽可能利用模型结构的潜在能力。接下来会详细介绍所有组件：</p>
+<h2 id="IoU-balanced-Sampling"><a href="#IoU-balanced-Sampling" class="headerlink" title="IoU-balanced Sampling"></a>IoU-balanced Sampling</h2><p>首先提出了一个问题：训练样本及对应ground truth的重叠度IoU是否与样本的difficulty(这里类比于easy sample,hard sample)相关。我们进行了实验，结果如下：<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/vRBnS7n9jp4x.png?imageslim" alt="mark"><br>从图中可以看到，随机采样超过70%的部分都在 IoU 0到0.05之间。而60%的hard negative样本都在IoU大于0.05的地方，但随机采样只提供了30%的IoU大于0.05的训练样本。由于这种极度的不平衡，许多的hard样本会被数以千计的easy样本埋没掉。<br>于是我们提出了IoU-balanced sampling：一个简单但高效不需要额外消耗的hard mining方法。假设我们需要从M个对应的候选样本中采样N个negative样本。在随机采样下，每一个样本被采样的概率为：</p>
+<script type="math/tex; mode=display">p=\frac{N}{M}</script><p>为了提升选择到hard样本的可能性，我们根据IoU的值将采样区间划分为K个格子。要求negative样本均匀分配到每个格子，然后对其进行均匀采样。得到的采样概率为：</p>
+<script type="math/tex; mode=display">p_k=\frac{N}{K}*\frac{1}{M_k},k\in[0,K)</script><p>$M_k$为对应区间上的候选采样数。在我们的实验中K默认取值为3。<br>通过上图我们可以发现我们的IoU-balanced sampling能够使训练样本的分布近似于hard negative样本的分布。<br>另外，值得注意的是这个方法也适用于hard positive样本。然而在大多数情况下，没有足够的候选样本，对正样本进行扩充，因此，本文选择了一个替代的方法来达到平衡采样的目的，即对每个ground truth采样相同数量的正样本。</p>
+<h2 id="Balanced-Feature-Pyramid"><a href="#Balanced-Feature-Pyramid" class="headerlink" title="Balanced Feature Pyramid"></a>Balanced Feature Pyramid</h2><p>本文不同于以前通过侧连接的方法来结合多个层级特征的方法，本文通过使用相同深度的融合平衡后的语义信息来增强不同层级的特征，如下图所示，主要包含四步：rescaling,integrating,refining,strengthening<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/pHl8soHrBW8h.png?imageslim" alt="mark"></p>
+<ul>
+<li><p><strong>Obtaining balanced semantic features</strong><br>为了融合多层次的特征，同时保留它们的语义层次。我们首先的多层次的特征$\lbrace C_2,C_3,C_4,C_5\rbrace$的尺寸通过插值或者最大池化改变为中等大小。然后，取其均值得到平衡后的语义特征。</p>
+<script type="math/tex; mode=display">C=\frac{1}{L}\sum_{l=l_{min}}^{l_{max}}C_l</script><p>得到的特征，进行rescale然后通过反向操作增强原始每层的特征。在这个过程中每个分辨率从其他分辨率那里获得等同的信息。此过程不包含任何参数，证明了信息传递的高效性。</p>
+</li>
+<li><p><strong>Refining balanced semantic features</strong><br>平衡后的语义特征可以进一步增强增加其分辨性。本文发现卷积和non-local 模型的增强效果都很好，但是non-local模型更加稳健。因此，我们默认使用embeded Gaussian non-local attention。refining这一步可以进一步的丰富特征信息，进而提升结果。使用这种方法来自low-level以及high-level的特征能够同时被融合。融合后得到的特征{P2,P3,P4,P5}用于后续的目标检测中，流程和FPN相同。</p>
+</li>
+</ul>
+<h2 id="Balanced-L1-Losss"><a href="#Balanced-L1-Losss" class="headerlink" title="Balanced L1 Losss"></a>Balanced L1 Losss</h2><p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/fmtNaY8jrC0S.png?imageslim" alt="mark"></p>
+<p>从Fast R-CNN开始，分类以及定位的问题在multi-task损失的指导下同时解决。</p>
+<script type="math/tex; mode=display">L_{p,u,t^u,v}=L_{cls}(p,u)+\lambda[u\geq 1]L_{loc}(t^u,v)</script><p>$L_{cls}$和$L_{loc}$分别对应着分类和定位的损失函数，$p,u$分别是$L_{cls}$的预测和目标，$t^u$是对应$u$类的回归结果。$v$是回归目标。$\lambda$用于在多任务学习下调整损失权重。我们把loss大于等于1.0的样本称为outliers，其他的样本称为inliers。</p>
+<p>由于这个损失函数是两个loss的相加，如果分类做得很好地话一样会得到很高的分数，而导致忽略了回归的重要性。平衡上述损失的一个常规方法是，调整两个任务损失的权重，然而，对于没有边界的回归目标，直接增加定位损失的权重将会是模型对outliers的点更加敏感，outliers可以被看作是hard samples，这些hard samples可能会产生过大的损失，不利于训练。inliers可以看作是easy samples，相比outliners对整体的梯度贡献度较低，相比hard sample，平均每个，easy sample对梯度的贡献为hard sample的30%，即较少的outliers贡献了较多的梯度。基于上述分析，提出了balanced L1 Loss记作$L_b$。</p>
+<p>Balanced L1 loss源自conventional smooth L1 loss。在conventional smooth L1 loss中有一个拐点来分离inliners和outliners,并且通过设置一个为1.0的最大值来截断outliners产生的大的梯度。Balanced L1 loss的关键思想是，促进影响较大的回归梯度，（像来自inliers即准确样本的梯度）。进而平衡包含的样本及任务。从而可以在分类，粗定位，及细定位中进行平衡的训练。，基于balanced L1 loss的定位损失如下：</p>
 <script type="math/tex; mode=display">
-L_{CE}(p,p^{*}) = \left\{
+L_{loc}=\sum_{i\in\lbrace x,y,w,h\rbrace}L_b(t_i^u-v_i)</script><p>其对应的梯度公式遵循：</p>
+<script type="math/tex; mode=display">
+\frac{\partial L_{loc}}{\partial w}\varpropto\frac{\partial L_b}{\partial t_i^u}\varpropto\frac{\partial L_b}{\partial x}</script><p>基于上式，我们设计了一个梯度公式：</p>
+<script type="math/tex; mode=display">
+\frac{L_b}{x} = \left \{
   \begin{array}{lr}
-    -log(p) & if x < 0\\
-    -log(1-p) & if x \ge 0
+    \alpha ln(b|x|+1) & if|x|<1 \\
+    \gamma            & otherwise
   \end{array}
-\right.</script><p>假设$x$为模型输出，使得$p=sigmoid(x)$，那么上述的交叉熵损失对$x$的导数为：</p>
+\right.</script><p>三个参数的作用：</p>
+<ul>
+<li>$\alpha$ 使得inliers获得更多的梯度(因为原先的easy样本贡献的梯度少)</li>
+<li>$\gamma$ 通过整体放大来陶正回归误差的上限，让更多的outliers参与回归，使得目标函数更好地平衡参与的任务</li>
+<li>$b$ 用来平很参数$\alpha$和$\gamma$，使之满足关系：$\alpha ln(b+1)=\gamma$，使得梯度在误差等于1处连续</li>
+</ul>
+<p>最后得到balanced L1 loss如下:</p>
 <script type="math/tex; mode=display">
-\begin{aligned}
-\frac{\partial L_{CE}}{\partial x}
-& = \left\{
+L_b(x) = \left\{
   \begin{array}{lr}
-    p-1 & if x < 0\\
-    p & if x \ge 0
+    \frac{\alpha}{b}(b|x|+1)ln(b|x|+1)-\alpha|x| & if |x|<1 \\
+    \gamma|x|+C & otherwise
   \end{array}
-\right. \\
-& = p-p^{*}
-\end{aligned}</script><p>那么梯度的模定义为：</p>
-<script type="math/tex; mode=display">
-g = |p-p^{*}| = \left\{
-  \begin{array}{lr}
-    1-p & if p^{*}=1 \\
-    p   & if p^{*}=0
-  \end{array}
-\right.</script><p>$g$代表了这个样本的难易程度以及它对整个梯度的贡献。<br>下图是一个收敛模型的梯度模长的分布，可以看出简单样本的数量很大，使得它对梯度的整个贡献很大，另一个需要的地方是，在梯度模较大的地方仍然存在着一定数量的分布，说明模型很难正确处理这些样本，作者把这类样本归为离群样本，因为他们的梯度模与整体的梯度模的分布差异太大，并且模型很难处理，如果让模型强行去学习这些离群样本，反而会导致整体性能下降。<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/r0Gj6X6iRyFj.png?imageslim" alt="mark"></p>
-<h2 id="Gradient-Density"><a href="#Gradient-Density" class="headerlink" title="Gradient Density"></a>Gradient Density</h2><p>训练样本的梯度密度函数为：</p>
-<script type="math/tex; mode=display">
-GD(g)=\frac{1}{l_{\epsilon}(g)}\sum_{k=1}^N\delta_{\epsilon}(g_k,g)</script><p>其中$g_k$为第$k$个样本的gradient norm。</p>
-<script type="math/tex; mode=display">
-\delta_{\epsilon}(x,y)= \left\{
-  \begin{array}{lr}
-    1 & if y-\frac{\epsilon}{2} <= x < y+\frac{\epsilon}{2} \\
-    0 & otherwise
-  \end{array}
-\right.</script><script type="math/tex; mode=display">
-l_{\epsilon}(g)=min(g+\frac{\epsilon}{2},1)-max(g-\frac{\epsilon}{2},0)</script><p>g的gradient norm即为在以g为中心，长度为$\epsilon$的区域内的样本数，并且由该区域的有效长度进行归一化。<br>现在我们就可以定义梯度密度harmonizing参数：</p>
-<script type="math/tex; mode=display">
-\beta_i=\frac{N}{GD(g_i)}</script><p>$N$为样本总数</p>
-<h2 id="GHM-C-Loss"><a href="#GHM-C-Loss" class="headerlink" title="GHM-C Loss"></a>GHM-C Loss</h2><p>根据梯度密度harmonizing参数，就可以得到损失函数的梯度密度harmonized的形式：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-L_{GHM-C} 
-& =\frac{1}{N}\sum_{i=1}^N\beta_iL_{CE}(p_i,{p_i}^{*}) \\
-& = \sum_{i=1}^N\frac{L_{CE}(p_i,p_i^*)}{GD(g_i)}
-\end{aligned}</script><p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/a3YO5XCsPIS3.png?imageslim" alt="mark"><br>上图对比了不同损失函数下的gradient norm的分布。可以看出，之前提到的简单样本的权重得到了较大幅度地降低，离群样本也得到了一定程度的降权。使用经过改善之后的损失函数使得训练过程更加高效和鲁棒。</p>
-<h2 id="Unit-Region-Approximation"><a href="#Unit-Region-Approximation" class="headerlink" title="Unit Region Approximation"></a>Unit Region Approximation</h2><h3 id="Complexity-Analysis"><a href="#Complexity-Analysis" class="headerlink" title="Complexity Analysis"></a>Complexity Analysis</h3><p>常规计算所有样本梯度值的算法复杂度为$O(N^2)$，即使使用并行计算，每个计算节点仍有N的计算量。比较好的算法首先会以$O(NlogN)$的复杂度通过梯度正则对样本进行排序，然后使用一个队列来扫描样本，以$O(N)$的方式得到密度。由于单阶段检测中的N为$10^5$或者$10^6$，其梯度计算量仍很大，基于排序的算法比并行计算提升的幅度有限。本文提出了近似的获得样本梯度密度的方法。</p>
-<h3 id="Unit-Region"><a href="#Unit-Region" class="headerlink" title="Unit Region"></a>Unit Region</h3><p>我们把$g$的分布空间分为长度为$\epsilon$的独立unit区域，所以共有$M=\frac{1}{\epsilon}$个区域。让$r_j$表示第$j$个区域，那么$r_j=[(j-1)\epsilon,j\epsilon)$。让$R_j$表示在$r_j$区域里的样本个数。我们定义$ind(g)=t$，表示$g$所在的区域的序号，满足$(t-1)\epsilon&lt;=g&lt;t\epsilon$。<br>然后我们定义近似梯度密度函数：</p>
-<script type="math/tex; mode=display">
-\hat{GD}(g)=\frac{R_{ind(g)}}{\epsilon}=R_{ind(g)}M</script><p>然后我们就得到了近似梯度密度harmonizing参数：</p>
-<script type="math/tex; mode=display">
-\hat{\beta}_i=\frac{N}{\hat{GD}(g_i)}</script><p>最后我们得到了重新制定的损失函数：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\hat{L}_{GHM-C}
-& =\frac{1}{N}\sum_{i=1}^N\hat{\beta}_iL_{CE}(p_i,{p_i}^{*}) \\
-& = \sum_{i=1}^N\frac{L_{CE}(p_i,p_i^*)}{\hat{GD}(g_i)}
-\end{aligned}</script><h3 id="EMA"><a href="#EMA" class="headerlink" title="EMA"></a>EMA</h3><p>基于Mini-batch统计的方法存在一个问题：当一个mini-batch中存在大量的异常点时，统计结果为噪声，而且使训练变得不稳定。Exponential moving average(EMA)是解决此问题的常用方法，比如带动量的SGD及BN处理。由于梯度密度的近似计算中的样本来自于单元区域，因此可以在每个单元区域应用EMA，进而得到更多稳定的梯度密度。</p>
-<h2 id="GHM-R-Loss"><a href="#GHM-R-Loss" class="headerlink" title="GHM-R Loss"></a>GHM-R Loss</h2><p>Smooth L1损失函数为：</p>
-<script type="math/tex; mode=display">
-L_{reg}=\sum_{i\in\lbrace x,y,w,h\rbrace}SL_1(t_i-t_i^*)</script><script type="math/tex; mode=display">
-SL_1(d) = \left\{
-  \begin{array}{lr}
-    \frac{d^2}{2\delta} & if |d|<=\delta \\
-    |d|-\frac{\delta}{2} & otherwise
-  \end{array}
-\right.</script><p>由于$d=t_i-t_i^*$,smoothL1 loss关于$t_1$的导数为：</p>
-<script type="math/tex; mode=display">
-\frac{\partial SL_1}{\partial t_i} = \frac{\partial SL_1}{\partial d} = \left\{
-  \begin{array}{lr}
-    \frac{d}{\delta} & if |d|<=\delta \\
-    sgn(d) & otherwise
-  \end{array}
-\right.</script><p>对于所有$|d|&gt;\delta$的样本，都具有相同的gradient norm$|\frac{\partial SL_1}{\partial t_i}|=1$。这就不可能仅仅依靠gradient norm来区分不同属性的样本。一个选择就是直接使用$|d|$作为不同属性的度量。但新的问题是$|d|$理论上可以达到无穷大，单位区域的近似无法实现。<br>为了便捷的在回归loss上应用GHM，我们把传统的$SL_1$loss改变为更优雅的形式：</p>
-<script type="math/tex; mode=display">
-ASL_1(d)=\sqrt{d^2+{\mu}^2}-\mu</script><p>当$d$很小时，近似为一个方差函数(L2 loss)，当$d$很大时近似为一个线性损失(L1 loss)，称该损失为Authentic Smooth L1损失，具有很好的平滑性，其偏导存在且连续。&amp;ASL_1$的偏导如下：</p>
-<script type="math/tex; mode=display">
-\frac{\partial ASL1}{\partial d}=\frac{d}{\sqrt{d^2+{\mu}^2}}</script><p>我们定义$gr=|\frac{d}{\sqrt{d^2+{\mu}^2}}|$为$ASL_1$loss的gradient norm，其梯度分布如下图所示，从图中可以看出存在大量的异常点。而回归损失只作用在正样本中，因此，分类与回归的分布是不同的。最后，将GHM应用于回归loss:</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-L_{GHM-R} 
-& =\frac{1}{N}\sum_{i=1}^N\beta_iASL_1(d_i) \\
-& = \sum_{i=1}^N\frac{ASL_1(d_i)}{GD({gr}_i)}
-\end{aligned}</script><p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/wWnNVGPxv4PO.png?imageslim" alt="mark"></p>
-<p>我们强调，在边框回归中并不是所有的“简单样本”都是不重要的。在分类中一个简单样本通常是一个背景区域，有着很低的预测可能值，会被排除在最终候选框外。因此对这些样本的改进并不会对精度产生任何的影响。但是在边框回归中一个简单样本仍然偏离了真实框位置。对每个样本更好的预测会直接提升最终候选框的质量。而且，高级的数据集更关心定位的精确性<br>我们的GHM-R能够harmonize简单样本以及困难样本对边框回归的贡献，通过对简单样本的重要部分进行升权，以及对离群样本进行降权。实验显示它能比$SL_1$一级$ASL_1$获得更好的性能。</p>
-<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/dqeRz7wD70bm.png?imageslim" alt="mark"><br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/oui6JLhpLsVF.png?imageslim" alt="mark"><br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/9VcFcLujS5rv.png?imageslim" alt="mark"></p>
+\right.</script><h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/gWwND5mex8zj.png?imageslim" alt="mark"></p>
 
     </div>
 
@@ -475,11 +456,11 @@ L_{GHM-R}
           
           <div class="post-tags" id="post-tags">
             
-              <a href="/tags/损失函数/" rel="tag"><i class="fa fa-tag"></i> 损失函数</a>
-            
               <a href="/tags/目标检测/" rel="tag"><i class="fa fa-tag"></i> 目标检测</a>
             
               <a href="/tags/论文笔记/" rel="tag"><i class="fa fa-tag"></i> 论文笔记</a>
+            
+              <a href="/tags/R-CNN/" rel="tag"><i class="fa fa-tag"></i> R-CNN</a>
             
           </div>
           <script type="text/javascript">
@@ -501,8 +482,8 @@ L_{GHM-R}
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/08/01/hexo阅读全文/" rel="next" title="NexT主题阅读全文设置">
-                  <i class="fa fa-chevron-left"></i> NexT主题阅读全文设置
+                <a href="/2019/08/02/exponential-moving-average/" rel="next" title="滑动平均(exponential moving average)">
+                  <i class="fa fa-chevron-left"></i> 滑动平均(exponential moving average)
                 </a>
               
             </div>
@@ -511,8 +492,8 @@ L_{GHM-R}
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/08/02/exponential-moving-average/" rel="prev" title="滑动平均(exponential moving average)">
-                  滑动平均(exponential moving average) <i class="fa fa-chevron-right"></i>
+                <a href="/2019/08/03/论文笔记8/" rel="prev" title="论文阅读笔记8：Non-local Neural Networks">
+                  论文阅读笔记8：Non-local Neural Networks <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -769,7 +750,7 @@ L_{GHM-R}
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradient-Harmonizing-Mechanism"><span class="nav-number">4.</span> <span class="nav-text">Gradient Harmonizing Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Description"><span class="nav-number">4.1.</span> <span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient-Density"><span class="nav-number">4.2.</span> <span class="nav-text">Gradient Density</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GHM-C-Loss"><span class="nav-number">4.3.</span> <span class="nav-text">GHM-C Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit-Region-Approximation"><span class="nav-number">4.4.</span> <span class="nav-text">Unit Region Approximation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Complexity-Analysis"><span class="nav-number">4.4.1.</span> <span class="nav-text">Complexity Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unit-Region"><span class="nav-number">4.4.2.</span> <span class="nav-text">Unit Region</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EMA"><span class="nav-number">4.4.3.</span> <span class="nav-text">EMA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GHM-R-Loss"><span class="nav-number">4.5.</span> <span class="nav-text">GHM-R Loss</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-number">5.</span> <span class="nav-text">Experiments</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Methodology"><span class="nav-number">4.</span> <span class="nav-text">Methodology</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IoU-balanced-Sampling"><span class="nav-number">4.1.</span> <span class="nav-text">IoU-balanced Sampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Balanced-Feature-Pyramid"><span class="nav-number">4.2.</span> <span class="nav-text">Balanced Feature Pyramid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Balanced-L1-Losss"><span class="nav-number">4.3.</span> <span class="nav-text">Balanced L1 Losss</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-number">5.</span> <span class="nav-text">Experiments</span></a></li></ol></div>
             
 
           </div>
@@ -836,6 +817,15 @@ L_{GHM-R}
 
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 
 

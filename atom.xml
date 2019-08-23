@@ -5,9 +5,9 @@
   <subtitle>我们的征途是星辰大海</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://zhengyujie.cn/"/>
   <updated>2019-08-23T02:31:50.068Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://zhengyujie.cn/</id>
   
   <author>
     <name>Zheng Yujie</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>TensorFlow学习笔记12：CIFAR-10数据集图片分类</title>
-    <link href="http://yoursite.com/2019/08/23/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B012/"/>
-    <id>http://yoursite.com/2019/08/23/tf学习笔记12/</id>
+    <link href="http://zhengyujie.cn/2019/08/23/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B012/"/>
+    <id>http://zhengyujie.cn/2019/08/23/tf学习笔记12/</id>
     <published>2019-08-23T02:02:38.000Z</published>
     <updated>2019-08-23T02:31:50.068Z</updated>
     
@@ -34,21 +34,21 @@
     
     </summary>
     
-      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="深度学习" scheme="http://zhengyujie.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+      <category term="Python" scheme="http://zhengyujie.cn/categories/Python/"/>
     
     
-      <category term="卷积网络" scheme="http://yoursite.com/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
+      <category term="卷积网络" scheme="http://zhengyujie.cn/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="TensorFlow" scheme="http://yoursite.com/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhengyujie.cn/tags/TensorFlow/"/>
     
   </entry>
   
   <entry>
     <title>Ubuntu 16.04安装Pycharm</title>
-    <link href="http://yoursite.com/2019/08/22/ubuntu%E5%AE%89%E8%A3%85pycharm/"/>
-    <id>http://yoursite.com/2019/08/22/ubuntu安装pycharm/</id>
+    <link href="http://zhengyujie.cn/2019/08/22/ubuntu%E5%AE%89%E8%A3%85pycharm/"/>
+    <id>http://zhengyujie.cn/2019/08/22/ubuntu安装pycharm/</id>
     <published>2019-08-22T07:28:22.000Z</published>
     <updated>2019-08-22T07:42:24.666Z</updated>
     
@@ -60,21 +60,21 @@
     
     </summary>
     
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+      <category term="Python" scheme="http://zhengyujie.cn/categories/Python/"/>
     
-      <category term="Ubuntu" scheme="http://yoursite.com/categories/Ubuntu/"/>
+      <category term="Ubuntu" scheme="http://zhengyujie.cn/categories/Ubuntu/"/>
     
     
-      <category term="Pycharm" scheme="http://yoursite.com/tags/Pycharm/"/>
+      <category term="Pycharm" scheme="http://zhengyujie.cn/tags/Pycharm/"/>
     
-      <category term="软件安装" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
+      <category term="软件安装" scheme="http://zhengyujie.cn/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
     
   </entry>
   
   <entry>
     <title>Hexo折腾日记之侧栏篇</title>
-    <link href="http://yoursite.com/2019/08/22/hexo%E8%AE%BE%E7%BD%AE%E4%BE%A7%E6%A0%8F/"/>
-    <id>http://yoursite.com/2019/08/22/hexo设置侧栏/</id>
+    <link href="http://zhengyujie.cn/2019/08/22/hexo%E8%AE%BE%E7%BD%AE%E4%BE%A7%E6%A0%8F/"/>
+    <id>http://zhengyujie.cn/2019/08/22/hexo设置侧栏/</id>
     <published>2019-08-22T06:11:16.000Z</published>
     <updated>2019-08-22T07:09:10.976Z</updated>
     
@@ -86,23 +86,23 @@
     
     </summary>
     
-      <category term="Hexo框架" scheme="http://yoursite.com/categories/Hexo%E6%A1%86%E6%9E%B6/"/>
+      <category term="Hexo框架" scheme="http://zhengyujie.cn/categories/Hexo%E6%A1%86%E6%9E%B6/"/>
     
     
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://zhengyujie.cn/tags/Hexo/"/>
     
-      <category term="NexT" scheme="http://yoursite.com/tags/NexT/"/>
+      <category term="NexT" scheme="http://zhengyujie.cn/tags/NexT/"/>
     
-      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="http://zhengyujie.cn/tags/JavaScript/"/>
     
-      <category term="Django" scheme="http://yoursite.com/tags/Django/"/>
+      <category term="Django" scheme="http://zhengyujie.cn/tags/Django/"/>
     
   </entry>
   
   <entry>
     <title>Hexo折腾日记之标签篇</title>
-    <link href="http://yoursite.com/2019/08/20/hexo%E5%BD%A9%E8%89%B2%E6%A0%87%E7%AD%BE/"/>
-    <id>http://yoursite.com/2019/08/20/hexo彩色标签/</id>
+    <link href="http://zhengyujie.cn/2019/08/20/hexo%E5%BD%A9%E8%89%B2%E6%A0%87%E7%AD%BE/"/>
+    <id>http://zhengyujie.cn/2019/08/20/hexo彩色标签/</id>
     <published>2019-08-20T05:24:27.000Z</published>
     <updated>2019-08-22T06:12:28.165Z</updated>
     
@@ -114,25 +114,25 @@
     
     </summary>
     
-      <category term="Hexo框架" scheme="http://yoursite.com/categories/Hexo%E6%A1%86%E6%9E%B6/"/>
+      <category term="Hexo框架" scheme="http://zhengyujie.cn/categories/Hexo%E6%A1%86%E6%9E%B6/"/>
     
     
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://zhengyujie.cn/tags/Hexo/"/>
     
-      <category term="NexT" scheme="http://yoursite.com/tags/NexT/"/>
+      <category term="NexT" scheme="http://zhengyujie.cn/tags/NexT/"/>
     
-      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="http://zhengyujie.cn/tags/JavaScript/"/>
     
-      <category term="HTML" scheme="http://yoursite.com/tags/HTML/"/>
+      <category term="HTML" scheme="http://zhengyujie.cn/tags/HTML/"/>
     
-      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+      <category term="CSS" scheme="http://zhengyujie.cn/tags/CSS/"/>
     
   </entry>
   
   <entry>
     <title>Hexo添加Valine评论功能</title>
-    <link href="http://yoursite.com/2019/08/18/valine%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/"/>
-    <id>http://yoursite.com/2019/08/18/valine评论系统/</id>
+    <link href="http://zhengyujie.cn/2019/08/18/valine%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://zhengyujie.cn/2019/08/18/valine评论系统/</id>
     <published>2019-08-18T02:41:28.000Z</published>
     <updated>2019-08-18T03:42:26.436Z</updated>
     
@@ -144,21 +144,21 @@
     
     </summary>
     
-      <category term="Hexo框架" scheme="http://yoursite.com/categories/Hexo%E6%A1%86%E6%9E%B6/"/>
+      <category term="Hexo框架" scheme="http://zhengyujie.cn/categories/Hexo%E6%A1%86%E6%9E%B6/"/>
     
     
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://zhengyujie.cn/tags/Hexo/"/>
     
-      <category term="NexT" scheme="http://yoursite.com/tags/NexT/"/>
+      <category term="NexT" scheme="http://zhengyujie.cn/tags/NexT/"/>
     
-      <category term="Valine" scheme="http://yoursite.com/tags/Valine/"/>
+      <category term="Valine" scheme="http://zhengyujie.cn/tags/Valine/"/>
     
   </entry>
   
   <entry>
     <title>Hexo博客部署到阿里云服务器</title>
-    <link href="http://yoursite.com/2019/08/17/%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    <id>http://yoursite.com/2019/08/17/部署到阿里云服务器/</id>
+    <link href="http://zhengyujie.cn/2019/08/17/%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://zhengyujie.cn/2019/08/17/部署到阿里云服务器/</id>
     <published>2019-08-17T10:30:42.000Z</published>
     <updated>2019-08-19T08:11:43.453Z</updated>
     
@@ -170,29 +170,29 @@
     
     </summary>
     
-      <category term="Hexo框架" scheme="http://yoursite.com/categories/Hexo%E6%A1%86%E6%9E%B6/"/>
+      <category term="Hexo框架" scheme="http://zhengyujie.cn/categories/Hexo%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="Ubuntu" scheme="http://yoursite.com/categories/Ubuntu/"/>
+      <category term="Ubuntu" scheme="http://zhengyujie.cn/categories/Ubuntu/"/>
     
     
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://zhengyujie.cn/tags/Hexo/"/>
     
-      <category term="Ubuntu" scheme="http://yoursite.com/tags/Ubuntu/"/>
+      <category term="Ubuntu" scheme="http://zhengyujie.cn/tags/Ubuntu/"/>
     
-      <category term="SSH" scheme="http://yoursite.com/tags/SSH/"/>
+      <category term="SSH" scheme="http://zhengyujie.cn/tags/SSH/"/>
     
-      <category term="阿里云" scheme="http://yoursite.com/tags/%E9%98%BF%E9%87%8C%E4%BA%91/"/>
+      <category term="阿里云" scheme="http://zhengyujie.cn/tags/%E9%98%BF%E9%87%8C%E4%BA%91/"/>
     
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+      <category term="Git" scheme="http://zhengyujie.cn/tags/Git/"/>
     
-      <category term="Nginx" scheme="http://yoursite.com/tags/Nginx/"/>
+      <category term="Nginx" scheme="http://zhengyujie.cn/tags/Nginx/"/>
     
   </entry>
   
   <entry>
     <title>Ubuntu深度学习环境搭建</title>
-    <link href="http://yoursite.com/2019/08/16/ubuntu%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83/"/>
-    <id>http://yoursite.com/2019/08/16/ubuntu深度学习环境/</id>
+    <link href="http://zhengyujie.cn/2019/08/16/ubuntu%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83/"/>
+    <id>http://zhengyujie.cn/2019/08/16/ubuntu深度学习环境/</id>
     <published>2019-08-16T02:15:48.000Z</published>
     <updated>2019-08-19T08:10:52.925Z</updated>
     
@@ -212,25 +212,25 @@
     
     </summary>
     
-      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="深度学习" scheme="http://zhengyujie.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="Ubuntu" scheme="http://yoursite.com/categories/Ubuntu/"/>
+      <category term="Ubuntu" scheme="http://zhengyujie.cn/categories/Ubuntu/"/>
     
     
-      <category term="TensorFlow" scheme="http://yoursite.com/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhengyujie.cn/tags/TensorFlow/"/>
     
-      <category term="Ubuntu" scheme="http://yoursite.com/tags/Ubuntu/"/>
+      <category term="Ubuntu" scheme="http://zhengyujie.cn/tags/Ubuntu/"/>
     
-      <category term="CUDA" scheme="http://yoursite.com/tags/CUDA/"/>
+      <category term="CUDA" scheme="http://zhengyujie.cn/tags/CUDA/"/>
     
-      <category term="cuDNN" scheme="http://yoursite.com/tags/cuDNN/"/>
+      <category term="cuDNN" scheme="http://zhengyujie.cn/tags/cuDNN/"/>
     
   </entry>
   
   <entry>
     <title>Windows下安装Ubuntu16.04双系统</title>
-    <link href="http://yoursite.com/2019/08/16/%E5%AE%89%E8%A3%85Ubuntu%E7%B3%BB%E7%BB%9F/"/>
-    <id>http://yoursite.com/2019/08/16/安装Ubuntu系统/</id>
+    <link href="http://zhengyujie.cn/2019/08/16/%E5%AE%89%E8%A3%85Ubuntu%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://zhengyujie.cn/2019/08/16/安装Ubuntu系统/</id>
     <published>2019-08-16T01:00:55.000Z</published>
     <updated>2019-08-19T08:11:19.437Z</updated>
     
@@ -242,19 +242,19 @@
     
     </summary>
     
-      <category term="Ubuntu" scheme="http://yoursite.com/categories/Ubuntu/"/>
+      <category term="Ubuntu" scheme="http://zhengyujie.cn/categories/Ubuntu/"/>
     
     
-      <category term="Ubuntu" scheme="http://yoursite.com/tags/Ubuntu/"/>
+      <category term="Ubuntu" scheme="http://zhengyujie.cn/tags/Ubuntu/"/>
     
-      <category term="系统安装" scheme="http://yoursite.com/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/"/>
+      <category term="系统安装" scheme="http://zhengyujie.cn/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/"/>
     
   </entry>
   
   <entry>
     <title>Hexo部署博客到Coding</title>
-    <link href="http://yoursite.com/2019/08/13/%E9%83%A8%E7%BD%B2%E5%88%B0coding/"/>
-    <id>http://yoursite.com/2019/08/13/部署到coding/</id>
+    <link href="http://zhengyujie.cn/2019/08/13/%E9%83%A8%E7%BD%B2%E5%88%B0coding/"/>
+    <id>http://zhengyujie.cn/2019/08/13/部署到coding/</id>
     <published>2019-08-13T11:07:46.000Z</published>
     <updated>2019-08-19T08:11:30.077Z</updated>
     
@@ -266,23 +266,23 @@
     
     </summary>
     
-      <category term="Hexo框架" scheme="http://yoursite.com/categories/Hexo%E6%A1%86%E6%9E%B6/"/>
+      <category term="Hexo框架" scheme="http://zhengyujie.cn/categories/Hexo%E6%A1%86%E6%9E%B6/"/>
     
     
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://zhengyujie.cn/tags/Hexo/"/>
     
-      <category term="Coding" scheme="http://yoursite.com/tags/Coding/"/>
+      <category term="Coding" scheme="http://zhengyujie.cn/tags/Coding/"/>
     
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+      <category term="git" scheme="http://zhengyujie.cn/tags/git/"/>
     
-      <category term="SSH" scheme="http://yoursite.com/tags/SSH/"/>
+      <category term="SSH" scheme="http://zhengyujie.cn/tags/SSH/"/>
     
   </entry>
   
   <entry>
     <title>Non-local PyTorch部分源码解读</title>
-    <link href="http://yoursite.com/2019/08/13/non-local%E7%9A%84pytorch%E6%BA%90%E7%A0%81/"/>
-    <id>http://yoursite.com/2019/08/13/non-local的pytorch源码/</id>
+    <link href="http://zhengyujie.cn/2019/08/13/non-local%E7%9A%84pytorch%E6%BA%90%E7%A0%81/"/>
+    <id>http://zhengyujie.cn/2019/08/13/non-local的pytorch源码/</id>
     <published>2019-08-13T07:16:47.000Z</published>
     <updated>2019-08-19T08:17:57.589Z</updated>
     
@@ -297,23 +297,23 @@
     
     </summary>
     
-      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="深度学习" scheme="http://zhengyujie.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+      <category term="Python" scheme="http://zhengyujie.cn/categories/Python/"/>
     
     
-      <category term="卷积网络" scheme="http://yoursite.com/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
+      <category term="卷积网络" scheme="http://zhengyujie.cn/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="PyTorch" scheme="http://yoursite.com/tags/PyTorch/"/>
+      <category term="PyTorch" scheme="http://zhengyujie.cn/tags/PyTorch/"/>
     
-      <category term="源码解读" scheme="http://yoursite.com/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/"/>
+      <category term="源码解读" scheme="http://zhengyujie.cn/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/"/>
     
   </entry>
   
   <entry>
     <title>空洞卷积(Dilated Convolution)学习笔记</title>
-    <link href="http://yoursite.com/2019/08/13/dilated_conv/"/>
-    <id>http://yoursite.com/2019/08/13/dilated_conv/</id>
+    <link href="http://zhengyujie.cn/2019/08/13/dilated_conv/"/>
+    <id>http://zhengyujie.cn/2019/08/13/dilated_conv/</id>
     <published>2019-08-13T06:24:15.000Z</published>
     <updated>2019-08-19T08:16:06.629Z</updated>
     
@@ -325,19 +325,19 @@
     
     </summary>
     
-      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="深度学习" scheme="http://zhengyujie.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="卷积网络" scheme="http://yoursite.com/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
+      <category term="卷积网络" scheme="http://zhengyujie.cn/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="空洞卷积" scheme="http://yoursite.com/tags/%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/"/>
+      <category term="空洞卷积" scheme="http://zhengyujie.cn/tags/%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/"/>
     
   </entry>
   
   <entry>
     <title>TensorFlow学习笔记11：ResNet</title>
-    <link href="http://yoursite.com/2019/08/12/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B011/"/>
-    <id>http://yoursite.com/2019/08/12/tf学习笔记11/</id>
+    <link href="http://zhengyujie.cn/2019/08/12/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B011/"/>
+    <id>http://zhengyujie.cn/2019/08/12/tf学习笔记11/</id>
     <published>2019-08-12T11:24:47.000Z</published>
     <updated>2019-08-19T08:15:38.429Z</updated>
     
@@ -349,23 +349,23 @@
     
     </summary>
     
-      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="深度学习" scheme="http://zhengyujie.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+      <category term="Python" scheme="http://zhengyujie.cn/categories/Python/"/>
     
     
-      <category term="卷积网络" scheme="http://yoursite.com/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
+      <category term="卷积网络" scheme="http://zhengyujie.cn/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="TensorFlow" scheme="http://yoursite.com/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhengyujie.cn/tags/TensorFlow/"/>
     
-      <category term="ResNet" scheme="http://yoursite.com/tags/ResNet/"/>
+      <category term="ResNet" scheme="http://zhengyujie.cn/tags/ResNet/"/>
     
   </entry>
   
   <entry>
     <title>TensorFlow学习笔记10：Inception V3</title>
-    <link href="http://yoursite.com/2019/08/12/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/"/>
-    <id>http://yoursite.com/2019/08/12/tf学习笔记10/</id>
+    <link href="http://zhengyujie.cn/2019/08/12/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/"/>
+    <id>http://zhengyujie.cn/2019/08/12/tf学习笔记10/</id>
     <published>2019-08-12T10:38:17.000Z</published>
     <updated>2019-08-19T08:15:22.885Z</updated>
     
@@ -377,23 +377,23 @@
     
     </summary>
     
-      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="深度学习" scheme="http://zhengyujie.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+      <category term="Python" scheme="http://zhengyujie.cn/categories/Python/"/>
     
     
-      <category term="卷积网络" scheme="http://yoursite.com/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
+      <category term="卷积网络" scheme="http://zhengyujie.cn/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="TensorFlow" scheme="http://yoursite.com/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhengyujie.cn/tags/TensorFlow/"/>
     
-      <category term="InceptionNet" scheme="http://yoursite.com/tags/InceptionNet/"/>
+      <category term="InceptionNet" scheme="http://zhengyujie.cn/tags/InceptionNet/"/>
     
   </entry>
   
   <entry>
     <title>论文阅读笔记10：FCOS:Fully Convolutional One-Stage Object Detection</title>
-    <link href="http://yoursite.com/2019/08/09/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B010/"/>
-    <id>http://yoursite.com/2019/08/09/论文阅读笔记10/</id>
+    <link href="http://zhengyujie.cn/2019/08/09/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B010/"/>
+    <id>http://zhengyujie.cn/2019/08/09/论文笔记10/</id>
     <published>2019-08-09T02:21:15.000Z</published>
     <updated>2019-08-19T08:10:23.389Z</updated>
     
@@ -408,23 +408,23 @@
     
     </summary>
     
-      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="深度学习" scheme="http://zhengyujie.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="目标检测" scheme="http://yoursite.com/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+      <category term="目标检测" scheme="http://zhengyujie.cn/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
     
-      <category term="anchor-free" scheme="http://yoursite.com/tags/anchor-free/"/>
+      <category term="anchor-free" scheme="http://zhengyujie.cn/tags/anchor-free/"/>
     
-      <category term="论文笔记" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+      <category term="论文笔记" scheme="http://zhengyujie.cn/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="关键点检测" scheme="http://yoursite.com/tags/%E5%85%B3%E9%94%AE%E7%82%B9%E6%A3%80%E6%B5%8B/"/>
+      <category term="关键点检测" scheme="http://zhengyujie.cn/tags/%E5%85%B3%E9%94%AE%E7%82%B9%E6%A3%80%E6%B5%8B/"/>
     
   </entry>
   
   <entry>
     <title>Tensorflow-Slim简介</title>
-    <link href="http://yoursite.com/2019/08/08/tensorflow-slim/"/>
-    <id>http://yoursite.com/2019/08/08/tensorflow-slim/</id>
+    <link href="http://zhengyujie.cn/2019/08/08/tensorflow-slim/"/>
+    <id>http://zhengyujie.cn/2019/08/08/tensorflow-slim/</id>
     <published>2019-08-08T12:25:20.000Z</published>
     <updated>2019-08-20T05:11:06.583Z</updated>
     
@@ -436,17 +436,17 @@
     
     </summary>
     
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+      <category term="Python" scheme="http://zhengyujie.cn/categories/Python/"/>
     
     
-      <category term="TensorFlow" scheme="http://yoursite.com/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhengyujie.cn/tags/TensorFlow/"/>
     
   </entry>
   
   <entry>
     <title>TensorFlow学习笔记8：AlexNet</title>
-    <link href="http://yoursite.com/2019/08/08/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08/"/>
-    <id>http://yoursite.com/2019/08/08/tf学习笔记8/</id>
+    <link href="http://zhengyujie.cn/2019/08/08/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08/"/>
+    <id>http://zhengyujie.cn/2019/08/08/tf学习笔记8/</id>
     <published>2019-08-08T10:38:17.000Z</published>
     <updated>2019-08-19T08:14:48.069Z</updated>
     
@@ -458,23 +458,23 @@
     
     </summary>
     
-      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="深度学习" scheme="http://zhengyujie.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+      <category term="Python" scheme="http://zhengyujie.cn/categories/Python/"/>
     
     
-      <category term="卷积网络" scheme="http://yoursite.com/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
+      <category term="卷积网络" scheme="http://zhengyujie.cn/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="TensorFlow" scheme="http://yoursite.com/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhengyujie.cn/tags/TensorFlow/"/>
     
-      <category term="AlexNet" scheme="http://yoursite.com/tags/AlexNet/"/>
+      <category term="AlexNet" scheme="http://zhengyujie.cn/tags/AlexNet/"/>
     
   </entry>
   
   <entry>
     <title>TensorFlow学习笔记9：VGGNet-16</title>
-    <link href="http://yoursite.com/2019/08/08/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B09/"/>
-    <id>http://yoursite.com/2019/08/08/tf学习笔记9/</id>
+    <link href="http://zhengyujie.cn/2019/08/08/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B09/"/>
+    <id>http://zhengyujie.cn/2019/08/08/tf学习笔记9/</id>
     <published>2019-08-08T10:38:17.000Z</published>
     <updated>2019-08-19T08:15:07.165Z</updated>
     
@@ -486,23 +486,23 @@
     
     </summary>
     
-      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="深度学习" scheme="http://zhengyujie.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+      <category term="Python" scheme="http://zhengyujie.cn/categories/Python/"/>
     
     
-      <category term="卷积网络" scheme="http://yoursite.com/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
+      <category term="卷积网络" scheme="http://zhengyujie.cn/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="TensorFlow" scheme="http://yoursite.com/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhengyujie.cn/tags/TensorFlow/"/>
     
-      <category term="VGGNet" scheme="http://yoursite.com/tags/VGGNet/"/>
+      <category term="VGGNet" scheme="http://zhengyujie.cn/tags/VGGNet/"/>
     
   </entry>
   
   <entry>
     <title>TensorFlow学习笔记7：卷积神经网络</title>
-    <link href="http://yoursite.com/2019/08/08/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07/"/>
-    <id>http://yoursite.com/2019/08/08/tf学习笔记7/</id>
+    <link href="http://zhengyujie.cn/2019/08/08/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07/"/>
+    <id>http://zhengyujie.cn/2019/08/08/tf学习笔记7/</id>
     <published>2019-08-08T07:07:32.000Z</published>
     <updated>2019-08-19T08:14:24.693Z</updated>
     
@@ -514,23 +514,23 @@
     
     </summary>
     
-      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="深度学习" scheme="http://zhengyujie.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+      <category term="Python" scheme="http://zhengyujie.cn/categories/Python/"/>
     
     
-      <category term="卷积网络" scheme="http://yoursite.com/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
+      <category term="卷积网络" scheme="http://zhengyujie.cn/tags/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="TensorFlow" scheme="http://yoursite.com/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhengyujie.cn/tags/TensorFlow/"/>
     
-      <category term="MNIST" scheme="http://yoursite.com/tags/MNIST/"/>
+      <category term="MNIST" scheme="http://zhengyujie.cn/tags/MNIST/"/>
     
   </entry>
   
   <entry>
     <title>TensorFlow学习笔记6：逻辑回归</title>
-    <link href="http://yoursite.com/2019/08/08/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06/"/>
-    <id>http://yoursite.com/2019/08/08/tf学习笔记6/</id>
+    <link href="http://zhengyujie.cn/2019/08/08/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06/"/>
+    <id>http://zhengyujie.cn/2019/08/08/tf学习笔记6/</id>
     <published>2019-08-08T02:59:16.000Z</published>
     <updated>2019-08-19T08:13:59.717Z</updated>
     
@@ -542,21 +542,21 @@
     
     </summary>
     
-      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="深度学习" scheme="http://zhengyujie.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+      <category term="Python" scheme="http://zhengyujie.cn/categories/Python/"/>
     
     
-      <category term="TensorFlow" scheme="http://yoursite.com/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhengyujie.cn/tags/TensorFlow/"/>
     
-      <category term="逻辑回归" scheme="http://yoursite.com/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/"/>
+      <category term="逻辑回归" scheme="http://zhengyujie.cn/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/"/>
     
   </entry>
   
   <entry>
     <title>TensoeFlow学习笔记5：线性回归</title>
-    <link href="http://yoursite.com/2019/08/08/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B05/"/>
-    <id>http://yoursite.com/2019/08/08/tf学习笔记5/</id>
+    <link href="http://zhengyujie.cn/2019/08/08/tf%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B05/"/>
+    <id>http://zhengyujie.cn/2019/08/08/tf学习笔记5/</id>
     <published>2019-08-08T02:28:24.000Z</published>
     <updated>2019-08-19T08:13:44.397Z</updated>
     
@@ -568,14 +568,14 @@
     
     </summary>
     
-      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="深度学习" scheme="http://zhengyujie.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+      <category term="Python" scheme="http://zhengyujie.cn/categories/Python/"/>
     
     
-      <category term="TensorFlow" scheme="http://yoursite.com/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://zhengyujie.cn/tags/TensorFlow/"/>
     
-      <category term="线性回归" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/"/>
+      <category term="线性回归" scheme="http://zhengyujie.cn/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/"/>
     
   </entry>
   
