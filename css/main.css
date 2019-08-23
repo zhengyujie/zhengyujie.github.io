@@ -1736,7 +1736,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #525201;
+  background: #ff50ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2907,9 +2907,6 @@ ul.breadcrumb li+li:last-child {
     margin: 8px 0 0;
   }
 }
-body {
-  background-color: #aadab8;
-}
 .blog-show {
   background: url("http://pwbhioup3.bkt.clouddn.com/blog-head.jpg");
   background-size: cover;
@@ -2928,7 +2925,7 @@ body {
 }
 @media screen and (max-device-width: 960px) {
   .blog-show {
-    height: 100px;
+    display: none;
   }
 }
 @media (min-width: 1200px) {
@@ -3129,6 +3126,11 @@ nav.pagination {
   padding-top: 10px;
   border-top: 0px;
   border-radius: 10px;
+  box-shadow: 0 4px 8px 6px rgba(7,17,27,0.06);
+  transition: all 0.3s;
+}
+nav.pagination:hover {
+  box-shadow: 0 4px 8px 12px rgba(7,17,27,0.12);
 }
 .posts-expand .post-tags a {
   display: inline-block;
@@ -3144,6 +3146,7 @@ nav.pagination {
   margin: 0px 4px;
   color: #fff;
   font-size: 0.8em;
+  border: 0px;
 }
 .container.sidebar-position-left {
   background-color: #fff;
@@ -3179,8 +3182,6 @@ header#header {
 a.category-list-link {
   border: 0px;
   padding: 10px;
-  background-color: #aadab8;
-  border-radius: 10px;
   margin: 10px;
 }
 .about-me {

@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","width":300,"display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="CIFAR-10数据集简介 官网链接：http://www.cs.toronto.edu/~kriz/cifar.html   CIFAR-10是一个更接近普适物体的彩色图像数据集。CIFAR-10 是由Hinton 的学生Alex Krizhevsky 和Ilya Sutskever 整理的一个用于识别普适物体的小型数据集。一共包含10个类别的RGB彩色图片：飞机（ airplane ）、汽车（">
+<meta name="keywords" content="卷积网络,TensorFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow学习笔记12：CIFAR-10数据集图片分类">
+<meta property="og:url" content="http://yoursite.com/2019/08/23/tf学习笔记12/index.html">
+<meta property="og:site_name" content="浅笑の博客">
+<meta property="og:description" content="CIFAR-10数据集简介 官网链接：http://www.cs.toronto.edu/~kriz/cifar.html   CIFAR-10是一个更接近普适物体的彩色图像数据集。CIFAR-10 是由Hinton 的学生Alex Krizhevsky 和Ilya Sutskever 整理的一个用于识别普适物体的小型数据集。一共包含10个类别的RGB彩色图片：飞机（ airplane ）、汽车（">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/CIFAR-10.png">
+<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C1.png">
+<meta property="og:updated_time" content="2019-08-23T02:31:50.068Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TensorFlow学习笔记12：CIFAR-10数据集图片分类">
+<meta name="twitter:description" content="CIFAR-10数据集简介 官网链接：http://www.cs.toronto.edu/~kriz/cifar.html   CIFAR-10是一个更接近普适物体的彩色图像数据集。CIFAR-10 是由Hinton 的学生Alex Krizhevsky 和Ilya Sutskever 整理的一个用于识别普适物体的小型数据集。一共包含10个类别的RGB彩色图片：飞机（ airplane ）、汽车（">
+<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/CIFAR-10.png">
+  <link rel="canonical" href="http://yoursite.com/2019/08/23/tf学习笔记12/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>TensorFlow学习笔记12：CIFAR-10数据集图片分类 | 浅笑の博客</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">浅笑の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我们的征途是星辰大海</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">46</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">44</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-guestbook">
+      
+    
+      
+    
+
+    <a href="/guestbook/" rel="section"><i class="menu-item-icon fa fa-fw fa-paper-plane-o"></i> <br>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+  <a href="https://github.com/zhengyujie" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/23/tf学习笔记12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zheng Yujie">
+      <meta itemprop="description" content="C++/Python/深度学习">
+      <meta itemprop="image" content="/images/1.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅笑の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">TensorFlow学习笔记12：CIFAR-10数据集图片分类
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-23 10:02:38" itemprop="dateCreated datePublished" datetime="2019-08-23T10:02:38+08:00">2019-08-23</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/08/23/tf学习笔记12/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/23/tf学习笔记12/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>4.7k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="CIFAR-10数据集简介"><a href="#CIFAR-10数据集简介" class="headerlink" title="CIFAR-10数据集简介"></a>CIFAR-10数据集简介</h1><blockquote>
+<p>官网链接：<a href="http://www.cs.toronto.edu/~kriz/cifar.html" target="_blank" rel="noopener">http://www.cs.toronto.edu/~kriz/cifar.html</a></p>
+</blockquote>
+<p> CIFAR-10是一个更接近普适物体的彩色图像数据集。CIFAR-10 是由Hinton 的学生Alex Krizhevsky 和Ilya Sutskever 整理的一个用于识别普适物体的小型数据集。一共包含10个类别的RGB彩色图片：飞机（ airplane ）、汽车（ automobile ）、鸟类（ bird ）、猫（ cat ）、鹿（ deer ）、狗（ dog ）、蛙类（ frog ）、马（ horse ）、船（ ship ）和卡车（ truck ）。每个图片的尺寸为32 × 32 ，每个类别有6000个图像，数据集中一共有50000 张训练图片和10000 张测试图片。</p>
+<a id="more"></a>
+<p><img src="http://pwbhioup3.bkt.clouddn.com/CIFAR-10.png" alt="CIFAR-10"></p>
+<h1 id="TensenFlow实现"><a href="#TensenFlow实现" class="headerlink" title="TensenFlow实现"></a>TensenFlow实现</h1><h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>首先去官方库下载<code>cifar10.py</code>以及<code>cifar10_input.py</code>文件来下载CIFAR-10数据集二进制文件，以及读取文件内容。</p>
+<blockquote>
+<p>GitHub地址：<a href="https://github.com/tensorflow/models/tree/master/tutorials/image/cifar10" target="_blank" rel="noopener">https://github.com/tensorflow/models/tree/master/tutorials/image/cifar10</a></p>
+</blockquote>
+<p>运行下载数据集函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.models.tutorials.image.cifar10 <span class="keyword">import</span> cifar10</span><br><span class="line">cifar10.maybe_download_and_extract()</span><br></pre></td></tr></table></figure></p>
+<p>数据集文件默认下载在<code>./tmp/cifar10_data</code>文件下，可以将其移动到自己的工程文件夹下</p>
+<h2 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h2><p>首先定义一个权重初始化函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">variable_with_weight_loss</span><span class="params">(shape,std,w1)</span>:</span></span><br><span class="line">    var = tf.Variable(tf.truncated_normal(shape,stddev=std),dtype=tf.float32)</span><br><span class="line">    <span class="keyword">if</span> w1 <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        weight_loss = tf.multiply(tf.nn.l2_loss(var),w1,name=<span class="string">"weight_loss"</span>)</span><br><span class="line">        tf.add_to_collection(<span class="string">"losses"</span>,weight_loss)</span><br><span class="line">    <span class="keyword">return</span> var</span><br></pre></td></tr></table></figure></p>
+<p>然后定义一个损失函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loss_func</span><span class="params">(logits,labels)</span>:</span></span><br><span class="line">    labels = tf.cast(labels,tf.int32)</span><br><span class="line">    cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits,</span><br><span class="line">                           labels=labels,name=<span class="string">"cross_entropy_per_example"</span>)</span><br><span class="line">    cross_entropy_mean = tf.reduce_mean(tf.reduce_sum(cross_entropy))</span><br><span class="line">    tf.add_to_collection(<span class="string">"losses"</span>,cross_entropy_mean)</span><br><span class="line">    <span class="keyword">return</span> tf.add_n(tf.get_collection(<span class="string">"losses"</span>),name=<span class="string">"total_loss"</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置每次训练的数据大小</span></span><br><span class="line">batch_size = <span class="number">128</span></span><br><span class="line"><span class="comment">#下载解压数据</span></span><br><span class="line"><span class="comment"># cifar10.maybe_download_and_extract()</span></span><br><span class="line"><span class="comment"># 设置数据的存放目录</span></span><br><span class="line">cifar10_dir = <span class="string">"cifar10_data/cifar-10-batches-bin"</span></span><br><span class="line"><span class="comment">#获取数据增强后的训练集数据</span></span><br><span class="line">images_train,labels_train = cifar10_input.distorted_inputs(cifar10_dir,batch_size)</span><br><span class="line"><span class="comment">#获取裁剪后的测试数据</span></span><br><span class="line">images_test,labels_test = cifar10_input.inputs(eval_data=<span class="literal">True</span>,data_dir=cifar10_dir,                     </span><br><span class="line">                                               batch_size=batch_size)</span><br></pre></td></tr></table></figure>
+<h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#定义模型的输入和输出数据</span></span><br><span class="line">image_holder = tf.placeholder(dtype=tf.float32,shape=[batch_size,<span class="number">24</span>,<span class="number">24</span>,<span class="number">3</span>])</span><br><span class="line">label_holder = tf.placeholder(dtype=tf.int32,shape=[batch_size])</span><br><span class="line"></span><br><span class="line"><span class="comment">#设计第一层卷积</span></span><br><span class="line">weight1 = variable_with_weight_loss(shape=[<span class="number">5</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">64</span>],std=<span class="number">5e-2</span>,w1=<span class="number">0</span>)</span><br><span class="line">kernel1 = tf.nn.conv2d(image_holder,weight1,[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],padding=<span class="string">"SAME"</span>)</span><br><span class="line">bais1 = tf.Variable(tf.constant(<span class="number">0.0</span>,dtype=tf.float32,shape=[<span class="number">64</span>]))</span><br><span class="line">conv1 = tf.nn.relu(tf.nn.bias_add(kernel1,bais1))</span><br><span class="line">pool1 = tf.nn.max_pool(conv1,[<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>],padding=<span class="string">"SAME"</span>)</span><br><span class="line">norm1 = tf.nn.lrn(pool1,<span class="number">4</span>,bias=<span class="number">1.0</span>,alpha=<span class="number">0.001</span> / <span class="number">9</span>,beta=<span class="number">0.75</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设计第二层卷积</span></span><br><span class="line">weight2 = variable_with_weight_loss(shape=[<span class="number">5</span>,<span class="number">5</span>,<span class="number">64</span>,<span class="number">64</span>],std=<span class="number">5e-2</span>,w1=<span class="number">0</span>)</span><br><span class="line">kernel2 = tf.nn.conv2d(norm1,weight2,[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],padding=<span class="string">"SAME"</span>)</span><br><span class="line">bais2 = tf.Variable(tf.constant(<span class="number">0.1</span>,dtype=tf.float32,shape=[<span class="number">64</span>]))</span><br><span class="line">conv2 = tf.nn.relu(tf.nn.bias_add(kernel2,bais2))</span><br><span class="line">norm2 = tf.nn.lrn(conv2,<span class="number">4</span>,bias=<span class="number">1.0</span>,alpha=<span class="number">0.01</span> / <span class="number">9</span>,beta=<span class="number">0.75</span>)</span><br><span class="line">pool2 = tf.nn.max_pool(norm2,[<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>],padding=<span class="string">"SAME"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#第一层全连接层</span></span><br><span class="line">reshape = tf.reshape(pool2,[batch_size,<span class="number">-1</span>])</span><br><span class="line">dim = reshape.get_shape()[<span class="number">1</span>].value</span><br><span class="line">weight3 = variable_with_weight_loss([dim,<span class="number">384</span>],std=<span class="number">0.04</span>,w1=<span class="number">0.004</span>)</span><br><span class="line">bais3 = tf.Variable(tf.constant(<span class="number">0.1</span>,shape=[<span class="number">384</span>],dtype=tf.float32))</span><br><span class="line">local3 = tf.nn.relu(tf.matmul(reshape,weight3)+bais3)</span><br><span class="line"></span><br><span class="line"><span class="comment">#第二层全连接层</span></span><br><span class="line">weight4 = variable_with_weight_loss([<span class="number">384</span>,<span class="number">192</span>],std=<span class="number">0.04</span>,w1=<span class="number">0.004</span>)</span><br><span class="line">bais4 = tf.Variable(tf.constant(<span class="number">0.1</span>,shape=[<span class="number">192</span>],dtype=tf.float32))</span><br><span class="line">local4 = tf.nn.relu(tf.matmul(local3,weight4)+bais4)</span><br><span class="line"></span><br><span class="line"><span class="comment">#最后一层</span></span><br><span class="line">weight5 = variable_with_weight_loss([<span class="number">192</span>,<span class="number">10</span>],std=<span class="number">1</span>/<span class="number">192.0</span>,w1=<span class="number">0</span>)</span><br><span class="line">bais5 = tf.Variable(tf.constant(<span class="number">0.0</span>,shape=[<span class="number">10</span>],dtype=tf.float32))</span><br><span class="line">logits = tf.add(tf.matmul(local4,weight5),bais5)</span><br></pre></td></tr></table></figure>
+<h2 id="训练和优化"><a href="#训练和优化" class="headerlink" title="训练和优化"></a>训练和优化</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置最大迭代次数</span></span><br><span class="line">max_steps = <span class="number">10000</span></span><br><span class="line"><span class="comment">#获取损失函数</span></span><br><span class="line">loss = loss_func(logits,label_holder)</span><br><span class="line"><span class="comment">#设置优化算法使得成本最小</span></span><br><span class="line">train_step = tf.train.AdamOptimizer(<span class="number">1e-3</span>).minimize(loss)</span><br><span class="line"><span class="comment">#获取最高类的分类准确率，取top1作为衡量标准</span></span><br><span class="line">top_k_op = tf.nn.in_top_k(logits,label_holder,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#开始训练</span></span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> range(max_steps):</span><br><span class="line">    start_time = time.time()</span><br><span class="line">    images_batch,labels_batch = sess.run([images_train,labels_train])</span><br><span class="line">    _,loss_value = sess.run([train_step,loss],feed_dict=&#123;image_holder:images_batch,</span><br><span class="line">                                                            label_holder:labels_batch&#125;)</span><br><span class="line">    <span class="comment">#获取计算时间</span></span><br><span class="line">    duration = time.time() - start_time</span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="comment">#计算每秒处理多少张图片</span></span><br><span class="line">        per_images_second = batch_size / duration</span><br><span class="line">        <span class="comment">#获取时间</span></span><br><span class="line">        sec_per_batch = float(duration)</span><br><span class="line">        print(<span class="string">"step:%d,duration:%.3f,per_images_second:%.2f,loss:%.3f"</span>%(step,duration</span><br><span class="line">              ,per_images_second,loss_value))</span><br></pre></td></tr></table></figure>
+<h2 id="测试过程"><a href="#测试过程" class="headerlink" title="测试过程"></a>测试过程</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#计算测试集上的准确率</span></span><br><span class="line">num_examples = <span class="number">10000</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line">num_iter = int(math.ceil(num_examples / batch_size))</span><br><span class="line">true_count = <span class="number">0</span></span><br><span class="line">total_sample_count = num_iter * batch_size</span><br><span class="line">step = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> step &lt; num_iter:</span><br><span class="line">    images_batch,labels_batch = sess.run([images_test,labels_test])</span><br><span class="line">    pred = sess.run([top_k_op],feed_dict=&#123;image_holder:images_batch,label_holder:labels_batch&#125;)</span><br><span class="line">    true_count += np.sum(pred)</span><br><span class="line">    step += <span class="number">1</span></span><br><span class="line"><span class="comment">#计算测试集的准确率</span></span><br><span class="line">precision = true_count / total_sample_count</span><br><span class="line">print(<span class="string">"test accuracy:%.3f"</span>%precision)</span><br></pre></td></tr></table></figure>
+<h2 id="训练结果"><a href="#训练结果" class="headerlink" title="训练结果"></a>训练结果</h2><p><img src="http://pwbhioup3.bkt.clouddn.com/%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C1.png" alt></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags" id="post-tags">
+            
+              <a href="/tags/卷积网络/" rel="tag"><i class="fa fa-tag"></i> 卷积网络</a>
+            
+              <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
+            
+          </div>
+          <script type="text/javascript">
+            var tagsall=document.getElementsByClassName("post-tags")
+            for (var i = tagsall.length - 1; i >= 0; i--){
+                var tags=tagsall[i].getElementsByTagName("a");
+                for (var j = tags.length - 1; j >= 0; j--) {
+                    var r=Math.floor(Math.random()*75+130);
+                    var g=Math.floor(Math.random()*75+100);
+                    var b=Math.floor(Math.random()*75+80);
+                    tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                }
+            }                        
+          </script>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/22/ubuntu安装pycharm/" rel="next" title="Ubuntu 16.04安装Pycharm">
+                  <i class="fa fa-chevron-left"></i> Ubuntu 16.04安装Pycharm
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+      <!--noindex-->
+        <div class="author-overview">
+            <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+              
+                <img class="site-author-image" itemprop="image"
+                  src="/images/1.jpeg"
+                  alt="Zheng Yujie">
+              
+              <p class="site-author-name" itemprop="name">Zheng Yujie</p>
+              <div class="site-description motion-element" itemprop="description">C++/Python/深度学习</div>
+            </div>
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                  
+                    <a href="/archives/">
+                  
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                  
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                  
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://github.com/zhengyujie" title="GitHub &rarr; https://github.com/zhengyujie" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="mailto:zhengyujie97@126.com" title="E-Mail &rarr; mailto:zhengyujie97@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://music.163.com/#/playlist?id=327924141" title="Music &rarr; https://music.163.com/#/playlist?id=327924141" rel="noopener" target="_blank"><i class="fa fa-fw fa-headphones"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://www.google.com" title="Google &rarr; https://www.google.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+
+          
+        </div>
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active" id="post-toc-wrap">
+          <div class="item_headline">
+            <i class="fa fa-list" aria-hidden="true">
+            </i><span>目录</span>
+          </div>
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CIFAR-10数据集简介"><span class="nav-number">1.</span> <span class="nav-text">CIFAR-10数据集简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TensenFlow实现"><span class="nav-number">2.</span> <span class="nav-text">TensenFlow实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据准备"><span class="nav-number">2.1.</span> <span class="nav-text">数据准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义函数"><span class="nav-number">2.2.</span> <span class="nav-text">定义函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取数据"><span class="nav-number">2.3.</span> <span class="nav-text">读取数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络结构"><span class="nav-number">2.4.</span> <span class="nav-text">网络结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练和优化"><span class="nav-number">2.5.</span> <span class="nav-text">训练和优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练过程"><span class="nav-number">2.6.</span> <span class="nav-text">训练过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试过程"><span class="nav-number">2.7.</span> <span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练结果"><span class="nav-number">2.8.</span> <span class="nav-text">训练结果</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
+    <span class="post-meta-divider">|</span>
+    <span title="站点总字数">全站共194k字</span>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        <span>0%</span>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+<script>
+NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.9/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: true,
+    appId: 'QhpM05HufWMwqxw5TW8GGKHt-gzGzoHsz',
+    appKey: 'ReXaLSgoPNRCjW8dT9eEyR25',
+    placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧！',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

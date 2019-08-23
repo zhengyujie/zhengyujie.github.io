@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","width":300,"display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="前言现在我相信兴趣是最好的学习动力了。作为一个对前段完全提不起兴趣的人，在见识到别人的博客有多好看之后，我居然对美化博客产生了强烈的兴趣。以至于在折腾的过程中浑然不知时间的流逝，有时候明明已经饥肠辘辘了却依然乐之不疲，连我自己都在怀疑自己是不是着了魔。在高强度折腾了将近一天后，我终于将我的博客侧栏打造成了我满意的样子。对于我这种毫无任何HTML，CSS等基础的人，在折腾过程中遇到了难以计数的bug">
+<meta name="keywords" content="Hexo,NexT,JavaScript,Django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo折腾日记之侧栏篇">
+<meta property="og:url" content="http://yoursite.com/2019/08/22/hexo设置侧栏/index.html">
+<meta property="og:site_name" content="浅笑の博客">
+<meta property="og:description" content="前言现在我相信兴趣是最好的学习动力了。作为一个对前段完全提不起兴趣的人，在见识到别人的博客有多好看之后，我居然对美化博客产生了强烈的兴趣。以至于在折腾的过程中浑然不知时间的流逝，有时候明明已经饥肠辘辘了却依然乐之不疲，连我自己都在怀疑自己是不是着了魔。在高强度折腾了将近一天后，我终于将我的博客侧栏打造成了我满意的样子。对于我这种毫无任何HTML，CSS等基础的人，在折腾过程中遇到了难以计数的bug">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-22T07:09:10.976Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo折腾日记之侧栏篇">
+<meta name="twitter:description" content="前言现在我相信兴趣是最好的学习动力了。作为一个对前段完全提不起兴趣的人，在见识到别人的博客有多好看之后，我居然对美化博客产生了强烈的兴趣。以至于在折腾的过程中浑然不知时间的流逝，有时候明明已经饥肠辘辘了却依然乐之不疲，连我自己都在怀疑自己是不是着了魔。在高强度折腾了将近一天后，我终于将我的博客侧栏打造成了我满意的样子。对于我这种毫无任何HTML，CSS等基础的人，在折腾过程中遇到了难以计数的bug">
+  <link rel="canonical" href="http://yoursite.com/2019/08/22/hexo设置侧栏/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Hexo折腾日记之侧栏篇 | 浅笑の博客</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">浅笑の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我们的征途是星辰大海</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">46</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">44</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-guestbook">
+      
+    
+      
+    
+
+    <a href="/guestbook/" rel="section"><i class="menu-item-icon fa fa-fw fa-paper-plane-o"></i> <br>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+  <a href="https://github.com/zhengyujie" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/22/hexo设置侧栏/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zheng Yujie">
+      <meta itemprop="description" content="C++/Python/深度学习">
+      <meta itemprop="image" content="/images/1.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅笑の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Hexo折腾日记之侧栏篇
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-22 14:11:16" itemprop="dateCreated datePublished" datetime="2019-08-22T14:11:16+08:00">2019-08-22</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hexo框架/" itemprop="url" rel="index"><span itemprop="name">Hexo框架</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/08/22/hexo设置侧栏/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/22/hexo设置侧栏/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>22k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>现在我相信兴趣是最好的学习动力了。作为一个对前段完全提不起兴趣的人，在见识到别人的博客有多好看之后，我居然对美化博客产生了强烈的兴趣。以至于在折腾的过程中浑然不知时间的流逝，有时候明明已经饥肠辘辘了却依然乐之不疲，连我自己都在怀疑自己是不是着了魔。在高强度折腾了将近一天后，我终于将我的博客侧栏打造成了我满意的样子。对于我这种毫无任何HTML，CSS等基础的人，在折腾过程中遇到了难以计数的bug，所以能有这样的成果已经是相当满足了。这篇博客记录我对侧栏进行魔改的整个过程。</p>
+<a id="more"></a>
+<h1 id="折腾过程"><a href="#折腾过程" class="headerlink" title="折腾过程"></a>折腾过程</h1><h2 id="改造思路"><a href="#改造思路" class="headerlink" title="改造思路"></a>改造思路</h2><p>我希望主页的侧栏以及浏览文章时的侧栏显示的内容是不同的。</p>
+<ul>
+<li>在主页时，博客侧栏要尽可能多地显示和我博客有关的各种信息，比如博主的信息，文章分类信息，文章标签信息等等。</li>
+<li>在浏览文章时，侧栏的信息要加以精简，仅仅保留博主信息以及文章目录，同时在滚动页面时侧栏要固定在头部。</li>
+</ul>
+<p>由于NexT主题默认在任何页面侧栏在滚动到页面顶部时都固定不动。但我想在主页面时侧栏能够显示更多的信息，于是我的想法就是写一个<code>if</code>语句判断当前页面是否为浏览文章页面，若不是，则侧栏随页面滚动，并且尽可能多的显示信息。若是，则仅仅显示博主信息以及文章目录。</p>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><p>首先打开<code>/next/layout/_macro</code>文件夹下的<code>sidebar.swig</code>文件，这就是我们博客侧栏的源代码了，我们开始进行魔改</p>
+<p>首先开头第一段<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sidebar-toggle"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sidebar-toggle-line-wrap"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"sidebar-toggle-line sidebar-toggle-line-first"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"sidebar-toggle-line sidebar-toggle-line-middle"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"sidebar-toggle-line sidebar-toggle-line-last"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>我们保持不动，然后接下来<code>aside</code>标签下的内容全部删除，是的你没听错，全部删除，我们重新实现。<br>首先先写个<code>if</code>语句来判断当前的页面<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;%- <span class="keyword">set</span> display_toc = theme.toc.enable and display_toc %&#125;</span><br><span class="line">&#123;%- <span class="keyword">if</span> not display_toc or toc(page.content).length &lt;= <span class="number">1</span> %&#125;</span><br><span class="line">...</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接着我们在if语句内部协商我们想在主页面侧栏现实的内容</p>
+<ol>
+<li><p>博主信息。包括头像，自我介绍以及附加博客的文章数，类别数以及标签数。这段代码在<code>next/layout/_partials/sidebar/</code>的<code>site-overview.swig</code>文件内有现成的，我们只要保留我们想显示的部分就好了</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"author-overview"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"site-author motion-element"</span> itemprop=<span class="string">"author"</span> itemscope itemtype=<span class="string">"http://schema.org/Person"</span>&gt;</span><br><span class="line">        &#123;%- <span class="keyword">if</span> theme.avatar.url %&#125;</span><br><span class="line">        &lt;img <span class="class"><span class="keyword">class</span></span>=<span class="string">"site-author-image"</span> itemprop=<span class="string">"image"</span></span><br><span class="line">            src=<span class="string">"&#123;&#123; url_for( theme.avatar.url | default(theme.images + '/avatar.gif') ) &#125;&#125;"</span></span><br><span class="line">            alt=<span class="string">"&#123;&#123; author &#125;&#125;"</span>&gt;</span><br><span class="line">        &#123;%- endif %&#125;</span><br><span class="line">        &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"site-author-name"</span> itemprop=<span class="string">"name"</span>&gt;&#123;&#123; author &#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div class="site-description motion-element" itemprop="description"&gt;&#123;&#123; description &#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &#123;%- if theme.site_state %&#125;</span></span><br><span class="line"><span class="regexp">        &lt;nav class="site-state motion-element"&gt;</span></span><br><span class="line"><span class="regexp">        &#123;%- if config.archive_dir != '/</span><span class="string">' and site.posts.length &gt; 0 %&#125;</span></span><br><span class="line"><span class="string">            &lt;div class="site-state-item site-state-posts"&gt;</span></span><br><span class="line"><span class="string">            &#123;%- if theme.menu.archives %&#125;</span></span><br><span class="line"><span class="string">                &lt;a href="&#123;&#123; url_for(theme.menu.archives).split('</span>||<span class="string">')[0] | trim &#125;&#125;"&gt;</span></span><br><span class="line"><span class="string">            &#123;% else %&#125;</span></span><br><span class="line"><span class="string">                &lt;a href="&#123;&#123; url_for(config.archive_dir) &#125;&#125;"&gt;</span></span><br><span class="line"><span class="string">            &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">                &lt;span class="site-state-item-count"&gt;&#123;&#123; site.posts.length &#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">                &lt;span class="site-state-item-name"&gt;&#123;&#123; __('</span>state.posts<span class="string">') &#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">            &lt;/a&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &#123;%- if site.categories.length &gt; 0 %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set categoriesPageQuery = site.pages.find(&#123;type: '</span>categories<span class="string">'&#125;, &#123;lean: true&#125;) %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set hasCategoriesPage = categoriesPageQuery.length &gt; 0 %&#125;</span></span><br><span class="line"><span class="string">            &lt;div class="site-state-item site-state-categories"&gt;</span></span><br><span class="line"><span class="string">            &#123;%- if hasCategoriesPage %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- if theme.menu.categories %&#125;</span></span><br><span class="line"><span class="string">                &lt;a href="&#123;&#123; url_for(theme.menu.categories).split('</span>||<span class="string">')[0] | trim &#125;&#125;"&gt;</span></span><br><span class="line"><span class="string">                &#123;% else %&#125;</span></span><br><span class="line"><span class="string">                &lt;a href="&#123;&#123; url_for(config.category_dir) + '</span>/<span class="string">' &#125;&#125;"&gt;</span></span><br><span class="line"><span class="string">                &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set visibleCategories = 0 %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- for cat in site.categories %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- if cat.length %&#125;&#123;%- set visibleCategories += 1 %&#125;&#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- endfor %&#125;</span></span><br><span class="line"><span class="string">            &lt;span class="site-state-item-count"&gt;&#123;&#123; visibleCategories &#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">            &lt;span class="site-state-item-name"&gt;&#123;&#123; __('</span>state.categories<span class="string">') &#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">            &#123;%- if hasCategoriesPage %&#125;&lt;/a&gt;&#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &#123;%- if site.tags.length &gt; 0 %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set tagsPageQuery = site.pages.find(&#123;type: '</span>tags<span class="string">'&#125;, &#123;lean: true&#125;) %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set hasTagsPage = tagsPageQuery.length &gt; 0 %&#125;</span></span><br><span class="line"><span class="string">            &lt;div class="site-state-item site-state-tags"&gt;</span></span><br><span class="line"><span class="string">            &#123;%- if hasTagsPage %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- if theme.menu.tags %&#125;</span></span><br><span class="line"><span class="string">                &lt;a href="&#123;&#123; url_for(theme.menu.tags).split('</span>||<span class="string">')[0] | trim &#125;&#125;"&gt;</span></span><br><span class="line"><span class="string">                &#123;% else %&#125;</span></span><br><span class="line"><span class="string">                &lt;a href="&#123;&#123; url_for(config.tag_dir) + '</span>/<span class="string">' &#125;&#125;"&gt;</span></span><br><span class="line"><span class="string">                &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set visibleTags = 0 %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- for tag in site.tags %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- if tag.length %&#125;&#123;%- set visibleTags += 1 %&#125;&#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- endfor %&#125;</span></span><br><span class="line"><span class="string">            &lt;span class="site-state-item-count"&gt;&#123;&#123; visibleTags &#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">            &lt;span class="site-state-item-name"&gt;&#123;&#123; __('</span>state.tags<span class="string">') &#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">            &#123;%- if hasTagsPage %&#125;&lt;/a&gt;&#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">        &lt;/nav&gt;</span></span><br><span class="line"><span class="string">    &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#123;%- if theme.social %&#125;</span></span><br><span class="line"><span class="string">        &lt;div class="links-of-author motion-element"&gt;</span></span><br><span class="line"><span class="string">        &#123;%- for name, link in theme.social %&#125;</span></span><br><span class="line"><span class="string">            &lt;span class="links-of-author-item"&gt;</span></span><br><span class="line"><span class="string">            &#123;%- set sidebarURL = link.split('</span>||<span class="string">')[0] | trim %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- if not (theme.social_icons.enable) or (not theme.social_icons.icons_only) %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set sidebarText = name %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- if theme.social_icons.enable %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set sidebarIcon = '</span>&lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"fa fa-fw fa-' + link.split('||')[1] | trim | default('globe') + '"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><span class="string">' %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &#123;&#123; next_url(sidebarURL, sidebarIcon + sidebarText, &#123;title: name + '</span> &amp;rarr; <span class="string">' + sidebarURL&#125;) &#125;&#125;</span></span><br><span class="line"><span class="string">            &lt;/span&gt;</span></span><br><span class="line"><span class="string">        &#123;%- endfor %&#125;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#123;%- if theme.rss %&#125;</span></span><br><span class="line"><span class="string">        &lt;div class="feed-link motion-element"&gt;</span></span><br><span class="line"><span class="string">        &lt;a href="&#123;&#123; url_for(theme.rss) &#125;&#125;" rel="alternate"&gt;</span></span><br><span class="line"><span class="string">            &lt;i class="fa fa-rss"&gt;&lt;/i&gt;RSS</span></span><br><span class="line"><span class="string">        &lt;/a&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#123;%- if theme.chat.enable and theme.chat.service !== '</span><span class="string">' %&#125;</span></span><br><span class="line"><span class="string">        &lt;div class="chat motion-element"&gt;</span></span><br><span class="line"><span class="string">        &#123;%- if theme.chat.service == '</span>chatra<span class="string">' and theme.chatra.enable %&#125;</span></span><br><span class="line"><span class="string">        &lt;a onclick="Chatra('</span>openChat<span class="string">', true)"&gt;</span></span><br><span class="line"><span class="string">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">        &#123;%- if theme.chat.service == '</span>tidio<span class="string">' and theme.tidio.enable %&#125;</span></span><br><span class="line"><span class="string">        &lt;a onclick="tidioChatApi.open();"&gt;</span></span><br><span class="line"><span class="string">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">        &#123;%- if theme.chat.icon %&#125;&lt;i class="fa fa-&#123;&#123; theme.chat.icon &#125;&#125;"&gt;&lt;/i&gt;&#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">        &#123;&#123; theme.chat.text &#125;&#125;</span></span><br><span class="line"><span class="string">        &lt;/a&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#123;%- if theme.creative_commons.license and theme.creative_commons.sidebar %&#125;</span></span><br><span class="line"><span class="string">        &lt;div class="cc-license motion-element" itemprop="license"&gt;</span></span><br><span class="line"><span class="string">        &#123;%- set ccLanguage = theme.creative_commons.language %&#125;</span></span><br><span class="line"><span class="string">        &#123;%- if theme.creative_commons.license === '</span>zero<span class="string">' %&#125;</span></span><br><span class="line"><span class="string">        &#123;%- set ccType = '</span>publicdomain/zero/<span class="number">1.0</span>/<span class="string">' + ccLanguage %&#125;</span></span><br><span class="line"><span class="string">        &#123;% else %&#125;</span></span><br><span class="line"><span class="string">        &#123;%- set ccType = '</span>licenses/<span class="string">' + theme.creative_commons.license + '</span>/<span class="number">4.0</span>/<span class="string">' + ccLanguage %&#125;</span></span><br><span class="line"><span class="string">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">        &#123;%- set ccURL = '</span>https:<span class="comment">//creativecommons.org/' + ccType %&#125;</span></span><br><span class="line">        &#123;%- <span class="keyword">set</span> ccImage = '&lt;img src="' + url_for(theme.images + '/cc-' + theme.creative_commons.license + '.svg') + '" alt="Creative Commons"&gt;' %&#125;</span><br><span class="line">        &#123;&#123; next_url(ccURL, ccImage, &#123;<span class="attr">class</span>: <span class="string">'cc-opacity'</span>&#125;) &#125;&#125;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &#123;%- endif %&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>博客公告。内容就自由发挥了。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;card-announcement&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;card-content&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;item_headline&quot;&gt;</span><br><span class="line">        &lt;i class=&quot;fa fa-bullhorn card-announcement-animation&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</span><br><span class="line">        &lt;span&gt;公告&lt;/span&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;announcement_content&quot;&gt;</span><br><span class="line">        谢谢你这么帅，这么漂亮还来看我的博客，如果喜欢的话记得收藏哦</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>博客信息。我主要就显示文章数量，博客运行天数，访问人数以及点击量四条信息。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"blog-overview"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"item_headline"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-line-chart"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>网站资讯<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"blog-info"</span>&gt;</span><br><span class="line">        &lt;script&#123;&#123; pjax &#125;&#125; <span class="keyword">async</span> src=<span class="string">"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">        &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">"blog-info-list"</span>&gt;</span><br><span class="line">        &lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">"blog-info-name"</span>&gt;文章数目&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">        &lt;span class="blogs-count"&gt;&#123;&#123; site.posts.length &#125;&#125;&lt;/</span>span&gt;</span><br><span class="line">        &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">        &lt;li class="blog-info-list"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;span class="blog-info-name"&gt;运行天数&lt;/</span>span&gt;</span><br><span class="line">        &lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">"days-count"</span> id=<span class="string">"sitedays"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">        &lt;script language=javascript&gt;</span><br><span class="line">            <span class="function"><span class="keyword">function</span> <span class="title">siteTime</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="built_in">window</span>.setTimeout(<span class="string">"siteTime()"</span>, <span class="number">1000</span>);</span><br><span class="line">                <span class="keyword">var</span> seconds = <span class="number">1000</span>;</span><br><span class="line">                <span class="keyword">var</span> minutes = seconds * <span class="number">60</span>;</span><br><span class="line">                <span class="keyword">var</span> hours = minutes * <span class="number">60</span>;</span><br><span class="line">                <span class="keyword">var</span> days = hours * <span class="number">24</span>;</span><br><span class="line">                <span class="keyword">var</span> years = days * <span class="number">365</span>;</span><br><span class="line">                <span class="keyword">var</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">                <span class="keyword">var</span> todayYear = today.getFullYear();</span><br><span class="line">                <span class="keyword">var</span> todayMonth = today.getMonth()+<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">var</span> todayDate = today.getDate();</span><br><span class="line">                <span class="keyword">var</span> todayHour = today.getHours();</span><br><span class="line">                <span class="keyword">var</span> todayMinute = today.getMinutes();</span><br><span class="line">                <span class="keyword">var</span> todaySecond = today.getSeconds();</span><br><span class="line">                <span class="keyword">var</span> t1 = <span class="built_in">Date</span>.UTC(<span class="number">2019</span>,<span class="number">07</span>,<span class="number">26</span>,<span class="number">00</span>,<span class="number">00</span>,<span class="number">00</span>); <span class="comment">//北京时间2018-2-13 00:00:00</span></span><br><span class="line">                <span class="keyword">var</span> t2 = <span class="built_in">Date</span>.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);</span><br><span class="line">                <span class="keyword">var</span> diff = t2-t1;</span><br><span class="line">                <span class="keyword">var</span> diffYears = <span class="built_in">Math</span>.floor(diff/years);</span><br><span class="line">                <span class="keyword">var</span> diffDays = <span class="built_in">Math</span>.floor((diff/days)-diffYears*<span class="number">365</span>);</span><br><span class="line">                <span class="built_in">document</span>.getElementById(<span class="string">"sitedays"</span>).innerHTML=diffDays+<span class="string">" 天 "</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            siteTime();</span><br><span class="line">        &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>li&gt;</span><br><span class="line">        &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">"blog-info-list"</span>&gt;</span><br><span class="line">        &lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">"blog-info-list"</span>&gt;访问数&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">        &lt;span class="site-uv" title="&#123;&#123; __('footer.total_visitors') &#125;&#125;"&gt;</span></span><br><span class="line"><span class="regexp">            &lt;span class="busuanzi-value" id="busuanzi_value_site_uv"&gt;&lt;/</span>span&gt;</span><br><span class="line">        &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>li&gt;</span><br><span class="line">        &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">"blog-info-list"</span>&gt;</span><br><span class="line">        &lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">"blog-info-name"</span>&gt;点击量&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">        &lt;span class="site-pv" title="&#123;&#123; __('footer.total_views') &#125;&#125;"&gt;</span></span><br><span class="line"><span class="regexp">            &lt;span class="busuanzi-value" id="busuanzi_value_site_pv"&gt;&lt;/</span>span&gt;</span><br><span class="line">        &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>li&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分类信息。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"sidebar-categoreus"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"item_headline"</span>&gt;</span><br><span class="line">    &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"fa fa-folder-open"</span> aria-hidden=<span class="string">"true"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></span><br><span class="line">    &lt;span&gt;分类&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">    &#123;&#123; list_categories() &#125;&#125; </span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>标签云。GitHub地址：<a href="https://github.com/MikeCoder/hexo-tag-cloud" target="_blank" rel="noopener">https://github.com/MikeCoder/hexo-tag-cloud</a></p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"sidebar-tags"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"item_headline"</span>&gt;</span><br><span class="line">    &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"fa fa-tags"</span> aria-hidden=<span class="string">"true"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></span><br><span class="line">    &lt;span&gt;标签云&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">    &#123;% <span class="keyword">if</span> site.tags.length &gt; <span class="number">1</span> %&#125;</span><br><span class="line">    &lt;script type=<span class="string">"text/javascript"</span> charset=<span class="string">"utf-8"</span> src=<span class="string">"&#123;&#123; url_for('/js/tagcloud.js') &#125;&#125;"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script type=<span class="string">"text/javascript"</span> charset=<span class="string">"utf-8"</span> src=<span class="string">"&#123;&#123; url_for('/js/tagcanvas.js') &#125;&#125;"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"widget-wrap"</span>&gt;</span><br><span class="line">        &lt;div id=<span class="string">"myCanvasContainer"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"widget tagcloud"</span>&gt;</span><br><span class="line">        &lt;canvas width=<span class="string">"250"</span> height=<span class="string">"250"</span> id=<span class="string">"resCanvas"</span> style=<span class="string">"width=100%"</span>&gt;</span><br><span class="line">            &#123;&#123; list_tags() &#125;&#125;</span><br><span class="line">        &lt;<span class="regexp">/canvas&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &#123;% endif %&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>友情链接</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"link-of-blogroll"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"item_headline"</span>&gt;</span><br><span class="line">    &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"fa fa-handshake-o"</span> aria-hidden=<span class="string">"true"</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/i&gt;&lt;span&gt;友情链接&lt;/</span>span&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &#123;%- if theme.links %&#125;</span></span><br><span class="line"><span class="regexp">    &lt;div class="links-of-blogroll motion-element &#123;&#123; "links-of-blogroll-" + theme.links_layout | default('inline') &#125;&#125;"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div class="links-of-blogroll-title"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;i class="fa  fa-fw fa-&#123;&#123; theme.links_icon | default('globe') | lower &#125;&#125;"&gt;&lt;/i</span>&gt;</span><br><span class="line">        &#123;&#123; theme.links_title &#125;&#125;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;ul class="links-of-blogroll-list"&gt;</span></span><br><span class="line"><span class="regexp">        &#123;%- for blogrollText, blogrollURL in theme.links %&#125;</span></span><br><span class="line"><span class="regexp">            &lt;li class="links-of-blogroll-item"&gt;</span></span><br><span class="line"><span class="regexp">            &#123;&#123; next_url(blogrollURL, blogrollText, &#123;title: blogrollURL&#125;) &#125;&#125;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>li&gt;</span><br><span class="line">        &#123;%- endfor %&#125;</span><br><span class="line">        &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">    &#123;%- endif %&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>主页的侧栏就设置完成了。</p>
+<p>接下来就是浏览文章时的侧栏的设计，这里就直接上我的代码了<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"sidebar-inner"</span>&gt; </span><br><span class="line">    &#123;%- <span class="keyword">if</span> display_toc and toc(page.content).length &gt; <span class="number">1</span> %&#125;</span><br><span class="line">    &lt;!--noindex--&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"author-overview"</span>&gt;</span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"site-author motion-element"</span> itemprop=<span class="string">"author"</span> itemscope itemtype=<span class="string">"http://schema.org/Person"</span>&gt;</span><br><span class="line">            &#123;%- <span class="keyword">if</span> theme.avatar.url %&#125;</span><br><span class="line">            &lt;img <span class="class"><span class="keyword">class</span></span>=<span class="string">"site-author-image"</span> itemprop=<span class="string">"image"</span></span><br><span class="line">                src=<span class="string">"&#123;&#123; url_for( theme.avatar.url | default(theme.images + '/avatar.gif') ) &#125;&#125;"</span></span><br><span class="line">                alt=<span class="string">"&#123;&#123; author &#125;&#125;"</span>&gt;</span><br><span class="line">            &#123;%- endif %&#125;</span><br><span class="line">            &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"site-author-name"</span> itemprop=<span class="string">"name"</span>&gt;&#123;&#123; author &#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">            &lt;div class="site-description motion-element" itemprop="description"&gt;&#123;&#123; description &#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &#123;%- if theme.site_state %&#125;</span></span><br><span class="line"><span class="regexp">        &lt;nav class="site-state motion-element"&gt;</span></span><br><span class="line"><span class="regexp">            &#123;%- if config.archive_dir != '/</span><span class="string">' and site.posts.length &gt; 0 %&#125;</span></span><br><span class="line"><span class="string">            &lt;div class="site-state-item site-state-posts"&gt;</span></span><br><span class="line"><span class="string">                &#123;%- if theme.menu.archives %&#125;</span></span><br><span class="line"><span class="string">                &lt;a href="&#123;&#123; url_for(theme.menu.archives).split('</span>||<span class="string">')[0] | trim &#125;&#125;"&gt;</span></span><br><span class="line"><span class="string">                &#123;% else %&#125;</span></span><br><span class="line"><span class="string">                &lt;a href="&#123;&#123; url_for(config.archive_dir) &#125;&#125;"&gt;</span></span><br><span class="line"><span class="string">                &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">                &lt;span class="site-state-item-count"&gt;&#123;&#123; site.posts.length &#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">                &lt;span class="site-state-item-name"&gt;&#123;&#123; __('</span>state.posts<span class="string">') &#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">                &lt;/a&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">            &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            &#123;%- if site.categories.length &gt; 0 %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set categoriesPageQuery = site.pages.find(&#123;type: '</span>categories<span class="string">'&#125;, &#123;lean: true&#125;) %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set hasCategoriesPage = categoriesPageQuery.length &gt; 0 %&#125;</span></span><br><span class="line"><span class="string">            &lt;div class="site-state-item site-state-categories"&gt;</span></span><br><span class="line"><span class="string">                &#123;%- if hasCategoriesPage %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- if theme.menu.categories %&#125;</span></span><br><span class="line"><span class="string">                    &lt;a href="&#123;&#123; url_for(theme.menu.categories).split('</span>||<span class="string">')[0] | trim &#125;&#125;"&gt;</span></span><br><span class="line"><span class="string">                &#123;% else %&#125;</span></span><br><span class="line"><span class="string">                    &lt;a href="&#123;&#123; url_for(config.category_dir) + '</span>/<span class="string">' &#125;&#125;"&gt;</span></span><br><span class="line"><span class="string">                &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- set visibleCategories = 0 %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- for cat in site.categories %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- if cat.length %&#125;&#123;%- set visibleCategories += 1 %&#125;&#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- endfor %&#125;</span></span><br><span class="line"><span class="string">                &lt;span class="site-state-item-count"&gt;&#123;&#123; visibleCategories &#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">                &lt;span class="site-state-item-name"&gt;&#123;&#123; __('</span>state.categories<span class="string">') &#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">                &#123;%- if hasCategoriesPage %&#125;&lt;/a&gt;&#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">            &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            &#123;%- if site.tags.length &gt; 0 %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set tagsPageQuery = site.pages.find(&#123;type: '</span>tags<span class="string">'&#125;, &#123;lean: true&#125;) %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set hasTagsPage = tagsPageQuery.length &gt; 0 %&#125;</span></span><br><span class="line"><span class="string">            &lt;div class="site-state-item site-state-tags"&gt;</span></span><br><span class="line"><span class="string">                &#123;%- if hasTagsPage %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- if theme.menu.tags %&#125;</span></span><br><span class="line"><span class="string">                    &lt;a href="&#123;&#123; url_for(theme.menu.tags).split('</span>||<span class="string">')[0] | trim &#125;&#125;"&gt;</span></span><br><span class="line"><span class="string">                &#123;% else %&#125;</span></span><br><span class="line"><span class="string">                    &lt;a href="&#123;&#123; url_for(config.tag_dir) + '</span>/<span class="string">' &#125;&#125;"&gt;</span></span><br><span class="line"><span class="string">                &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- set visibleTags = 0 %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- for tag in site.tags %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- if tag.length %&#125;&#123;%- set visibleTags += 1 %&#125;&#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- endfor %&#125;</span></span><br><span class="line"><span class="string">                &lt;span class="site-state-item-count"&gt;&#123;&#123; visibleTags &#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">                &lt;span class="site-state-item-name"&gt;&#123;&#123; __('</span>state.tags<span class="string">') &#125;&#125;&lt;/span&gt;</span></span><br><span class="line"><span class="string">                &#123;%- if hasTagsPage %&#125;&lt;/a&gt;&#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">            &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">        &lt;/nav&gt;</span></span><br><span class="line"><span class="string">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &#123;%- if theme.social %&#125;</span></span><br><span class="line"><span class="string">        &lt;div class="links-of-author motion-element"&gt;</span></span><br><span class="line"><span class="string">            &#123;%- for name, link in theme.social %&#125;</span></span><br><span class="line"><span class="string">            &lt;span class="links-of-author-item"&gt;</span></span><br><span class="line"><span class="string">            &#123;%- set sidebarURL = link.split('</span>||<span class="string">')[0] | trim %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- if not (theme.social_icons.enable) or (not theme.social_icons.icons_only) %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- set sidebarText = name %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- if theme.social_icons.enable %&#125;</span></span><br><span class="line"><span class="string">                &#123;%- set sidebarIcon = '</span>&lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"fa fa-fw fa-' + link.split('||')[1] | trim | default('globe') + '"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><span class="string">' %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">                &#123;&#123; next_url(sidebarURL, sidebarIcon + sidebarText, &#123;title: name + '</span> &amp;rarr; <span class="string">' + sidebarURL&#125;) &#125;&#125;</span></span><br><span class="line"><span class="string">            &lt;/span&gt;</span></span><br><span class="line"><span class="string">            &#123;%- endfor %&#125;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &#123;%- if theme.rss %&#125;</span></span><br><span class="line"><span class="string">        &lt;div class="feed-link motion-element"&gt;</span></span><br><span class="line"><span class="string">            &lt;a href="&#123;&#123; url_for(theme.rss) &#125;&#125;" rel="alternate"&gt;</span></span><br><span class="line"><span class="string">            &lt;i class="fa fa-rss"&gt;&lt;/i&gt;RSS</span></span><br><span class="line"><span class="string">            &lt;/a&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &#123;%- if theme.chat.enable and theme.chat.service !== '</span><span class="string">' %&#125;</span></span><br><span class="line"><span class="string">        &lt;div class="chat motion-element"&gt;</span></span><br><span class="line"><span class="string">        &#123;%- if theme.chat.service == '</span>chatra<span class="string">' and theme.chatra.enable %&#125;</span></span><br><span class="line"><span class="string">            &lt;a onclick="Chatra('</span>openChat<span class="string">', true)"&gt;</span></span><br><span class="line"><span class="string">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">        &#123;%- if theme.chat.service == '</span>tidio<span class="string">' and theme.tidio.enable %&#125;</span></span><br><span class="line"><span class="string">            &lt;a onclick="tidioChatApi.open();"&gt;</span></span><br><span class="line"><span class="string">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">        &#123;%- if theme.chat.icon %&#125;&lt;i class="fa fa-&#123;&#123; theme.chat.icon &#125;&#125;"&gt;&lt;/i&gt;&#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">            &#123;&#123; theme.chat.text &#125;&#125;</span></span><br><span class="line"><span class="string">        &lt;/a&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &#123;%- if theme.creative_commons.license and theme.creative_commons.sidebar %&#125;</span></span><br><span class="line"><span class="string">        &lt;div class="cc-license motion-element" itemprop="license"&gt;</span></span><br><span class="line"><span class="string">        &#123;%- set ccLanguage = theme.creative_commons.language %&#125;</span></span><br><span class="line"><span class="string">        &#123;%- if theme.creative_commons.license === '</span>zero<span class="string">' %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set ccType = '</span>publicdomain/zero/<span class="number">1.0</span>/<span class="string">' + ccLanguage %&#125;</span></span><br><span class="line"><span class="string">        &#123;% else %&#125;</span></span><br><span class="line"><span class="string">            &#123;%- set ccType = '</span>licenses/<span class="string">' + theme.creative_commons.license + '</span>/<span class="number">4.0</span>/<span class="string">' + ccLanguage %&#125;</span></span><br><span class="line"><span class="string">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="string">        &#123;%- set ccURL = '</span>https:<span class="comment">//creativecommons.org/' + ccType %&#125;</span></span><br><span class="line">        &#123;%- <span class="keyword">set</span> ccImage = '&lt;img src="' + url_for(theme.images + '/cc-' + theme.creative_commons.license + '.svg') + '" alt="Creative Commons"&gt;' %&#125;</span><br><span class="line">            &#123;&#123; next_url(ccURL, ccImage, &#123;<span class="attr">class</span>: <span class="string">'cc-opacity'</span>&#125;) &#125;&#125;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"post-toc-wrap motion-element sidebar-panel sidebar-panel-active"</span> id=<span class="string">"post-toc-wrap"</span>&gt;</span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"item_headline"</span>&gt;</span><br><span class="line">        &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"fa fa-list"</span> aria-hidden=<span class="string">"true"</span>&gt;</span><br><span class="line">        &lt;<span class="regexp">/i&gt;&lt;span&gt;目录&lt;/</span>span&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div class="post-toc"&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &#123;%- set next_toc_number = theme.toc.number %&#125;</span></span><br><span class="line"><span class="regexp">        &#123;%- if page.toc_number !== undefined %&#125;</span></span><br><span class="line"><span class="regexp">            &#123;%- set next_toc_number = page.toc_number %&#125;</span></span><br><span class="line"><span class="regexp">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="regexp">        &#123;%- set next_toc_max_depth = page.toc_max_depth|default(theme.toc.max_depth)|default(6) %&#125;</span></span><br><span class="line"><span class="regexp">        &#123;%- set toc = toc(page.content, &#123; "class": "nav", list_number: next_toc_number, max_depth: next_toc_max_depth &#125;) %&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &#123;%- if toc.length &lt;= 1 %&#125;</span></span><br><span class="line"><span class="regexp">            &lt;p class="post-toc-empty"&gt;&#123;&#123; __('post.toc_empty') &#125;&#125;&lt;/</span>p&gt;</span><br><span class="line">        &#123;% <span class="keyword">else</span> %&#125;</span><br><span class="line">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"post-toc-content"</span>&gt;&#123;&#123; toc &#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &#123;%- endif %&#125;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;!--/</span>noindex--&gt;</span><br><span class="line">    &#123;%- endif %&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>之后就可以自由发挥添加CSS样式了。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags" id="post-tags">
+            
+              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+            
+              <a href="/tags/NexT/" rel="tag"><i class="fa fa-tag"></i> NexT</a>
+            
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+            
+              <a href="/tags/Django/" rel="tag"><i class="fa fa-tag"></i> Django</a>
+            
+          </div>
+          <script type="text/javascript">
+            var tagsall=document.getElementsByClassName("post-tags")
+            for (var i = tagsall.length - 1; i >= 0; i--){
+                var tags=tagsall[i].getElementsByTagName("a");
+                for (var j = tags.length - 1; j >= 0; j--) {
+                    var r=Math.floor(Math.random()*75+130);
+                    var g=Math.floor(Math.random()*75+100);
+                    var b=Math.floor(Math.random()*75+80);
+                    tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                }
+            }                        
+          </script>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/20/hexo彩色标签/" rel="next" title="Hexo折腾日记之标签篇">
+                  <i class="fa fa-chevron-left"></i> Hexo折腾日记之标签篇
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/22/ubuntu安装pycharm/" rel="prev" title="Ubuntu 16.04安装Pycharm">
+                  Ubuntu 16.04安装Pycharm <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+      <!--noindex-->
+        <div class="author-overview">
+            <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+              
+                <img class="site-author-image" itemprop="image"
+                  src="/images/1.jpeg"
+                  alt="Zheng Yujie">
+              
+              <p class="site-author-name" itemprop="name">Zheng Yujie</p>
+              <div class="site-description motion-element" itemprop="description">C++/Python/深度学习</div>
+            </div>
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                  
+                    <a href="/archives/">
+                  
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                  
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                  
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://github.com/zhengyujie" title="GitHub &rarr; https://github.com/zhengyujie" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="mailto:zhengyujie97@126.com" title="E-Mail &rarr; mailto:zhengyujie97@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://music.163.com/#/playlist?id=327924141" title="Music &rarr; https://music.163.com/#/playlist?id=327924141" rel="noopener" target="_blank"><i class="fa fa-fw fa-headphones"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://www.google.com" title="Google &rarr; https://www.google.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+
+          
+        </div>
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active" id="post-toc-wrap">
+          <div class="item_headline">
+            <i class="fa fa-list" aria-hidden="true">
+            </i><span>目录</span>
+          </div>
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#折腾过程"><span class="nav-number">2.</span> <span class="nav-text">折腾过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#改造思路"><span class="nav-number">2.1.</span> <span class="nav-text">改造思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体实现"><span class="nav-number">2.2.</span> <span class="nav-text">具体实现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
+    <span class="post-meta-divider">|</span>
+    <span title="站点总字数">全站共194k字</span>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        <span>0%</span>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+<script>
+NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.9/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: true,
+    appId: 'QhpM05HufWMwqxw5TW8GGKHt-gzGzoHsz',
+    appKey: 'ReXaLSgoPNRCjW8dT9eEyR25',
+    placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧！',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
