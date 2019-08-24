@@ -1736,7 +1736,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #1dff8b;
+  background: #5711e4;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2908,7 +2908,7 @@ ul.breadcrumb li+li:last-child {
   }
 }
 .blog-show {
-  background: url("http://pwbhioup3.bkt.clouddn.com/blog-head.jpg");
+  background: url("https://i.loli.net/2019/08/24/zSfQqaeXsu67GUT.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;

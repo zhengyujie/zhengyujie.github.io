@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","width":300,"display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="&amp;#x8BBA;&amp;#x6587;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://arxiv.org/pdf/1811.05181.pdf&amp;#x4EE3;&amp;#x7801;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://github.com/libuyu/GHM_Detection  Abstract&amp;#x5C3D;&amp;#x7BA1;&amp;#x5355;&amp;#x9636;&amp;#">
+<meta name="keywords" content="目标检测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读笔记6：Gradient Harmonized Single-stage Detector">
+<meta property="og:url" content="http://zhengyujie.cn/2019/08/01/论文阅读笔记6/index.html">
+<meta property="og:site_name" content="浅笑の博客">
+<meta property="og:description" content="&amp;#x8BBA;&amp;#x6587;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://arxiv.org/pdf/1811.05181.pdf&amp;#x4EE3;&amp;#x7801;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://github.com/libuyu/GHM_Detection  Abstract&amp;#x5C3D;&amp;#x7BA1;&amp;#x5355;&amp;#x9636;&amp;#">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/01/论文阅读笔记6/1.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/01/论文阅读笔记6/2.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/01/论文阅读笔记6/3.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/01/论文阅读笔记6/4.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/01/论文阅读笔记6/5.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/01/论文阅读笔记6/6.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/01/论文阅读笔记6/7.png">
+<meta property="og:updated_time" content="2019-08-01T05:54:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="论文阅读笔记6：Gradient Harmonized Single-stage Detector">
+<meta name="twitter:description" content="&amp;#x8BBA;&amp;#x6587;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://arxiv.org/pdf/1811.05181.pdf&amp;#x4EE3;&amp;#x7801;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://github.com/libuyu/GHM_Detection  Abstract&amp;#x5C3D;&amp;#x7BA1;&amp;#x5355;&amp;#x9636;&amp;#">
+<meta name="twitter:image" content="http://zhengyujie.cn/2019/08/01/论文阅读笔记6/1.png">
+  <link rel="canonical" href="http://zhengyujie.cn/2019/08/01/论文阅读笔记6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>论文阅读笔记6：Gradient Harmonized Single-stage Detector | 浅笑の博客</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">浅笑の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我们的征途是星辰大海</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-guestbook">
+      
+    
+      
+    
+
+    <a href="/guestbook/" rel="section"><i class="menu-item-icon fa fa-fw fa-paper-plane-o"></i> <br>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+  <a href="https://github.com/zhengyujie" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/01/论文阅读笔记6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zheng Yujie">
+      <meta itemprop="description" content="C++/Python/深度学习">
+      <meta itemprop="image" content="/images/1.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅笑の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">论文阅读笔记6：Gradient Harmonized Single-stage Detector
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-01 15:42:05" itemprop="dateCreated datePublished" datetime="2019-08-01T15:42:05+08:00">2019-08-01</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/08/01/论文阅读笔记6/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/01/论文阅读笔记6/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>2.7k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>&#x8BBA;&#x6587;&#x5730;&#x5740;&#xFF1A;<a href="https://arxiv.org/pdf/1811.05181.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1811.05181.pdf</a><br>&#x4EE3;&#x7801;&#x5730;&#x5740;&#xFF1A;<a href="https://github.com/libuyu/GHM_Detection" target="_blank" rel="noopener">https://github.com/libuyu/GHM_Detection</a></p>
+</blockquote>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>&#x5C3D;&#x7BA1;&#x5355;&#x9636;&#x6BB5;&#x7684;&#x68C0;&#x6D4B;&#x5668;&#x901F;&#x5EA6;&#x8F83;&#x5FEB;&#xFF0C;&#x4F46;&#x5728;&#x8BAD;&#x7EC3;&#x65F6;&#x5B58;&#x5728;&#x4EE5;&#x4E0B;&#x51E0;&#x70B9;&#x4E0D;&#x8DB3;&#xFF0C;&#x6B63;&#x8D1F;&#x6837;&#x672C;&#x4E4B;&#x95F4;&#x7684;&#x5DE8;&#x5927;&#x5DEE;&#x8DDD;&#xFF0C;&#x540C;&#x6837;&#xFF0C;easy,hard&#x6837;&#x672C;&#x7684;&#x5DE8;&#x5927;&#x5DEE;&#x8DDD;&#x3002;&#x672C;&#x6587;&#x4ECE;&#x68AF;&#x5EA6;&#x89D2;&#x5EA6;&#x51FA;&#x53D1;&#xFF0C;&#x6307;&#x51FA;&#x4E86;&#x4E0A;&#x9762;&#x4E24;&#x4E2A;&#x4E0D;&#x8DB3;&#x5E26;&#x6765;&#x7684;&#x5F71;&#x54CD;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x4F5C;&#x8005;&#x8FDB;&#x4E00;&#x6B65;&#x63D0;&#x51FA;&#x4E86;&#x68AF;&#x5EA6;&#x534F;&#x8C03;&#x673A;&#x5236;(GHM)&#x7528;&#x4E8E;&#x907F;&#x5F00;&#x4E0A;&#x9762;&#x7684;&#x4E0D;&#x8DB3;&#x3002;GHM&#x7684;&#x601D;&#x60F3;&#x53EF;&#x4EE5;&#x5D4C;&#x5165;&#x5230;&#x7528;&#x4E8E;&#x5206;&#x7C7B;&#x7684;&#x4EA4;&#x53C9;&#x71B5;&#x635F;&#x5931;&#x6216;&#x8005;&#x7528;&#x4E8E;&#x56DE;&#x5F52;&#x7684;Smooth-L1&#x635F;&#x5931;&#x4E2D;&#xFF0C;&#x6700;&#x540E;&#xFF0C;&#x672C;&#x6587;&#x4FEE;&#x6539;&#x8FC7;&#x7684;&#x635F;&#x5931;&#x51FD;&#x6570;GHM-C&#x4E0E;GHM-R&#x7528;&#x4E8E;&#x5E73;&#x8861;anchor&#x5206;&#x7C7B;&#x53CA;&#x56DE;&#x5F52;&#x4E8C;&#x8005;&#x7684;&#x68AF;&#x5EA6;&#x3002;&#x63D0;&#x51FA;&#x7684;`&#x6A21;&#x578B;&#x5728;COCO&#x6D4B;&#x8BD5;&#x96C6;&#x4E0A;&#x7684;mAP&#x8FBE;&#x5230;&#x4E86;41.6&#xFF0C;&#x4E0E;$Focal Loss(FL)+SL_{1}$&#x76F8;&#x6BD4;&#xFF0C;&#x8D85;&#x8FC7;&#x4E86;0.8&#x3002;</p>
+<a id="more"></a>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>&#x4F46;&#x9636;&#x6BB5;&#x68C0;&#x6D4B;&#x5668;&#x5728;&#x8BAD;&#x7EC3;&#x65F6;&#x9762;&#x4E34;&#x7684;&#x6700;&#x5177;&#x6311;&#x6218;&#x6027;&#x7684;&#x95EE;&#x9898;&#x5C31;&#x662F;easy&#x548C;hard&#x6837;&#x672C;&#x4EE5;&#x53CA;positive&#x548C;negative&#x6837;&#x672C;&#x4E4B;&#x95F4;&#x7684;&#x4E25;&#x91CD;&#x4E0D;&#x5E73;&#x8861;&#x3002;&#x5DE8;&#x5927;&#x6570;&#x91CF;&#x7684;easy&#x4EE5;&#x53CA;&#x80CC;&#x666F;&#x6837;&#x672C;&#x5F71;&#x54CD;&#x4E86;&#x68C0;&#x6D4B;&#x5668;&#x7684;&#x8BAD;&#x7EC3;&#x3002;&#x5F52;&#x529F;&#x4E8E;proposal-driven&#x673A;&#x5236;&#xFF0C;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x5728;&#x4E8C;&#x9636;&#x6BB5;&#x68C0;&#x6D4B;&#x5668;&#x4E2D;&#x5E76;&#x4E0D;&#x5B58;&#x5728;&#x3002;&#x540E;&#x6765;&#xFF0C;&#x51FA;&#x73B0;&#x4E86;&#x57FA;&#x4E8E;OHEM&#x7684;&#x6837;&#x672C;&#x6316;&#x6398;&#x6280;&#x672F;&#xFF0C;&#x4F46;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x820D;&#x5F03;&#x4E86;&#x5927;&#x90E8;&#x5206;&#x6837;&#x672C;&#xFF0C;&#x8BAD;&#x7EC3;&#x4E5F;&#x4E0D;&#x662F;&#x5F88;&#x9AD8;&#x6548;&#xFF0C;&#x540E;&#x6765;Focal Loss&#x901A;&#x8FC7;&#x4FEE;&#x6539;&#x635F;&#x5931;&#x51FD;&#x6570;&#x6765;&#x8C03;&#x6574;&#x4E0D;&#x5E73;&#x8861;&#x95EE;&#x9898;&#x3002;&#x4F46;&#x662F;Focal loss&#x5F15;&#x5165;&#x4E86;&#x4E24;&#x4E2A;&#x8D85;&#x53C2;&#x6570;&#xFF0C;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x5927;&#x91CF;&#x7684;&#x5B9E;&#x9A8C;&#x8FDB;&#x884C;&#x8C03;&#x8BD5;&#xFF0C;&#x540C;&#x65F6;&#xFF0C;Focal loss&#x662F;&#x4E00;&#x79CD;&#x9759;&#x6001;&#x635F;&#x5931;&#xFF0C;&#x5BF9;&#x6570;&#x636E;&#x96C6;&#x7684;&#x5206;&#x5E03;&#x4E0D;&#x654F;&#x611F;&#xFF0C;&#x800C;&#x5728;&#x8BAD;&#x7EC3;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6570;&#x636E;&#x96C6;&#x7684;&#x5206;&#x5E03;&#x662F;&#x4F1A;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x7684;&#x3002;<br>&#x672C;&#x6587;&#x6307;&#x51FA;&#x7C7B;&#x522B;&#x4E0D;&#x5E73;&#x8861;&#x4E3B;&#x8981;&#x5F52;&#x7ED3;&#x4E8E;&#x96BE;&#x5EA6;&#x7684;&#x4E0D;&#x5E73;&#x8861;&#xFF0C;&#x800C;&#x96BE;&#x5EA6;&#x7684;&#x4E0D;&#x5E73;&#x8861;&#x53EF;&#x4EE5;&#x5F52;&#x7ED3;&#x4E3A;&#xFF0C;gradient norm&#x5206;&#x5E03;&#x7684;&#x4E0D;&#x5E73;&#x8861;&#x3002;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x6B63;&#x6837;&#x672C;&#x5F88;&#x5BB9;&#x6613;&#x88AB;&#x5206;&#x7C7B;&#xFF0C;&#x5219;&#x8BE5;&#x6837;&#x672C;&#x4E3A;easy example&#x540C;&#x65F6;&#x6A21;&#x578B;&#x4ECE;&#x4E2D;&#x5F97;&#x5230;&#x7684;&#x4FE1;&#x606F;&#x91CF;&#x8F83;&#x5C11;&#xFF0C;&#x6BD4;&#x5982;&#xFF0C;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x6837;&#x672C;&#xFF0C;&#x53EA;&#x4EA7;&#x751F;&#x4E86;&#x4E00;&#x70B9;&#x68AF;&#x5EA6;&#x4FE1;&#x606F;&#x3002;&#x6A21;&#x578B;&#x5E94;&#x8BE5;&#x5173;&#x6CE8;&#x8FD9;&#x4E2A;&#x88AB;&#x5206;&#x9519;&#x7684;&#x6837;&#x672C;&#x65E0;&#x8BBA;&#x5B83;&#x5C5E;&#x4E8E;&#x54EA;&#x4E2A;&#x7C7B;&#x522B;&#x3002;&#x4ECE;&#x6574;&#x4F53;&#x4E0A;&#x6765;&#x770B;&#xFF0C;&#x8D1F;&#x6837;&#x672C;&#x6613;&#x4E8E;&#x591A;&#x4E3A;easy examples&#xFF0C;&#x800C;hard examples&#x901A;&#x5E38;&#x4E3A;&#x4E3A;&#x6B63;&#x6837;&#x672C;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x4E24;&#x79CD;&#x4E0D;&#x5E73;&#x8861;&#x53EF;&#x4EE5;&#x5F52;&#x7ED3;&#x4E3A;&#x5C5E;&#x6027;&#x4E0A;&#x7684;&#x4E0D;&#x5E73;&#x8861;&#x3002;<br>&#x6B64;&#x5916;&#xFF0C;&#x4E0A;&#x9762;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x4E0D;&#x5E73;&#x8861;(hard/easy , positive/negative)&#x53EF;&#x4EE5;&#x7531;gradient norm&#x7684;&#x5206;&#x5E03;&#x8868;&#x793A;&#x3002;&#x5E26;&#x6709;gradient norm&#x7684;&#x6837;&#x672C;&#x5BC6;&#x5EA6;&#xFF0C;&#x88AB;&#x79F0;&#x4E3A;&#x68AF;&#x5EA6;&#x5BC6;&#x5EA6;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x5DE6;&#x4FA7;&#x6240;&#x793A;&#xFF0C;&#x7531;&#x4E8E;&#x5B58;&#x5728;&#x5927;&#x91CF;&#x7684;&#x7B80;&#x5355;&#x8D1F;&#x6837;&#x672C;&#xFF0C;gradient norm&#x8F83;&#x5C0F;&#x7684;&#x6837;&#x672C;&#x7684;&#x5BC6;&#x5EA6;&#x5F88;&#x5927;&#x3002;&#x867D;&#x7136;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x6837;&#x672C;&#x5BF9;&#x6574;&#x4F53;&#x7684;&#x68AF;&#x5EA6;&#x8D21;&#x732E;&#x5F88;&#x5C0F;&#xFF0C;&#x4F46;&#x5927;&#x91CF;&#x7684;&#x7B80;&#x5355;&#x6837;&#x672C;&#x4F5C;&#x7528;&#x540E;&#x4F1A;&#x5360;&#x636E;&#x8BAD;&#x7EC3;&#x7684;&#x4E3B;&#x5BFC;&#xFF0C;&#x4F7F;&#x8BAD;&#x7EC3;&#x8FC7;&#x7A0B;&#x5E76;&#x4E0D;&#x662F;&#x5F88;&#x9AD8;&#x6548;&#x3002;&#x53E6;&#x5916;&#x6211;&#x4EEC;&#x53D1;&#x73B0;gradient norm&#x8F83;&#x5927;&#x7684;&#x6837;&#x672C;(hard examples)&#x7684;&#x5BC6;&#x5EA6;&#x4E5F;&#x5927;&#x4E8E;&#x4E2D;&#x95F4;&#x6837;&#x672C;&#x7684;&#x5BC6;&#x5EA6;&#x3002;<br><img src="/2019/08/01/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;6/1.png" alt><br>&#x5F97;&#x76CA;&#x4E8E;&#x5BF9;gradient norm&#x7684;&#x5206;&#x5E03;&#x7684;&#x5206;&#x6790;&#xFF0C;&#x6211;&#x4EEC;&#x63D0;&#x51FA;&#x4E86;&#x4E00;&#x4E2A; gradient harmonizing mechanism (GHM)&#x6765;&#x9AD8;&#x6548;&#x7684;&#x8BAD;&#x7EC3;&#x5355;&#x9636;&#x6BB5;&#x7684;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x6A21;&#x578B;&#xFF0C;&#x8FD9;&#x4E2A;&#x673A;&#x5236;&#x7740;&#x91CD;&#x4E8E;&#x4E0D;&#x540C;&#x6837;&#x672C;&#x7684;&#x68AF;&#x5EA6;&#x5206;&#x5E03;&#x7684;harmony&#x3002;GHM&#x5148;&#x7EDF;&#x8BA1;&#x5177;&#x6709;&#x76F8;&#x4F3C;&#x68AF;&#x5EA6;&#x5BC6;&#x5EA6;&#x7684;&#x6837;&#x672C;&#x7684;&#x6570;&#x91CF;&#xFF0C;&#x5BF9;&#x6BCF;&#x4E00;&#x4E2A;&#x6837;&#x672C;&#x6839;&#x636E;&#x5176;&#x5BC6;&#x5EA6;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;harmonizing&#x53C2;&#x6570;&#x3002;&#x4F7F;&#x7528;GHM&#x6765;&#x8BAD;&#x7EC3;&#xFF0C;&#x6BCF;&#x79CD;&#x6837;&#x672C;&#x7684;&#x5206;&#x5E03;&#x4F1A;&#x8D8B;&#x4E8E;&#x5E73;&#x8861;&#xFF0C;&#x8BAD;&#x7EC3;&#x8FC7;&#x7A0B;&#x4F1A;&#x53D8;&#x5F97;&#x66F4;&#x9AD8;&#x6548;&#x548C;&#x7A33;&#x5B9A;&#x3002;<br>&#x5728;&#x5B9E;&#x9A8C;&#x4E2D;&#xFF0C;&#x5BF9;&#x68AF;&#x5EA6;&#x7684;&#x6539;&#x53D8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5BF9;&#x635F;&#x5931;&#x51FD;&#x6570;&#x7684;&#x91CD;&#x65B0;&#x8BBE;&#x8BA1;&#x6765;&#x7B49;&#x6548;&#x7684;&#x5B9E;&#x73B0;&#x3002;&#x6211;&#x4EEC;&#x628A;GHM&#x5D4C;&#x5165;&#x5206;&#x7C7B;&#x635F;&#x5931;&#xFF0C;&#x547D;&#x540D;&#x4E3A;GHM-C&#x635F;&#x5931;&#xFF0C;&#x540C;&#x6837;&#x6211;&#x4EEC;&#x4E5F;&#x5728;&#x56DE;&#x5F52;&#x5206;&#x652F;&#x4E2D;&#x4F7F;&#x7528;&#x4E86;GHM&#xFF0C;&#x547D;&#x540D;&#x4E3A;GHM-R&#x635F;&#x5931;&#x3002;<br>&#x6211;&#x4EEC;&#x7684;&#x6700;&#x4E3B;&#x8981;&#x8D21;&#x732E;&#xFF1A;</p>
+<ol>
+<li>&#x6211;&#x4EEC;&#x63ED;&#x793A;&#x4E86;&#x5355;&#x9636;&#x6BB5;&#x68C0;&#x6D4B;&#x5668;&#x5728;gradient norm&#x5206;&#x5E03;&#x65B9;&#x9762;&#x5B58;&#x5728;&#x663E;&#x8457;&#x4E0D;&#x8DB3;&#x7684;&#x57FA;&#x672C;&#x539F;&#x7406;&#xFF0C;&#x5E76;&#x4E14;&#x63D0;&#x51FA;&#x4E86;&#x4E00;&#x79CD;&#x65B0;&#x7684;&#x68AF;&#x5EA6;&#x5E73;&#x8861;&#x673A;&#x5236;(GHM)&#x6765;&#x5904;&#x7406;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;</li>
+<li>&#x6211;&#x4EEC;&#x63D0;&#x51FA;&#x4E86;GHM-C&#x4EE5;&#x53CA;GHM-R&#xFF0C;&#x5B83;&#x4EEC;&#x7EA0;&#x6B63;&#x4E86;&#x4E0D;&#x540C;&#x6837;&#x672C;&#x7684;&#x68AF;&#x5EA6;&#x5206;&#x5E03;&#xFF0C;&#x5E76;&#x4E14;&#x5BF9;&#x8D85;&#x53C2;&#x6570;&#x5177;&#x6709;&#x9C81;&#x68D2;&#x6027;&#x3002;</li>
+<li>&#x901A;&#x8FC7;&#x4F7F;&#x7528;GHM&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8F7B;&#x677E;&#x5730;&#x8BAD;&#x7EC3;&#x5355;&#x9636;&#x6BB5;&#x68C0;&#x6D4B;&#x5668;&#xFF0C;&#x65E0;&#x9700;&#x4EFB;&#x4F55;&#x6570;&#x636E;&#x91C7;&#x6837;&#x7B56;&#x7565;&#xFF0C;&#x5E76;&#x4E14;&#x5728;COCO&#x57FA;&#x51C6;&#x6D4B;&#x8BD5;&#x4E2D;&#x53D6;&#x5F97;&#x4E86;state-of-the-art&#x7684;&#x7ED3;&#x679C;&#x3002;</li>
+</ol>
+<h1 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h1><ul>
+<li><strong>Object Detection</strong></li>
+<li><strong>Object Function for Object Detector</strong></li>
+</ul>
+<h1 id="Gradient-Harmonizing-Mechanism"><a href="#Gradient-Harmonizing-Mechanism" class="headerlink" title="Gradient Harmonizing Mechanism"></a>Gradient Harmonizing Mechanism</h1><h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;&#x5019;&#x9009;&#x6846;&#xFF0C;&#x5B83;&#x7684;&#x771F;&#x5B9E;&#x6807;&#x7B7E;&#x4E3A;$p^{*}\in\lbrace0,1\rbrace$&#xFF0C;&#x9884;&#x6D4B;&#x7684;&#x503C;&#x4E3A;$p\in[0,1]$&#xFF0C;&#x91C7;&#x7528;&#x4E8C;&#x5143;&#x4EA4;&#x53C9;&#x71B5;&#x635F;&#x5931;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+L_{CE}(p,p^{*}) = \left\{
+  \begin{array}{lr}
+    -log(p) & if x < 0\\
+    -log(1-p) & if x \ge 0
+  \end{array}
+\right.</script><p>&#x5047;&#x8BBE;$x$&#x4E3A;&#x6A21;&#x578B;&#x8F93;&#x51FA;&#xFF0C;&#x4F7F;&#x5F97;$p=sigmoid(x)$&#xFF0C;&#x90A3;&#x4E48;&#x4E0A;&#x8FF0;&#x7684;&#x4EA4;&#x53C9;&#x71B5;&#x635F;&#x5931;&#x5BF9;$x$&#x7684;&#x5BFC;&#x6570;&#x4E3A;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial L_{CE}}{\partial x}
+& = \left\{
+  \begin{array}{lr}
+    p-1 & if x < 0\\
+    p & if x \ge 0
+  \end{array}
+\right. \\
+& = p-p^{*}
+\end{aligned}</script><p>&#x90A3;&#x4E48;&#x68AF;&#x5EA6;&#x7684;&#x6A21;&#x5B9A;&#x4E49;&#x4E3A;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+g = |p-p^{*}| = \left\{
+  \begin{array}{lr}
+    1-p & if p^{*}=1 \\
+    p   & if p^{*}=0
+  \end{array}
+\right.</script><p>$g$&#x4EE3;&#x8868;&#x4E86;&#x8FD9;&#x4E2A;&#x6837;&#x672C;&#x7684;&#x96BE;&#x6613;&#x7A0B;&#x5EA6;&#x4EE5;&#x53CA;&#x5B83;&#x5BF9;&#x6574;&#x4E2A;&#x68AF;&#x5EA6;&#x7684;&#x8D21;&#x732E;&#x3002;<br>&#x4E0B;&#x56FE;&#x662F;&#x4E00;&#x4E2A;&#x6536;&#x655B;&#x6A21;&#x578B;&#x7684;&#x68AF;&#x5EA6;&#x6A21;&#x957F;&#x7684;&#x5206;&#x5E03;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#x7B80;&#x5355;&#x6837;&#x672C;&#x7684;&#x6570;&#x91CF;&#x5F88;&#x5927;&#xFF0C;&#x4F7F;&#x5F97;&#x5B83;&#x5BF9;&#x68AF;&#x5EA6;&#x7684;&#x6574;&#x4E2A;&#x8D21;&#x732E;&#x5F88;&#x5927;&#xFF0C;&#x53E6;&#x4E00;&#x4E2A;&#x9700;&#x8981;&#x7684;&#x5730;&#x65B9;&#x662F;&#xFF0C;&#x5728;&#x68AF;&#x5EA6;&#x6A21;&#x8F83;&#x5927;&#x7684;&#x5730;&#x65B9;&#x4ECD;&#x7136;&#x5B58;&#x5728;&#x7740;&#x4E00;&#x5B9A;&#x6570;&#x91CF;&#x7684;&#x5206;&#x5E03;&#xFF0C;&#x8BF4;&#x660E;&#x6A21;&#x578B;&#x5F88;&#x96BE;&#x6B63;&#x786E;&#x5904;&#x7406;&#x8FD9;&#x4E9B;&#x6837;&#x672C;&#xFF0C;&#x4F5C;&#x8005;&#x628A;&#x8FD9;&#x7C7B;&#x6837;&#x672C;&#x5F52;&#x4E3A;&#x79BB;&#x7FA4;&#x6837;&#x672C;&#xFF0C;&#x56E0;&#x4E3A;&#x4ED6;&#x4EEC;&#x7684;&#x68AF;&#x5EA6;&#x6A21;&#x4E0E;&#x6574;&#x4F53;&#x7684;&#x68AF;&#x5EA6;&#x6A21;&#x7684;&#x5206;&#x5E03;&#x5DEE;&#x5F02;&#x592A;&#x5927;&#xFF0C;&#x5E76;&#x4E14;&#x6A21;&#x578B;&#x5F88;&#x96BE;&#x5904;&#x7406;&#xFF0C;&#x5982;&#x679C;&#x8BA9;&#x6A21;&#x578B;&#x5F3A;&#x884C;&#x53BB;&#x5B66;&#x4E60;&#x8FD9;&#x4E9B;&#x79BB;&#x7FA4;&#x6837;&#x672C;&#xFF0C;&#x53CD;&#x800C;&#x4F1A;&#x5BFC;&#x81F4;&#x6574;&#x4F53;&#x6027;&#x80FD;&#x4E0B;&#x964D;&#x3002;<br><img src="/2019/08/01/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;6/2.png" alt></p>
+<h2 id="Gradient-Density"><a href="#Gradient-Density" class="headerlink" title="Gradient Density"></a>Gradient Density</h2><p>&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#x7684;&#x68AF;&#x5EA6;&#x5BC6;&#x5EA6;&#x51FD;&#x6570;&#x4E3A;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+GD(g)=\frac{1}{l_{\epsilon}(g)}\sum_{k=1}^N\delta_{\epsilon}(g_k,g)</script><p>&#x5176;&#x4E2D;$g_k$&#x4E3A;&#x7B2C;$k$&#x4E2A;&#x6837;&#x672C;&#x7684;gradient norm&#x3002;</p>
+<script type="math/tex; mode=display">
+\delta_{\epsilon}(x,y)= \left\{
+  \begin{array}{lr}
+    1 & if y-\frac{\epsilon}{2} <= x < y+\frac{\epsilon}{2} \\
+    0 & otherwise
+  \end{array}
+\right.</script><script type="math/tex; mode=display">
+l_{\epsilon}(g)=min(g+\frac{\epsilon}{2},1)-max(g-\frac{\epsilon}{2},0)</script><p>g&#x7684;gradient norm&#x5373;&#x4E3A;&#x5728;&#x4EE5;g&#x4E3A;&#x4E2D;&#x5FC3;&#xFF0C;&#x957F;&#x5EA6;&#x4E3A;$\epsilon$&#x7684;&#x533A;&#x57DF;&#x5185;&#x7684;&#x6837;&#x672C;&#x6570;&#xFF0C;&#x5E76;&#x4E14;&#x7531;&#x8BE5;&#x533A;&#x57DF;&#x7684;&#x6709;&#x6548;&#x957F;&#x5EA6;&#x8FDB;&#x884C;&#x5F52;&#x4E00;&#x5316;&#x3002;<br>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x68AF;&#x5EA6;&#x5BC6;&#x5EA6;harmonizing&#x53C2;&#x6570;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+\beta_i=\frac{N}{GD(g_i)}</script><p>$N$&#x4E3A;&#x6837;&#x672C;&#x603B;&#x6570;</p>
+<h2 id="GHM-C-Loss"><a href="#GHM-C-Loss" class="headerlink" title="GHM-C Loss"></a>GHM-C Loss</h2><p>&#x6839;&#x636E;&#x68AF;&#x5EA6;&#x5BC6;&#x5EA6;harmonizing&#x53C2;&#x6570;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x635F;&#x5931;&#x51FD;&#x6570;&#x7684;&#x68AF;&#x5EA6;&#x5BC6;&#x5EA6;harmonized&#x7684;&#x5F62;&#x5F0F;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L_{GHM-C} 
+& =\frac{1}{N}\sum_{i=1}^N\beta_iL_{CE}(p_i,{p_i}^{*}) \\
+& = \sum_{i=1}^N\frac{L_{CE}(p_i,p_i^*)}{GD(g_i)}
+\end{aligned}</script><p><img src="/2019/08/01/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;6/3.png" alt><br>&#x4E0A;&#x56FE;&#x5BF9;&#x6BD4;&#x4E86;&#x4E0D;&#x540C;&#x635F;&#x5931;&#x51FD;&#x6570;&#x4E0B;&#x7684;gradient norm&#x7684;&#x5206;&#x5E03;&#x3002;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x4E4B;&#x524D;&#x63D0;&#x5230;&#x7684;&#x7B80;&#x5355;&#x6837;&#x672C;&#x7684;&#x6743;&#x91CD;&#x5F97;&#x5230;&#x4E86;&#x8F83;&#x5927;&#x5E45;&#x5EA6;&#x5730;&#x964D;&#x4F4E;&#xFF0C;&#x79BB;&#x7FA4;&#x6837;&#x672C;&#x4E5F;&#x5F97;&#x5230;&#x4E86;&#x4E00;&#x5B9A;&#x7A0B;&#x5EA6;&#x7684;&#x964D;&#x6743;&#x3002;&#x4F7F;&#x7528;&#x7ECF;&#x8FC7;&#x6539;&#x5584;&#x4E4B;&#x540E;&#x7684;&#x635F;&#x5931;&#x51FD;&#x6570;&#x4F7F;&#x5F97;&#x8BAD;&#x7EC3;&#x8FC7;&#x7A0B;&#x66F4;&#x52A0;&#x9AD8;&#x6548;&#x548C;&#x9C81;&#x68D2;&#x3002;</p>
+<h2 id="Unit-Region-Approximation"><a href="#Unit-Region-Approximation" class="headerlink" title="Unit Region Approximation"></a>Unit Region Approximation</h2><h3 id="Complexity-Analysis"><a href="#Complexity-Analysis" class="headerlink" title="Complexity Analysis"></a>Complexity Analysis</h3><p>&#x5E38;&#x89C4;&#x8BA1;&#x7B97;&#x6240;&#x6709;&#x6837;&#x672C;&#x68AF;&#x5EA6;&#x503C;&#x7684;&#x7B97;&#x6CD5;&#x590D;&#x6742;&#x5EA6;&#x4E3A;$O(N^2)$&#xFF0C;&#x5373;&#x4F7F;&#x4F7F;&#x7528;&#x5E76;&#x884C;&#x8BA1;&#x7B97;&#xFF0C;&#x6BCF;&#x4E2A;&#x8BA1;&#x7B97;&#x8282;&#x70B9;&#x4ECD;&#x6709;N&#x7684;&#x8BA1;&#x7B97;&#x91CF;&#x3002;&#x6BD4;&#x8F83;&#x597D;&#x7684;&#x7B97;&#x6CD5;&#x9996;&#x5148;&#x4F1A;&#x4EE5;$O(NlogN)$&#x7684;&#x590D;&#x6742;&#x5EA6;&#x901A;&#x8FC7;&#x68AF;&#x5EA6;&#x6B63;&#x5219;&#x5BF9;&#x6837;&#x672C;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x961F;&#x5217;&#x6765;&#x626B;&#x63CF;&#x6837;&#x672C;&#xFF0C;&#x4EE5;$O(N)$&#x7684;&#x65B9;&#x5F0F;&#x5F97;&#x5230;&#x5BC6;&#x5EA6;&#x3002;&#x7531;&#x4E8E;&#x5355;&#x9636;&#x6BB5;&#x68C0;&#x6D4B;&#x4E2D;&#x7684;N&#x4E3A;$10^5$&#x6216;&#x8005;$10^6$&#xFF0C;&#x5176;&#x68AF;&#x5EA6;&#x8BA1;&#x7B97;&#x91CF;&#x4ECD;&#x5F88;&#x5927;&#xFF0C;&#x57FA;&#x4E8E;&#x6392;&#x5E8F;&#x7684;&#x7B97;&#x6CD5;&#x6BD4;&#x5E76;&#x884C;&#x8BA1;&#x7B97;&#x63D0;&#x5347;&#x7684;&#x5E45;&#x5EA6;&#x6709;&#x9650;&#x3002;&#x672C;&#x6587;&#x63D0;&#x51FA;&#x4E86;&#x8FD1;&#x4F3C;&#x7684;&#x83B7;&#x5F97;&#x6837;&#x672C;&#x68AF;&#x5EA6;&#x5BC6;&#x5EA6;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<h3 id="Unit-Region"><a href="#Unit-Region" class="headerlink" title="Unit Region"></a>Unit Region</h3><p>&#x6211;&#x4EEC;&#x628A;$g$&#x7684;&#x5206;&#x5E03;&#x7A7A;&#x95F4;&#x5206;&#x4E3A;&#x957F;&#x5EA6;&#x4E3A;$\epsilon$&#x7684;&#x72EC;&#x7ACB;unit&#x533A;&#x57DF;&#xFF0C;&#x6240;&#x4EE5;&#x5171;&#x6709;$M=\frac{1}{\epsilon}$&#x4E2A;&#x533A;&#x57DF;&#x3002;&#x8BA9;$r_j$&#x8868;&#x793A;&#x7B2C;$j$&#x4E2A;&#x533A;&#x57DF;&#xFF0C;&#x90A3;&#x4E48;$r_j=[(j-1)\epsilon,j\epsilon)$&#x3002;&#x8BA9;$R_j$&#x8868;&#x793A;&#x5728;$r_j$&#x533A;&#x57DF;&#x91CC;&#x7684;&#x6837;&#x672C;&#x4E2A;&#x6570;&#x3002;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;$ind(g)=t$&#xFF0C;&#x8868;&#x793A;$g$&#x6240;&#x5728;&#x7684;&#x533A;&#x57DF;&#x7684;&#x5E8F;&#x53F7;&#xFF0C;&#x6EE1;&#x8DB3;$(t-1)\epsilon&lt;=g&lt;t\epsilon$&#x3002;<br>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x8FD1;&#x4F3C;&#x68AF;&#x5EA6;&#x5BC6;&#x5EA6;&#x51FD;&#x6570;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+\hat{GD}(g)=\frac{R_{ind(g)}}{\epsilon}=R_{ind(g)}M</script><p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x5C31;&#x5F97;&#x5230;&#x4E86;&#x8FD1;&#x4F3C;&#x68AF;&#x5EA6;&#x5BC6;&#x5EA6;harmonizing&#x53C2;&#x6570;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+\hat{\beta}_i=\frac{N}{\hat{GD}(g_i)}</script><p>&#x6700;&#x540E;&#x6211;&#x4EEC;&#x5F97;&#x5230;&#x4E86;&#x91CD;&#x65B0;&#x5236;&#x5B9A;&#x7684;&#x635F;&#x5931;&#x51FD;&#x6570;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\hat{L}_{GHM-C}
+& =\frac{1}{N}\sum_{i=1}^N\hat{\beta}_iL_{CE}(p_i,{p_i}^{*}) \\
+& = \sum_{i=1}^N\frac{L_{CE}(p_i,p_i^*)}{\hat{GD}(g_i)}
+\end{aligned}</script><h3 id="EMA"><a href="#EMA" class="headerlink" title="EMA"></a>EMA</h3><p>&#x57FA;&#x4E8E;Mini-batch&#x7EDF;&#x8BA1;&#x7684;&#x65B9;&#x6CD5;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF1A;&#x5F53;&#x4E00;&#x4E2A;mini-batch&#x4E2D;&#x5B58;&#x5728;&#x5927;&#x91CF;&#x7684;&#x5F02;&#x5E38;&#x70B9;&#x65F6;&#xFF0C;&#x7EDF;&#x8BA1;&#x7ED3;&#x679C;&#x4E3A;&#x566A;&#x58F0;&#xFF0C;&#x800C;&#x4E14;&#x4F7F;&#x8BAD;&#x7EC3;&#x53D8;&#x5F97;&#x4E0D;&#x7A33;&#x5B9A;&#x3002;Exponential moving average(EMA)&#x662F;&#x89E3;&#x51B3;&#x6B64;&#x95EE;&#x9898;&#x7684;&#x5E38;&#x7528;&#x65B9;&#x6CD5;&#xFF0C;&#x6BD4;&#x5982;&#x5E26;&#x52A8;&#x91CF;&#x7684;SGD&#x53CA;BN&#x5904;&#x7406;&#x3002;&#x7531;&#x4E8E;&#x68AF;&#x5EA6;&#x5BC6;&#x5EA6;&#x7684;&#x8FD1;&#x4F3C;&#x8BA1;&#x7B97;&#x4E2D;&#x7684;&#x6837;&#x672C;&#x6765;&#x81EA;&#x4E8E;&#x5355;&#x5143;&#x533A;&#x57DF;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x5728;&#x6BCF;&#x4E2A;&#x5355;&#x5143;&#x533A;&#x57DF;&#x5E94;&#x7528;EMA&#xFF0C;&#x8FDB;&#x800C;&#x5F97;&#x5230;&#x66F4;&#x591A;&#x7A33;&#x5B9A;&#x7684;&#x68AF;&#x5EA6;&#x5BC6;&#x5EA6;&#x3002;</p>
+<h2 id="GHM-R-Loss"><a href="#GHM-R-Loss" class="headerlink" title="GHM-R Loss"></a>GHM-R Loss</h2><p>Smooth L1&#x635F;&#x5931;&#x51FD;&#x6570;&#x4E3A;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+L_{reg}=\sum_{i\in\lbrace x,y,w,h\rbrace}SL_1(t_i-t_i^*)</script><script type="math/tex; mode=display">
+SL_1(d) = \left\{
+  \begin{array}{lr}
+    \frac{d^2}{2\delta} & if |d|<=\delta \\
+    |d|-\frac{\delta}{2} & otherwise
+  \end{array}
+\right.</script><p>&#x7531;&#x4E8E;$d=t_i-t_i^*$,smoothL1 loss&#x5173;&#x4E8E;$t_1$&#x7684;&#x5BFC;&#x6570;&#x4E3A;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+\frac{\partial SL_1}{\partial t_i} = \frac{\partial SL_1}{\partial d} = \left\{
+  \begin{array}{lr}
+    \frac{d}{\delta} & if |d|<=\delta \\
+    sgn(d) & otherwise
+  \end{array}
+\right.</script><p>&#x5BF9;&#x4E8E;&#x6240;&#x6709;$|d|&gt;\delta$&#x7684;&#x6837;&#x672C;&#xFF0C;&#x90FD;&#x5177;&#x6709;&#x76F8;&#x540C;&#x7684;gradient norm$|\frac{\partial SL_1}{\partial t_i}|=1$&#x3002;&#x8FD9;&#x5C31;&#x4E0D;&#x53EF;&#x80FD;&#x4EC5;&#x4EC5;&#x4F9D;&#x9760;gradient norm&#x6765;&#x533A;&#x5206;&#x4E0D;&#x540C;&#x5C5E;&#x6027;&#x7684;&#x6837;&#x672C;&#x3002;&#x4E00;&#x4E2A;&#x9009;&#x62E9;&#x5C31;&#x662F;&#x76F4;&#x63A5;&#x4F7F;&#x7528;$|d|$&#x4F5C;&#x4E3A;&#x4E0D;&#x540C;&#x5C5E;&#x6027;&#x7684;&#x5EA6;&#x91CF;&#x3002;&#x4F46;&#x65B0;&#x7684;&#x95EE;&#x9898;&#x662F;$|d|$&#x7406;&#x8BBA;&#x4E0A;&#x53EF;&#x4EE5;&#x8FBE;&#x5230;&#x65E0;&#x7A77;&#x5927;&#xFF0C;&#x5355;&#x4F4D;&#x533A;&#x57DF;&#x7684;&#x8FD1;&#x4F3C;&#x65E0;&#x6CD5;&#x5B9E;&#x73B0;&#x3002;<br>&#x4E3A;&#x4E86;&#x4FBF;&#x6377;&#x7684;&#x5728;&#x56DE;&#x5F52;loss&#x4E0A;&#x5E94;&#x7528;GHM&#xFF0C;&#x6211;&#x4EEC;&#x628A;&#x4F20;&#x7EDF;&#x7684;$SL_1$loss&#x6539;&#x53D8;&#x4E3A;&#x66F4;&#x4F18;&#x96C5;&#x7684;&#x5F62;&#x5F0F;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+ASL_1(d)=\sqrt{d^2+{\mu}^2}-\mu</script><p>&#x5F53;$d$&#x5F88;&#x5C0F;&#x65F6;&#xFF0C;&#x8FD1;&#x4F3C;&#x4E3A;&#x4E00;&#x4E2A;&#x65B9;&#x5DEE;&#x51FD;&#x6570;(L2 loss)&#xFF0C;&#x5F53;$d$&#x5F88;&#x5927;&#x65F6;&#x8FD1;&#x4F3C;&#x4E3A;&#x4E00;&#x4E2A;&#x7EBF;&#x6027;&#x635F;&#x5931;(L1 loss)&#xFF0C;&#x79F0;&#x8BE5;&#x635F;&#x5931;&#x4E3A;Authentic Smooth L1&#x635F;&#x5931;&#xFF0C;&#x5177;&#x6709;&#x5F88;&#x597D;&#x7684;&#x5E73;&#x6ED1;&#x6027;&#xFF0C;&#x5176;&#x504F;&#x5BFC;&#x5B58;&#x5728;&#x4E14;&#x8FDE;&#x7EED;&#x3002;&amp;ASL_1$&#x7684;&#x504F;&#x5BFC;&#x5982;&#x4E0B;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+\frac{\partial ASL1}{\partial d}=\frac{d}{\sqrt{d^2+{\mu}^2}}</script><p>&#x6211;&#x4EEC;&#x5B9A;&#x4E49;$gr=|\frac{d}{\sqrt{d^2+{\mu}^2}}|$&#x4E3A;$ASL_1$loss&#x7684;gradient norm&#xFF0C;&#x5176;&#x68AF;&#x5EA6;&#x5206;&#x5E03;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF0C;&#x4ECE;&#x56FE;&#x4E2D;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#x5B58;&#x5728;&#x5927;&#x91CF;&#x7684;&#x5F02;&#x5E38;&#x70B9;&#x3002;&#x800C;&#x56DE;&#x5F52;&#x635F;&#x5931;&#x53EA;&#x4F5C;&#x7528;&#x5728;&#x6B63;&#x6837;&#x672C;&#x4E2D;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x5206;&#x7C7B;&#x4E0E;&#x56DE;&#x5F52;&#x7684;&#x5206;&#x5E03;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x3002;&#x6700;&#x540E;&#xFF0C;&#x5C06;GHM&#x5E94;&#x7528;&#x4E8E;&#x56DE;&#x5F52;loss:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L_{GHM-R} 
+& =\frac{1}{N}\sum_{i=1}^N\beta_iASL_1(d_i) \\
+& = \sum_{i=1}^N\frac{ASL_1(d_i)}{GD({gr}_i)}
+\end{aligned}</script><p><img src="/2019/08/01/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;6/4.png" alt></p>
+<p>&#x6211;&#x4EEC;&#x5F3A;&#x8C03;&#xFF0C;&#x5728;&#x8FB9;&#x6846;&#x56DE;&#x5F52;&#x4E2D;&#x5E76;&#x4E0D;&#x662F;&#x6240;&#x6709;&#x7684;&#x201C;&#x7B80;&#x5355;&#x6837;&#x672C;&#x201D;&#x90FD;&#x662F;&#x4E0D;&#x91CD;&#x8981;&#x7684;&#x3002;&#x5728;&#x5206;&#x7C7B;&#x4E2D;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x6837;&#x672C;&#x901A;&#x5E38;&#x662F;&#x4E00;&#x4E2A;&#x80CC;&#x666F;&#x533A;&#x57DF;&#xFF0C;&#x6709;&#x7740;&#x5F88;&#x4F4E;&#x7684;&#x9884;&#x6D4B;&#x53EF;&#x80FD;&#x503C;&#xFF0C;&#x4F1A;&#x88AB;&#x6392;&#x9664;&#x5728;&#x6700;&#x7EC8;&#x5019;&#x9009;&#x6846;&#x5916;&#x3002;&#x56E0;&#x6B64;&#x5BF9;&#x8FD9;&#x4E9B;&#x6837;&#x672C;&#x7684;&#x6539;&#x8FDB;&#x5E76;&#x4E0D;&#x4F1A;&#x5BF9;&#x7CBE;&#x5EA6;&#x4EA7;&#x751F;&#x4EFB;&#x4F55;&#x7684;&#x5F71;&#x54CD;&#x3002;&#x4F46;&#x662F;&#x5728;&#x8FB9;&#x6846;&#x56DE;&#x5F52;&#x4E2D;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x6837;&#x672C;&#x4ECD;&#x7136;&#x504F;&#x79BB;&#x4E86;&#x771F;&#x5B9E;&#x6846;&#x4F4D;&#x7F6E;&#x3002;&#x5BF9;&#x6BCF;&#x4E2A;&#x6837;&#x672C;&#x66F4;&#x597D;&#x7684;&#x9884;&#x6D4B;&#x4F1A;&#x76F4;&#x63A5;&#x63D0;&#x5347;&#x6700;&#x7EC8;&#x5019;&#x9009;&#x6846;&#x7684;&#x8D28;&#x91CF;&#x3002;&#x800C;&#x4E14;&#xFF0C;&#x9AD8;&#x7EA7;&#x7684;&#x6570;&#x636E;&#x96C6;&#x66F4;&#x5173;&#x5FC3;&#x5B9A;&#x4F4D;&#x7684;&#x7CBE;&#x786E;&#x6027;<br>&#x6211;&#x4EEC;&#x7684;GHM-R&#x80FD;&#x591F;harmonize&#x7B80;&#x5355;&#x6837;&#x672C;&#x4EE5;&#x53CA;&#x56F0;&#x96BE;&#x6837;&#x672C;&#x5BF9;&#x8FB9;&#x6846;&#x56DE;&#x5F52;&#x7684;&#x8D21;&#x732E;&#xFF0C;&#x901A;&#x8FC7;&#x5BF9;&#x7B80;&#x5355;&#x6837;&#x672C;&#x7684;&#x91CD;&#x8981;&#x90E8;&#x5206;&#x8FDB;&#x884C;&#x5347;&#x6743;&#xFF0C;&#x4EE5;&#x53CA;&#x5BF9;&#x79BB;&#x7FA4;&#x6837;&#x672C;&#x8FDB;&#x884C;&#x964D;&#x6743;&#x3002;&#x5B9E;&#x9A8C;&#x663E;&#x793A;&#x5B83;&#x80FD;&#x6BD4;$SL_1$&#x4E00;&#x7EA7;$ASL_1$&#x83B7;&#x5F97;&#x66F4;&#x597D;&#x7684;&#x6027;&#x80FD;&#x3002;</p>
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p><img src="/2019/08/01/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;6/5.png" alt><br><img src="/2019/08/01/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;6/6.png" alt><br><img src="/2019/08/01/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;6/7.png" alt></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags" id="post-tags">
+            
+              <a href="/tags/目标检测/" rel="tag"><i class="fa fa-tag"></i> 目标检测</a>
+            
+          </div>
+          <script type="text/javascript">
+            var tagsall=document.getElementsByClassName("post-tags")
+            for (var i = tagsall.length - 1; i >= 0; i--){
+                var tags=tagsall[i].getElementsByTagName("a");
+                for (var j = tags.length - 1; j >= 0; j--) {
+                    var r=Math.floor(Math.random()*75+130);
+                    var g=Math.floor(Math.random()*75+100);
+                    var b=Math.floor(Math.random()*75+80);
+                    tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                }
+            }                        
+          </script>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/01/hexo阅读全文/" rel="next" title="NexT主题阅读全文设置">
+                  <i class="fa fa-chevron-left"></i> NexT主题阅读全文设置
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/02/exponential-moving-average/" rel="prev" title="滑动平均(exponential moving average)">
+                  滑动平均(exponential moving average) <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+      <!--noindex-->
+        <div class="author-overview">
+            <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+              
+                <img class="site-author-image" itemprop="image"
+                  src="/images/1.jpeg"
+                  alt="Zheng Yujie">
+              
+              <p class="site-author-name" itemprop="name">Zheng Yujie</p>
+              <div class="site-description motion-element" itemprop="description">C++/Python/深度学习</div>
+            </div>
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                  
+                    <a href="/archives/">
+                  
+                    <span class="site-state-item-count">47</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                  
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                  
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://github.com/zhengyujie" title="GitHub &rarr; https://github.com/zhengyujie" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="mailto:zhengyujie97@126.com" title="E-Mail &rarr; mailto:zhengyujie97@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://music.163.com/#/playlist?id=327924141" title="Music &rarr; https://music.163.com/#/playlist?id=327924141" rel="noopener" target="_blank"><i class="fa fa-fw fa-headphones"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://www.google.com" title="Google &rarr; https://www.google.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+
+          
+        </div>
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active" id="post-toc-wrap">
+          <div class="item_headline">
+            <i class="fa fa-list" aria-hidden="true">
+            </i><span>目录</span>
+          </div>
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradient-Harmonizing-Mechanism"><span class="nav-number">4.</span> <span class="nav-text">Gradient Harmonizing Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Description"><span class="nav-number">4.1.</span> <span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient-Density"><span class="nav-number">4.2.</span> <span class="nav-text">Gradient Density</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GHM-C-Loss"><span class="nav-number">4.3.</span> <span class="nav-text">GHM-C Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit-Region-Approximation"><span class="nav-number">4.4.</span> <span class="nav-text">Unit Region Approximation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Complexity-Analysis"><span class="nav-number">4.4.1.</span> <span class="nav-text">Complexity Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unit-Region"><span class="nav-number">4.4.2.</span> <span class="nav-text">Unit Region</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EMA"><span class="nav-number">4.4.3.</span> <span class="nav-text">EMA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GHM-R-Loss"><span class="nav-number">4.5.</span> <span class="nav-text">GHM-R Loss</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-number">5.</span> <span class="nav-text">Experiments</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
+    <span class="post-meta-divider">|</span>
+    <span title="站点总字数">全站共199k字</span>
+</div>
+
+<div class="BbeiAn-info">
+	浙ICP备 -
+	<a target="_blank"  href="http://www.miitbeian.gov.cn/">19035016号</a>
+	</a>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        <span>0%</span>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+<script>
+NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.9/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: true,
+    appId: 'QhpM05HufWMwqxw5TW8GGKHt-gzGzoHsz',
+    appKey: 'ReXaLSgoPNRCjW8dT9eEyR25',
+    placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧！',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

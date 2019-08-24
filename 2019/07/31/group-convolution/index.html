@@ -60,12 +60,12 @@
 <meta property="og:url" content="http://zhengyujie.cn/2019/07/31/group-convolution/index.html">
 <meta property="og:site_name" content="浅笑の博客">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/csEm643zcfff.png?imageslim">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/TjQDSWrNC4tw.png?imageslim">
-<meta property="og:updated_time" content="2019-08-19T08:16:27.477Z">
+<meta property="og:image" content="http://zhengyujie.cn/2019/07/31/group-convolution/2.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/07/31/group-convolution/1.png">
+<meta property="og:updated_time" content="2019-07-31T18:23:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分组卷积——Group convolution">
-<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/csEm643zcfff.png?imageslim">
+<meta name="twitter:image" content="http://zhengyujie.cn/2019/07/31/group-convolution/2.png">
   <link rel="canonical" href="http://zhengyujie.cn/2019/07/31/group-convolution/">
 
 
@@ -174,7 +174,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">47</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -187,7 +187,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
 
   </li>
       
@@ -200,7 +200,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
 
   </li>
       
@@ -351,18 +351,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/csEm643zcfff.png?imageslim" alt="mark"></p>
+        <p><img src="/2019/07/31/group-convolution/2.png" alt></p>
 <a id="more"></a>
-<h1 id="常规卷积"><a href="#常规卷积" class="headerlink" title="常规卷积"></a>常规卷积</h1><p>如果输入feature map尺寸为C∗H∗W，卷积核有N个，输出feature map与卷积核的数量相同也是N，每个卷积核的尺寸为C∗K∗K，N个卷积核的总参数量为N∗C∗K∗K，输入map与输出map的连接方式如上图左所示。</p>
-<h1 id="分组卷积"><a href="#分组卷积" class="headerlink" title="分组卷积"></a>分组卷积</h1><p>Group Convolution分组卷积，最早见于AlexNet——2012年Imagenet的冠军方法，Group Convolution被用来切分网络，使其在2个GPU上并行运行，AlexNet网络结构如下<br><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/TjQDSWrNC4tw.png?imageslim" alt="mark"><br>Group Convolution顾名思义，则是对输入feature map进行分组，然后每组分别卷积。假设输入feature map的尺寸仍为C∗H∗W，输出feature map的数量为N个，如果设定要分成G个groups，则每组的输入feature map数量为$\frac{C}{G}$，每组的输出feature map数量为$\frac{N}{G}$，每个卷积核的尺寸为$\frac{C}{G}∗K∗K$，卷积核的总数仍为N个，每组的卷积核数量为$\frac{N}{G}$，卷积核只与其同组的输入map进行卷积，卷积核的总参数量为$N∗\frac{C}{G}∗K∗K$，可见，总参数量减少为原来的$\frac{1}{G}$，其连接方式如上图右所示，group1输出map数为2，有2个卷积核，每个卷积核的channel数为4，与group1的输入map的channel数相同，卷积核只与同组的输入map卷积，而不与其他组的输入map卷积。</p>
-<h1 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h1><ul>
-<li><strong>减少参数量</strong><br>分成G组，则该层的参数量减少为原来的$\frac{1}{G}$</li>
-<li><strong>Structured Sparss</strong><br>每个卷积核的尺寸由$C∗K∗K$变为$\frac{C}{G}∗K∗K$，可以将其余$(C−\frac{C}{G})∗K∗K$的参数视为0，有时甚至可以在减少参数量的同时获得更好的效果（相当于正则）。</li>
-<li><strong>Depthwise Convolution</strong><br>当分组数量等于输入map数量，输出map数量也等于输入map数量，即$G=N=C$、N个卷积核每个尺寸为$1∗K∗K$时，Group Convolution就成了Depthwise Convolution</li>
-<li><strong>Global Depthwise Convolution(GDC)</strong><br>如果分组数$G=N=C$，同时卷积核的尺寸与输入map的尺寸相同，即$K=H=W$，则输出map为$C∗1∗1$即长度为C的向量，此时称之为Global Depthwise Convolution（GDC），可以看成是全局加权池化，与 Global Average Pooling（GAP） 的不同之处在于，GDC 给每个位置赋予了可学习的权重（对于已对齐的图像这很有效，比如人脸，中心位置和边界位置的权重自然应该不同），而GAP每个位置的权重相同，全局取个平均。</li>
+<h1 id="&#x5E38;&#x89C4;&#x5377;&#x79EF;"><a href="#&#x5E38;&#x89C4;&#x5377;&#x79EF;" class="headerlink" title="&#x5E38;&#x89C4;&#x5377;&#x79EF;"></a>&#x5E38;&#x89C4;&#x5377;&#x79EF;</h1><p>&#x5982;&#x679C;&#x8F93;&#x5165;feature map&#x5C3A;&#x5BF8;&#x4E3A;C&#x2217;H&#x2217;W&#xFF0C;&#x5377;&#x79EF;&#x6838;&#x6709;N&#x4E2A;&#xFF0C;&#x8F93;&#x51FA;feature map&#x4E0E;&#x5377;&#x79EF;&#x6838;&#x7684;&#x6570;&#x91CF;&#x76F8;&#x540C;&#x4E5F;&#x662F;N&#xFF0C;&#x6BCF;&#x4E2A;&#x5377;&#x79EF;&#x6838;&#x7684;&#x5C3A;&#x5BF8;&#x4E3A;C&#x2217;K&#x2217;K&#xFF0C;N&#x4E2A;&#x5377;&#x79EF;&#x6838;&#x7684;&#x603B;&#x53C2;&#x6570;&#x91CF;&#x4E3A;N&#x2217;C&#x2217;K&#x2217;K&#xFF0C;&#x8F93;&#x5165;map&#x4E0E;&#x8F93;&#x51FA;map&#x7684;&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;&#x5982;&#x4E0A;&#x56FE;&#x5DE6;&#x6240;&#x793A;&#x3002;</p>
+<h1 id="&#x5206;&#x7EC4;&#x5377;&#x79EF;"><a href="#&#x5206;&#x7EC4;&#x5377;&#x79EF;" class="headerlink" title="&#x5206;&#x7EC4;&#x5377;&#x79EF;"></a>&#x5206;&#x7EC4;&#x5377;&#x79EF;</h1><p>Group Convolution&#x5206;&#x7EC4;&#x5377;&#x79EF;&#xFF0C;&#x6700;&#x65E9;&#x89C1;&#x4E8E;AlexNet&#x2014;&#x2014;2012&#x5E74;Imagenet&#x7684;&#x51A0;&#x519B;&#x65B9;&#x6CD5;&#xFF0C;Group Convolution&#x88AB;&#x7528;&#x6765;&#x5207;&#x5206;&#x7F51;&#x7EDC;&#xFF0C;&#x4F7F;&#x5176;&#x5728;2&#x4E2A;GPU&#x4E0A;&#x5E76;&#x884C;&#x8FD0;&#x884C;&#xFF0C;AlexNet&#x7F51;&#x7EDC;&#x7ED3;&#x6784;&#x5982;&#x4E0B;<br><img src="/2019/07/31/group-convolution/1.png" alt><br>Group Convolution&#x987E;&#x540D;&#x601D;&#x4E49;&#xFF0C;&#x5219;&#x662F;&#x5BF9;&#x8F93;&#x5165;feature map&#x8FDB;&#x884C;&#x5206;&#x7EC4;&#xFF0C;&#x7136;&#x540E;&#x6BCF;&#x7EC4;&#x5206;&#x522B;&#x5377;&#x79EF;&#x3002;&#x5047;&#x8BBE;&#x8F93;&#x5165;feature map&#x7684;&#x5C3A;&#x5BF8;&#x4ECD;&#x4E3A;C&#x2217;H&#x2217;W&#xFF0C;&#x8F93;&#x51FA;feature map&#x7684;&#x6570;&#x91CF;&#x4E3A;N&#x4E2A;&#xFF0C;&#x5982;&#x679C;&#x8BBE;&#x5B9A;&#x8981;&#x5206;&#x6210;G&#x4E2A;groups&#xFF0C;&#x5219;&#x6BCF;&#x7EC4;&#x7684;&#x8F93;&#x5165;feature map&#x6570;&#x91CF;&#x4E3A;$\frac{C}{G}$&#xFF0C;&#x6BCF;&#x7EC4;&#x7684;&#x8F93;&#x51FA;feature map&#x6570;&#x91CF;&#x4E3A;$\frac{N}{G}$&#xFF0C;&#x6BCF;&#x4E2A;&#x5377;&#x79EF;&#x6838;&#x7684;&#x5C3A;&#x5BF8;&#x4E3A;$\frac{C}{G}&#x2217;K&#x2217;K$&#xFF0C;&#x5377;&#x79EF;&#x6838;&#x7684;&#x603B;&#x6570;&#x4ECD;&#x4E3A;N&#x4E2A;&#xFF0C;&#x6BCF;&#x7EC4;&#x7684;&#x5377;&#x79EF;&#x6838;&#x6570;&#x91CF;&#x4E3A;$\frac{N}{G}$&#xFF0C;&#x5377;&#x79EF;&#x6838;&#x53EA;&#x4E0E;&#x5176;&#x540C;&#x7EC4;&#x7684;&#x8F93;&#x5165;map&#x8FDB;&#x884C;&#x5377;&#x79EF;&#xFF0C;&#x5377;&#x79EF;&#x6838;&#x7684;&#x603B;&#x53C2;&#x6570;&#x91CF;&#x4E3A;$N&#x2217;\frac{C}{G}&#x2217;K&#x2217;K$&#xFF0C;&#x53EF;&#x89C1;&#xFF0C;&#x603B;&#x53C2;&#x6570;&#x91CF;&#x51CF;&#x5C11;&#x4E3A;&#x539F;&#x6765;&#x7684;$\frac{1}{G}$&#xFF0C;&#x5176;&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;&#x5982;&#x4E0A;&#x56FE;&#x53F3;&#x6240;&#x793A;&#xFF0C;group1&#x8F93;&#x51FA;map&#x6570;&#x4E3A;2&#xFF0C;&#x6709;2&#x4E2A;&#x5377;&#x79EF;&#x6838;&#xFF0C;&#x6BCF;&#x4E2A;&#x5377;&#x79EF;&#x6838;&#x7684;channel&#x6570;&#x4E3A;4&#xFF0C;&#x4E0E;group1&#x7684;&#x8F93;&#x5165;map&#x7684;channel&#x6570;&#x76F8;&#x540C;&#xFF0C;&#x5377;&#x79EF;&#x6838;&#x53EA;&#x4E0E;&#x540C;&#x7EC4;&#x7684;&#x8F93;&#x5165;map&#x5377;&#x79EF;&#xFF0C;&#x800C;&#x4E0D;&#x4E0E;&#x5176;&#x4ED6;&#x7EC4;&#x7684;&#x8F93;&#x5165;map&#x5377;&#x79EF;&#x3002;</p>
+<h1 id="&#x7528;&#x9014;"><a href="#&#x7528;&#x9014;" class="headerlink" title="&#x7528;&#x9014;"></a>&#x7528;&#x9014;</h1><ul>
+<li><strong>&#x51CF;&#x5C11;&#x53C2;&#x6570;&#x91CF;</strong><br>&#x5206;&#x6210;G&#x7EC4;&#xFF0C;&#x5219;&#x8BE5;&#x5C42;&#x7684;&#x53C2;&#x6570;&#x91CF;&#x51CF;&#x5C11;&#x4E3A;&#x539F;&#x6765;&#x7684;$\frac{1}{G}$</li>
+<li><strong>Structured Sparss</strong><br>&#x6BCF;&#x4E2A;&#x5377;&#x79EF;&#x6838;&#x7684;&#x5C3A;&#x5BF8;&#x7531;$C&#x2217;K&#x2217;K$&#x53D8;&#x4E3A;$\frac{C}{G}&#x2217;K&#x2217;K$&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x5176;&#x4F59;$(C&#x2212;\frac{C}{G})&#x2217;K&#x2217;K$&#x7684;&#x53C2;&#x6570;&#x89C6;&#x4E3A;0&#xFF0C;&#x6709;&#x65F6;&#x751A;&#x81F3;&#x53EF;&#x4EE5;&#x5728;&#x51CF;&#x5C11;&#x53C2;&#x6570;&#x91CF;&#x7684;&#x540C;&#x65F6;&#x83B7;&#x5F97;&#x66F4;&#x597D;&#x7684;&#x6548;&#x679C;&#xFF08;&#x76F8;&#x5F53;&#x4E8E;&#x6B63;&#x5219;&#xFF09;&#x3002;</li>
+<li><strong>Depthwise Convolution</strong><br>&#x5F53;&#x5206;&#x7EC4;&#x6570;&#x91CF;&#x7B49;&#x4E8E;&#x8F93;&#x5165;map&#x6570;&#x91CF;&#xFF0C;&#x8F93;&#x51FA;map&#x6570;&#x91CF;&#x4E5F;&#x7B49;&#x4E8E;&#x8F93;&#x5165;map&#x6570;&#x91CF;&#xFF0C;&#x5373;$G=N=C$&#x3001;N&#x4E2A;&#x5377;&#x79EF;&#x6838;&#x6BCF;&#x4E2A;&#x5C3A;&#x5BF8;&#x4E3A;$1&#x2217;K&#x2217;K$&#x65F6;&#xFF0C;Group Convolution&#x5C31;&#x6210;&#x4E86;Depthwise Convolution</li>
+<li><strong>Global Depthwise Convolution(GDC)</strong><br>&#x5982;&#x679C;&#x5206;&#x7EC4;&#x6570;$G=N=C$&#xFF0C;&#x540C;&#x65F6;&#x5377;&#x79EF;&#x6838;&#x7684;&#x5C3A;&#x5BF8;&#x4E0E;&#x8F93;&#x5165;map&#x7684;&#x5C3A;&#x5BF8;&#x76F8;&#x540C;&#xFF0C;&#x5373;$K=H=W$&#xFF0C;&#x5219;&#x8F93;&#x51FA;map&#x4E3A;$C&#x2217;1&#x2217;1$&#x5373;&#x957F;&#x5EA6;&#x4E3A;C&#x7684;&#x5411;&#x91CF;&#xFF0C;&#x6B64;&#x65F6;&#x79F0;&#x4E4B;&#x4E3A;Global Depthwise Convolution&#xFF08;GDC&#xFF09;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x6210;&#x662F;&#x5168;&#x5C40;&#x52A0;&#x6743;&#x6C60;&#x5316;&#xFF0C;&#x4E0E; Global Average Pooling&#xFF08;GAP&#xFF09; &#x7684;&#x4E0D;&#x540C;&#x4E4B;&#x5904;&#x5728;&#x4E8E;&#xFF0C;GDC &#x7ED9;&#x6BCF;&#x4E2A;&#x4F4D;&#x7F6E;&#x8D4B;&#x4E88;&#x4E86;&#x53EF;&#x5B66;&#x4E60;&#x7684;&#x6743;&#x91CD;&#xFF08;&#x5BF9;&#x4E8E;&#x5DF2;&#x5BF9;&#x9F50;&#x7684;&#x56FE;&#x50CF;&#x8FD9;&#x5F88;&#x6709;&#x6548;&#xFF0C;&#x6BD4;&#x5982;&#x4EBA;&#x8138;&#xFF0C;&#x4E2D;&#x5FC3;&#x4F4D;&#x7F6E;&#x548C;&#x8FB9;&#x754C;&#x4F4D;&#x7F6E;&#x7684;&#x6743;&#x91CD;&#x81EA;&#x7136;&#x5E94;&#x8BE5;&#x4E0D;&#x540C;&#xFF09;&#xFF0C;&#x800C;GAP&#x6BCF;&#x4E2A;&#x4F4D;&#x7F6E;&#x7684;&#x6743;&#x91CD;&#x76F8;&#x540C;&#xFF0C;&#x5168;&#x5C40;&#x53D6;&#x4E2A;&#x5E73;&#x5747;&#x3002;</li>
 </ul>
 <blockquote>
-<p>参考：<a href="https://www.cnblogs.com/shine-lee/p/10243114.html" target="_blank" rel="noopener">https://www.cnblogs.com/shine-lee/p/10243114.html</a></p>
+<p>&#x53C2;&#x8003;&#xFF1A;<a href="https://www.cnblogs.com/shine-lee/p/10243114.html" target="_blank" rel="noopener">https://www.cnblogs.com/shine-lee/p/10243114.html</a></p>
 </blockquote>
 
     </div>
@@ -466,7 +466,7 @@
                   
                     <a href="/archives/">
                   
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -493,7 +493,9 @@
                   
                     
                   
-                  <span class="site-state-item-count">5</span>
+                    
+                  
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -568,43 +570,7 @@
                   
                     
                   
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -697,7 +663,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
     <span class="post-meta-divider">|</span>
-    <span title="站点总字数">全站共195k字</span>
+    <span title="站点总字数">全站共199k字</span>
 </div>
 
 <div class="BbeiAn-info">

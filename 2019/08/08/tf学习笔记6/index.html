@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="逻辑回归逻辑回归是应用非常广泛的一个分类机器学习算法，它将数据拟合到一个logit函数(或者叫做logistic函数)中，从而能够完成对事件发生的概率进行预测。">
-<meta name="keywords" content="TensorFlow,逻辑回归">
+  <meta name="description" content="&amp;#x903B;&amp;#x8F91;&amp;#x56DE;&amp;#x5F52;&amp;#x903B;&amp;#x8F91;&amp;#x56DE;&amp;#x5F52;&amp;#x662F;&amp;#x5E94;&amp;#x7528;&amp;#x975E;&amp;#x5E38;&amp;#x5E7F;&amp;#x6CDB;&amp;#x7684;&amp;#x4E00;&amp;#x4E2A;&amp;#x5206;&amp;#x7C7B;&amp;#x673A;&amp;#x5668;&amp;#x5B66;&amp;#x4E60;&amp;#x7B97;">
+<meta name="keywords" content="TensorFlow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TensorFlow学习笔记6：逻辑回归">
 <meta property="og:url" content="http://zhengyujie.cn/2019/08/08/tf学习笔记6/index.html">
 <meta property="og:site_name" content="浅笑の博客">
-<meta property="og:description" content="逻辑回归逻辑回归是应用非常广泛的一个分类机器学习算法，它将数据拟合到一个logit函数(或者叫做logistic函数)中，从而能够完成对事件发生的概率进行预测。">
+<meta property="og:description" content="&amp;#x903B;&amp;#x8F91;&amp;#x56DE;&amp;#x5F52;&amp;#x903B;&amp;#x8F91;&amp;#x56DE;&amp;#x5F52;&amp;#x662F;&amp;#x5E94;&amp;#x7528;&amp;#x975E;&amp;#x5E38;&amp;#x5E7F;&amp;#x6CDB;&amp;#x7684;&amp;#x4E00;&amp;#x4E2A;&amp;#x5206;&amp;#x7C7B;&amp;#x673A;&amp;#x5668;&amp;#x5B66;&amp;#x4E60;&amp;#x7B97;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-19T08:13:59.717Z">
+<meta property="og:updated_time" content="2019-08-07T22:27:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TensorFlow学习笔记6：逻辑回归">
-<meta name="twitter:description" content="逻辑回归逻辑回归是应用非常广泛的一个分类机器学习算法，它将数据拟合到一个logit函数(或者叫做logistic函数)中，从而能够完成对事件发生的概率进行预测。">
+<meta name="twitter:description" content="&amp;#x903B;&amp;#x8F91;&amp;#x56DE;&amp;#x5F52;&amp;#x903B;&amp;#x8F91;&amp;#x56DE;&amp;#x5F52;&amp;#x662F;&amp;#x5E94;&amp;#x7528;&amp;#x975E;&amp;#x5E38;&amp;#x5E7F;&amp;#x6CDB;&amp;#x7684;&amp;#x4E00;&amp;#x4E2A;&amp;#x5206;&amp;#x7C7B;&amp;#x673A;&amp;#x5668;&amp;#x5B66;&amp;#x4E60;&amp;#x7B97;">
   <link rel="canonical" href="http://zhengyujie.cn/2019/08/08/tf学习笔记6/">
 
 
@@ -174,7 +174,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">47</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -187,7 +187,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
 
   </li>
       
@@ -200,7 +200,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
 
   </li>
       
@@ -358,17 +358,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><p>逻辑回归是应用非常广泛的一个分类机器学习算法，它将数据拟合到一个logit函数(或者叫做logistic函数)中，从而能够完成对事件发生的概率进行预测。</p>
+        <h1 id="&#x903B;&#x8F91;&#x56DE;&#x5F52;"><a href="#&#x903B;&#x8F91;&#x56DE;&#x5F52;" class="headerlink" title="&#x903B;&#x8F91;&#x56DE;&#x5F52;"></a>&#x903B;&#x8F91;&#x56DE;&#x5F52;</h1><p>&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x662F;&#x5E94;&#x7528;&#x975E;&#x5E38;&#x5E7F;&#x6CDB;&#x7684;&#x4E00;&#x4E2A;&#x5206;&#x7C7B;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7B97;&#x6CD5;&#xFF0C;&#x5B83;&#x5C06;&#x6570;&#x636E;&#x62DF;&#x5408;&#x5230;&#x4E00;&#x4E2A;logit&#x51FD;&#x6570;(&#x6216;&#x8005;&#x53EB;&#x505A;logistic&#x51FD;&#x6570;)&#x4E2D;&#xFF0C;&#x4ECE;&#x800C;&#x80FD;&#x591F;&#x5B8C;&#x6210;&#x5BF9;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x7684;&#x6982;&#x7387;&#x8FDB;&#x884C;&#x9884;&#x6D4B;&#x3002;</p>
 <a id="more"></a>
-<h1 id="MINIST数据集"><a href="#MINIST数据集" class="headerlink" title="MINIST数据集"></a>MINIST数据集</h1><p>MNIST 数据集来自美国国家标准与技术研究所, National Institute of Standards and Technology (NIST). 训练集 (training set) 由来自 250 个不同人手写的数字构成，是一个非常有名的手写体数字识别数据集，在很多资料中，这个数据集都会被用作深度学习的入门样例。 </p>
+<h1 id="MINIST&#x6570;&#x636E;&#x96C6;"><a href="#MINIST&#x6570;&#x636E;&#x96C6;" class="headerlink" title="MINIST&#x6570;&#x636E;&#x96C6;"></a>MINIST&#x6570;&#x636E;&#x96C6;</h1><p>MNIST &#x6570;&#x636E;&#x96C6;&#x6765;&#x81EA;&#x7F8E;&#x56FD;&#x56FD;&#x5BB6;&#x6807;&#x51C6;&#x4E0E;&#x6280;&#x672F;&#x7814;&#x7A76;&#x6240;, National Institute of Standards and Technology (NIST). &#x8BAD;&#x7EC3;&#x96C6; (training set) &#x7531;&#x6765;&#x81EA; 250 &#x4E2A;&#x4E0D;&#x540C;&#x4EBA;&#x624B;&#x5199;&#x7684;&#x6570;&#x5B57;&#x6784;&#x6210;&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x6709;&#x540D;&#x7684;&#x624B;&#x5199;&#x4F53;&#x6570;&#x5B57;&#x8BC6;&#x522B;&#x6570;&#x636E;&#x96C6;&#xFF0C;&#x5728;&#x5F88;&#x591A;&#x8D44;&#x6599;&#x4E2D;&#xFF0C;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x96C6;&#x90FD;&#x4F1A;&#x88AB;&#x7528;&#x4F5C;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x7684;&#x5165;&#x95E8;&#x6837;&#x4F8B;&#x3002; </p>
 <ul>
-<li><p>存储形式<br>共有四个压缩文件<br>train-images-idx3-ubyte.gz: training set images (9912422 bytes)<br>train-labels-idx1-ubyte.gz: training set labels (28881 bytes)<br>t10k-images-idx3-ubyte.gz: test set images (1648877 bytes)<br>t10k-labels-idx1-ubyte.gz: test set labels (4542 bytes) </p>
+<li><p>&#x5B58;&#x50A8;&#x5F62;&#x5F0F;<br>&#x5171;&#x6709;&#x56DB;&#x4E2A;&#x538B;&#x7F29;&#x6587;&#x4EF6;<br>train-images-idx3-ubyte.gz: training set images (9912422 bytes)<br>train-labels-idx1-ubyte.gz: training set labels (28881 bytes)<br>t10k-images-idx3-ubyte.gz: test set images (1648877 bytes)<br>t10k-labels-idx1-ubyte.gz: test set labels (4542 bytes) </p>
 </li>
-<li><p>样本个数<br>训练样本：共55000个<br>验证样本：共5000个<br>测试样本：共10000个 </p>
+<li><p>&#x6837;&#x672C;&#x4E2A;&#x6570;<br>&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#xFF1A;&#x5171;55000&#x4E2A;<br>&#x9A8C;&#x8BC1;&#x6837;&#x672C;&#xFF1A;&#x5171;5000&#x4E2A;<br>&#x6D4B;&#x8BD5;&#x6837;&#x672C;&#xFF1A;&#x5171;10000&#x4E2A; </p>
 </li>
 </ul>
-<h1 id="TensorFlow实现"><a href="#TensorFlow实现" class="headerlink" title="TensorFlow实现"></a>TensorFlow实现</h1><p>代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载MINIST数据集</span></span><br><span class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</span><br><span class="line">mnist = input_data.read_data_sets(<span class="string">"MNIST_data"</span>, one_hot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设定参数</span></span><br><span class="line">learning_rate = <span class="number">0.01</span></span><br><span class="line">training_epochs = <span class="number">25</span></span><br><span class="line">batch_size = <span class="number">100</span></span><br><span class="line">display_step = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型输入,784为MINIST数据集的图片大小28*28</span></span><br><span class="line">x = tf.placeholder(tf.float32, [<span class="literal">None</span>, <span class="number">784</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型输出,10为预测的类别数</span></span><br><span class="line">y = tf.placeholder(tf.float32, [<span class="literal">None</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设定模型的权重和偏移量</span></span><br><span class="line">W = tf.Variable(tf.zeros([<span class="number">784</span>, <span class="number">10</span>]))</span><br><span class="line">b = tf.Variable(tf.zeros([<span class="number">10</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型的结构</span></span><br><span class="line">pred = tf.nn.softmax(tf.matmul(x, W) + b) <span class="comment"># Softmax</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用cross entropy来作为损失函数</span></span><br><span class="line">cost = tf.reduce_mean(-tf.reduce_sum(y*tf.log(pred), reduction_indices=<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用Gradient Descent</span></span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化所有变量</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始训练</span></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 执行初始化</span></span><br><span class="line">    sess.run(init)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 训练循环</span></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(training_epochs):</span><br><span class="line">        avg_cost = <span class="number">0.</span></span><br><span class="line">        total_batch = int(mnist.train.num_examples/batch_size)</span><br><span class="line">        <span class="comment"># 循环每一个batches</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(total_batch):</span><br><span class="line">            batch_xs, batch_ys = mnist.train.next_batch(batch_size)</span><br><span class="line">            <span class="comment"># 执行optimizer,获得cost</span></span><br><span class="line">            _, c = sess.run([optimizer, cost], feed_dict=&#123;x: batch_xs,</span><br><span class="line">                                                          y: batch_ys&#125;)</span><br><span class="line">            <span class="comment"># 计算平均损失</span></span><br><span class="line">            avg_cost += c / total_batch</span><br><span class="line">        <span class="comment"># 显示每一轮的结果</span></span><br><span class="line">        <span class="keyword">if</span> (epoch+<span class="number">1</span>) % display_step == <span class="number">0</span>:</span><br><span class="line">            print(<span class="string">"Epoch:"</span>, <span class="string">'%04d'</span> % (epoch+<span class="number">1</span>), <span class="string">"cost="</span>, <span class="string">"&#123;:.9f&#125;"</span>.format(avg_cost))</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"Optimization Finished!"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 测试模型</span></span><br><span class="line">    correct_prediction = tf.equal(tf.argmax(pred, <span class="number">1</span>), tf.argmax(y, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算精确率</span></span><br><span class="line">    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</span><br><span class="line">    print(<span class="string">"Accuracy:"</span>, accuracy.eval(&#123;x: mnist.test.images, y: mnist.test.labels&#125;))</span><br></pre></td></tr></table></figure></p>
-<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Epoch: 0001 cost= 1.183872078</span><br><span class="line">Epoch: 0002 cost= 0.665350118</span><br><span class="line">Epoch: 0003 cost= 0.552830602</span><br><span class="line">Epoch: 0004 cost= 0.498699041</span><br><span class="line">Epoch: 0005 cost= 0.465488806</span><br><span class="line">Epoch: 0006 cost= 0.442619649</span><br><span class="line">Epoch: 0007 cost= 0.425471577</span><br><span class="line">Epoch: 0008 cost= 0.412201005</span><br><span class="line">Epoch: 0009 cost= 0.401415385</span><br><span class="line">Epoch: 0010 cost= 0.392391824</span><br><span class="line">Epoch: 0011 cost= 0.384738960</span><br><span class="line">Epoch: 0012 cost= 0.378136856</span><br><span class="line">Epoch: 0013 cost= 0.372445326</span><br><span class="line">Epoch: 0014 cost= 0.367273882</span><br><span class="line">Epoch: 0015 cost= 0.362716155</span><br><span class="line">Epoch: 0016 cost= 0.358604888</span><br><span class="line">Epoch: 0017 cost= 0.354853253</span><br><span class="line">Epoch: 0018 cost= 0.351472244</span><br><span class="line">Epoch: 0019 cost= 0.348347617</span><br><span class="line">Epoch: 0020 cost= 0.345449658</span><br><span class="line">Epoch: 0021 cost= 0.342724947</span><br><span class="line">Epoch: 0022 cost= 0.340273546</span><br><span class="line">Epoch: 0023 cost= 0.337938625</span><br><span class="line">Epoch: 0024 cost= 0.335751063</span><br><span class="line">Epoch: 0025 cost= 0.333709621</span><br><span class="line">Optimization Finished!</span><br><span class="line">Accuracy: 0.9138</span><br></pre></td></tr></table></figure></p>
+<h1 id="TensorFlow&#x5B9E;&#x73B0;"><a href="#TensorFlow&#x5B9E;&#x73B0;" class="headerlink" title="TensorFlow&#x5B9E;&#x73B0;"></a>TensorFlow&#x5B9E;&#x73B0;</h1><p>&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x4E0B;&#x8F7D;MINIST&#x6570;&#x636E;&#x96C6;</span></span><br><span class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</span><br><span class="line">mnist = input_data.read_data_sets(<span class="string">&quot;MNIST_data&quot;</span>, one_hot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x8BBE;&#x5B9A;&#x53C2;&#x6570;</span></span><br><span class="line">learning_rate = <span class="number">0.01</span></span><br><span class="line">training_epochs = <span class="number">25</span></span><br><span class="line">batch_size = <span class="number">100</span></span><br><span class="line">display_step = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x6A21;&#x578B;&#x8F93;&#x5165;,784&#x4E3A;MINIST&#x6570;&#x636E;&#x96C6;&#x7684;&#x56FE;&#x7247;&#x5927;&#x5C0F;28*28</span></span><br><span class="line">x = tf.placeholder(tf.float32, [<span class="literal">None</span>, <span class="number">784</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x6A21;&#x578B;&#x8F93;&#x51FA;,10&#x4E3A;&#x9884;&#x6D4B;&#x7684;&#x7C7B;&#x522B;&#x6570;</span></span><br><span class="line">y = tf.placeholder(tf.float32, [<span class="literal">None</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x8BBE;&#x5B9A;&#x6A21;&#x578B;&#x7684;&#x6743;&#x91CD;&#x548C;&#x504F;&#x79FB;&#x91CF;</span></span><br><span class="line">W = tf.Variable(tf.zeros([<span class="number">784</span>, <span class="number">10</span>]))</span><br><span class="line">b = tf.Variable(tf.zeros([<span class="number">10</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x6A21;&#x578B;&#x7684;&#x7ED3;&#x6784;</span></span><br><span class="line">pred = tf.nn.softmax(tf.matmul(x, W) + b) <span class="comment"># Softmax</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x4F7F;&#x7528;cross entropy&#x6765;&#x4F5C;&#x4E3A;&#x635F;&#x5931;&#x51FD;&#x6570;</span></span><br><span class="line">cost = tf.reduce_mean(-tf.reduce_sum(y*tf.log(pred), reduction_indices=<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x4F7F;&#x7528;Gradient Descent</span></span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x521D;&#x59CB;&#x5316;&#x6240;&#x6709;&#x53D8;&#x91CF;</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x5F00;&#x59CB;&#x8BAD;&#x7EC3;</span></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line"></span><br><span class="line">    <span class="comment"># &#x6267;&#x884C;&#x521D;&#x59CB;&#x5316;</span></span><br><span class="line">    sess.run(init)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># &#x8BAD;&#x7EC3;&#x5FAA;&#x73AF;</span></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(training_epochs):</span><br><span class="line">        avg_cost = <span class="number">0.</span></span><br><span class="line">        total_batch = int(mnist.train.num_examples/batch_size)</span><br><span class="line">        <span class="comment"># &#x5FAA;&#x73AF;&#x6BCF;&#x4E00;&#x4E2A;batches</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(total_batch):</span><br><span class="line">            batch_xs, batch_ys = mnist.train.next_batch(batch_size)</span><br><span class="line">            <span class="comment"># &#x6267;&#x884C;optimizer,&#x83B7;&#x5F97;cost</span></span><br><span class="line">            _, c = sess.run([optimizer, cost], feed_dict={x: batch_xs,</span><br><span class="line">                                                          y: batch_ys})</span><br><span class="line">            <span class="comment"># &#x8BA1;&#x7B97;&#x5E73;&#x5747;&#x635F;&#x5931;</span></span><br><span class="line">            avg_cost += c / total_batch</span><br><span class="line">        <span class="comment"># &#x663E;&#x793A;&#x6BCF;&#x4E00;&#x8F6E;&#x7684;&#x7ED3;&#x679C;</span></span><br><span class="line">        <span class="keyword">if</span> (epoch+<span class="number">1</span>) % display_step == <span class="number">0</span>:</span><br><span class="line">            print(<span class="string">&quot;Epoch:&quot;</span>, <span class="string">&apos;%04d&apos;</span> % (epoch+<span class="number">1</span>), <span class="string">&quot;cost=&quot;</span>, <span class="string">&quot;{:.9f}&quot;</span>.format(avg_cost))</span><br><span class="line"></span><br><span class="line">    print(<span class="string">&quot;Optimization Finished!&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># &#x6D4B;&#x8BD5;&#x6A21;&#x578B;</span></span><br><span class="line">    correct_prediction = tf.equal(tf.argmax(pred, <span class="number">1</span>), tf.argmax(y, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># &#x8BA1;&#x7B97;&#x7CBE;&#x786E;&#x7387;</span></span><br><span class="line">    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</span><br><span class="line">    print(<span class="string">&quot;Accuracy:&quot;</span>, accuracy.eval({x: mnist.test.images, y: mnist.test.labels}))</span><br></pre></td></tr></table></figure></p>
+<p>&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Epoch: 0001 cost= 1.183872078</span><br><span class="line">Epoch: 0002 cost= 0.665350118</span><br><span class="line">Epoch: 0003 cost= 0.552830602</span><br><span class="line">Epoch: 0004 cost= 0.498699041</span><br><span class="line">Epoch: 0005 cost= 0.465488806</span><br><span class="line">Epoch: 0006 cost= 0.442619649</span><br><span class="line">Epoch: 0007 cost= 0.425471577</span><br><span class="line">Epoch: 0008 cost= 0.412201005</span><br><span class="line">Epoch: 0009 cost= 0.401415385</span><br><span class="line">Epoch: 0010 cost= 0.392391824</span><br><span class="line">Epoch: 0011 cost= 0.384738960</span><br><span class="line">Epoch: 0012 cost= 0.378136856</span><br><span class="line">Epoch: 0013 cost= 0.372445326</span><br><span class="line">Epoch: 0014 cost= 0.367273882</span><br><span class="line">Epoch: 0015 cost= 0.362716155</span><br><span class="line">Epoch: 0016 cost= 0.358604888</span><br><span class="line">Epoch: 0017 cost= 0.354853253</span><br><span class="line">Epoch: 0018 cost= 0.351472244</span><br><span class="line">Epoch: 0019 cost= 0.348347617</span><br><span class="line">Epoch: 0020 cost= 0.345449658</span><br><span class="line">Epoch: 0021 cost= 0.342724947</span><br><span class="line">Epoch: 0022 cost= 0.340273546</span><br><span class="line">Epoch: 0023 cost= 0.337938625</span><br><span class="line">Epoch: 0024 cost= 0.335751063</span><br><span class="line">Epoch: 0025 cost= 0.333709621</span><br><span class="line">Optimization Finished!</span><br><span class="line">Accuracy: 0.9138</span><br></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -385,8 +385,6 @@
           <div class="post-tags" id="post-tags">
             
               <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
-            
-              <a href="/tags/逻辑回归/" rel="tag"><i class="fa fa-tag"></i> 逻辑回归</a>
             
           </div>
           <script type="text/javascript">
@@ -473,7 +471,7 @@
                   
                     <a href="/archives/">
                   
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -500,7 +498,9 @@
                   
                     
                   
-                  <span class="site-state-item-count">5</span>
+                    
+                  
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -575,43 +575,7 @@
                   
                     
                   
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -704,7 +668,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
     <span class="post-meta-divider">|</span>
-    <span title="站点总字数">全站共195k字</span>
+    <span title="站点总字数">全站共199k字</span>
 </div>
 
 <div class="BbeiAn-info">

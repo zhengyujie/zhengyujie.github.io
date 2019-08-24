@@ -54,20 +54,20 @@
   };
 </script>
 
-  <meta name="description" content="线性回归线性回归（Linear Regression）是一种通过属性的线性组合来进行预测的线性模型，其目的是找到一条直线或者一个平面或者更高维的超平面，使得预测值与真实值之间的误差最小化。">
-<meta name="keywords" content="TensorFlow,线性回归">
+  <meta name="description" content="&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#xFF08;Linear Regression&amp;#xFF09;&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x901A;&amp;#x8FC7;&amp;#x5C5E;&amp;#x6027;&amp;#x7684;&amp;#x7EBF;&amp;#x6027;&amp;#x7EC4;&amp;#x5408;&amp;#x6765">
+<meta name="keywords" content="TensorFlow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TensoeFlow学习笔记5：线性回归">
 <meta property="og:url" content="http://zhengyujie.cn/2019/08/08/tf学习笔记5/index.html">
 <meta property="og:site_name" content="浅笑の博客">
-<meta property="og:description" content="线性回归线性回归（Linear Regression）是一种通过属性的线性组合来进行预测的线性模型，其目的是找到一条直线或者一个平面或者更高维的超平面，使得预测值与真实值之间的误差最小化。">
+<meta property="og:description" content="&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#xFF08;Linear Regression&amp;#xFF09;&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x901A;&amp;#x8FC7;&amp;#x5C5E;&amp;#x6027;&amp;#x7684;&amp;#x7EBF;&amp;#x6027;&amp;#x7EC4;&amp;#x5408;&amp;#x6765">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/buv6SxKq3CxD.png?imageslim">
-<meta property="og:updated_time" content="2019-08-19T08:13:44.397Z">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/08/tf学习笔记5/1.png">
+<meta property="og:updated_time" content="2019-08-07T22:26:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TensoeFlow学习笔记5：线性回归">
-<meta name="twitter:description" content="线性回归线性回归（Linear Regression）是一种通过属性的线性组合来进行预测的线性模型，其目的是找到一条直线或者一个平面或者更高维的超平面，使得预测值与真实值之间的误差最小化。">
-<meta name="twitter:image" content="http://pwbhioup3.bkt.clouddn.com/blog/20190816/buv6SxKq3CxD.png?imageslim">
+<meta name="twitter:description" content="&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#xFF08;Linear Regression&amp;#xFF09;&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x901A;&amp;#x8FC7;&amp;#x5C5E;&amp;#x6027;&amp;#x7684;&amp;#x7EBF;&amp;#x6027;&amp;#x7EC4;&amp;#x5408;&amp;#x6765">
+<meta name="twitter:image" content="http://zhengyujie.cn/2019/08/08/tf学习笔记5/1.png">
   <link rel="canonical" href="http://zhengyujie.cn/2019/08/08/tf学习笔记5/">
 
 
@@ -176,7 +176,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">47</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -189,7 +189,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
 
   </li>
       
@@ -202,7 +202,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
 
   </li>
       
@@ -360,11 +360,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><p>线性回归（Linear Regression）是一种通过属性的线性组合来进行预测的线性模型，其目的是找到一条直线或者一个平面或者更高维的超平面，使得预测值与真实值之间的误差最小化。</p>
+        <h1 id="&#x7EBF;&#x6027;&#x56DE;&#x5F52;"><a href="#&#x7EBF;&#x6027;&#x56DE;&#x5F52;" class="headerlink" title="&#x7EBF;&#x6027;&#x56DE;&#x5F52;"></a>&#x7EBF;&#x6027;&#x56DE;&#x5F52;</h1><p>&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#xFF08;Linear Regression&#xFF09;&#x662F;&#x4E00;&#x79CD;&#x901A;&#x8FC7;&#x5C5E;&#x6027;&#x7684;&#x7EBF;&#x6027;&#x7EC4;&#x5408;&#x6765;&#x8FDB;&#x884C;&#x9884;&#x6D4B;&#x7684;&#x7EBF;&#x6027;&#x6A21;&#x578B;&#xFF0C;&#x5176;&#x76EE;&#x7684;&#x662F;&#x627E;&#x5230;&#x4E00;&#x6761;&#x76F4;&#x7EBF;&#x6216;&#x8005;&#x4E00;&#x4E2A;&#x5E73;&#x9762;&#x6216;&#x8005;&#x66F4;&#x9AD8;&#x7EF4;&#x7684;&#x8D85;&#x5E73;&#x9762;&#xFF0C;&#x4F7F;&#x5F97;&#x9884;&#x6D4B;&#x503C;&#x4E0E;&#x771F;&#x5B9E;&#x503C;&#x4E4B;&#x95F4;&#x7684;&#x8BEF;&#x5DEE;&#x6700;&#x5C0F;&#x5316;&#x3002;</p>
 <a id="more"></a>
-<h1 id="简单实现"><a href="#简单实现" class="headerlink" title="简单实现"></a>简单实现</h1><p>具体代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">num_points=<span class="number">1000</span>    </span><br><span class="line">vectors_set=[]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_points):</span><br><span class="line">    <span class="comment"># 横坐标，进行随机高斯处理化，以0为均值，以0.55为标准差</span></span><br><span class="line">    x1=np.random.normal(<span class="number">0.0</span>,<span class="number">0.55</span>)</span><br><span class="line">    <span class="comment"># 纵坐标，数据点在y1=x1*0.1+0.3上小范围浮动</span></span><br><span class="line">    y1=x1*<span class="number">0.1</span>+<span class="number">0.3</span>+np.random.normal(<span class="number">0.0</span>,<span class="number">0.03</span>)</span><br><span class="line">    vectors_set.append([x1,y1])</span><br><span class="line">    x_data=[v[<span class="number">0</span>] <span class="keyword">for</span> v <span class="keyword">in</span> vectors_set]</span><br><span class="line">    y_data=[v[<span class="number">1</span>] <span class="keyword">for</span> v <span class="keyword">in</span> vectors_set]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成1维的W矩阵，取值是[-1,1]之间的随机数</span></span><br><span class="line">W = tf.Variable(tf.random_uniform([<span class="number">1</span>], <span class="number">-1.0</span>, <span class="number">1.0</span>), name=<span class="string">'W'</span>)</span><br><span class="line"><span class="comment"># 生成1维的b矩阵，初始值是0</span></span><br><span class="line">b = tf.Variable(tf.zeros([<span class="number">1</span>]), name=<span class="string">'b'</span>)</span><br><span class="line"><span class="comment"># 经过计算得出预估值y</span></span><br><span class="line">y = W * x_data + b</span><br><span class="line"><span class="comment"># 以预估值y和实际值y_data之间的均方误差作为损失</span></span><br><span class="line">loss = tf.reduce_mean(tf.square(y - y_data), name=<span class="string">'loss'</span>)</span><br><span class="line"><span class="comment"># 采用梯度下降法来优化参数  学习率为0.5</span></span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(<span class="number">0.5</span>)</span><br><span class="line"><span class="comment"># 训练的过程就是最小化这个误差值</span></span><br><span class="line">train = optimizer.minimize(loss, name=<span class="string">'train'</span>)</span><br><span class="line"><span class="comment"># sess = tf.Session()</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"><span class="comment"># 创建会话</span></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init)</span><br><span class="line">    <span class="comment"># 执行20次训练</span></span><br><span class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">        sess.run(train) <span class="comment"># 输出训练好的W和b</span></span><br><span class="line"></span><br><span class="line">        print(<span class="string">"W ="</span>, sess.run(W), <span class="string">"b ="</span>, sess.run(b), <span class="string">"loss ="</span>, sess.run(loss))</span><br><span class="line"></span><br><span class="line">    plt.scatter(x_data,y_data,c=<span class="string">'r'</span>)</span><br><span class="line">    plt.plot(x_data,sess.run(y))</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure></p>
-<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">W = [0.41536754] b = [0.29331774] loss = 0.028788242</span><br><span class="line">W = [0.32664812] b = [0.29488927] loss = 0.015261736</span><br><span class="line">W = [0.26295245] b = [0.29606903] loss = 0.008289363</span><br><span class="line">W = [0.2172218] b = [0.29691604] loss = 0.004695383</span><br><span class="line">W = [0.18438922] b = [0.29752415] loss = 0.002842829</span><br><span class="line">W = [0.1608169] b = [0.29796076] loss = 0.0018879117</span><br><span class="line">W = [0.143893] b = [0.29827422] loss = 0.0013956894</span><br><span class="line">W = [0.1317424] b = [0.2984993] loss = 0.0011419685</span><br><span class="line">W = [0.12301882] b = [0.29866084] loss = 0.0010111856</span><br><span class="line">W = [0.11675566] b = [0.29877687] loss = 0.00094377215</span><br><span class="line">W = [0.112259] b = [0.29886016] loss = 0.0009090233</span><br><span class="line">W = [0.1090306] b = [0.29891995] loss = 0.0008911116</span><br><span class="line">W = [0.10671275] b = [0.29896286] loss = 0.00088187883</span><br><span class="line">W = [0.10504864] b = [0.2989937] loss = 0.0008771197</span><br><span class="line">W = [0.10385388] b = [0.29901582] loss = 0.00087466656</span><br><span class="line">W = [0.1029961] b = [0.2990317] loss = 0.00087340205</span><br><span class="line">W = [0.10238025] b = [0.29904312] loss = 0.0008727502</span><br><span class="line">W = [0.10193809] b = [0.2990513] loss = 0.0008724143</span><br><span class="line">W = [0.10162064] b = [0.2990572] loss = 0.0008722411</span><br><span class="line">W = [0.10139273] b = [0.29906142] loss = 0.00087215187</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/buv6SxKq3CxD.png?imageslim" alt="mark"></p>
+<h1 id="&#x7B80;&#x5355;&#x5B9E;&#x73B0;"><a href="#&#x7B80;&#x5355;&#x5B9E;&#x73B0;" class="headerlink" title="&#x7B80;&#x5355;&#x5B9E;&#x73B0;"></a>&#x7B80;&#x5355;&#x5B9E;&#x73B0;</h1><p>&#x5177;&#x4F53;&#x4EE3;&#x7801;&#xFF1A;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">num_points=<span class="number">1000</span>    </span><br><span class="line">vectors_set=[]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_points):</span><br><span class="line">    <span class="comment"># &#x6A2A;&#x5750;&#x6807;&#xFF0C;&#x8FDB;&#x884C;&#x968F;&#x673A;&#x9AD8;&#x65AF;&#x5904;&#x7406;&#x5316;&#xFF0C;&#x4EE5;0&#x4E3A;&#x5747;&#x503C;&#xFF0C;&#x4EE5;0.55&#x4E3A;&#x6807;&#x51C6;&#x5DEE;</span></span><br><span class="line">    x1=np.random.normal(<span class="number">0.0</span>,<span class="number">0.55</span>)</span><br><span class="line">    <span class="comment"># &#x7EB5;&#x5750;&#x6807;&#xFF0C;&#x6570;&#x636E;&#x70B9;&#x5728;y1=x1*0.1+0.3&#x4E0A;&#x5C0F;&#x8303;&#x56F4;&#x6D6E;&#x52A8;</span></span><br><span class="line">    y1=x1*<span class="number">0.1</span>+<span class="number">0.3</span>+np.random.normal(<span class="number">0.0</span>,<span class="number">0.03</span>)</span><br><span class="line">    vectors_set.append([x1,y1])</span><br><span class="line">    x_data=[v[<span class="number">0</span>] <span class="keyword">for</span> v <span class="keyword">in</span> vectors_set]</span><br><span class="line">    y_data=[v[<span class="number">1</span>] <span class="keyword">for</span> v <span class="keyword">in</span> vectors_set]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x751F;&#x6210;1&#x7EF4;&#x7684;W&#x77E9;&#x9635;&#xFF0C;&#x53D6;&#x503C;&#x662F;[-1,1]&#x4E4B;&#x95F4;&#x7684;&#x968F;&#x673A;&#x6570;</span></span><br><span class="line">W = tf.Variable(tf.random_uniform([<span class="number">1</span>], <span class="number">-1.0</span>, <span class="number">1.0</span>), name=<span class="string">&apos;W&apos;</span>)</span><br><span class="line"><span class="comment"># &#x751F;&#x6210;1&#x7EF4;&#x7684;b&#x77E9;&#x9635;&#xFF0C;&#x521D;&#x59CB;&#x503C;&#x662F;0</span></span><br><span class="line">b = tf.Variable(tf.zeros([<span class="number">1</span>]), name=<span class="string">&apos;b&apos;</span>)</span><br><span class="line"><span class="comment"># &#x7ECF;&#x8FC7;&#x8BA1;&#x7B97;&#x5F97;&#x51FA;&#x9884;&#x4F30;&#x503C;y</span></span><br><span class="line">y = W * x_data + b</span><br><span class="line"><span class="comment"># &#x4EE5;&#x9884;&#x4F30;&#x503C;y&#x548C;&#x5B9E;&#x9645;&#x503C;y_data&#x4E4B;&#x95F4;&#x7684;&#x5747;&#x65B9;&#x8BEF;&#x5DEE;&#x4F5C;&#x4E3A;&#x635F;&#x5931;</span></span><br><span class="line">loss = tf.reduce_mean(tf.square(y - y_data), name=<span class="string">&apos;loss&apos;</span>)</span><br><span class="line"><span class="comment"># &#x91C7;&#x7528;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;&#x6765;&#x4F18;&#x5316;&#x53C2;&#x6570;  &#x5B66;&#x4E60;&#x7387;&#x4E3A;0.5</span></span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(<span class="number">0.5</span>)</span><br><span class="line"><span class="comment"># &#x8BAD;&#x7EC3;&#x7684;&#x8FC7;&#x7A0B;&#x5C31;&#x662F;&#x6700;&#x5C0F;&#x5316;&#x8FD9;&#x4E2A;&#x8BEF;&#x5DEE;&#x503C;</span></span><br><span class="line">train = optimizer.minimize(loss, name=<span class="string">&apos;train&apos;</span>)</span><br><span class="line"><span class="comment"># sess = tf.Session()</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"><span class="comment"># &#x521B;&#x5EFA;&#x4F1A;&#x8BDD;</span></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init)</span><br><span class="line">    <span class="comment"># &#x6267;&#x884C;20&#x6B21;&#x8BAD;&#x7EC3;</span></span><br><span class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">        sess.run(train) <span class="comment"># &#x8F93;&#x51FA;&#x8BAD;&#x7EC3;&#x597D;&#x7684;W&#x548C;b</span></span><br><span class="line"></span><br><span class="line">        print(<span class="string">&quot;W =&quot;</span>, sess.run(W), <span class="string">&quot;b =&quot;</span>, sess.run(b), <span class="string">&quot;loss =&quot;</span>, sess.run(loss))</span><br><span class="line"></span><br><span class="line">    plt.scatter(x_data,y_data,c=<span class="string">&apos;r&apos;</span>)</span><br><span class="line">    plt.plot(x_data,sess.run(y))</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure></p>
+<p>&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">W = [0.41536754] b = [0.29331774] loss = 0.028788242</span><br><span class="line">W = [0.32664812] b = [0.29488927] loss = 0.015261736</span><br><span class="line">W = [0.26295245] b = [0.29606903] loss = 0.008289363</span><br><span class="line">W = [0.2172218] b = [0.29691604] loss = 0.004695383</span><br><span class="line">W = [0.18438922] b = [0.29752415] loss = 0.002842829</span><br><span class="line">W = [0.1608169] b = [0.29796076] loss = 0.0018879117</span><br><span class="line">W = [0.143893] b = [0.29827422] loss = 0.0013956894</span><br><span class="line">W = [0.1317424] b = [0.2984993] loss = 0.0011419685</span><br><span class="line">W = [0.12301882] b = [0.29866084] loss = 0.0010111856</span><br><span class="line">W = [0.11675566] b = [0.29877687] loss = 0.00094377215</span><br><span class="line">W = [0.112259] b = [0.29886016] loss = 0.0009090233</span><br><span class="line">W = [0.1090306] b = [0.29891995] loss = 0.0008911116</span><br><span class="line">W = [0.10671275] b = [0.29896286] loss = 0.00088187883</span><br><span class="line">W = [0.10504864] b = [0.2989937] loss = 0.0008771197</span><br><span class="line">W = [0.10385388] b = [0.29901582] loss = 0.00087466656</span><br><span class="line">W = [0.1029961] b = [0.2990317] loss = 0.00087340205</span><br><span class="line">W = [0.10238025] b = [0.29904312] loss = 0.0008727502</span><br><span class="line">W = [0.10193809] b = [0.2990513] loss = 0.0008724143</span><br><span class="line">W = [0.10162064] b = [0.2990572] loss = 0.0008722411</span><br><span class="line">W = [0.10139273] b = [0.29906142] loss = 0.00087215187</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/08/08/tf&#x5B66;&#x4E60;&#x7B14;&#x8BB0;5/1.png" alt></p>
 
     </div>
 
@@ -381,8 +381,6 @@
           <div class="post-tags" id="post-tags">
             
               <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
-            
-              <a href="/tags/线性回归/" rel="tag"><i class="fa fa-tag"></i> 线性回归</a>
             
           </div>
           <script type="text/javascript">
@@ -469,7 +467,7 @@
                   
                     <a href="/archives/">
                   
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -496,7 +494,9 @@
                   
                     
                   
-                  <span class="site-state-item-count">5</span>
+                    
+                  
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -571,43 +571,7 @@
                   
                     
                   
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -700,7 +664,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
     <span class="post-meta-divider">|</span>
-    <span title="站点总字数">全站共195k字</span>
+    <span title="站点总字数">全站共199k字</span>
 </div>
 
 <div class="BbeiAn-info">

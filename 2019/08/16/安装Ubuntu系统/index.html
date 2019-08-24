@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="前言昨天在更新tensorflow时我的Ubuntu系统突然崩溃了，无奈只能重装系统。但距离上次安装Ubuntu系统已经过去许久，只能去网上搜教程折腾，好在整个过程异常顺利，于是用本博客记录下我的整个安装步骤。">
-<meta name="keywords" content="Ubuntu,系统安装">
+  <meta name="description" content="&amp;#x524D;&amp;#x8A00;&amp;#x6628;&amp;#x5929;&amp;#x5728;&amp;#x66F4;&amp;#x65B0;tensorflow&amp;#x65F6;&amp;#x6211;&amp;#x7684;Ubuntu&amp;#x7CFB;&amp;#x7EDF;&amp;#x7A81;&amp;#x7136;&amp;#x5D29;&amp;#x6E83;&amp;#x4E86;&amp;#xFF0C;&amp;#x65E0;&amp;#x5948;&amp;#x53EA;&amp;#x80FD;&amp;#x91CD;">
+<meta name="keywords" content="Ubuntu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows下安装Ubuntu16.04双系统">
 <meta property="og:url" content="http://zhengyujie.cn/2019/08/16/安装Ubuntu系统/index.html">
 <meta property="og:site_name" content="浅笑の博客">
-<meta property="og:description" content="前言昨天在更新tensorflow时我的Ubuntu系统突然崩溃了，无奈只能重装系统。但距离上次安装Ubuntu系统已经过去许久，只能去网上搜教程折腾，好在整个过程异常顺利，于是用本博客记录下我的整个安装步骤。">
+<meta property="og:description" content="&amp;#x524D;&amp;#x8A00;&amp;#x6628;&amp;#x5929;&amp;#x5728;&amp;#x66F4;&amp;#x65B0;tensorflow&amp;#x65F6;&amp;#x6211;&amp;#x7684;Ubuntu&amp;#x7CFB;&amp;#x7EDF;&amp;#x7A81;&amp;#x7136;&amp;#x5D29;&amp;#x6E83;&amp;#x4E86;&amp;#xFF0C;&amp;#x65E0;&amp;#x5948;&amp;#x53EA;&amp;#x80FD;&amp;#x91CD;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-19T08:11:19.437Z">
+<meta property="og:updated_time" content="2019-08-16T01:32:46.360Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows下安装Ubuntu16.04双系统">
-<meta name="twitter:description" content="前言昨天在更新tensorflow时我的Ubuntu系统突然崩溃了，无奈只能重装系统。但距离上次安装Ubuntu系统已经过去许久，只能去网上搜教程折腾，好在整个过程异常顺利，于是用本博客记录下我的整个安装步骤。">
+<meta name="twitter:description" content="&amp;#x524D;&amp;#x8A00;&amp;#x6628;&amp;#x5929;&amp;#x5728;&amp;#x66F4;&amp;#x65B0;tensorflow&amp;#x65F6;&amp;#x6211;&amp;#x7684;Ubuntu&amp;#x7CFB;&amp;#x7EDF;&amp;#x7A81;&amp;#x7136;&amp;#x5D29;&amp;#x6E83;&amp;#x4E86;&amp;#xFF0C;&amp;#x65E0;&amp;#x5948;&amp;#x53EA;&amp;#x80FD;&amp;#x91CD;">
   <link rel="canonical" href="http://zhengyujie.cn/2019/08/16/安装Ubuntu系统/">
 
 
@@ -174,7 +174,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">47</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -187,7 +187,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
 
   </li>
       
@@ -200,7 +200,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
 
   </li>
       
@@ -351,60 +351,60 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>昨天在更新tensorflow时我的Ubuntu系统突然崩溃了，无奈只能重装系统。但距离上次安装Ubuntu系统已经过去许久，只能去网上搜教程折腾，好在整个过程异常顺利，于是用本博客记录下我的整个安装步骤。</p>
+        <h1 id="&#x524D;&#x8A00;"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</h1><p>&#x6628;&#x5929;&#x5728;&#x66F4;&#x65B0;tensorflow&#x65F6;&#x6211;&#x7684;Ubuntu&#x7CFB;&#x7EDF;&#x7A81;&#x7136;&#x5D29;&#x6E83;&#x4E86;&#xFF0C;&#x65E0;&#x5948;&#x53EA;&#x80FD;&#x91CD;&#x88C5;&#x7CFB;&#x7EDF;&#x3002;&#x4F46;&#x8DDD;&#x79BB;&#x4E0A;&#x6B21;&#x5B89;&#x88C5;Ubuntu&#x7CFB;&#x7EDF;&#x5DF2;&#x7ECF;&#x8FC7;&#x53BB;&#x8BB8;&#x4E45;&#xFF0C;&#x53EA;&#x80FD;&#x53BB;&#x7F51;&#x4E0A;&#x641C;&#x6559;&#x7A0B;&#x6298;&#x817E;&#xFF0C;&#x597D;&#x5728;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x5F02;&#x5E38;&#x987A;&#x5229;&#xFF0C;&#x4E8E;&#x662F;&#x7528;&#x672C;&#x535A;&#x5BA2;&#x8BB0;&#x5F55;&#x4E0B;&#x6211;&#x7684;&#x6574;&#x4E2A;&#x5B89;&#x88C5;&#x6B65;&#x9AA4;&#x3002;</p>
 <a id="more"></a>
-<h1 id="完整步骤"><a href="#完整步骤" class="headerlink" title="完整步骤"></a>完整步骤</h1><ol>
-<li><p><strong>空间准备</strong></p>
-<p> 在Windows 10中打开“磁盘管理器”，找一个空闲的磁盘分区，压缩出来一部分空间给Ubuntu使用，压缩出来的硬盘应处于未分配状态。或者通过删除某个不使用的本地磁盘使其处于未分配状态。这里我给Ubuntu系统分配了100G空间</p>
+<h1 id="&#x5B8C;&#x6574;&#x6B65;&#x9AA4;"><a href="#&#x5B8C;&#x6574;&#x6B65;&#x9AA4;" class="headerlink" title="&#x5B8C;&#x6574;&#x6B65;&#x9AA4;"></a>&#x5B8C;&#x6574;&#x6B65;&#x9AA4;</h1><ol>
+<li><p><strong>&#x7A7A;&#x95F4;&#x51C6;&#x5907;</strong></p>
+<p> &#x5728;Windows 10&#x4E2D;&#x6253;&#x5F00;&#x201C;&#x78C1;&#x76D8;&#x7BA1;&#x7406;&#x5668;&#x201D;&#xFF0C;&#x627E;&#x4E00;&#x4E2A;&#x7A7A;&#x95F2;&#x7684;&#x78C1;&#x76D8;&#x5206;&#x533A;&#xFF0C;&#x538B;&#x7F29;&#x51FA;&#x6765;&#x4E00;&#x90E8;&#x5206;&#x7A7A;&#x95F4;&#x7ED9;Ubuntu&#x4F7F;&#x7528;&#xFF0C;&#x538B;&#x7F29;&#x51FA;&#x6765;&#x7684;&#x786C;&#x76D8;&#x5E94;&#x5904;&#x4E8E;&#x672A;&#x5206;&#x914D;&#x72B6;&#x6001;&#x3002;&#x6216;&#x8005;&#x901A;&#x8FC7;&#x5220;&#x9664;&#x67D0;&#x4E2A;&#x4E0D;&#x4F7F;&#x7528;&#x7684;&#x672C;&#x5730;&#x78C1;&#x76D8;&#x4F7F;&#x5176;&#x5904;&#x4E8E;&#x672A;&#x5206;&#x914D;&#x72B6;&#x6001;&#x3002;&#x8FD9;&#x91CC;&#x6211;&#x7ED9;Ubuntu&#x7CFB;&#x7EDF;&#x5206;&#x914D;&#x4E86;100G&#x7A7A;&#x95F4;</p>
 </li>
-<li><p><strong>制作启动盘</strong></p>
+<li><p><strong>&#x5236;&#x4F5C;&#x542F;&#x52A8;&#x76D8;</strong></p>
 <ol>
-<li>插入用来制作启动盘的U盘（会被格式化，请备份好重要文件），打开UltraISO刻录软件（免费无限期试用）。</li>
-<li>选择“文件(F)”-&gt;“打开”，找到“Ubuntu-16.04-desktop-amd64.iso”镜像文件，然后点击“打开”。</li>
-<li>选择“启动(B)”-&gt;“写入硬盘映像”，打开启动盘制作界面。</li>
-<li>然后点击下方的“写入”，会弹出警告提示，确定后，就会开始制作启动盘。写入完成后关闭UltraISO软件即可。</li>
+<li>&#x63D2;&#x5165;&#x7528;&#x6765;&#x5236;&#x4F5C;&#x542F;&#x52A8;&#x76D8;&#x7684;U&#x76D8;&#xFF08;&#x4F1A;&#x88AB;&#x683C;&#x5F0F;&#x5316;&#xFF0C;&#x8BF7;&#x5907;&#x4EFD;&#x597D;&#x91CD;&#x8981;&#x6587;&#x4EF6;&#xFF09;&#xFF0C;&#x6253;&#x5F00;UltraISO&#x523B;&#x5F55;&#x8F6F;&#x4EF6;&#xFF08;&#x514D;&#x8D39;&#x65E0;&#x9650;&#x671F;&#x8BD5;&#x7528;&#xFF09;&#x3002;</li>
+<li>&#x9009;&#x62E9;&#x201C;&#x6587;&#x4EF6;(F)&#x201D;-&gt;&#x201C;&#x6253;&#x5F00;&#x201D;&#xFF0C;&#x627E;&#x5230;&#x201C;Ubuntu-16.04-desktop-amd64.iso&#x201D;&#x955C;&#x50CF;&#x6587;&#x4EF6;&#xFF0C;&#x7136;&#x540E;&#x70B9;&#x51FB;&#x201C;&#x6253;&#x5F00;&#x201D;&#x3002;</li>
+<li>&#x9009;&#x62E9;&#x201C;&#x542F;&#x52A8;(B)&#x201D;-&gt;&#x201C;&#x5199;&#x5165;&#x786C;&#x76D8;&#x6620;&#x50CF;&#x201D;&#xFF0C;&#x6253;&#x5F00;&#x542F;&#x52A8;&#x76D8;&#x5236;&#x4F5C;&#x754C;&#x9762;&#x3002;</li>
+<li>&#x7136;&#x540E;&#x70B9;&#x51FB;&#x4E0B;&#x65B9;&#x7684;&#x201C;&#x5199;&#x5165;&#x201D;&#xFF0C;&#x4F1A;&#x5F39;&#x51FA;&#x8B66;&#x544A;&#x63D0;&#x793A;&#xFF0C;&#x786E;&#x5B9A;&#x540E;&#xFF0C;&#x5C31;&#x4F1A;&#x5F00;&#x59CB;&#x5236;&#x4F5C;&#x542F;&#x52A8;&#x76D8;&#x3002;&#x5199;&#x5165;&#x5B8C;&#x6210;&#x540E;&#x5173;&#x95ED;UltraISO&#x8F6F;&#x4EF6;&#x5373;&#x53EF;&#x3002;</li>
 </ol>
 </li>
-<li><p><strong>BIOS设置</strong></p>
-<p> 我的主板为微星主板，重启电脑猛按DEL键即可进入BIOS界面，然后设置U盘为第一启动项。最后按F10保存设置并重启。</p>
+<li><p><strong>BIOS&#x8BBE;&#x7F6E;</strong></p>
+<p> &#x6211;&#x7684;&#x4E3B;&#x677F;&#x4E3A;&#x5FAE;&#x661F;&#x4E3B;&#x677F;&#xFF0C;&#x91CD;&#x542F;&#x7535;&#x8111;&#x731B;&#x6309;DEL&#x952E;&#x5373;&#x53EF;&#x8FDB;&#x5165;BIOS&#x754C;&#x9762;&#xFF0C;&#x7136;&#x540E;&#x8BBE;&#x7F6E;U&#x76D8;&#x4E3A;&#x7B2C;&#x4E00;&#x542F;&#x52A8;&#x9879;&#x3002;&#x6700;&#x540E;&#x6309;F10&#x4FDD;&#x5B58;&#x8BBE;&#x7F6E;&#x5E76;&#x91CD;&#x542F;&#x3002;</p>
 </li>
-<li><p><strong>安装Ubuntu系统</strong></p>
+<li><p><strong>&#x5B89;&#x88C5;Ubuntu&#x7CFB;&#x7EDF;</strong></p>
 <ol>
-<li>重启后便进入安装界面，通过上下键选择则第二项：<code>Install Ubuntu</code></li>
-<li>选择语言</li>
-<li><strong>不要</strong>选择为图形或者无线硬件，以及Mp3和其他媒体安装第三方软件。</li>
-<li>选择最后一项：其它选项</li>
-<li>选中我们预留好的100G空间，然后点击+号新建分区</li>
-<li>新建分区：<ol>
-<li>大小一般为8G</li>
-<li>新分区类型为主分区</li>
-<li>新分区位置为空间起始位置</li>
-<li>用于交换空间</li>
-<li>挂载点/swap</li>
+<li>&#x91CD;&#x542F;&#x540E;&#x4FBF;&#x8FDB;&#x5165;&#x5B89;&#x88C5;&#x754C;&#x9762;&#xFF0C;&#x901A;&#x8FC7;&#x4E0A;&#x4E0B;&#x952E;&#x9009;&#x62E9;&#x5219;&#x7B2C;&#x4E8C;&#x9879;&#xFF1A;<code>Install Ubuntu</code></li>
+<li>&#x9009;&#x62E9;&#x8BED;&#x8A00;</li>
+<li><strong>&#x4E0D;&#x8981;</strong>&#x9009;&#x62E9;&#x4E3A;&#x56FE;&#x5F62;&#x6216;&#x8005;&#x65E0;&#x7EBF;&#x786C;&#x4EF6;&#xFF0C;&#x4EE5;&#x53CA;Mp3&#x548C;&#x5176;&#x4ED6;&#x5A92;&#x4F53;&#x5B89;&#x88C5;&#x7B2C;&#x4E09;&#x65B9;&#x8F6F;&#x4EF6;&#x3002;</li>
+<li>&#x9009;&#x62E9;&#x6700;&#x540E;&#x4E00;&#x9879;&#xFF1A;&#x5176;&#x5B83;&#x9009;&#x9879;</li>
+<li>&#x9009;&#x4E2D;&#x6211;&#x4EEC;&#x9884;&#x7559;&#x597D;&#x7684;100G&#x7A7A;&#x95F4;&#xFF0C;&#x7136;&#x540E;&#x70B9;&#x51FB;+&#x53F7;&#x65B0;&#x5EFA;&#x5206;&#x533A;</li>
+<li>&#x65B0;&#x5EFA;&#x5206;&#x533A;&#xFF1A;<ol>
+<li>&#x5927;&#x5C0F;&#x4E00;&#x822C;&#x4E3A;8G</li>
+<li>&#x65B0;&#x5206;&#x533A;&#x7C7B;&#x578B;&#x4E3A;&#x4E3B;&#x5206;&#x533A;</li>
+<li>&#x65B0;&#x5206;&#x533A;&#x4F4D;&#x7F6E;&#x4E3A;&#x7A7A;&#x95F4;&#x8D77;&#x59CB;&#x4F4D;&#x7F6E;</li>
+<li>&#x7528;&#x4E8E;&#x4EA4;&#x6362;&#x7A7A;&#x95F4;</li>
+<li>&#x6302;&#x8F7D;&#x70B9;/swap</li>
 </ol>
 </li>
-<li>新建分区：<ol>
-<li>剩余空间的一半分给它，我分了50G</li>
-<li>新分区类型为主分区</li>
-<li>新分区位置为空间起始位置</li>
-<li>用于EXT4日志文件系统</li>
-<li>挂载点/home</li>
+<li>&#x65B0;&#x5EFA;&#x5206;&#x533A;&#xFF1A;<ol>
+<li>&#x5269;&#x4F59;&#x7A7A;&#x95F4;&#x7684;&#x4E00;&#x534A;&#x5206;&#x7ED9;&#x5B83;&#xFF0C;&#x6211;&#x5206;&#x4E86;50G</li>
+<li>&#x65B0;&#x5206;&#x533A;&#x7C7B;&#x578B;&#x4E3A;&#x4E3B;&#x5206;&#x533A;</li>
+<li>&#x65B0;&#x5206;&#x533A;&#x4F4D;&#x7F6E;&#x4E3A;&#x7A7A;&#x95F4;&#x8D77;&#x59CB;&#x4F4D;&#x7F6E;</li>
+<li>&#x7528;&#x4E8E;EXT4&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</li>
+<li>&#x6302;&#x8F7D;&#x70B9;/home</li>
 </ol>
 </li>
-<li>新建分区：<ol>
-<li>大小剩下的空间都给它</li>
-<li>新分区类型为主分区</li>
-<li>新分区位置为空间起始位置</li>
-<li>用于EXT4日志文件系统</li>
-<li>挂载点/</li>
+<li>&#x65B0;&#x5EFA;&#x5206;&#x533A;&#xFF1A;<ol>
+<li>&#x5927;&#x5C0F;&#x5269;&#x4E0B;&#x7684;&#x7A7A;&#x95F4;&#x90FD;&#x7ED9;&#x5B83;</li>
+<li>&#x65B0;&#x5206;&#x533A;&#x7C7B;&#x578B;&#x4E3A;&#x4E3B;&#x5206;&#x533A;</li>
+<li>&#x65B0;&#x5206;&#x533A;&#x4F4D;&#x7F6E;&#x4E3A;&#x7A7A;&#x95F4;&#x8D77;&#x59CB;&#x4F4D;&#x7F6E;</li>
+<li>&#x7528;&#x4E8E;EXT4&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</li>
+<li>&#x6302;&#x8F7D;&#x70B9;/</li>
 </ol>
 </li>
-<li>设置安装引导的启动设置，在下拉中选择Windows Boot Manager所在的整块硬盘（不带数字标号）</li>
-<li>点击继续</li>
-<li>选择Shanghai，定位时区</li>
-<li>键盘布局中英都行，以后可以改</li>
-<li>设置用户名以及密码</li>
-<li>等待进度条结束即可完成安装</li>
+<li>&#x8BBE;&#x7F6E;&#x5B89;&#x88C5;&#x5F15;&#x5BFC;&#x7684;&#x542F;&#x52A8;&#x8BBE;&#x7F6E;&#xFF0C;&#x5728;&#x4E0B;&#x62C9;&#x4E2D;&#x9009;&#x62E9;Windows Boot Manager&#x6240;&#x5728;&#x7684;&#x6574;&#x5757;&#x786C;&#x76D8;&#xFF08;&#x4E0D;&#x5E26;&#x6570;&#x5B57;&#x6807;&#x53F7;&#xFF09;</li>
+<li>&#x70B9;&#x51FB;&#x7EE7;&#x7EED;</li>
+<li>&#x9009;&#x62E9;Shanghai&#xFF0C;&#x5B9A;&#x4F4D;&#x65F6;&#x533A;</li>
+<li>&#x952E;&#x76D8;&#x5E03;&#x5C40;&#x4E2D;&#x82F1;&#x90FD;&#x884C;&#xFF0C;&#x4EE5;&#x540E;&#x53EF;&#x4EE5;&#x6539;</li>
+<li>&#x8BBE;&#x7F6E;&#x7528;&#x6237;&#x540D;&#x4EE5;&#x53CA;&#x5BC6;&#x7801;</li>
+<li>&#x7B49;&#x5F85;&#x8FDB;&#x5EA6;&#x6761;&#x7ED3;&#x675F;&#x5373;&#x53EF;&#x5B8C;&#x6210;&#x5B89;&#x88C5;</li>
 </ol>
 </li>
 </ol>
@@ -424,8 +424,6 @@
           <div class="post-tags" id="post-tags">
             
               <a href="/tags/Ubuntu/" rel="tag"><i class="fa fa-tag"></i> Ubuntu</a>
-            
-              <a href="/tags/系统安装/" rel="tag"><i class="fa fa-tag"></i> 系统安装</a>
             
           </div>
           <script type="text/javascript">
@@ -512,7 +510,7 @@
                   
                     <a href="/archives/">
                   
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -539,7 +537,9 @@
                   
                     
                   
-                  <span class="site-state-item-count">5</span>
+                    
+                  
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -614,43 +614,7 @@
                   
                     
                   
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -743,7 +707,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
     <span class="post-meta-divider">|</span>
-    <span title="站点总字数">全站共195k字</span>
+    <span title="站点总字数">全站共199k字</span>
 </div>
 
 <div class="BbeiAn-info">

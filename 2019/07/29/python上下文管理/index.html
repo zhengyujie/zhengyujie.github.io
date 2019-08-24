@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="with语句创建上下文管理实际就是创建一个类，添加enter和exit方法。下面我们来实现open的上下文管理功能： 1234567891011121314class OpenContext(object):    def __init__(self, filename, mode):        self.fp = open(filename, mode)    def __enter__(s">
+  <meta name="description" content="with&amp;#x8BED;&amp;#x53E5;&amp;#x521B;&amp;#x5EFA;&amp;#x4E0A;&amp;#x4E0B;&amp;#x6587;&amp;#x7BA1;&amp;#x7406;&amp;#x5B9E;&amp;#x9645;&amp;#x5C31;&amp;#x662F;&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x7C7B;&amp;#xFF0C;&amp;#x6DFB;&amp;#x52A0;enter&amp;#x548C;exit&amp;#x65B9;&amp;#x">
 <meta name="keywords" content="Python库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python——with语句和contextlib模块">
 <meta property="og:url" content="http://zhengyujie.cn/2019/07/29/python上下文管理/index.html">
 <meta property="og:site_name" content="浅笑の博客">
-<meta property="og:description" content="with语句创建上下文管理实际就是创建一个类，添加enter和exit方法。下面我们来实现open的上下文管理功能： 1234567891011121314class OpenContext(object):    def __init__(self, filename, mode):        self.fp = open(filename, mode)    def __enter__(s">
+<meta property="og:description" content="with&amp;#x8BED;&amp;#x53E5;&amp;#x521B;&amp;#x5EFA;&amp;#x4E0A;&amp;#x4E0B;&amp;#x6587;&amp;#x7BA1;&amp;#x7406;&amp;#x5B9E;&amp;#x9645;&amp;#x5C31;&amp;#x662F;&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x7C7B;&amp;#xFF0C;&amp;#x6DFB;&amp;#x52A0;enter&amp;#x548C;exit&amp;#x65B9;&amp;#x">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-19T08:18:09.661Z">
+<meta property="og:updated_time" content="2019-07-31T18:25:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python——with语句和contextlib模块">
-<meta name="twitter:description" content="with语句创建上下文管理实际就是创建一个类，添加enter和exit方法。下面我们来实现open的上下文管理功能： 1234567891011121314class OpenContext(object):    def __init__(self, filename, mode):        self.fp = open(filename, mode)    def __enter__(s">
+<meta name="twitter:description" content="with&amp;#x8BED;&amp;#x53E5;&amp;#x521B;&amp;#x5EFA;&amp;#x4E0A;&amp;#x4E0B;&amp;#x6587;&amp;#x7BA1;&amp;#x7406;&amp;#x5B9E;&amp;#x9645;&amp;#x5C31;&amp;#x662F;&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x7C7B;&amp;#xFF0C;&amp;#x6DFB;&amp;#x52A0;enter&amp;#x548C;exit&amp;#x65B9;&amp;#x">
   <link rel="canonical" href="http://zhengyujie.cn/2019/07/29/python上下文管理/">
 
 
@@ -174,7 +174,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">47</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -187,7 +187,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
 
   </li>
       
@@ -200,7 +200,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
 
   </li>
       
@@ -351,14 +351,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="with语句"><a href="#with语句" class="headerlink" title="with语句"></a>with语句</h1><p>创建上下文管理实际就是创建一个类，添加<strong>enter</strong>和<strong>exit</strong>方法。下面我们来实现open的上下文管理功能：</p>
+        <h1 id="with&#x8BED;&#x53E5;"><a href="#with&#x8BED;&#x53E5;" class="headerlink" title="with&#x8BED;&#x53E5;"></a>with&#x8BED;&#x53E5;</h1><p>&#x521B;&#x5EFA;&#x4E0A;&#x4E0B;&#x6587;&#x7BA1;&#x7406;&#x5B9E;&#x9645;&#x5C31;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7C7B;&#xFF0C;&#x6DFB;&#x52A0;<strong>enter</strong>&#x548C;<strong>exit</strong>&#x65B9;&#x6CD5;&#x3002;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x6765;&#x5B9E;&#x73B0;open&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x7BA1;&#x7406;&#x529F;&#x80FD;&#xFF1A;</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class OpenContext(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self, filename, mode):</span><br><span class="line">        self.fp = open(filename, mode)</span><br><span class="line"></span><br><span class="line">    def __enter__(self):</span><br><span class="line">        return self.fp</span><br><span class="line"></span><br><span class="line">    def __exit__(self, exc_type, exc_val, exc_tb):</span><br><span class="line">        self.fp.close()</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">with OpenContext(&apos;/tmp/a.txt&apos;, &apos;a&apos;) as file_obj:</span><br><span class="line">    file_obj.write(&quot;hello 6666&quot;)</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h1 id="contextlib模块"><a href="#contextlib模块" class="headerlink" title="contextlib模块"></a>contextlib模块</h1><p>上面我们自定义上下文管理器确实很方便，但是Python标准库还提供了更加易用的上下文管理器工具模块contextlib，它是通过生成器实现的，我们不需要再创建类以及<strong>enter</strong>和<strong>exit</strong>这两个特俗的方法：</p>
+<h1 id="contextlib&#x6A21;&#x5757;"><a href="#contextlib&#x6A21;&#x5757;" class="headerlink" title="contextlib&#x6A21;&#x5757;"></a>contextlib&#x6A21;&#x5757;</h1><p>&#x4E0A;&#x9762;&#x6211;&#x4EEC;&#x81EA;&#x5B9A;&#x4E49;&#x4E0A;&#x4E0B;&#x6587;&#x7BA1;&#x7406;&#x5668;&#x786E;&#x5B9E;&#x5F88;&#x65B9;&#x4FBF;&#xFF0C;&#x4F46;&#x662F;Python&#x6807;&#x51C6;&#x5E93;&#x8FD8;&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x52A0;&#x6613;&#x7528;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x7BA1;&#x7406;&#x5668;&#x5DE5;&#x5177;&#x6A21;&#x5757;contextlib&#xFF0C;&#x5B83;&#x662F;&#x901A;&#x8FC7;&#x751F;&#x6210;&#x5668;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x9700;&#x8981;&#x518D;&#x521B;&#x5EFA;&#x7C7B;&#x4EE5;&#x53CA;<strong>enter</strong>&#x548C;<strong>exit</strong>&#x8FD9;&#x4E24;&#x4E2A;&#x7279;&#x4FD7;&#x7684;&#x65B9;&#x6CD5;&#xFF1A;</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from contextlib import contextmanager</span><br><span class="line"></span><br><span class="line">@contextmanager</span><br><span class="line">def make_open_context(filename, mode):</span><br><span class="line">    fp = open(filename, mode)</span><br><span class="line">    try:</span><br><span class="line">        yield fp</span><br><span class="line">    finally:</span><br><span class="line">        fp.close()</span><br><span class="line"></span><br><span class="line">with make_open_context(&apos;/tmp/a.txt&apos;, &apos;a&apos;) as file_obj:</span><br><span class="line">    file_obj.write(&quot;hello 666&quot;)</span><br></pre></td></tr></table></figure>
-<p>在上文中，yield关键词把上下文分割成两部分：yield之前就是<strong>init</strong>中的代码块；yield之后其实就是<strong>exit</strong>中的代码块，yield生成的值会绑定到with语句as子句中的变量，例如在上面的例子中，yield生成的值是文件句柄对象fp，在下面的with语句中，会将fp和file_obj绑定到一起，也就是说file_obj此时就是一个文件句柄对象，那么它就可以操作文件了，因此就可以调用file_obj.write(“hello 666”)，另外要注意的是如果yield没有生成值，那么在with语句中就不需要写as子句了</p>
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># _*_ coding:utf-8 _*_</span><br><span class="line"></span><br><span class="line">from contextlib import contextmanager</span><br><span class="line"></span><br><span class="line">@contextmanager</span><br><span class="line">def book_mark():</span><br><span class="line">    print(&apos;《&apos;, end=&quot;&quot;)</span><br><span class="line">    yield</span><br><span class="line">    print(&apos;》&apos;, end=&quot;&quot;)</span><br><span class="line"></span><br><span class="line">with book_mark():</span><br><span class="line">    # 核心代码</span><br><span class="line">    print(&apos;且将生活一饮而尽&apos;, end=&quot;&quot;)</span><br></pre></td></tr></table></figure>
-<p>这样在打印书名时，通过上下文管理器，会自动加上书名号</p>
+<p>&#x5728;&#x4E0A;&#x6587;&#x4E2D;&#xFF0C;yield&#x5173;&#x952E;&#x8BCD;&#x628A;&#x4E0A;&#x4E0B;&#x6587;&#x5206;&#x5272;&#x6210;&#x4E24;&#x90E8;&#x5206;&#xFF1A;yield&#x4E4B;&#x524D;&#x5C31;&#x662F;<strong>init</strong>&#x4E2D;&#x7684;&#x4EE3;&#x7801;&#x5757;&#xFF1B;yield&#x4E4B;&#x540E;&#x5176;&#x5B9E;&#x5C31;&#x662F;<strong>exit</strong>&#x4E2D;&#x7684;&#x4EE3;&#x7801;&#x5757;&#xFF0C;yield&#x751F;&#x6210;&#x7684;&#x503C;&#x4F1A;&#x7ED1;&#x5B9A;&#x5230;with&#x8BED;&#x53E5;as&#x5B50;&#x53E5;&#x4E2D;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x4F8B;&#x5982;&#x5728;&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;yield&#x751F;&#x6210;&#x7684;&#x503C;&#x662F;&#x6587;&#x4EF6;&#x53E5;&#x67C4;&#x5BF9;&#x8C61;fp&#xFF0C;&#x5728;&#x4E0B;&#x9762;&#x7684;with&#x8BED;&#x53E5;&#x4E2D;&#xFF0C;&#x4F1A;&#x5C06;fp&#x548C;file_obj&#x7ED1;&#x5B9A;&#x5230;&#x4E00;&#x8D77;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;file_obj&#x6B64;&#x65F6;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x53E5;&#x67C4;&#x5BF9;&#x8C61;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x5C31;&#x53EF;&#x4EE5;&#x64CD;&#x4F5C;&#x6587;&#x4EF6;&#x4E86;&#xFF0C;&#x56E0;&#x6B64;&#x5C31;&#x53EF;&#x4EE5;&#x8C03;&#x7528;file_obj.write(&#x201C;hello 666&#x201D;)&#xFF0C;&#x53E6;&#x5916;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x5982;&#x679C;yield&#x6CA1;&#x6709;&#x751F;&#x6210;&#x503C;&#xFF0C;&#x90A3;&#x4E48;&#x5728;with&#x8BED;&#x53E5;&#x4E2D;&#x5C31;&#x4E0D;&#x9700;&#x8981;&#x5199;as&#x5B50;&#x53E5;&#x4E86;</p>
+<h1 id="&#x6848;&#x4F8B;"><a href="#&#x6848;&#x4F8B;" class="headerlink" title="&#x6848;&#x4F8B;"></a>&#x6848;&#x4F8B;</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># _*_ coding:utf-8 _*_</span><br><span class="line"></span><br><span class="line">from contextlib import contextmanager</span><br><span class="line"></span><br><span class="line">@contextmanager</span><br><span class="line">def book_mark():</span><br><span class="line">    print(&apos;&#x300A;&apos;, end=&quot;&quot;)</span><br><span class="line">    yield</span><br><span class="line">    print(&apos;&#x300B;&apos;, end=&quot;&quot;)</span><br><span class="line"></span><br><span class="line">with book_mark():</span><br><span class="line">    # &#x6838;&#x5FC3;&#x4EE3;&#x7801;</span><br><span class="line">    print(&apos;&#x4E14;&#x5C06;&#x751F;&#x6D3B;&#x4E00;&#x996E;&#x800C;&#x5C3D;&apos;, end=&quot;&quot;)</span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x6837;&#x5728;&#x6253;&#x5370;&#x4E66;&#x540D;&#x65F6;&#xFF0C;&#x901A;&#x8FC7;&#x4E0A;&#x4E0B;&#x6587;&#x7BA1;&#x7406;&#x5668;&#xFF0C;&#x4F1A;&#x81EA;&#x52A8;&#x52A0;&#x4E0A;&#x4E66;&#x540D;&#x53F7;</p>
 
     </div>
 
@@ -461,7 +461,7 @@
                   
                     <a href="/archives/">
                   
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -488,7 +488,9 @@
                   
                     
                   
-                  <span class="site-state-item-count">5</span>
+                    
+                  
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -563,43 +565,7 @@
                   
                     
                   
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -692,7 +658,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
     <span class="post-meta-divider">|</span>
-    <span title="站点总字数">全站共195k字</span>
+    <span title="站点总字数">全站共199k字</span>
 </div>
 
 <div class="BbeiAn-info">

@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="激励函数的作用激励函数的作用就是将多个线性输入转换为非线性的关系。如果不使用激励函数，神经网络的每层都只是做线性变换，即使是多层输入叠加后也还是线性变换。通过使用激励函数引入非线性因素后，使神经网络的表示能力更强了。">
-<meta name="keywords" content="TensorFlow,激励函数">
+  <meta name="description" content="&amp;#x6FC0;&amp;#x52B1;&amp;#x51FD;&amp;#x6570;&amp;#x7684;&amp;#x4F5C;&amp;#x7528;&amp;#x6FC0;&amp;#x52B1;&amp;#x51FD;&amp;#x6570;&amp;#x7684;&amp;#x4F5C;&amp;#x7528;&amp;#x5C31;&amp;#x662F;&amp;#x5C06;&amp;#x591A;&amp;#x4E2A;&amp;#x7EBF;&amp;#x6027;&amp;#x8F93;&amp;#x5165;&amp;#x8F6C;&amp;#x6362;">
+<meta name="keywords" content="TensorFlow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TensorFlow学习笔记3：激励函数">
 <meta property="og:url" content="http://zhengyujie.cn/2019/08/06/tf学习笔记3/index.html">
 <meta property="og:site_name" content="浅笑の博客">
-<meta property="og:description" content="激励函数的作用激励函数的作用就是将多个线性输入转换为非线性的关系。如果不使用激励函数，神经网络的每层都只是做线性变换，即使是多层输入叠加后也还是线性变换。通过使用激励函数引入非线性因素后，使神经网络的表示能力更强了。">
+<meta property="og:description" content="&amp;#x6FC0;&amp;#x52B1;&amp;#x51FD;&amp;#x6570;&amp;#x7684;&amp;#x4F5C;&amp;#x7528;&amp;#x6FC0;&amp;#x52B1;&amp;#x51FD;&amp;#x6570;&amp;#x7684;&amp;#x4F5C;&amp;#x7528;&amp;#x5C31;&amp;#x662F;&amp;#x5C06;&amp;#x591A;&amp;#x4E2A;&amp;#x7EBF;&amp;#x6027;&amp;#x8F93;&amp;#x5165;&amp;#x8F6C;&amp;#x6362;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-19T08:13:10.037Z">
+<meta property="og:updated_time" content="2019-08-07T22:26:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TensorFlow学习笔记3：激励函数">
-<meta name="twitter:description" content="激励函数的作用激励函数的作用就是将多个线性输入转换为非线性的关系。如果不使用激励函数，神经网络的每层都只是做线性变换，即使是多层输入叠加后也还是线性变换。通过使用激励函数引入非线性因素后，使神经网络的表示能力更强了。">
+<meta name="twitter:description" content="&amp;#x6FC0;&amp;#x52B1;&amp;#x51FD;&amp;#x6570;&amp;#x7684;&amp;#x4F5C;&amp;#x7528;&amp;#x6FC0;&amp;#x52B1;&amp;#x51FD;&amp;#x6570;&amp;#x7684;&amp;#x4F5C;&amp;#x7528;&amp;#x5C31;&amp;#x662F;&amp;#x5C06;&amp;#x591A;&amp;#x4E2A;&amp;#x7EBF;&amp;#x6027;&amp;#x8F93;&amp;#x5165;&amp;#x8F6C;&amp;#x6362;">
   <link rel="canonical" href="http://zhengyujie.cn/2019/08/06/tf学习笔记3/">
 
 
@@ -174,7 +174,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">47</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -187,7 +187,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
 
   </li>
       
@@ -200,7 +200,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
 
   </li>
       
@@ -358,39 +358,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="激励函数的作用"><a href="#激励函数的作用" class="headerlink" title="激励函数的作用"></a>激励函数的作用</h1><p>激励函数的作用就是将多个线性输入转换为非线性的关系。如果不使用激励函数，神经网络的每层都只是做线性变换，即使是多层输入叠加后也还是线性变换。通过使用激励函数引入非线性因素后，使神经网络的表示能力更强了。</p>
+        <h1 id="&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;"><a href="#&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;" class="headerlink" title="&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;"></a>&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;</h1><p>&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;&#x5C31;&#x662F;&#x5C06;&#x591A;&#x4E2A;&#x7EBF;&#x6027;&#x8F93;&#x5165;&#x8F6C;&#x6362;&#x4E3A;&#x975E;&#x7EBF;&#x6027;&#x7684;&#x5173;&#x7CFB;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x4F7F;&#x7528;&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#xFF0C;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x6BCF;&#x5C42;&#x90FD;&#x53EA;&#x662F;&#x505A;&#x7EBF;&#x6027;&#x53D8;&#x6362;&#xFF0C;&#x5373;&#x4F7F;&#x662F;&#x591A;&#x5C42;&#x8F93;&#x5165;&#x53E0;&#x52A0;&#x540E;&#x4E5F;&#x8FD8;&#x662F;&#x7EBF;&#x6027;&#x53D8;&#x6362;&#x3002;&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x5F15;&#x5165;&#x975E;&#x7EBF;&#x6027;&#x56E0;&#x7D20;&#x540E;&#xFF0C;&#x4F7F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x8868;&#x793A;&#x80FD;&#x529B;&#x66F4;&#x5F3A;&#x4E86;&#x3002;</p>
 <a id="more"></a>
-<h1 id="使用激励函数"><a href="#使用激励函数" class="headerlink" title="使用激励函数"></a>使用激励函数</h1><p>在TensorFlow中使用激励函数非常方便，激励函数位于神经网络库中（tensorflow.nn），下面介绍使用方法。<br>首先先创建一个会话，使用默认计算图：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">sess = tf.Session()</span><br></pre></td></tr></table></figure></p>
+<h1 id="&#x4F7F;&#x7528;&#x6FC0;&#x52B1;&#x51FD;&#x6570;"><a href="#&#x4F7F;&#x7528;&#x6FC0;&#x52B1;&#x51FD;&#x6570;" class="headerlink" title="&#x4F7F;&#x7528;&#x6FC0;&#x52B1;&#x51FD;&#x6570;"></a>&#x4F7F;&#x7528;&#x6FC0;&#x52B1;&#x51FD;&#x6570;</h1><p>&#x5728;TensorFlow&#x4E2D;&#x4F7F;&#x7528;&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x975E;&#x5E38;&#x65B9;&#x4FBF;&#xFF0C;&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x4F4D;&#x4E8E;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x5E93;&#x4E2D;&#xFF08;tensorflow.nn&#xFF09;&#xFF0C;&#x4E0B;&#x9762;&#x4ECB;&#x7ECD;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x3002;<br>&#x9996;&#x5148;&#x5148;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4F1A;&#x8BDD;&#xFF0C;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x8BA1;&#x7B97;&#x56FE;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">sess = tf.Session()</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li><p><strong>ReLU函数</strong><br>ReLU（Rectifier linear unit，整流线性单元）是神经网络中最常用的激励函数，函数如下：</p>
-<script type="math/tex; mode=display">max(0,x)</script><p>调用函数<code>tf.nn.relu()</code></p>
+<li><p><strong>ReLU&#x51FD;&#x6570;</strong><br>ReLU&#xFF08;Rectifier linear unit&#xFF0C;&#x6574;&#x6D41;&#x7EBF;&#x6027;&#x5355;&#x5143;&#xFF09;&#x662F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E2D;&#x6700;&#x5E38;&#x7528;&#x7684;&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#xFF0C;&#x51FD;&#x6570;&#x5982;&#x4E0B;&#xFF1A;</p>
+<script type="math/tex; mode=display">max(0,x)</script><p>&#x8C03;&#x7528;&#x51FD;&#x6570;<code>tf.nn.relu()</code></p>
 </li>
-<li><p><strong>ReLU6函数</strong><br>引入ReLU6主要是为了抵消ReLU函数的线性增长部分，在ReLU的基础上再加上min，函数如下：</p>
-<script type="math/tex; mode=display">min(max(0,x),6)</script><p>调用函数<code>tf.nn.relu6()</code></p>
+<li><p><strong>ReLU6&#x51FD;&#x6570;</strong><br>&#x5F15;&#x5165;ReLU6&#x4E3B;&#x8981;&#x662F;&#x4E3A;&#x4E86;&#x62B5;&#x6D88;ReLU&#x51FD;&#x6570;&#x7684;&#x7EBF;&#x6027;&#x589E;&#x957F;&#x90E8;&#x5206;&#xFF0C;&#x5728;ReLU&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x518D;&#x52A0;&#x4E0A;min&#xFF0C;&#x51FD;&#x6570;&#x5982;&#x4E0B;&#xFF1A;</p>
+<script type="math/tex; mode=display">min(max(0,x),6)</script><p>&#x8C03;&#x7528;&#x51FD;&#x6570;<code>tf.nn.relu6()</code></p>
 </li>
-<li><p><strong>Leaky ReLU函数</strong><br>引入Leaky ReLU主要是为了避免梯度消失，当神经元处于非激活状态时，允许一个非0的梯度存在，这样不会出现梯度消失，收敛速度快。函数如下：</p>
-<script type="math/tex; mode=display">max(0.1x,x)</script><p>调用函数<code>tf.nn.leaky_relu()</code></p>
+<li><p><strong>Leaky ReLU&#x51FD;&#x6570;</strong><br>&#x5F15;&#x5165;Leaky ReLU&#x4E3B;&#x8981;&#x662F;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x68AF;&#x5EA6;&#x6D88;&#x5931;&#xFF0C;&#x5F53;&#x795E;&#x7ECF;&#x5143;&#x5904;&#x4E8E;&#x975E;&#x6FC0;&#x6D3B;&#x72B6;&#x6001;&#x65F6;&#xFF0C;&#x5141;&#x8BB8;&#x4E00;&#x4E2A;&#x975E;0&#x7684;&#x68AF;&#x5EA6;&#x5B58;&#x5728;&#xFF0C;&#x8FD9;&#x6837;&#x4E0D;&#x4F1A;&#x51FA;&#x73B0;&#x68AF;&#x5EA6;&#x6D88;&#x5931;&#xFF0C;&#x6536;&#x655B;&#x901F;&#x5EA6;&#x5FEB;&#x3002;&#x51FD;&#x6570;&#x5982;&#x4E0B;&#xFF1A;</p>
+<script type="math/tex; mode=display">max(0.1x,x)</script><p>&#x8C03;&#x7528;&#x51FD;&#x6570;<code>tf.nn.leaky_relu()</code></p>
 </li>
-<li><p><strong>sigmoid函数</strong><br>sigmoid函数是神经网络中最常用的激励函数，它也被称为逻辑函数，它在深度学习的训练过程中会导致梯度消失，因此在深度学习中不怎么使用。函数如下：</p>
-<script type="math/tex; mode=display">\sigma(x)=\frac{1}{1+e^{-x}}</script><p>调用函数<code>tf.nn.sigmoid()</code></p>
+<li><p><strong>sigmoid&#x51FD;&#x6570;</strong><br>sigmoid&#x51FD;&#x6570;&#x662F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E2D;&#x6700;&#x5E38;&#x7528;&#x7684;&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x4E5F;&#x88AB;&#x79F0;&#x4E3A;&#x903B;&#x8F91;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x5728;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x7684;&#x8BAD;&#x7EC3;&#x8FC7;&#x7A0B;&#x4E2D;&#x4F1A;&#x5BFC;&#x81F4;&#x68AF;&#x5EA6;&#x6D88;&#x5931;&#xFF0C;&#x56E0;&#x6B64;&#x5728;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x4E2D;&#x4E0D;&#x600E;&#x4E48;&#x4F7F;&#x7528;&#x3002;&#x51FD;&#x6570;&#x5982;&#x4E0B;&#xFF1A;</p>
+<script type="math/tex; mode=display">\sigma(x)=\frac{1}{1+e^{-x}}</script><p>&#x8C03;&#x7528;&#x51FD;&#x6570;<code>tf.nn.sigmoid()</code></p>
 </li>
-<li><p><strong>tanh函数</strong><br>tanh函数即是双曲正切函数，tanh与sigmoid函数相似，但tanh的取值范围是0到1，sigmoid函数取值范围是-1到1。函数如下：</p>
-<script type="math/tex; mode=display">tanh(x)</script><p>调用函数<code>tf.nn.tanh()</code></p>
+<li><p><strong>tanh&#x51FD;&#x6570;</strong><br>tanh&#x51FD;&#x6570;&#x5373;&#x662F;&#x53CC;&#x66F2;&#x6B63;&#x5207;&#x51FD;&#x6570;&#xFF0C;tanh&#x4E0E;sigmoid&#x51FD;&#x6570;&#x76F8;&#x4F3C;&#xFF0C;&#x4F46;tanh&#x7684;&#x53D6;&#x503C;&#x8303;&#x56F4;&#x662F;0&#x5230;1&#xFF0C;sigmoid&#x51FD;&#x6570;&#x53D6;&#x503C;&#x8303;&#x56F4;&#x662F;-1&#x5230;1&#x3002;&#x51FD;&#x6570;&#x5982;&#x4E0B;&#xFF1A;</p>
+<script type="math/tex; mode=display">tanh(x)</script><p>&#x8C03;&#x7528;&#x51FD;&#x6570;<code>tf.nn.tanh()</code></p>
 </li>
-<li><p><strong>ELU函数</strong><br>ELU在正值区间的值为x本身，而在负值区间，ELU在输入取较小值时具有软饱和的特性，提升了对噪声的鲁棒性，函数如下：</p>
+<li><p><strong>ELU&#x51FD;&#x6570;</strong><br>ELU&#x5728;&#x6B63;&#x503C;&#x533A;&#x95F4;&#x7684;&#x503C;&#x4E3A;x&#x672C;&#x8EAB;&#xFF0C;&#x800C;&#x5728;&#x8D1F;&#x503C;&#x533A;&#x95F4;&#xFF0C;ELU&#x5728;&#x8F93;&#x5165;&#x53D6;&#x8F83;&#x5C0F;&#x503C;&#x65F6;&#x5177;&#x6709;&#x8F6F;&#x9971;&#x548C;&#x7684;&#x7279;&#x6027;&#xFF0C;&#x63D0;&#x5347;&#x4E86;&#x5BF9;&#x566A;&#x58F0;&#x7684;&#x9C81;&#x68D2;&#x6027;&#xFF0C;&#x51FD;&#x6570;&#x5982;&#x4E0B;&#xFF1A;</p>
 <script type="math/tex; mode=display">
 \left\{
 \begin{array}{lr}
   x & x\geq 0 \\
   \alpha(e^x-1) & x < 0
 \end{array}
-\right.</script><p>调用函数<code>tf.nn.elu()</code></p>
+\right.</script><p>&#x8C03;&#x7528;&#x51FD;&#x6570;<code>tf.nn.elu()</code></p>
 </li>
-<li><p><strong>softsign函数</strong><br>softsign函数是符号函数的连续估计，定义如下：</p>
-<script type="math/tex; mode=display">f(x)=\frac{x}{|x|+1}</script><p>调用函数<code>tf.nn.softsign()</code></p>
+<li><p><strong>softsign&#x51FD;&#x6570;</strong><br>softsign&#x51FD;&#x6570;&#x662F;&#x7B26;&#x53F7;&#x51FD;&#x6570;&#x7684;&#x8FDE;&#x7EED;&#x4F30;&#x8BA1;&#xFF0C;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
+<script type="math/tex; mode=display">f(x)=\frac{x}{|x|+1}</script><p>&#x8C03;&#x7528;&#x51FD;&#x6570;<code>tf.nn.softsign()</code></p>
 </li>
-<li><p><strong>softplus函数</strong><br>softplus是ReLU激励函数的平滑版，定义如下：</p>
-<script type="math/tex; mode=display">f(x)=log(e^x+1)</script><p>调用函数<code>tf.nn.softplus()</code></p>
+<li><p><strong>softplus&#x51FD;&#x6570;</strong><br>softplus&#x662F;ReLU&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x7684;&#x5E73;&#x6ED1;&#x7248;&#xFF0C;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
+<script type="math/tex; mode=display">f(x)=log(e^x+1)</script><p>&#x8C03;&#x7528;&#x51FD;&#x6570;<code>tf.nn.softplus()</code></p>
 </li>
 </ul>
 
@@ -409,8 +409,6 @@
           <div class="post-tags" id="post-tags">
             
               <a href="/tags/TensorFlow/" rel="tag"><i class="fa fa-tag"></i> TensorFlow</a>
-            
-              <a href="/tags/激励函数/" rel="tag"><i class="fa fa-tag"></i> 激励函数</a>
             
           </div>
           <script type="text/javascript">
@@ -497,7 +495,7 @@
                   
                     <a href="/archives/">
                   
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -524,7 +522,9 @@
                   
                     
                   
-                  <span class="site-state-item-count">5</span>
+                    
+                  
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -599,43 +599,7 @@
                   
                     
                   
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -728,7 +692,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
     <span class="post-meta-divider">|</span>
-    <span title="站点总字数">全站共195k字</span>
+    <span title="站点总字数">全站共199k字</span>
 </div>
 
 <div class="BbeiAn-info">

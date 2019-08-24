@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","width":300,"display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="&amp;#x8BBA;&amp;#x6587;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://arxiv.org/pdf/1904.07850.pdf&amp;#x8BBA;&amp;#x6587;&amp;#x4EE3;&amp;#x7801;&amp;#xFF1A;https://github.com/xingyizhou/CenterNet  Abstract&amp;#x76EE;&amp;#x6807;&amp;#x68C0;&amp;#x6D4B;&amp;#">
+<meta name="keywords" content="目标检测,anchor-free">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读笔记2：Objects as Points">
+<meta property="og:url" content="http://zhengyujie.cn/2019/07/29/论文阅读笔记2/index.html">
+<meta property="og:site_name" content="浅笑の博客">
+<meta property="og:description" content="&amp;#x8BBA;&amp;#x6587;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://arxiv.org/pdf/1904.07850.pdf&amp;#x8BBA;&amp;#x6587;&amp;#x4EE3;&amp;#x7801;&amp;#xFF1A;https://github.com/xingyizhou/CenterNet  Abstract&amp;#x76EE;&amp;#x6807;&amp;#x68C0;&amp;#x6D4B;&amp;#">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://zhengyujie.cn/2019/07/29/论文阅读笔记2/focalloss.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/07/29/论文阅读笔记2/offsetloss.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/07/29/论文阅读笔记2/sizeloss.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/07/29/论文阅读笔记2/totalloss.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/07/29/论文阅读笔记2/Bbox.png">
+<meta property="og:updated_time" content="2019-08-06T05:52:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="论文阅读笔记2：Objects as Points">
+<meta name="twitter:description" content="&amp;#x8BBA;&amp;#x6587;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://arxiv.org/pdf/1904.07850.pdf&amp;#x8BBA;&amp;#x6587;&amp;#x4EE3;&amp;#x7801;&amp;#xFF1A;https://github.com/xingyizhou/CenterNet  Abstract&amp;#x76EE;&amp;#x6807;&amp;#x68C0;&amp;#x6D4B;&amp;#">
+<meta name="twitter:image" content="http://zhengyujie.cn/2019/07/29/论文阅读笔记2/focalloss.png">
+  <link rel="canonical" href="http://zhengyujie.cn/2019/07/29/论文阅读笔记2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>论文阅读笔记2：Objects as Points | 浅笑の博客</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">浅笑の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我们的征途是星辰大海</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-guestbook">
+      
+    
+      
+    
+
+    <a href="/guestbook/" rel="section"><i class="menu-item-icon fa fa-fw fa-paper-plane-o"></i> <br>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+  <a href="https://github.com/zhengyujie" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/07/29/论文阅读笔记2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zheng Yujie">
+      <meta itemprop="description" content="C++/Python/深度学习">
+      <meta itemprop="image" content="/images/1.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅笑の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">论文阅读笔记2：Objects as Points
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-29 09:50:59" itemprop="dateCreated datePublished" datetime="2019-07-29T09:50:59+08:00">2019-07-29</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/07/29/论文阅读笔记2/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/07/29/论文阅读笔记2/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>3.9k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>&#x8BBA;&#x6587;&#x5730;&#x5740;&#xFF1A;<a href="https://arxiv.org/pdf/1904.07850.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1904.07850.pdf</a><br>&#x8BBA;&#x6587;&#x4EE3;&#x7801;&#xFF1A;<a href="https://github.com/xingyizhou/CenterNet" target="_blank" rel="noopener">https://github.com/xingyizhou/CenterNet</a></p>
+</blockquote>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x8BC6;&#x522B;&#x5F80;&#x5F80;&#x5728;&#x56FE;&#x50CF;&#x4E0A;&#x5C06;&#x76EE;&#x6807;&#x4EE5;&#x8F74;&#x5BF9;&#x79F0;&#x7684;&#x6846;&#x5F62;&#x5F0F;&#x6846;&#x51FA;&#x3002;&#x5927;&#x591A;&#x6210;&#x529F;&#x7684;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x5668;&#x90FD;&#x5148;&#x7A77;&#x4E3E;&#x51FA;&#x6F5C;&#x5728;&#x76EE;&#x6807;&#x4F4D;&#x7F6E;&#xFF0C;&#x7136;&#x540E;&#x5BF9;&#x8BE5;&#x4F4D;&#x7F6E;&#x8FDB;&#x884C;&#x5206;&#x7C7B;&#xFF0C;&#x8FD9;&#x79CD;&#x505A;&#x6CD5;&#x6D6A;&#x8D39;&#x65F6;&#x95F4;&#xFF0C;&#x4F4E;&#x6548;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x989D;&#x5916;&#x7684;&#x540E;&#x5904;&#x7406;&#x3002;&#x672C;&#x6587;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x91C7;&#x7528;&#x4E0D;&#x540C;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x6784;&#x5EFA;&#x6A21;&#x578B;&#x65F6;&#x5C06;&#x76EE;&#x6807;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x70B9;&#x2014;&#x2014;&#x5373;&#x76EE;&#x6807;BBox&#x7684;&#x4E2D;&#x5FC3;&#x70B9;&#x3002;&#x6211;&#x4EEC;&#x7684;&#x68C0;&#x6D4B;&#x5668;&#x91C7;&#x7528;&#x5173;&#x952E;&#x70B9;&#x4F30;&#x8BA1;&#x6765;&#x627E;&#x5230;&#x4E2D;&#x5FC3;&#x70B9;&#xFF0C;&#x5E76;&#x56DE;&#x5F52;&#x5230;&#x5176;&#x4ED6;&#x76EE;&#x6807;&#x5C5E;&#x6027;&#xFF0C;&#x4F8B;&#x5982;&#x5C3A;&#x5BF8;&#xFF0C;3D&#x4F4D;&#x7F6E;&#xFF0C;&#x65B9;&#x5411;&#xFF0C;&#x751A;&#x81F3;&#x59FF;&#x6001;&#x3002;&#x6211;&#x4EEC;&#x57FA;&#x4E8E;&#x4E2D;&#x5FC3;&#x70B9;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x79F0;&#x4E3A;&#xFF1A;CenterNet&#xFF0C;&#x76F8;&#x6BD4;&#x8F83;&#x4E8E;&#x57FA;&#x4E8E;BBox&#x7684;&#x68C0;&#x6D4B;&#x5668;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x6A21;&#x578B;&#x662F;&#x7AEF;&#x5230;&#x7AEF;&#x53EF;&#x5FAE;&#x7684;&#xFF0C;&#x66F4;&#x7B80;&#x5355;&#xFF0C;&#x66F4;&#x5FEB;&#xFF0C;&#x66F4;&#x7CBE;&#x786E;&#x3002;&#x6211;&#x4EEC;&#x7684;&#x6A21;&#x578B;&#x5B9E;&#x73B0;&#x4E86;&#x901F;&#x5EA6;&#x548C;&#x7CBE;&#x786E;&#x7684;&#x6700;&#x597D;&#x6743;&#x8861;&#xFF0C;&#x4EE5;&#x4E0B;&#x662F;&#x5176;&#x6027;&#x80FD;&#xFF1A;<br>MS COCO dataset, with 28:1% AP at 142 FPS, 37:4% AP at 52 FPS, and 45:1% AP with multi-scale testing at 1.4 FPS.</p>
+<a id="more"></a>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>&#x5F53;&#x524D;&#x7684;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x7528;&#x4E00;&#x4E2A;&#x7D27;&#x7D27;&#x5305;&#x542B;&#x76EE;&#x6807;&#x7684;&#x8F74;&#x5BF9;&#x79F0;&#x7684;&#x8FB9;&#x754C;&#x6846;&#x6765;&#x8868;&#x793A;&#x6BCF;&#x4E00;&#x4E2A;&#x76EE;&#x6807;&#x3002;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E00;&#x4E2A;&#x76EE;&#x6807;&#xFF0C;&#x4F7F;&#x7528;&#x5206;&#x7C7B;&#x5668;&#x6765;&#x786E;&#x5B9A;&#x6BCF;&#x4E2A;&#x6846;&#x4E2D;&#x662F;&#x5426;&#x4E3A;&#x7279;&#x5B9A;&#x7684;&#x76EE;&#x6807;&#x8FD8;&#x662F;&#x80CC;&#x666F;&#x3002;</p>
+<ul>
+<li><p><strong>One-stage detectors</strong> &#x5728;&#x56FE;&#x50CF;&#x4E0A;&#x6ED1;&#x52A8;&#x590D;&#x6742;&#x6392;&#x5217;&#x7684;&#x53EF;&#x80FD;bbox&#xFF08;&#x5373;&#x951A;&#x70B9;&#xFF09;,&#x7136;&#x540E;&#x76F4;&#x63A5;&#x5BF9;&#x6846;&#x8FDB;&#x884C;&#x5206;&#x7C7B;&#xFF0C;&#x800C;&#x4E0D;&#x4F1A;&#x6307;&#x5B9A;&#x6846;&#x4E2D;&#x5185;&#x5BB9;&#x3002;</p>
+</li>
+<li><p><strong>Two-stage detectors</strong> &#x5BF9;&#x6BCF;&#x4E2A;&#x6F5C;&#x5728;&#x6846;&#x91CD;&#x65B0;&#x8BA1;&#x7B97;&#x56FE;&#x50CF;&#x7279;&#x5F81;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x90A3;&#x4E9B;&#x7279;&#x5F81;&#x8FDB;&#x884C;&#x5206;&#x7C7B;&#x3002;</p>
+</li>
+<li><p><strong>Post-processing</strong> &#x4E5F;&#x5373;&#x662F;non-maxima suppression(&#x975E;&#x6781;&#x5927;&#x503C;&#x6291;&#x5236;)&#xFF0C;&#x901A;&#x8FC7;&#x8BA1;&#x7B97;IoU&#x6765;&#x79FB;&#x9664;&#x5BF9;&#x540C;&#x4E00;&#x4E2A;instance&#x7684;&#x91CD;&#x590D;&#x68C0;&#x6D4B;&#x3002;&#x8FD9;&#x79CD;&#x540E;&#x5904;&#x7406;&#x5F88;&#x96BE;&#x533A;&#x5206;&#x548C;&#x8BAD;&#x7EC3;&#xFF0C;&#x56E0;&#x6B64;&#x73B0;&#x6709;&#x5927;&#x591A;&#x68C0;&#x6D4B;&#x5668;&#x90FD;&#x4E0D;&#x662F;&#x7AEF;&#x5230;&#x7AEF;&#x53EF;&#x8BAD;&#x7EC3;&#x7684;&#x3002;</p>
+</li>
+</ul>
+<p>&#x672C;&#x6587;&#x63D0;&#x51FA;&#x4E86;&#x4E00;&#x79CD;&#x7B80;&#x4FBF;&#x548C;&#x9AD8;&#x6548;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x4F7F;&#x7528;&#x76EE;&#x6807;&#x8FB9;&#x754C;&#x6846;&#x4E2D;&#x5FC3;&#x7684;&#x4E00;&#x4E2A;&#x70B9;&#x6765;&#x4EE3;&#x8868;&#x76EE;&#x6807;&#x3002;&#x7136;&#x540E;&#x5728;&#x4E2D;&#x5FC3;&#x70B9;&#x4F4D;&#x7F6E;&#x56DE;&#x5F52;&#x51FA;&#x76EE;&#x6807;&#x7684;&#x4E00;&#x4E9B;&#x5C5E;&#x6027;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;size, dimension, 3D extent, orientation, pose&#x3002; &#x800C;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x95EE;&#x9898;&#x53D8;&#x6210;&#x4E86;&#x4E00;&#x4E2A;&#x6807;&#x51C6;&#x7684;&#x5173;&#x952E;&#x70B9;&#x4F30;&#x8BA1;&#x95EE;&#x9898;&#x3002;&#x6211;&#x4EEC;&#x4EC5;&#x4EC5;&#x5C06;&#x56FE;&#x50CF;&#x4F20;&#x5165;&#x5168;&#x5377;&#x79EF;&#x7F51;&#x7EDC;&#xFF0C;&#x5F97;&#x5230;&#x4E00;&#x4E2A;heatmap&#xFF0C;heatmap&#x5CF0;&#x503C;&#x70B9;&#x5373;&#x4E2D;&#x5FC3;&#x70B9;&#xFF0C;&#x6BCF;&#x4E2A;&#x7279;&#x5F81;&#x56FE;&#x7684;&#x5CF0;&#x503C;&#x70B9;&#x4F4D;&#x7F6E;&#x9884;&#x6D4B;&#x4E86;&#x76EE;&#x6807;&#x7684;&#x5BBD;&#x9AD8;&#x4FE1;&#x606F;&#x3002;&#x4E0D;&#x9700;&#x8981;NMS&#x505A;&#x540E;&#x5904;&#x7406;&#x3002;</p>
+<h1 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h1><ul>
+<li><strong>Object  detection  by  region  classification</strong> RCNN Fast-RCNN</li>
+<li><strong>Object detection with implicit anchors</strong> Faster-RCNN&#x901A;&#x8FC7;&#x68C0;&#x6D4B;&#x7F51;&#x7EDC;&#x751F;&#x6210;region proposal&#x3002;&#x5728;&#x4F4E;&#x5206;&#x8FA8;&#x7387;&#x56FE;&#x50CF;&#x7F51;&#x683C;&#x5468;&#x56F4;&#x91C7;&#x6837;&#x56FA;&#x5B9A;&#x5F62;&#x72B6;&#x7684;&#x8FB9;&#x754C;&#x6846;(anchors)&#xFF0C;&#x5BF9;&#x6BCF;&#x4E2A;anchor&#x8FDB;&#x884C;&#x662F;&#x5426;&#x4E3A;&#x524D;&#x666F;&#x7684;&#x5206;&#x7C7B;&#x3002;&#x7136;&#x540E;&#x5BF9;&#x6BCF;&#x4E00;&#x4E2A;&#x524D;&#x666F;&#x6837;&#x672C;&#x8FDB;&#x884C;&#x591A;&#x7C7B;&#x522B;&#x5206;&#x7C7B;&#xFF0C;&#x5F97;&#x5230;&#x6700;&#x7EC8;&#x7684;&#x7ED3;&#x679C;&#x3002;<br>&#x6211;&#x4EEC;&#x7684;&#x65B9;&#x6CD5;&#x7C7B;&#x4F3C;&#x4E8E;anchor-based&#x5355;&#x9636;&#x6BB5;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4E00;&#x4E2A;&#x4E2D;&#x5FC3;&#x70B9;&#x53EF;&#x4EE5;&#x770B;&#x505A;&#x4E00;&#x4E2A;&#x5F62;&#x72B6;&#x672A;&#x77E5;&#x7684;anchor&#x3002;&#x7136;&#x800C;&#xFF0C;&#x5B58;&#x5728;&#x4E00;&#x4E9B;&#x91CD;&#x8981;&#x7684;&#x4E0D;&#x540C;&#x70B9;&#xFF1A;<ul>
+<li>&#x6211;&#x4EEC;&#x5206;&#x914D;&#x7684;&#x951A;&#x70B9;&#x4EC5;&#x4EC5;&#x662F;&#x653E;&#x5728;&#x4F4D;&#x7F6E;&#x4E0A;&#xFF0C;&#x6CA1;&#x6709;&#x5C3A;&#x5BF8;&#x6846;&#x3002;&#x6CA1;&#x6709;&#x624B;&#x52A8;&#x8BBE;&#x7F6E;&#x7684;&#x9608;&#x503C;&#x505A;&#x524D;&#x540E;&#x666F;&#x5206;&#x7C7B;&#x3002;&#xFF08;&#x50CF;Faster RCNN&#x4F1A;&#x5C06;&#x4E0E;GT IOU &gt;0.7&#x7684;&#x4F5C;&#x4E3A;&#x524D;&#x666F;&#xFF0C;&lt;0.3&#x7684;&#x4F5C;&#x4E3A;&#x80CC;&#x666F;&#xFF0C;&#x5176;&#x4ED6;&#x4E0D;&#x7BA1;&#xFF09;</li>
+<li>&#x6BCF;&#x4E2A;&#x76EE;&#x6807;&#x4EC5;&#x4EC5;&#x6709;&#x4E00;&#x4E2A;&#x6B63;&#x7684;&#x951A;&#x70B9;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x4F1A;&#x7528;&#x5230;NMS&#xFF0C;&#x6211;&#x4EEC;&#x63D0;&#x53D6;&#x5173;&#x952E;&#x70B9;&#x7279;&#x5F81;&#x56FE;&#x4E0A;&#x5C40;&#x90E8;&#x5CF0;&#x503C;&#x70B9;&#xFF08;local peaks&#xFF09;</li>
+<li>CenterNet &#x76F8;&#x6BD4;&#x8F83;&#x4F20;&#x7EDF;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x800C;&#x8A00;&#xFF08;&#x7F29;&#x653E;16&#x500D;&#x5C3A;&#x5EA6;&#xFF09;&#xFF0C;&#x4F7F;&#x7528;&#x66F4;&#x5927;&#x5206;&#x8FA8;&#x7387;&#x7684;&#x8F93;&#x51FA;&#x7279;&#x5F81;&#x56FE;&#xFF08;&#x7F29;&#x653E;&#x4E86;4&#x500D;&#xFF09;&#xFF0C;&#x56E0;&#x6B64;&#x65E0;&#x9700;&#x7528;&#x5230;&#x591A;&#x91CD;&#x7279;&#x5F81;&#x56FE;&#x951A;&#x70B9;</li>
+</ul>
+</li>
+<li><strong>Object detection by keypoint estimation</strong> CornerNet&#x68C0;&#x6D4B;&#x8FB9;&#x754C;&#x6846;&#x7684;&#x4E24;&#x4E2A;&#x89D2;&#x70B9;&#x4F5C;&#x4E3A;&#x5173;&#x952E;&#x70B9;&#xFF0C;ExtremeNet&#x68C0;&#x6D4B;&#x6240;&#x6709;&#x7269;&#x4F53;&#x7684;&#x4E0A;&#x4E0B;&#x5DE6;&#x53F3;&#x4EE5;&#x53CA;&#x4E2D;&#x5FC3;&#x5E97;&#x6765;&#x68C0;&#x6D4B;&#x76EE;&#x6807;&#x3002;&#x7136;&#x800C;&#x5B83;&#x4EEC;&#x90FD;&#x9700;&#x8981;&#x5728;&#x5173;&#x952E;&#x70B9;&#x68C0;&#x6D4B;&#x540E;&#x52A0;&#x4E0A;&#x4E00;&#x4E2A;grouping&#x9636;&#x6BB5;&#xFF0C;&#x8FD9;&#x4F1A;&#x663E;&#x8457;&#x62D6;&#x6162;&#x5B83;&#x4EEC;&#x7684;&#x7B97;&#x6CD5;&#x3002;&#x800C;CenterNet&#x53EA;&#x662F;&#x5BF9;&#x6BCF;&#x4E2A;&#x76EE;&#x6807;&#x7B80;&#x5355;&#x7684;&#x63D0;&#x53D6;&#x4E00;&#x4E2A;&#x4E2D;&#x5FC3;&#x5E97;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x9700;&#x8981;grouping&#x4EE5;&#x53CA;post-processing&#x3002;</li>
+</ul>
+<h1 id="Preliminary"><a href="#Preliminary" class="headerlink" title="Preliminary"></a>Preliminary</h1><p>&#x7528;$I\in R^{W&#xD7;H&#xD7;3}$&#x8868;&#x793A;&#x957F;&#x4E3A;H&#x5BBD;&#x4E3A;W&#x7684;&#x8F93;&#x5165;&#x56FE;&#x50CF;&#x3002;&#x6211;&#x4EEC;&#x7684;&#x76EE;&#x6807;&#x662F;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x5173;&#x952E;&#x70B9;heat map $Y\in[0,1]^{\frac{W}{R}&#xD7;\frac{H}{R}&#xD7;C}$,R&#x4E3A;&#x8F93;&#x51FA;&#x6B65;&#x957F;&#xFF0C;C&#x4E3A;&#x5173;&#x952E;&#x70B9;&#x7684;&#x7C7B;&#x522B;&#x6570;&#x91CF;&#x3002;$\hat{Y}_{xyz}=1$&#x8868;&#x793A;&#x68C0;&#x6D4B;&#x5230;&#x7684;&#x5173;&#x952E;&#x70B9;&#xFF0C;$\hat{Y}_{xyz}=0$&#x8868;&#x793A;&#x80CC;&#x666F;&#x3002;&#x6211;&#x4EEC;&#x91C7;&#x7528;&#x4E86;&#x51E0;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x5168;&#x5377;&#x79EF;&#x7F16;&#x7801;-&#x89E3;&#x7801;&#x7F51;&#x7EDC;&#x6765;&#x9884;&#x6D4B;&#x56FE;&#x50CF; I &#x5F97;&#x5230;&#x7684;$\hat{Y}$&#xFF1A;</p>
+<ul>
+<li>stacked hourglass network</li>
+<li>upconvolutional residual networks (ResNet)</li>
+<li>deep layer aggregation (DLA)</li>
+</ul>
+<p>&#x5BF9;&#x4E8E;&#x7C7B;&#x522B;&#x4E3A;c&#x7684;&#x771F;&#x5B9E;&#x6846;&#x7684;&#x5173;&#x952E;&#x70B9;$p\in R^2$&#xFF0C;&#x6211;&#x4EEC;&#x8BA1;&#x7B97;&#x5B83;&#x5728;&#x4F4E;&#x5206;&#x8FA8;&#x7387;&#x4E0A;&#x5BF9;&#x5E94;&#x7684;&#x5173;&#x952E;&#x70B9;&#x4E3A;$\overline{p}=\lfloor\frac{p}{R}\rfloor$&#x3002;&#x6211;&#x4EEC;&#x5C06;GT&#x5173;&#x952E;&#x70B9;&#x901A;&#x8FC7;&#x9AD8;&#x65AF;&#x6838;$Y_{xyz}=exp{(-\frac{(x-\overline{p}_{x})^2+(y-\overline{p}_{y})^2}{2\sigma_{p}^2})}$&#x5206;&#x6563;&#x5230;heat map  $Y\in[0,1]^{\frac{W}{R}&#xD7;\frac{H}{R}&#xD7;C}$&#x4E0A;&#xFF0C;&#x5176;&#x4E2D;$\sigma_{p}$&#x662F;&#x76EE;&#x6807;&#x5C3A;&#x5EA6;&#x81EA;&#x9002;&#x5E94;&#x7684;&#x6807;&#x51C6;&#x65B9;&#x5DEE;&#x3002;&#x5982;&#x679C;&#x5BF9;&#x4E8E;&#x540C;&#x4E2A;&#x7C7B; c &#xFF08;&#x540C;&#x4E2A;&#x5173;&#x952E;&#x70B9;&#x6216;&#x662F;&#x76EE;&#x6807;&#x7C7B;&#x522B;&#xFF09;&#x6709;&#x4E24;&#x4E2A;&#x9AD8;&#x65AF;&#x51FD;&#x6570;&#x53D1;&#x751F;&#x91CD;&#x53E0;&#xFF0C;&#x6211;&#x4EEC;&#x9009;&#x62E9;&#x5143;&#x7D20;&#x7EA7;&#x6700;&#x5927;&#x7684;&#x3002;&#x8BAD;&#x7EC3;&#x76EE;&#x6807;&#x51FD;&#x6570;&#x5982;&#x4E0B;&#xFF0C;&#x50CF;&#x7D20;&#x7EA7;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x7684;focal loss&#xFF1A;<br><img src="/2019/07/29/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;2/focalloss.png" alt></p>
+<p>&#x7531;&#x4E8E;&#x56FE;&#x50CF;&#x4E0B;&#x91C7;&#x6837;&#x65F6;&#xFF0C;GT&#x7684;&#x5173;&#x952E;&#x70B9;&#x4F1A;&#x56E0;&#x6570;&#x636E;&#x662F;&#x79BB;&#x6563;&#x7684;&#x800C;&#x4EA7;&#x751F;&#x504F;&#x5DEE;&#xFF0C;&#x6211;&#x4EEC;&#x5BF9;&#x6BCF;&#x4E2A;&#x4E2D;&#x5FC3;&#x70B9;&#x9644;&#x52A0;&#x9884;&#x6D4B;&#x4E86;&#x4E2A;&#x5C40;&#x90E8;&#x504F;&#x79FB;$\hat{O}\in R^{\frac{W}{R}&#xD7;\frac{H}{R}&#xD7;2}$,&#x6240;&#x6709;&#x7C7B;&#x522B; c &#x5171;&#x4EAB;&#x540C;&#x4E2A;&#x504F;&#x79FB;&#x9884;&#x6D4B;&#xFF0C;&#x8FD9;&#x4E2A;&#x504F;&#x79FB;&#x540C;&#x4E2A; L1 loss&#x6765;&#x8BAD;&#x7EC3;&#xFF1A;<br><img src="/2019/07/29/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;2/offsetloss.png" alt><br>&#x53EA;&#x4F1A;&#x5728;&#x5173;&#x952E;&#x70B9;$\overline{p}$&#x4F4D;&#x7F6E; &#x505A;&#x76D1;&#x7763;&#x64CD;&#x4F5C;&#xFF0C;&#x5176;&#x4ED6;&#x4F4D;&#x7F6E;&#x65E0;&#x89C6;&#x3002;<br>&#x5173;&#x4E8E;&#x8FD9;&#x4E2A;&#x635F;&#x5931;&#x51FD;&#x6570;&#x8865;&#x5145;&#x4E00;&#x70B9;&#x89E3;&#x91CA;&#x3002;&#x8FD9;&#x4E2A;&#x635F;&#x5931;&#x51FD;&#x6570;&#x4E0E;focal loss&#x7C7B;&#x4F3C;&#xFF0C;&#x5BF9;&#x4E8E;easy example&#x7684;&#x4E2D;&#x5FC3;&#x5E97;&#xFF0C;&#x9002;&#x5F53;&#x51CF;&#x5C11;&#x5176;&#x8BAD;&#x7EC3;&#x6BD4;&#x91CD;&#x4E5F;&#x5C31;&#x662F;loss&#x503C;&#x3002;</p>
+<ul>
+<li>&#x5F53;$Y_{xyc}=1$&#x65F6;&#xFF0C;$(1-\hat{Y}_{xyc})^\alpha$&#x5C31;&#x5145;&#x5F53;&#x4E86;&#x77EB;&#x6B63;&#x7684;&#x4F5C;&#x7528;&#x3002;<ul>
+<li>&#x5F53;$\hat{Y}_{xyc}$&#x63A5;&#x8FD1;&#x4E8E;1&#x65F6;&#xFF0C;&#x8BF4;&#x660E;&#x662F;&#x5BB9;&#x6613;&#x68C0;&#x6D4B;&#x51FA;&#x6765;&#x7684;&#x70B9;&#xFF0C;&#x8FD9;&#x4E2A;&#x503C;&#x5C31;&#x4F1A;&#x76F8;&#x5E94;&#x6BD4;&#x8F83;&#x4F4E;&#x3002;</li>
+<li>&#x5F53;$\hat{Y}_{xyc}$&#x63A5;&#x8FD1;&#x4E8E;0&#x65F6;&#xFF0C;&#x8BF4;&#x660E;&#x8FD9;&#x4E2A;&#x4E2D;&#x5FC3;&#x70B9;&#x8FD8;&#x6CA1;&#x6709;&#x5B66;&#x4E60;&#x5230;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x8981;&#x589E;&#x5927;&#x5176;&#x8BAD;&#x7EC3;&#x6BD4;&#x91CD;&#xFF0C;&#x56E0;&#x6B64;&#x8FD9;&#x4E2A;&#x503C;&#x5C31;&#x4F1A;&#x6BD4;&#x8F83;&#x5927;&#x3002;</li>
+</ul>
+</li>
+<li>&#x5F53;otherwise&#x65F6;&#xFF0C;$(1-Y_{xyc})^\beta$&#x548C;$(\hat{Y}_{xyc})^\alpha$&#x534F;&#x540C;&#x8FDB;&#x884C;&#x77EB;&#x6B63;&#x3002;<ul>
+<li>&#x5F53;$\hat{Y}_{xyc}$&#x8D8A;&#x63A5;&#x8FD1;1&#x65F6;&#xFF0C;&#x8BF4;&#x660E;&#x6837;&#x672C;&#x8D8A;&#x5BB9;&#x6613;&#x88AB;&#x8BEF;&#x68C0;&#xFF0C;&#x9700;&#x8981;&#x589E;&#x52A0;&#x5BF9;&#x5176;&#x7684;&#x60E9;&#x7F5A;&#xFF0C;&#x901A;&#x8FC7;$(\hat{Y}_{xyc})^\alpha$&#x6765;&#x5B9E;&#x73B0;&#x3002;</li>
+<li>&#x7531;&#x4E8E;&#x6B63;&#x8D1F;&#x6837;&#x672C;&#x7684;&#x6570;&#x91CF;&#x5F88;&#x4E0D;&#x5E73;&#x8861;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x6291;&#x5236;&#x8D1F;&#x6837;&#x672C;&#x7684;&#x8BAD;&#x7EC3;&#x6BD4;&#x91CD;&#x3002;&#x7531;&#x4E8E;&#x68C0;&#x6D4B;&#x5230;&#x7684;&#x8D1F;&#x6837;&#x672C;&#x5728;&#x6B63;&#x6837;&#x672C;&#x5373;&#x4E2D;&#x5FC3;&#x70B9;&#x5468;&#x56F4;&#x7684;&#x53EF;&#x80FD;&#x6027;&#x6BD4;&#x8F83;&#x9AD8;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x4EEC;&#x7684;$(1-Y_{xyc})$&#x63A5;&#x8FD1;&#x4E8E;1&#x3002;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;$(1-Y_{xyc})^\beta$&#x6765;&#x5B9E;&#x73B0;&#x3002;</li>
+</ul>
+</li>
+</ul>
+<h1 id="Objects-as-Points"><a href="#Objects-as-Points" class="headerlink" title="Objects as Points"></a>Objects as Points</h1><p>&#x7528;$(x_{1}^{(k)},y_{1}^{(k)},x_{2}^{(k)},y_{2}^{(k)})$&#x6765;&#x8868;&#x793A;&#x7C7B;&#x522B;&#x4E3A;$c_{k}$&#x7684;object$k$&#x7684;&#x8FB9;&#x754C;&#x6846;&#x3002;&#x90A3;&#x4E48;&#x5B83;&#x7684;&#x4E2D;&#x5FC3;&#x70B9;&#x5373;&#x4E3A;$(\frac{x_{1}^{(k)}+x_{2}^{(k)}}{2},\frac{y_{1}^{(k)}+y_{2}^{(k)}}{2})$&#x3002;&#x6211;&#x4EEC;&#x7528;&#x5173;&#x952E;&#x70B9;&#x4F30;&#x8BA1;$\hat{Y}$&#x6765;&#x5F97;&#x5230;&#x6240;&#x6709;&#x7684;&#x4E2D;&#x5FC3;&#x70B9;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x6211;&#x4EEC;&#x4E3A;&#x6BCF;&#x4E2A;&#x76EE;&#x6807; k &#x56DE;&#x5F52;&#x51FA;&#x76EE;&#x6807;&#x7684;&#x5C3A;&#x5BF8;$s_{k}=(x_{2}^{(k)}-x_{1}^{(k)},y_{2}^{(k)}-y_{1}^{(k)})$&#x3002;&#x4E3A;&#x4E86;&#x51CF;&#x5C11;&#x8BA1;&#x7B97;&#x8D1F;&#x62C5;&#xFF0C;&#x6211;&#x4EEC;&#x4E3A;&#x6BCF;&#x4E2A;&#x76EE;&#x6807;&#x79CD;&#x7C7B;&#x4F7F;&#x7528;&#x5355;&#x4E00;&#x7684;&#x5C3A;&#x5BF8;&#x9884;&#x6D4B;$\hat{S}\in R^{\frac{W}{R}&#xD7;\frac{H}{R}&#xD7;2}$,&#x6211;&#x4EEC;&#x5728;&#x4E2D;&#x5FC3;&#x70B9;&#x4F4D;&#x7F6E;&#x6DFB;&#x52A0;&#x4E86; L1 loss:</p>
+<p><img src="/2019/07/29/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;2/sizeloss.png" alt></p>
+<p>&#x6211;&#x4EEC;&#x4E0D;&#x5C06;scale&#x8FDB;&#x884C;&#x5F52;&#x4E00;&#x5316;&#xFF0C;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x50CF;&#x7D20;&#x5750;&#x6807;&#x3002;&#x4E3A;&#x4E86;&#x8C03;&#x8282;&#x8BE5;loss&#x7684;&#x5F71;&#x54CD;&#xFF0C;&#x5C06;&#x5176;&#x4E58;&#x4E86;&#x4E2A;&#x7CFB;&#x6570;&#xFF0C;&#x6574;&#x4E2A;&#x8BAD;&#x7EC3;&#x7684;&#x76EE;&#x6807;loss&#x51FD;&#x6570;&#x4E3A;&#xFF1A;</p>
+<p><img src="/2019/07/29/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;2/totalloss.png" alt></p>
+<p>&#x6574;&#x4E2A;&#x7F51;&#x7EDC;&#x9884;&#x6D4B;&#x4F1A;&#x5728;&#x6BCF;&#x4E2A;&#x4F4D;&#x7F6E;&#x8F93;&#x51FA; C+4&#x4E2A;&#x503C;(&#x5373;&#x5173;&#x952E;&#x70B9;&#x7C7B;&#x522B;C, &#x504F;&#x79FB;&#x91CF;&#x7684;x,y&#xFF0C;&#x5C3A;&#x5BF8;&#x7684;w,h)&#xFF0C;&#x6240;&#x6709;&#x8F93;&#x51FA;&#x5171;&#x4EAB;&#x4E00;&#x4E2A;&#x5168;&#x5377;&#x79EF;&#x7684;backbone&#x3002;</p>
+<p><strong>From points to bounding boxes</strong></p>
+<p>&#x5728;&#x63A8;&#x7406;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x5206;&#x522B;&#x63D0;&#x53D6;&#x70ED;&#x529B;&#x56FE;&#x4E0A;&#x6BCF;&#x4E2A;&#x7C7B;&#x522B;&#x7684;&#x5CF0;&#x503C;&#x70B9;&#x3002;&#x5982;&#x4F55;&#x5F97;&#x5230;&#x8FD9;&#x4E9B;&#x5CF0;&#x503C;&#x70B9;&#x5462;&#xFF1F;&#x505A;&#x6CD5;&#x662F;&#x5C06;&#x70ED;&#x529B;&#x56FE;&#x4E0A;&#x7684;&#x6240;&#x6709;&#x54CD;&#x5E94;&#x70B9;&#x4E0E;&#x5176;&#x8FDE;&#x63A5;&#x7684;8&#x4E2A;&#x4E34;&#x8FD1;&#x70B9;&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#xFF0C;&#x5982;&#x679C;&#x8BE5;&#x70B9;&#x54CD;&#x5E94;&#x503C;&#x5927;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;&#x5176;&#x516B;&#x4E2A;&#x4E34;&#x8FD1;&#x70B9;&#x503C;&#x5219;&#x4FDD;&#x7559;&#xFF0C;&#x6700;&#x540E;&#x6211;&#x4EEC;&#x4FDD;&#x7559;&#x6240;&#x6709;&#x6EE1;&#x8DB3;&#x4E4B;&#x524D;&#x8981;&#x6C42;&#x7684;&#x524D;100&#x4E2A;&#x5CF0;&#x503C;&#x70B9;&#x3002;</p>
+<ul>
+<li>&#x5173;&#x952E;&#x70B9;&#x68C0;&#x6D4B;&#x7ED3;&#x679C; $\hat{P}=\lbrace(\hat{x}_{i},\hat{y}_{i})\rbrace_{i=1}^{n}$</li>
+<li>&#x504F;&#x79FB;&#x68C0;&#x6D4B;&#x7ED3;&#x679C; $\hat{O}_{\hat{x}_{i},\hat{y}_{i}}=(\delta\hat{x}_{i},\delta\hat{y}_{i})$</li>
+<li>&#x5C3A;&#x5EA6;&#x68C0;&#x6D4B;&#x7ED3;&#x679C; $\hat{S}_{\hat{x}_{i},\hat{y}_{i}}=(\hat{w}_{i},\hat{h}_{i})$</li>
+</ul>
+<p>&#x6839;&#x636E;&#x4EE5;&#x4E0A;&#x7ED3;&#x679C;&#x5F97;&#x5230;&#x5728;$(\hat{x}_{i},\hat{y}_{i})$&#x7684;&#x8FB9;&#x754C;&#x6846;&#xFF1A;</p>
+<p><img src="/2019/07/29/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;2/Bbox.png" alt></p>
+<p>&#x6240;&#x6709;&#x7684;&#x8F93;&#x51FA;&#x90FD;&#x76F4;&#x63A5;&#x4ECE;&#x5173;&#x952E;&#x70B9;&#x4F30;&#x8BA1;&#x5F97;&#x5230;&#xFF0C;&#x65E0;&#x9700;&#x57FA;&#x4E8E;IOU&#x7684;NMS&#x6216;&#x8005;&#x5176;&#x4ED6;&#x540E;&#x5904;&#x7406;&#x3002;</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags" id="post-tags">
+            
+              <a href="/tags/目标检测/" rel="tag"><i class="fa fa-tag"></i> 目标检测</a>
+            
+              <a href="/tags/anchor-free/" rel="tag"><i class="fa fa-tag"></i> anchor-free</a>
+            
+          </div>
+          <script type="text/javascript">
+            var tagsall=document.getElementsByClassName("post-tags")
+            for (var i = tagsall.length - 1; i >= 0; i--){
+                var tags=tagsall[i].getElementsByTagName("a");
+                for (var j = tags.length - 1; j >= 0; j--) {
+                    var r=Math.floor(Math.random()*75+130);
+                    var g=Math.floor(Math.random()*75+100);
+                    var b=Math.floor(Math.random()*75+80);
+                    tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                }
+            }                        
+          </script>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/07/26/next主题个性化设置/" rel="next" title="next主题个性化设置">
+                  <i class="fa fa-chevron-left"></i> next主题个性化设置
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/07/29/hexo上传图片/" rel="prev" title="Hexo上传图片">
+                  Hexo上传图片 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+      <!--noindex-->
+        <div class="author-overview">
+            <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+              
+                <img class="site-author-image" itemprop="image"
+                  src="/images/1.jpeg"
+                  alt="Zheng Yujie">
+              
+              <p class="site-author-name" itemprop="name">Zheng Yujie</p>
+              <div class="site-description motion-element" itemprop="description">C++/Python/深度学习</div>
+            </div>
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                  
+                    <a href="/archives/">
+                  
+                    <span class="site-state-item-count">47</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                  
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                  
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://github.com/zhengyujie" title="GitHub &rarr; https://github.com/zhengyujie" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="mailto:zhengyujie97@126.com" title="E-Mail &rarr; mailto:zhengyujie97@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://music.163.com/#/playlist?id=327924141" title="Music &rarr; https://music.163.com/#/playlist?id=327924141" rel="noopener" target="_blank"><i class="fa fa-fw fa-headphones"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://www.google.com" title="Google &rarr; https://www.google.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+
+          
+        </div>
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active" id="post-toc-wrap">
+          <div class="item_headline">
+            <i class="fa fa-list" aria-hidden="true">
+            </i><span>目录</span>
+          </div>
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-work"><span class="nav-number">3.</span> <span class="nav-text">Related work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Preliminary"><span class="nav-number">4.</span> <span class="nav-text">Preliminary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Objects-as-Points"><span class="nav-number">5.</span> <span class="nav-text">Objects as Points</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
+    <span class="post-meta-divider">|</span>
+    <span title="站点总字数">全站共199k字</span>
+</div>
+
+<div class="BbeiAn-info">
+	浙ICP备 -
+	<a target="_blank"  href="http://www.miitbeian.gov.cn/">19035016号</a>
+	</a>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        <span>0%</span>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+<script>
+NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.9/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: true,
+    appId: 'QhpM05HufWMwqxw5TW8GGKHt-gzGzoHsz',
+    appKey: 'ReXaLSgoPNRCjW8dT9eEyR25',
+    placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧！',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

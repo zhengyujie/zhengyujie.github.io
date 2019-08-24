@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="滑动平均什么是滑动平均滑动平均法是用一组最近的实际数据值来预测未来一期或几期内公司产品的需求量、公司产能等的一种常用方法。滑动平均法适用于即期预测。当产品需求既不快速增长也不快速下降，且不存在季节性因素时，滑动平均法能有效地消除预测中的随机波动，是非常有用的。滑动平均法根据预测时使用的各元素的权重不同 滑动平均法是一种简单平滑预测技术，它的基本思想是：根据时间序列资料、逐项推移，依次计算包含一定项">
+  <meta name="description" content="&amp;#x6ED1;&amp;#x52A8;&amp;#x5E73;&amp;#x5747;&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;&amp;#x6ED1;&amp;#x52A8;&amp;#x5E73;&amp;#x5747;&amp;#x6ED1;&amp;#x52A8;&amp;#x5E73;&amp;#x5747;&amp;#x6CD5;&amp;#x662F;&amp;#x7528;&amp;#x4E00;&amp;#x7EC4;&amp;#x6700;&amp;#x8FD1;&amp;#x7684;&amp;#x5B9E;&amp;#x9645;">
 <meta name="keywords" content="TensorFlow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="滑动平均(exponential moving average)">
 <meta property="og:url" content="http://zhengyujie.cn/2019/08/02/exponential-moving-average/index.html">
 <meta property="og:site_name" content="浅笑の博客">
-<meta property="og:description" content="滑动平均什么是滑动平均滑动平均法是用一组最近的实际数据值来预测未来一期或几期内公司产品的需求量、公司产能等的一种常用方法。滑动平均法适用于即期预测。当产品需求既不快速增长也不快速下降，且不存在季节性因素时，滑动平均法能有效地消除预测中的随机波动，是非常有用的。滑动平均法根据预测时使用的各元素的权重不同 滑动平均法是一种简单平滑预测技术，它的基本思想是：根据时间序列资料、逐项推移，依次计算包含一定项">
+<meta property="og:description" content="&amp;#x6ED1;&amp;#x52A8;&amp;#x5E73;&amp;#x5747;&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;&amp;#x6ED1;&amp;#x52A8;&amp;#x5E73;&amp;#x5747;&amp;#x6ED1;&amp;#x52A8;&amp;#x5E73;&amp;#x5747;&amp;#x6CD5;&amp;#x662F;&amp;#x7528;&amp;#x4E00;&amp;#x7EC4;&amp;#x6700;&amp;#x8FD1;&amp;#x7684;&amp;#x5B9E;&amp;#x9645;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-19T08:16:13.469Z">
+<meta property="og:updated_time" content="2019-08-01T18:57:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="滑动平均(exponential moving average)">
-<meta name="twitter:description" content="滑动平均什么是滑动平均滑动平均法是用一组最近的实际数据值来预测未来一期或几期内公司产品的需求量、公司产能等的一种常用方法。滑动平均法适用于即期预测。当产品需求既不快速增长也不快速下降，且不存在季节性因素时，滑动平均法能有效地消除预测中的随机波动，是非常有用的。滑动平均法根据预测时使用的各元素的权重不同 滑动平均法是一种简单平滑预测技术，它的基本思想是：根据时间序列资料、逐项推移，依次计算包含一定项">
+<meta name="twitter:description" content="&amp;#x6ED1;&amp;#x52A8;&amp;#x5E73;&amp;#x5747;&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;&amp;#x6ED1;&amp;#x52A8;&amp;#x5E73;&amp;#x5747;&amp;#x6ED1;&amp;#x52A8;&amp;#x5E73;&amp;#x5747;&amp;#x6CD5;&amp;#x662F;&amp;#x7528;&amp;#x4E00;&amp;#x7EC4;&amp;#x6700;&amp;#x8FD1;&amp;#x7684;&amp;#x5B9E;&amp;#x9645;">
   <link rel="canonical" href="http://zhengyujie.cn/2019/08/02/exponential-moving-average/">
 
 
@@ -174,7 +174,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">47</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -187,7 +187,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
 
   </li>
       
@@ -200,7 +200,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
 
   </li>
       
@@ -351,32 +351,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="滑动平均"><a href="#滑动平均" class="headerlink" title="滑动平均"></a>滑动平均</h1><h2 id="什么是滑动平均"><a href="#什么是滑动平均" class="headerlink" title="什么是滑动平均"></a>什么是滑动平均</h2><p>滑动平均法是用一组最近的实际数据值来预测未来一期或几期内公司产品的需求量、公司产能等的一种常用方法。滑动平均法适用于即期预测。当产品需求既不快速增长也不快速下降，且不存在季节性因素时，滑动平均法能有效地消除预测中的随机波动，是非常有用的。滑动平均法根据预测时使用的各元素的权重不同</p>
-<p>滑动平均法是一种简单平滑预测技术，它的基本思想是：根据时间序列资料、逐项推移，依次计算包含一定项数的序时平均值，以反映长期趋势的方法。因此，当时间序列的数值由于受周期变动和随机波动的影响，起伏较大，不易显示出事件的发展趋势时，使用滑动平均法可以消除这些因素的影响，显示出事件的发展方向与趋势（即趋势线），然后依趋势线分析预测序列的长期趋势。</p>
+        <h1 id="&#x6ED1;&#x52A8;&#x5E73;&#x5747;"><a href="#&#x6ED1;&#x52A8;&#x5E73;&#x5747;" class="headerlink" title="&#x6ED1;&#x52A8;&#x5E73;&#x5747;"></a>&#x6ED1;&#x52A8;&#x5E73;&#x5747;</h1><h2 id="&#x4EC0;&#x4E48;&#x662F;&#x6ED1;&#x52A8;&#x5E73;&#x5747;"><a href="#&#x4EC0;&#x4E48;&#x662F;&#x6ED1;&#x52A8;&#x5E73;&#x5747;" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;&#x6ED1;&#x52A8;&#x5E73;&#x5747;"></a>&#x4EC0;&#x4E48;&#x662F;&#x6ED1;&#x52A8;&#x5E73;&#x5747;</h2><p>&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x6CD5;&#x662F;&#x7528;&#x4E00;&#x7EC4;&#x6700;&#x8FD1;&#x7684;&#x5B9E;&#x9645;&#x6570;&#x636E;&#x503C;&#x6765;&#x9884;&#x6D4B;&#x672A;&#x6765;&#x4E00;&#x671F;&#x6216;&#x51E0;&#x671F;&#x5185;&#x516C;&#x53F8;&#x4EA7;&#x54C1;&#x7684;&#x9700;&#x6C42;&#x91CF;&#x3001;&#x516C;&#x53F8;&#x4EA7;&#x80FD;&#x7B49;&#x7684;&#x4E00;&#x79CD;&#x5E38;&#x7528;&#x65B9;&#x6CD5;&#x3002;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x6CD5;&#x9002;&#x7528;&#x4E8E;&#x5373;&#x671F;&#x9884;&#x6D4B;&#x3002;&#x5F53;&#x4EA7;&#x54C1;&#x9700;&#x6C42;&#x65E2;&#x4E0D;&#x5FEB;&#x901F;&#x589E;&#x957F;&#x4E5F;&#x4E0D;&#x5FEB;&#x901F;&#x4E0B;&#x964D;&#xFF0C;&#x4E14;&#x4E0D;&#x5B58;&#x5728;&#x5B63;&#x8282;&#x6027;&#x56E0;&#x7D20;&#x65F6;&#xFF0C;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x6CD5;&#x80FD;&#x6709;&#x6548;&#x5730;&#x6D88;&#x9664;&#x9884;&#x6D4B;&#x4E2D;&#x7684;&#x968F;&#x673A;&#x6CE2;&#x52A8;&#xFF0C;&#x662F;&#x975E;&#x5E38;&#x6709;&#x7528;&#x7684;&#x3002;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x6CD5;&#x6839;&#x636E;&#x9884;&#x6D4B;&#x65F6;&#x4F7F;&#x7528;&#x7684;&#x5404;&#x5143;&#x7D20;&#x7684;&#x6743;&#x91CD;&#x4E0D;&#x540C;</p>
+<p>&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x6CD5;&#x662F;&#x4E00;&#x79CD;&#x7B80;&#x5355;&#x5E73;&#x6ED1;&#x9884;&#x6D4B;&#x6280;&#x672F;&#xFF0C;&#x5B83;&#x7684;&#x57FA;&#x672C;&#x601D;&#x60F3;&#x662F;&#xFF1A;&#x6839;&#x636E;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x8D44;&#x6599;&#x3001;&#x9010;&#x9879;&#x63A8;&#x79FB;&#xFF0C;&#x4F9D;&#x6B21;&#x8BA1;&#x7B97;&#x5305;&#x542B;&#x4E00;&#x5B9A;&#x9879;&#x6570;&#x7684;&#x5E8F;&#x65F6;&#x5E73;&#x5747;&#x503C;&#xFF0C;&#x4EE5;&#x53CD;&#x6620;&#x957F;&#x671F;&#x8D8B;&#x52BF;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5F53;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x7684;&#x6570;&#x503C;&#x7531;&#x4E8E;&#x53D7;&#x5468;&#x671F;&#x53D8;&#x52A8;&#x548C;&#x968F;&#x673A;&#x6CE2;&#x52A8;&#x7684;&#x5F71;&#x54CD;&#xFF0C;&#x8D77;&#x4F0F;&#x8F83;&#x5927;&#xFF0C;&#x4E0D;&#x6613;&#x663E;&#x793A;&#x51FA;&#x4E8B;&#x4EF6;&#x7684;&#x53D1;&#x5C55;&#x8D8B;&#x52BF;&#x65F6;&#xFF0C;&#x4F7F;&#x7528;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x6CD5;&#x53EF;&#x4EE5;&#x6D88;&#x9664;&#x8FD9;&#x4E9B;&#x56E0;&#x7D20;&#x7684;&#x5F71;&#x54CD;&#xFF0C;&#x663E;&#x793A;&#x51FA;&#x4E8B;&#x4EF6;&#x7684;&#x53D1;&#x5C55;&#x65B9;&#x5411;&#x4E0E;&#x8D8B;&#x52BF;&#xFF08;&#x5373;&#x8D8B;&#x52BF;&#x7EBF;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x4F9D;&#x8D8B;&#x52BF;&#x7EBF;&#x5206;&#x6790;&#x9884;&#x6D4B;&#x5E8F;&#x5217;&#x7684;&#x957F;&#x671F;&#x8D8B;&#x52BF;&#x3002;</p>
 <a id="more"></a>
-<h2 id="用滑动平均估计局部均值"><a href="#用滑动平均估计局部均值" class="headerlink" title="用滑动平均估计局部均值"></a>用滑动平均估计局部均值</h2><p>变量$v$在$t$时刻记为$v_t$，$\theta_t$为变量$v$在$t$时刻的取值，即在不使用滑动平均模型时$v_t=\theta_t$，在使用滑动平均模型后，$v_t$的更新公式如下：</p>
+<h2 id="&#x7528;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x4F30;&#x8BA1;&#x5C40;&#x90E8;&#x5747;&#x503C;"><a href="#&#x7528;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x4F30;&#x8BA1;&#x5C40;&#x90E8;&#x5747;&#x503C;" class="headerlink" title="&#x7528;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x4F30;&#x8BA1;&#x5C40;&#x90E8;&#x5747;&#x503C;"></a>&#x7528;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x4F30;&#x8BA1;&#x5C40;&#x90E8;&#x5747;&#x503C;</h2><p>&#x53D8;&#x91CF;$v$&#x5728;$t$&#x65F6;&#x523B;&#x8BB0;&#x4E3A;$v_t$&#xFF0C;$\theta_t$&#x4E3A;&#x53D8;&#x91CF;$v$&#x5728;$t$&#x65F6;&#x523B;&#x7684;&#x53D6;&#x503C;&#xFF0C;&#x5373;&#x5728;&#x4E0D;&#x4F7F;&#x7528;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x6A21;&#x578B;&#x65F6;$v_t=\theta_t$&#xFF0C;&#x5728;&#x4F7F;&#x7528;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x6A21;&#x578B;&#x540E;&#xFF0C;$v_t$&#x7684;&#x66F4;&#x65B0;&#x516C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;</p>
 <script type="math/tex; mode=display">
-v_t=\beta\cdot v_{t-1}+(1-\beta)\cdot\theta_t</script><p>上式中，$\beta\in[0,1)$。$\beta=0$相当于没有使用滑动平均。<br>Andrew Ng在Course 2 Improving Deep Neural Networks中讲到$t$时刻变量$v$的滑动平均值大致等于过去$\frac{1}{1-\beta}$个时刻$θ$值的平均。这个结论在滑动平均起始时相差比较大，所以有了Bias correction，将$vt$除以$(1−β^t)$修正对均值的估计。<br>加入了Bias correction后，更新公式如下：</p>
+v_t=\beta\cdot v_{t-1}+(1-\beta)\cdot\theta_t</script><p>&#x4E0A;&#x5F0F;&#x4E2D;&#xFF0C;$\beta\in[0,1)$&#x3002;$\beta=0$&#x76F8;&#x5F53;&#x4E8E;&#x6CA1;&#x6709;&#x4F7F;&#x7528;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x3002;<br>Andrew Ng&#x5728;Course 2 Improving Deep Neural Networks&#x4E2D;&#x8BB2;&#x5230;$t$&#x65F6;&#x523B;&#x53D8;&#x91CF;$v$&#x7684;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x503C;&#x5927;&#x81F4;&#x7B49;&#x4E8E;&#x8FC7;&#x53BB;$\frac{1}{1-\beta}$&#x4E2A;&#x65F6;&#x523B;$&#x3B8;$&#x503C;&#x7684;&#x5E73;&#x5747;&#x3002;&#x8FD9;&#x4E2A;&#x7ED3;&#x8BBA;&#x5728;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x8D77;&#x59CB;&#x65F6;&#x76F8;&#x5DEE;&#x6BD4;&#x8F83;&#x5927;&#xFF0C;&#x6240;&#x4EE5;&#x6709;&#x4E86;Bias correction&#xFF0C;&#x5C06;$vt$&#x9664;&#x4EE5;$(1&#x2212;&#x3B2;^t)$&#x4FEE;&#x6B63;&#x5BF9;&#x5747;&#x503C;&#x7684;&#x4F30;&#x8BA1;&#x3002;<br>&#x52A0;&#x5165;&#x4E86;Bias correction&#x540E;&#xFF0C;&#x66F4;&#x65B0;&#x516C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;</p>
 <script type="math/tex; mode=display">
 v_t=\beta\cdot v_{t-1}+(1-\beta)\cdot\theta_t</script><script type="math/tex; mode=display">
-v\_{biased}_t=\frac{v_t}{1-\beta^t}</script><p>$t$越大，$1-\beta^t$越接近1，则两者将会越来越接近。<br>当$\beta$越大时，滑动平均得到的值越和$\theta$的历史值相关。若$\beta=0.9$，则大致等于过去10个$\theta$值的平均；若$\beta=0.99$，则大致等于过去100个$\theta$值的平均。</p>
-<h2 id="滑动平均的好处："><a href="#滑动平均的好处：" class="headerlink" title="滑动平均的好处："></a>滑动平均的好处：</h2><p>占内存少，不需要保存过去10个或者100个历史 θ 值，就能够估计其均值。（当然，滑动平均不如将历史值全保存下来计算均值准确，但后者占用更多内存和计算成本更高），同时使用滑动平均法进行预测能平滑掉需求的突然波动对预测结果的影响。</p>
-<h1 id="tf-train-ExponentialMovingAverage"><a href="#tf-train-ExponentialMovingAverage" class="headerlink" title="tf.train.ExponentialMovingAverage"></a>tf.train.ExponentialMovingAverage</h1><h2 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h2><p>tensorflow中提供了tf.train.ExponentialMovingAverage来实现滑动平均模型，他使用指数衰减来计算变量的移动平均值。</p>
+v\_{biased}_t=\frac{v_t}{1-\beta^t}</script><p>$t$&#x8D8A;&#x5927;&#xFF0C;$1-\beta^t$&#x8D8A;&#x63A5;&#x8FD1;1&#xFF0C;&#x5219;&#x4E24;&#x8005;&#x5C06;&#x4F1A;&#x8D8A;&#x6765;&#x8D8A;&#x63A5;&#x8FD1;&#x3002;<br>&#x5F53;$\beta$&#x8D8A;&#x5927;&#x65F6;&#xFF0C;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x5F97;&#x5230;&#x7684;&#x503C;&#x8D8A;&#x548C;$\theta$&#x7684;&#x5386;&#x53F2;&#x503C;&#x76F8;&#x5173;&#x3002;&#x82E5;$\beta=0.9$&#xFF0C;&#x5219;&#x5927;&#x81F4;&#x7B49;&#x4E8E;&#x8FC7;&#x53BB;10&#x4E2A;$\theta$&#x503C;&#x7684;&#x5E73;&#x5747;&#xFF1B;&#x82E5;$\beta=0.99$&#xFF0C;&#x5219;&#x5927;&#x81F4;&#x7B49;&#x4E8E;&#x8FC7;&#x53BB;100&#x4E2A;$\theta$&#x503C;&#x7684;&#x5E73;&#x5747;&#x3002;</p>
+<h2 id="&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x7684;&#x597D;&#x5904;&#xFF1A;"><a href="#&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x7684;&#x597D;&#x5904;&#xFF1A;" class="headerlink" title="&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x7684;&#x597D;&#x5904;&#xFF1A;"></a>&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x7684;&#x597D;&#x5904;&#xFF1A;</h2><p>&#x5360;&#x5185;&#x5B58;&#x5C11;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x4FDD;&#x5B58;&#x8FC7;&#x53BB;10&#x4E2A;&#x6216;&#x8005;100&#x4E2A;&#x5386;&#x53F2; &#x3B8; &#x503C;&#xFF0C;&#x5C31;&#x80FD;&#x591F;&#x4F30;&#x8BA1;&#x5176;&#x5747;&#x503C;&#x3002;&#xFF08;&#x5F53;&#x7136;&#xFF0C;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x4E0D;&#x5982;&#x5C06;&#x5386;&#x53F2;&#x503C;&#x5168;&#x4FDD;&#x5B58;&#x4E0B;&#x6765;&#x8BA1;&#x7B97;&#x5747;&#x503C;&#x51C6;&#x786E;&#xFF0C;&#x4F46;&#x540E;&#x8005;&#x5360;&#x7528;&#x66F4;&#x591A;&#x5185;&#x5B58;&#x548C;&#x8BA1;&#x7B97;&#x6210;&#x672C;&#x66F4;&#x9AD8;&#xFF09;&#xFF0C;&#x540C;&#x65F6;&#x4F7F;&#x7528;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x6CD5;&#x8FDB;&#x884C;&#x9884;&#x6D4B;&#x80FD;&#x5E73;&#x6ED1;&#x6389;&#x9700;&#x6C42;&#x7684;&#x7A81;&#x7136;&#x6CE2;&#x52A8;&#x5BF9;&#x9884;&#x6D4B;&#x7ED3;&#x679C;&#x7684;&#x5F71;&#x54CD;&#x3002;</p>
+<h1 id="tf-train-ExponentialMovingAverage"><a href="#tf-train-ExponentialMovingAverage" class="headerlink" title="tf.train.ExponentialMovingAverage"></a>tf.train.ExponentialMovingAverage</h1><h2 id="&#x51FD;&#x6570;&#x5B9A;&#x4E49;"><a href="#&#x51FD;&#x6570;&#x5B9A;&#x4E49;" class="headerlink" title="&#x51FD;&#x6570;&#x5B9A;&#x4E49;"></a>&#x51FD;&#x6570;&#x5B9A;&#x4E49;</h2><p>tensorflow&#x4E2D;&#x63D0;&#x4F9B;&#x4E86;tf.train.ExponentialMovingAverage&#x6765;&#x5B9E;&#x73B0;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x6A21;&#x578B;&#xFF0C;&#x4ED6;&#x4F7F;&#x7528;&#x6307;&#x6570;&#x8870;&#x51CF;&#x6765;&#x8BA1;&#x7B97;&#x53D8;&#x91CF;&#x7684;&#x79FB;&#x52A8;&#x5E73;&#x5747;&#x503C;&#x3002;</p>
 <pre><code>tf.train.ExponentialMovingAverage.__init__(self, decay, num_updates=None, zero_debias=False, name=&quot;ExponentialMovingAverage&quot;)
-</code></pre><p>函数介绍：</p>
+</code></pre><p>&#x51FD;&#x6570;&#x4ECB;&#x7ECD;&#xFF1A;</p>
 <ul>
-<li>decay 是衰减率在创建ExponentialMovingAverage对象时，需指定衰减率（decay），用于控制模型的更新速度。影子变量的初始值与训练变量的初始值相同。当运行变量更新时，每个影子变量都会更新为：<script type="math/tex; mode=display">
-shadow\_variable=decay*shadow\_variable+(1-decay)*variable</script>$shadow_variable$就是上式中的$v_t$，$variable$就是上式中的$\theta_t$，$decay$就是上式中的$\beta$。decay 决定了影子变量的更新速度，decay 越大影子变量越趋于稳定。在实际运用中，decay一般会设成非常接近 1 的数（比如0.999或0.9999）。</li>
-<li>num_updates 是ExponentialMovingAverage提供用来动态设置decay的参数，当初始化时提供了参数，即不为none时，每次的衰减率是：<script type="math/tex; mode=display">
-min\lbrace decay,\frac{1+num\_updates}{10+num\_updates}\rbrace</script>这一点其实和Bias correction很像</li>
-<li>apply() 方法添加了训练变量的影子副本，并保持了其影子副本中训练变量的移动平均值操作。在每次训练之后调用此操作，更新移动平均值。</li>
-<li>average()和average_name() 方法可以获取影子变量及其名称。</li>
+<li>decay &#x662F;&#x8870;&#x51CF;&#x7387;&#x5728;&#x521B;&#x5EFA;ExponentialMovingAverage&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x9700;&#x6307;&#x5B9A;&#x8870;&#x51CF;&#x7387;&#xFF08;decay&#xFF09;&#xFF0C;&#x7528;&#x4E8E;&#x63A7;&#x5236;&#x6A21;&#x578B;&#x7684;&#x66F4;&#x65B0;&#x901F;&#x5EA6;&#x3002;&#x5F71;&#x5B50;&#x53D8;&#x91CF;&#x7684;&#x521D;&#x59CB;&#x503C;&#x4E0E;&#x8BAD;&#x7EC3;&#x53D8;&#x91CF;&#x7684;&#x521D;&#x59CB;&#x503C;&#x76F8;&#x540C;&#x3002;&#x5F53;&#x8FD0;&#x884C;&#x53D8;&#x91CF;&#x66F4;&#x65B0;&#x65F6;&#xFF0C;&#x6BCF;&#x4E2A;&#x5F71;&#x5B50;&#x53D8;&#x91CF;&#x90FD;&#x4F1A;&#x66F4;&#x65B0;&#x4E3A;&#xFF1A;<script type="math/tex; mode=display">
+shadow\_variable=decay*shadow\_variable+(1-decay)*variable</script>$shadow_variable$&#x5C31;&#x662F;&#x4E0A;&#x5F0F;&#x4E2D;&#x7684;$v_t$&#xFF0C;$variable$&#x5C31;&#x662F;&#x4E0A;&#x5F0F;&#x4E2D;&#x7684;$\theta_t$&#xFF0C;$decay$&#x5C31;&#x662F;&#x4E0A;&#x5F0F;&#x4E2D;&#x7684;$\beta$&#x3002;decay &#x51B3;&#x5B9A;&#x4E86;&#x5F71;&#x5B50;&#x53D8;&#x91CF;&#x7684;&#x66F4;&#x65B0;&#x901F;&#x5EA6;&#xFF0C;decay &#x8D8A;&#x5927;&#x5F71;&#x5B50;&#x53D8;&#x91CF;&#x8D8A;&#x8D8B;&#x4E8E;&#x7A33;&#x5B9A;&#x3002;&#x5728;&#x5B9E;&#x9645;&#x8FD0;&#x7528;&#x4E2D;&#xFF0C;decay&#x4E00;&#x822C;&#x4F1A;&#x8BBE;&#x6210;&#x975E;&#x5E38;&#x63A5;&#x8FD1; 1 &#x7684;&#x6570;&#xFF08;&#x6BD4;&#x5982;0.999&#x6216;0.9999&#xFF09;&#x3002;</li>
+<li>num_updates &#x662F;ExponentialMovingAverage&#x63D0;&#x4F9B;&#x7528;&#x6765;&#x52A8;&#x6001;&#x8BBE;&#x7F6E;decay&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x5F53;&#x521D;&#x59CB;&#x5316;&#x65F6;&#x63D0;&#x4F9B;&#x4E86;&#x53C2;&#x6570;&#xFF0C;&#x5373;&#x4E0D;&#x4E3A;none&#x65F6;&#xFF0C;&#x6BCF;&#x6B21;&#x7684;&#x8870;&#x51CF;&#x7387;&#x662F;&#xFF1A;<script type="math/tex; mode=display">
+min\lbrace decay,\frac{1+num\_updates}{10+num\_updates}\rbrace</script>&#x8FD9;&#x4E00;&#x70B9;&#x5176;&#x5B9E;&#x548C;Bias correction&#x5F88;&#x50CF;</li>
+<li>apply() &#x65B9;&#x6CD5;&#x6DFB;&#x52A0;&#x4E86;&#x8BAD;&#x7EC3;&#x53D8;&#x91CF;&#x7684;&#x5F71;&#x5B50;&#x526F;&#x672C;&#xFF0C;&#x5E76;&#x4FDD;&#x6301;&#x4E86;&#x5176;&#x5F71;&#x5B50;&#x526F;&#x672C;&#x4E2D;&#x8BAD;&#x7EC3;&#x53D8;&#x91CF;&#x7684;&#x79FB;&#x52A8;&#x5E73;&#x5747;&#x503C;&#x64CD;&#x4F5C;&#x3002;&#x5728;&#x6BCF;&#x6B21;&#x8BAD;&#x7EC3;&#x4E4B;&#x540E;&#x8C03;&#x7528;&#x6B64;&#x64CD;&#x4F5C;&#xFF0C;&#x66F4;&#x65B0;&#x79FB;&#x52A8;&#x5E73;&#x5747;&#x503C;&#x3002;</li>
+<li>average()&#x548C;average_name() &#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x5F71;&#x5B50;&#x53D8;&#x91CF;&#x53CA;&#x5176;&#x540D;&#x79F0;&#x3002;</li>
 </ul>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line"></span><br><span class="line"># 定义一个变量，初始值为0</span><br><span class="line">v1 = tf.Variable(0, dtype=tf.float32)</span><br><span class="line"># step为迭代轮数变量，控制衰减率</span><br><span class="line">step = tf.Variable(0, trainable=False)</span><br><span class="line"># 初始设定衰减率为0.99</span><br><span class="line">ema = tf.train.ExponentialMovingAverage(0.99, step)</span><br><span class="line"># 更新列表中的变量</span><br><span class="line">maintain_averages_op = ema.apply([v1])</span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">    # 初始化所有变量</span><br><span class="line">    init_op = tf.initialize_all_variables()</span><br><span class="line">    sess.run(init_op)</span><br><span class="line">    # 输出初始化后变量v1的值和v1的滑动平均值</span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br><span class="line">    # 更新v1的值</span><br><span class="line">    sess.run(tf.assign(v1, 5))</span><br><span class="line">    # 更新v1的滑动平均值</span><br><span class="line">    sess.run(maintain_averages_op)</span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br><span class="line">    # 更新迭代轮转数step</span><br><span class="line">    sess.run(tf.assign(step, 10000))</span><br><span class="line">    sess.run(tf.assign(v1, 10))</span><br><span class="line">    sess.run(maintain_averages_op)</span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br><span class="line">    # 再次更新滑动平均值，</span><br><span class="line">    sess.run(maintain_averages_op)</span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br><span class="line">    # 更新v1的值为15</span><br><span class="line">    sess.run(tf.assign(v1, 15))</span><br><span class="line">    sess.run(maintain_averages_op)</span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br></pre></td></tr></table></figure>
-<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[0.0, 0.0]</span><br><span class="line">[5.0, 4.5]</span><br><span class="line">[10.0, 4.555]</span><br><span class="line">[10.0, 4.60945]</span><br><span class="line">[15.0, 4.713355]</span><br></pre></td></tr></table></figure></p>
-<p>分析：</p>
+<h2 id="&#x4F8B;&#x5B50;"><a href="#&#x4F8B;&#x5B50;" class="headerlink" title="&#x4F8B;&#x5B50;"></a>&#x4F8B;&#x5B50;</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line"></span><br><span class="line"># &#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#xFF0C;&#x521D;&#x59CB;&#x503C;&#x4E3A;0</span><br><span class="line">v1 = tf.Variable(0, dtype=tf.float32)</span><br><span class="line"># step&#x4E3A;&#x8FED;&#x4EE3;&#x8F6E;&#x6570;&#x53D8;&#x91CF;&#xFF0C;&#x63A7;&#x5236;&#x8870;&#x51CF;&#x7387;</span><br><span class="line">step = tf.Variable(0, trainable=False)</span><br><span class="line"># &#x521D;&#x59CB;&#x8BBE;&#x5B9A;&#x8870;&#x51CF;&#x7387;&#x4E3A;0.99</span><br><span class="line">ema = tf.train.ExponentialMovingAverage(0.99, step)</span><br><span class="line"># &#x66F4;&#x65B0;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x53D8;&#x91CF;</span><br><span class="line">maintain_averages_op = ema.apply([v1])</span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">    # &#x521D;&#x59CB;&#x5316;&#x6240;&#x6709;&#x53D8;&#x91CF;</span><br><span class="line">    init_op = tf.initialize_all_variables()</span><br><span class="line">    sess.run(init_op)</span><br><span class="line">    # &#x8F93;&#x51FA;&#x521D;&#x59CB;&#x5316;&#x540E;&#x53D8;&#x91CF;v1&#x7684;&#x503C;&#x548C;v1&#x7684;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x503C;</span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br><span class="line">    # &#x66F4;&#x65B0;v1&#x7684;&#x503C;</span><br><span class="line">    sess.run(tf.assign(v1, 5))</span><br><span class="line">    # &#x66F4;&#x65B0;v1&#x7684;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x503C;</span><br><span class="line">    sess.run(maintain_averages_op)</span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br><span class="line">    # &#x66F4;&#x65B0;&#x8FED;&#x4EE3;&#x8F6E;&#x8F6C;&#x6570;step</span><br><span class="line">    sess.run(tf.assign(step, 10000))</span><br><span class="line">    sess.run(tf.assign(v1, 10))</span><br><span class="line">    sess.run(maintain_averages_op)</span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br><span class="line">    # &#x518D;&#x6B21;&#x66F4;&#x65B0;&#x6ED1;&#x52A8;&#x5E73;&#x5747;&#x503C;&#xFF0C;</span><br><span class="line">    sess.run(maintain_averages_op)</span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br><span class="line">    # &#x66F4;&#x65B0;v1&#x7684;&#x503C;&#x4E3A;15</span><br><span class="line">    sess.run(tf.assign(v1, 15))</span><br><span class="line">    sess.run(maintain_averages_op)</span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br></pre></td></tr></table></figure>
+<p>&#x8F93;&#x51FA;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[0.0, 0.0]</span><br><span class="line">[5.0, 4.5]</span><br><span class="line">[10.0, 4.555]</span><br><span class="line">[10.0, 4.60945]</span><br><span class="line">[15.0, 4.713355]</span><br></pre></td></tr></table></figure></p>
+<p>&#x5206;&#x6790;&#xFF1A;</p>
 <script type="math/tex; mode=display">decay=min(0.99,\frac{1+0.0}{10+0.0})=0.1,shadow\_variable=0.1*0.0+(1-0.1)*0.0=0.0</script><script type="math/tex; mode=display">decay=min(0.99,\frac{1+0.0}{10+0.0})=0.1,shadow\_variable=0.1*0.0+(1-0.1)*5.0=4.5</script><script type="math/tex; mode=display">decay=min(0.99,\frac{1+1000}{10+1000})=0.99,shadow\_variable=0.99*4.5+(1-0.99)*10=4.555</script><script type="math/tex; mode=display">decay=min(0.99,\frac{1+1000}{10+1000})=0.99,shadow\_variable=0.99*4.555+(1-0.99)*10=4.60945</script><script type="math/tex; mode=display">decay=min(0.99,\frac{1+1000}{10+1000})=0.99,shadow\_variable=0.99*4.60945+(1-0.99)*15=4.713355</script><blockquote>
-<p>参考：<br><a href="https://www.cnblogs.com/wuliytTaotao/p/9479958.html" target="_blank" rel="noopener">https://www.cnblogs.com/wuliytTaotao/p/9479958.html</a><br><a href="https://www.cnblogs.com/cloud-ken/p/7521609.html" target="_blank" rel="noopener">https://www.cnblogs.com/cloud-ken/p/7521609.html</a></p>
+<p>&#x53C2;&#x8003;&#xFF1A;<br><a href="https://www.cnblogs.com/wuliytTaotao/p/9479958.html" target="_blank" rel="noopener">https://www.cnblogs.com/wuliytTaotao/p/9479958.html</a><br><a href="https://www.cnblogs.com/cloud-ken/p/7521609.html" target="_blank" rel="noopener">https://www.cnblogs.com/cloud-ken/p/7521609.html</a></p>
 </blockquote>
 
     </div>
@@ -415,7 +415,7 @@ min\lbrace decay,\frac{1+num\_updates}{10+num\_updates}\rbrace</script>这一点
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/08/01/论文笔记6/" rel="next" title="论文阅读笔记6：Gradient Harmonized Single-stage Detector">
+                <a href="/2019/08/01/论文阅读笔记6/" rel="next" title="论文阅读笔记6：Gradient Harmonized Single-stage Detector">
                   <i class="fa fa-chevron-left"></i> 论文阅读笔记6：Gradient Harmonized Single-stage Detector
                 </a>
               
@@ -425,7 +425,7 @@ min\lbrace decay,\frac{1+num\_updates}{10+num\_updates}\rbrace</script>这一点
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/08/02/论文笔记7/" rel="prev" title="论文阅读笔记7：Libra R-CNN:Towards Balanced Learning for Object Detection">
+                <a href="/2019/08/02/论文阅读笔记7/" rel="prev" title="论文阅读笔记7：Libra R-CNN:Towards Balanced Learning for Object Detection">
                   论文阅读笔记7：Libra R-CNN:Towards Balanced Learning for Object Detection <i class="fa fa-chevron-right"></i>
                 </a>
               
@@ -480,7 +480,7 @@ min\lbrace decay,\frac{1+num\_updates}{10+num\_updates}\rbrace</script>这一点
                   
                     <a href="/archives/">
                   
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -507,7 +507,9 @@ min\lbrace decay,\frac{1+num\_updates}{10+num\_updates}\rbrace</script>这一点
                   
                     
                   
-                  <span class="site-state-item-count">5</span>
+                    
+                  
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -582,43 +584,7 @@ min\lbrace decay,\frac{1+num\_updates}{10+num\_updates}\rbrace</script>这一点
                   
                     
                   
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -711,7 +677,7 @@ min\lbrace decay,\frac{1+num\_updates}{10+num\_updates}\rbrace</script>这一点
   </span>
   <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
     <span class="post-meta-divider">|</span>
-    <span title="站点总字数">全站共195k字</span>
+    <span title="站点总字数">全站共199k字</span>
 </div>
 
 <div class="BbeiAn-info">

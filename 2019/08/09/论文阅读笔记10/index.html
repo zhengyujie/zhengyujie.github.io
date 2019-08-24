@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","width":300,"display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="&amp;#x8BBA;&amp;#x6587;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://arxiv.org/pdf/1904.01355.pdf&amp;#x4EE3;&amp;#x7801;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://github.com/tianzhi0549/FCOS  Abstract&amp;#x6211;&amp;#x4EEC;&amp;#x63D0;&amp;#x51FA;&amp;#x4E8">
+<meta name="keywords" content="目标检测,anchor-free">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读笔记10：FCOS:Fully Convolutional One-Stage Object Detection">
+<meta property="og:url" content="http://zhengyujie.cn/2019/08/09/论文阅读笔记10/index.html">
+<meta property="og:site_name" content="浅笑の博客">
+<meta property="og:description" content="&amp;#x8BBA;&amp;#x6587;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://arxiv.org/pdf/1904.01355.pdf&amp;#x4EE3;&amp;#x7801;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://github.com/tianzhi0549/FCOS  Abstract&amp;#x6211;&amp;#x4EEC;&amp;#x63D0;&amp;#x51FA;&amp;#x4E8">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/09/论文阅读笔记10/1.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/09/论文阅读笔记10/2.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/09/论文阅读笔记10/3.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/09/论文阅读笔记10/4.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/09/论文阅读笔记10/5.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/09/论文阅读笔记10/6.png">
+<meta property="og:image" content="http://zhengyujie.cn/2019/08/09/论文阅读笔记10/7.png">
+<meta property="og:updated_time" content="2019-08-16T07:08:49.527Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="论文阅读笔记10：FCOS:Fully Convolutional One-Stage Object Detection">
+<meta name="twitter:description" content="&amp;#x8BBA;&amp;#x6587;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://arxiv.org/pdf/1904.01355.pdf&amp;#x4EE3;&amp;#x7801;&amp;#x5730;&amp;#x5740;&amp;#xFF1A;https://github.com/tianzhi0549/FCOS  Abstract&amp;#x6211;&amp;#x4EEC;&amp;#x63D0;&amp;#x51FA;&amp;#x4E8">
+<meta name="twitter:image" content="http://zhengyujie.cn/2019/08/09/论文阅读笔记10/1.png">
+  <link rel="canonical" href="http://zhengyujie.cn/2019/08/09/论文阅读笔记10/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>论文阅读笔记10：FCOS:Fully Convolutional One-Stage Object Detection | 浅笑の博客</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">浅笑の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我们的征途是星辰大海</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-guestbook">
+      
+    
+      
+    
+
+    <a href="/guestbook/" rel="section"><i class="menu-item-icon fa fa-fw fa-paper-plane-o"></i> <br>留言板</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+  <a href="https://github.com/zhengyujie" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/09/论文阅读笔记10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zheng Yujie">
+      <meta itemprop="description" content="C++/Python/深度学习">
+      <meta itemprop="image" content="/images/1.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅笑の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">论文阅读笔记10：FCOS:Fully Convolutional One-Stage Object Detection
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-09 10:21:15" itemprop="dateCreated datePublished" datetime="2019-08-09T10:21:15+08:00">2019-08-09</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/08/09/论文阅读笔记10/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/09/论文阅读笔记10/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>8.2k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>&#x8BBA;&#x6587;&#x5730;&#x5740;&#xFF1A;<a href="https://arxiv.org/pdf/1904.01355.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1904.01355.pdf</a><br>&#x4EE3;&#x7801;&#x5730;&#x5740;&#xFF1A;<a href="https://github.com/tianzhi0549/FCOS" target="_blank" rel="noopener">https://github.com/tianzhi0549/FCOS</a></p>
+</blockquote>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>&#x6211;&#x4EEC;&#x63D0;&#x51FA;&#x4E86;&#x4E00;&#x79CD;&#x5168;&#x5377;&#x79EF;&#x7684; one-stage &#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x5668;&#xFF08;FCOS, Fully Convolutional One Stage&#xFF09;, &#x5B83;&#x4EE5;&#x5BF9;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x8FDB;&#x884C;&#x9884;&#x6D4B;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x89E3;&#x51B3;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x95EE;&#x9898;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;&#x8BED;&#x4E49;&#x5206;&#x5272;&#x3002;&#x51E0;&#x4E4E;&#x6240;&#x6709;&#x7684; SOTA &#x7269;&#x4F53;&#x68C0;&#x6D4B;&#x5668;&#xFF0C;&#x5982; RetinaNet&#xFF0C;SSD&#xFF0C;YOLOv3 &#x548C; Faster R-CNN &#x90FD;&#x4F9D;&#x8D56;&#x4E8E;&#x9884;&#x5B9A;&#x4E49;&#x7684; anchor box&#x3002;&#x76F8;&#x6BD4;&#x4E4B;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x63D0;&#x51FA;&#x7684; FCOS &#x4E0D;&#x9700;&#x8981; anchor box&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x4E0D;&#x9700;&#x8981; proposals (&#x5373; One-Stage)&#x3002;&#x901A;&#x8FC7;&#x6D88;&#x9664;&#x5BF9;&#x9884;&#x5B9A;&#x4E49; anchor &#x7684;&#x4F9D;&#x8D56;&#xFF0C;FCOS &#x5B8C;&#x5168;&#x907F;&#x514D;&#x4E86;&#x4E0E; anchor box &#x76F8;&#x5173;&#x7684;&#x590D;&#x6742;&#x8BA1;&#x7B97;&#xFF0C;&#x4F8B;&#x5982;&#x5728;&#x8BAD;&#x7EC3;&#x671F;&#x95F4;&#x8BA1;&#x7B97; overlapping &#x5E76;&#x663E;&#x7740;&#x51CF;&#x5C11; training memory footprint&#x3002;&#x66F4;&#x91CD;&#x8981;&#x7684;&#x662F;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x907F;&#x514D;&#x4E86;&#x4E0E; anchor &#x76F8;&#x5173;&#x7684;&#x6240;&#x6709;&#x8D85;&#x53C2;&#x6570;&#xFF0C;&#x8FD9;&#x4E9B;&#x53C2;&#x6570;&#x901A;&#x5E38;&#x5BF9;&#x6700;&#x7EC8;&#x68C0;&#x6D4B;&#x6027;&#x80FD;&#x975E;&#x5E38;&#x654F;&#x611F;&#x3002;&#x51ED;&#x501F;&#x552F;&#x4E00;&#x7684;&#x540E;&#x5904;&#x7406;&#x64CD;&#x4F5C;&#x975E;&#x6700;&#x5927;&#x6291;&#x5236;&#xFF08;NMS&#xFF09;&#xFF0C;&#x6211;&#x4EEC;&#x7684; FCOS &#x4F18;&#x4E8E;&#x4E4B;&#x524D;&#x7684; anchor-based one-stage detectors&#xFF0C;&#x5E76;&#x4E14;&#x7ED3;&#x6784;&#x66F4;&#x7B80;&#x5355;&#x3002;&#x6211;&#x4EEC;&#x9996;&#x6B21;&#x5C55;&#x793A;&#x4E86;&#x4E00;&#x79CD;&#x66F4;&#x52A0;&#x7B80;&#x5355;&#x7075;&#x6D3B;&#x7684;&#x68C0;&#x6D4B;&#x6846;&#x67B6;&#xFF0C;&#x53EF;&#x4EE5;&#x63D0;&#x9AD8;&#x68C0;&#x6D4B;&#x7CBE;&#x5EA6;&#x3002;&#x6211;&#x4EEC;&#x5E0C;&#x671B; FCOS &#x6846;&#x67B6;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x8BB8;&#x591A;&#x5176;&#x4ED6;&#x5B9E;&#x4F8B;&#x7EA7;&#x4EFB;&#x52A1;&#x7B80;&#x5355;&#x800C;&#x5F3A;&#x5927;&#x7684;&#x66FF;&#x4EE3;&#x65B9;&#x6848;&#x3002;</p>
+<a id="more"></a>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Anchor-based&#x68C0;&#x6D4B;&#x5668;&#x5B58;&#x5728;&#x7684;&#x7F3A;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>&#x5982; Faster R-CNN &#x548C; Focal Loss &#x6240;&#x793A;&#xFF0C;&#x68C0;&#x6D4B;&#x6027;&#x80FD;&#x5BF9;&#x4E8E;&#x5C3A;&#x5BF8;&#xFF0C;&#x5BBD;&#x9AD8;&#x6BD4;&#x548C; anchor &#x6570;&#x91CF;&#x975E;&#x5E38;&#x654F;&#x611F;&#x3002; &#x4F8B;&#x5982;&#xFF0C;&#x5728;RetinaNet &#x4E2D;&#xFF0C;&#x6839;&#x636E; COCO &#x7684; benchmark &#x4E0A;&#xFF0C;&#x4EC5;&#x4EC5;&#x6539;&#x53D8;&#x8FD9;&#x4E9B;&#x8D85;&#x53C2;&#x6570;&#x5C31;&#x4F1A;&#x5F71;&#x54CD;AP&#x7684;&#x6027;&#x80FD;&#x63D0;&#x5347;4&#xFF05;[13]&#x3002; &#x56E0;&#x6B64;&#xFF0C;&#x5BF9;&#x4E8E; anchor-based &#x68C0;&#x6D4B;&#x5668;&#x9700;&#x8981;&#x4ED4;&#x7EC6;&#x8C03;&#x6574;&#x8FD9;&#x4E9B;&#x8D85;&#x53C2;&#x6570;&#x3002;</li>
+<li>&#x5373;&#x4F7F;&#x7ECF;&#x8FC7;&#x7CBE;&#x5FC3;&#x8BBE;&#x8BA1;&#xFF0C;&#x7531;&#x4E8E; anchor box &#x7684;&#x6BD4;&#x4F8B;&#x548C;&#x5BBD;&#x9AD8;&#x6BD4;&#x4FDD;&#x6301;&#x56FA;&#x5B9A;&#xFF0C;detectors &#x5728;&#x5904;&#x7406;&#x5177;&#x6709;&#x8F83;&#x5927;&#x5F62;&#x72B6;&#x53D8;&#x5316;&#x7684;&#x7269;&#x4F53;&#x96C6;&#x5408;&#x65F6;&#x4F1A;&#x9047;&#x5230;&#x56F0;&#x96BE;&#xFF0C;&#x7279;&#x522B;&#x662F;&#x5BF9;&#x4E8E;&#x5C0F;&#x7269;&#x4F53;&#x3002; &#x9884;&#x5B9A;&#x4E49;&#x7684; anchor box &#x4E5F;&#x59A8;&#x788D;&#x4E86;&#x63A2;&#x6D4B;&#x5668;&#x7684;&#x6CDB;&#x5316;&#x80FD;&#x529B;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4EEC;&#x9700;&#x8981;&#x5728;&#x5177;&#x6709;&#x4E0D;&#x540C;&#x7269;&#x4F53;&#x5C3A;&#x5BF8;&#x6216;&#x5BBD;&#x9AD8;&#x6BD4;&#x7684;&#x65B0;&#x63A2;&#x6D4B;&#x4EFB;&#x52A1;&#x4E0A;&#x8FDB;&#x884C;&#x91CD;&#x65B0;&#x8BBE;&#x5B9A;&#x3002;</li>
+<li>&#x4E3A;&#x4E86;&#x5B9E;&#x73B0;&#x9AD8;&#x53EC;&#x56DE;&#x7387;&#xFF0C;anchor-based &#x68C0;&#x6D4B;&#x5668;&#x9700;&#x8981;&#x5C06; anchor box &#x5BC6;&#x96C6;&#x5730;&#x653E;&#x7F6E;&#x5728;&#x8F93;&#x5165;&#x56FE;&#x50CF;&#x4E0A;&#xFF08;&#x4F8B;&#x5982;&#xFF0C;&#x5728;&#x7279;&#x5F81;&#x91D1;&#x5B57;&#x5854;&#x7F51;&#x7EDC;(FPN)&#x4E2D;, &#x5BF9;&#x4E8E;&#x77ED;&#x8FB9;&#x50CF;&#x7D20;&#x4E3A; 800 &#x7684;&#x8F93;&#x5165;&#x56FE;&#x50CF;, &#x4F1A;&#x4EA7;&#x751F;&#x8D85;&#x8FC7; 180K &#x7684; anchor box&#xFF09;&#x3002; &#x5927;&#x591A;&#x6570;&#x8FD9;&#x4E9B; anchor box &#x5728;&#x8BAD;&#x7EC3;&#x671F;&#x95F4;&#x4F1A;&#x88AB;&#x6807;&#x8BB0;&#x4E3A; negative samples&#x3002; &#x8FC7;&#x591A;&#x7684; negative samples &#x52A0;&#x5267;&#x4E86; training &#x8FC7;&#x7A0B;&#x4E2D;&#x6B63;&#x8D1F;&#x6837;&#x672C;&#x4E4B;&#x95F4;&#x7684;&#x4E0D;&#x5E73;&#x8861;&#x6027;&#x3002;</li>
+<li>&#x5F53;&#x5728;&#x8BAD;&#x7EC3;&#x671F;&#x95F4;&#x8BA1;&#x7B97;&#x6240;&#x6709; anchor box &#x548C; GT box &#x4E4B;&#x95F4;&#x7684; IOU &#x65F6;&#xFF0C;&#x8FC7;&#x591A;&#x6570;&#x91CF;&#x7684; anchor box &#x4E5F;&#x663E;&#x8457;&#x589E;&#x52A0;&#x4E86;&#x8BA1;&#x7B97;&#x91CF;&#x548C;&#x5B58;&#x50A8;&#x5668;&#x5360;&#x7528;&#x91CF;&#x3002;</li>
+</ul>
+<p>&#x57FA;&#x4E8E; anchor-based &#x7684;&#x68C0;&#x6D4B;&#x65B9;&#x6CD5;&#x504F;&#x79BB;&#x5168;&#x5377;&#x79EF;&#x9884;&#x6D4B;&#x7684;&#x6846;&#x67B6;&#xFF0C;&#x800C;&#x672C;&#x6587;&#x5C1D;&#x8BD5;&#x7C7B;&#x4F3C;&#x4E8E;&#x8BED;&#x4E49;&#x5206;&#x5272;&#x7684;&#x50CF;&#x7D20;&#x7EA7;&#x9884;&#x6D4B;&#x5E94;&#x7528;&#x81F3;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x4EFB;&#x52A1;&#x4E2D;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#xFF0C;&#x8BED;&#x4E49;&#x5206;&#x5272;&#xFF0C;&#x5173;&#x952E;&#x70B9;&#x68C0;&#x6D4B;&#x7B49;&#x51E0;&#x79CD;&#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x7CC5;&#x5408;&#x5230;&#x4E00;&#x4E2A;&#x6A21;&#x578B;&#x4E2D;&#x3002;&#x4E00;&#x4E9B;&#x5DE5;&#x4F5C;&#x5982; Dense-Box&#xFF0C;UnitBox &#x66FE;&#x5229;&#x7528;&#x57FA;&#x4E8E; FCN-based &#x7684;&#x6846;&#x67B6;&#x8FDB;&#x884C;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x3002;&#x4F46;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x5728;&#x67D0;&#x4E00;&#x5C42;&#x7684; feature map &#x4E0A;&#x76F4;&#x63A5;&#x9884;&#x6D4B;4D&#x5750;&#x6807;&#x53CA;&#x7C7B;&#x522B;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x5DE6;&#x4FA7;&#x6240;&#x793A;&#xFF0C;4D&#x5411;&#x91CF;&#x8868;&#x793A;&#x4E86;&#x8FB9;&#x6846;&#x7684;&#x8FB9;&#x8DDD;&#x79BB;&#x8BE5;&#x50CF;&#x7D20;&#x70B9;&#x7684;&#x504F;&#x79FB;&#x3002;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x4E0E;&#x8BED;&#x4E49;&#x5206;&#x5272;&#x7684;&#x5168;&#x5377;&#x79EF;&#x76F8;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x6BCF;&#x4E2A;&#x4F4D;&#x7F6E;&#x9700;&#x8981;&#x56DE;&#x5F52;&#x4E00;&#x4E2A;&#x8FDE;&#x7EED;&#x7684;4D&#x5411;&#x91CF;&#x3002;&#x4E3A;&#x4E86;&#x5904;&#x7406;&#x4E0D;&#x540C;&#x5927;&#x5C0F;&#x7684;&#x8FB9;&#x6846;&#xFF0C;DenseBox &#x5C06;&#x8BAD;&#x7EC3;&#x56FE;&#x7247;&#x8C03;&#x6574;&#x4E3A;&#x56FA;&#x5B9A;&#x5C3A;&#x5BF8;&#x3002;DenseBox &#x5FC5;&#x987B;&#x8981;&#x5728;&#x56FE;&#x50CF;&#x91D1;&#x5B57;&#x5854;&#x4E0A;&#x8FDB;&#x884C;&#x68C0;&#x6D4B;&#xFF0C;&#x8FDD;&#x53CD;&#x4E86;&#x5168;&#x5377;&#x79EF;&#x5BF9;&#x6240;&#x6709;&#x5377;&#x79EF;&#x53EA;&#x8BA1;&#x7B97;&#x4E00;&#x6B21;&#x7684;&#x601D;&#x60F3;&#x3002;&#x800C;&#x4E14;&#xFF0C;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x5927;&#x591A;&#x5E94;&#x7528;&#x5728;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x7684;&#x7279;&#x6B8A;&#x573A;&#x666F;&#x4E2D;&#xFF0C;&#x6BD4;&#x5982;&#x6587;&#x672C;&#x68C0;&#x6D4B;&#x6216;&#x8005;&#x4EBA;&#x8138;&#x68C0;&#x6D4B;&#x3002;&#x5982;&#x4E0B;&#x56FE;&#x53F3;&#x4FA7;&#x6240;&#x793A;&#xFF0C;&#x8F83;&#x591A;&#x7684;&#x91CD;&#x53E0;&#x6846;&#x9020;&#x6210;&#x4E86;&#x6A21;&#x7CCA;&#xFF0C;&#x65E0;&#x6CD5;&#x786E;&#x5B9A;&#x91CD;&#x53E0;&#x533A;&#x57DF;&#x5E94;&#x8BE5;&#x5BF9;&#x54EA;&#x4E2A;&#x6846;&#x8FDB;&#x884C;&#x56DE;&#x5F52;&#x3002;&#x672C;&#x6587;&#x8BC1;&#x660E;&#x901A;&#x8FC7;FPN&#x7ED3;&#x6784;&#x53EF;&#x4EE5;&#x6D88;&#x9664;&#x8FD9;&#x79CD;&#x6A21;&#x7CCA;&#x3002;&#x672C;&#x6587;&#x53D1;&#x73B0;&#x5728;&#x8DDD;&#x79BB;&#x76EE;&#x6807;&#x4E2D;&#x5FC3;&#x8F83;&#x8FDC;&#x7684;&#x4F4D;&#x7F6E;&#x4F1A;&#x9884;&#x6D4B;&#x4E00;&#x5B9A;&#x6570;&#x91CF;&#x4F4E;&#x8D28;&#x91CF;&#x7684;&#x8FB9;&#x754C;&#x6846;&#x3002;&#x4E3A;&#x4E86;&#x6253;&#x538B;&#x8FD9;&#x4E9B;&#x8FB9;&#x6846;&#xFF0C;&#x672C;&#x6587;&#x8BBE;&#x8BA1;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5206;&#x652F;&#x201D;center-ness&#x201D;&#xFF0C;&#x7528;&#x4E8E;&#x9884;&#x6D4B;&#x4E00;&#x4E2A;&#x50CF;&#x7D20;&#x4E0E;&#x5BF9;&#x5E94;&#x8FB9;&#x6846;&#x4E2D;&#x5FC3;&#x7684;&#x504F;&#x5DEE;&#x3002;&#x6240;&#x5F97;&#x7684;&#x5206;&#x6570;&#x7528;&#x4E8E; down-weight &#x4F4E;&#x8D28;&#x91CF;&#x7684;&#x68C0;&#x6D4B;&#x6846;&#xFF0C;&#x6700;&#x540E;&#x901A;&#x8FC7;NMS&#x5C06;&#x68C0;&#x6D4B;&#x7ED3;&#x679C;&#x8FDB;&#x884C;&#x878D;&#x5408;&#x3002;</p>
+<p><img src="/2019/08/09/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;10/1.png" alt></p>
+<p>&#x8FD9;&#x4E2A;&#x65B0;&#x7684;&#x68C0;&#x6D4B;&#x6846;&#x67B6;&#x62E5;&#x6709;&#x4EE5;&#x4E0B;&#x4F18;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>&#x68C0;&#x6D4B;&#x4EFB;&#x52A1;&#x73B0;&#x5728;&#x4E0E;&#x8BB8;&#x591A;&#x5176;&#x4ED6; FCN &#x53EF;&#x89E3;&#x51B3;&#x7684;&#x4EFB;&#x52A1;&#xFF08;&#x4F8B;&#x5982;&#x8BED;&#x4E49;&#x5206;&#x5272;&#xFF09;&#x76F8;&#x7EDF;&#x4E00;&#xFF0C;&#x4ECE;&#x800C;&#x53EF;&#x4EE5;&#x66F4;&#x8F7B;&#x677E;&#x5730;&#x91CD;&#x590D;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x4EFB;&#x52A1;&#x4E2D;&#x7684;&#x60F3;&#x6CD5;&#x3002;</li>
+<li>&#x68C0;&#x6D4B;&#x53D8;&#x4E3A; proposal free &#x548C; anchor free&#xFF0C;&#x8FD9;&#x663E;&#x8457;&#x51CF;&#x5C11;&#x4E86;&#x8D85;&#x53C2;&#x6570;&#x7684;&#x6570;&#x91CF;&#x3002; &#x8D85;&#x53C2;&#x6570;&#x901A;&#x5E38;&#x9700;&#x8981;&#x542F;&#x53D1;&#x5F0F;&#x8C03;&#x6574;&#xFF0C;&#x5E76;&#x4E14;&#x6D89;&#x53CA;&#x8BB8;&#x591A;&#x6280;&#x5DE7;&#x624D;&#x80FD;&#x83B7;&#x5F97;&#x826F;&#x597D;&#x7684;&#x6027;&#x80FD;&#x3002; &#x800C;&#x6211;&#x4EEC;&#x7684;&#x65B0;&#x68C0;&#x6D4B;&#x6846;&#x67B6;&#x4F7F;&#x68C0;&#x6D4B;&#x5668;&#xFF0C;&#x7279;&#x522B;&#x662F;&#x4F7F;&#x5B83;&#x7684; training &#x9636;&#x6BB5;&#x53D8;&#x5F97;&#x76F8;&#x5F53;&#x7B80;&#x5355;&#x3002; &#x6B64;&#x5916;&#xFF0C;&#x901A;&#x8FC7;&#x6D88;&#x9664; anchor box&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x65B0;&#x63A2;&#x6D4B;&#x5668;&#x5B8C;&#x5168;&#x907F;&#x514D;&#x4E86;&#x590D;&#x6742;&#x7684; IOU &#x8BA1;&#x7B97;&#x4EE5;&#x53CA;&#x8BAD;&#x7EC3;&#x671F;&#x95F4; anchor box &#x548C; GT box &#x4E4B;&#x95F4;&#x7684;&#x5339;&#x914D;&#xFF0C;&#x5E76;&#x5C06;&#x603B;&#x7684;&#x8BAD;&#x7EC3;&#x5185;&#x5B58;&#x5360;&#x7528;(training memory footprint)&#x51CF;&#x5C11;&#x4E86;2&#x500D;&#x5DE6;&#x53F3;&#x3002;</li>
+<li>&#x6211;&#x4EEC;&#x5728; One-Stage Detectors &#x4E2D;&#x5B9E;&#x73B0;&#x4E86; SOTA &#x7684;&#x7ED3;&#x679C;&#x3002; &#x6211;&#x4EEC;&#x7684;&#x5B9E;&#x9A8C;&#x8FD8;&#x8868;&#x660E;&#xFF0C;&#x672C;&#x6587;&#x6240;&#x63D0;&#x51FA;&#x7684; FCOS &#x53EF;&#x4EE5;&#x7528;&#x4F5C; Two-Stage Detectors &#x4E2D;&#x7684; RPN&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x6BD4;&#x57FA;&#x4E8E; anchor &#x7684; RPN &#x66F4;&#x597D;&#x7684;&#x6027;&#x80FD;&#x3002; &#x9274;&#x4E8E;&#x66F4;&#x7B80;&#x5355;&#x7684; anchor free Detectors &#x5177;&#x6709;&#x66F4;&#x597D;&#x7684;&#x6027;&#x80FD;&#xFF0C;&#x6211;&#x4EEC;&#x9F13;&#x52B1;&#x5927;&#x5BB6;&#x91CD;&#x65B0;&#x8003;&#x8651;&#x7269;&#x4F53;&#x68C0;&#x6D4B;&#x4E2D; anchor &#x7684;&#x5FC5;&#x8981;&#x6027;&#xFF0C;&#x867D;&#x7136;&#x76EE;&#x524D;&#x8FD9;&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x68C0;&#x6D4B;&#x4EFB;&#x52A1;&#x7684;&#x4E8B;&#x5B9E;&#x6807;&#x51C6;(defacto standard for detection)&#x3002;</li>
+<li>&#x6211;&#x4EEC;&#x6240;&#x63D0;&#x51FA;&#x7684; detector &#x53EA;&#x9700;&#x505A;&#x5F88;&#x5C0F;&#x7684;&#x4FEE;&#x6539;&#x5C31;&#x53EF;&#x4EE5;&#x7ACB;&#x5373;&#x6269;&#x5C55;&#x5230;&#x5176;&#x4ED6;&#x89C6;&#x89C9;&#x4EFB;&#x52A1;&#xFF0C;&#x5305;&#x62EC;&#x5B9E;&#x4F8B;&#x5206;&#x5272;&#x548C;&#x5173;&#x952E;&#x70B9;&#x68C0;&#x6D4B;&#x3002; &#x6211;&#x4EEC;&#x76F8;&#x4FE1;&#x8FD9;&#x79CD;&#x65B0;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x6210;&#x4E3A;&#x8BB8;&#x591A;&#x5B9E;&#x4F8B;&#x7EA7;&#x9884;&#x6D4B;&#x95EE;&#x9898;&#x7684;&#x65B0; baseline&#x3002;</li>
+</ul>
+<h1 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h1><ul>
+<li><p><strong>Anchor-based Detectors</strong></p>
+</li>
+<li><p><strong>Anchor-free Detectors</strong></p>
+</li>
+</ul>
+<h1 id="Our-Approach"><a href="#Our-Approach" class="headerlink" title="Our Approach"></a>Our Approach</h1><p>&#x5728;&#x672C;&#x8282;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x9996;&#x5148;&#x4EE5;&#x9010;&#x50CF;&#x7D20;&#x9884;&#x6D4B;&#x7684;&#x65B9;&#x5F0F;&#x91CD;&#x65B0;&#x6784;&#x9020;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x4EFB;&#x52A1;&#x3002; &#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x6211;&#x4EEC;&#x5C55;&#x793A;&#x4E86;&#x6211;&#x4EEC;&#x5982;&#x4F55;&#x5229;&#x7528;&#x591A;&#x7EA7;&#x9884;&#x6D4B;(multi-level prediction)&#x6765;&#x6539;&#x5584;&#x53EC;&#x56DE;&#x7387;&#x5E76;&#x89E3;&#x51B3;&#x8BAD;&#x7EC3;&#x4E2D;&#x91CD;&#x53E0;&#x8FB9;&#x754C;&#x6846;&#x5BFC;&#x81F4;&#x7684;&#x6A21;&#x7CCA;&#x6027;&#x3002; &#x6700;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x5C55;&#x793A;&#x4E86;&#x6211;&#x4EEC;&#x63D0;&#x51FA;&#x7684; &#x201C;center-ness&#x201D; &#x5206;&#x652F;&#xFF0C;&#x5B83;&#x6709;&#x52A9;&#x4E8E;&#x6291;&#x5236;&#x4F4E;&#x8D28;&#x91CF;&#x7684;&#x68C0;&#x6D4B;&#x8FB9;&#x754C;&#x6846;&#x5E76;&#x5927;&#x5E45;&#x63D0;&#x9AD8;&#x6574;&#x4F53;&#x6027;&#x80FD;.</p>
+<h2 id="Fully-Convolutional-One-Stage-Object-Detector"><a href="#Fully-Convolutional-One-Stage-Object-Detector" class="headerlink" title="Fully Convolutional One-Stage Object Detector"></a>Fully Convolutional One-Stage Object Detector</h2><p>&#x8BBE;$F_i \in R^{H&#xD7;W&#xD7;C}$&#x662F; backbone CNN &#x7B2C; $i$ &#x5C42;&#x7684; feature maps&#xFF0C;$s$ &#x4E3A;&#x8BE5;&#x5C42;&#x4E4B;&#x524D;&#x7684;&#x603B;&#x6B65;&#x957F;&#x3002;&#x8F93;&#x5165;&#x56FE;&#x7247;&#x7684;&#x771F;&#x5B9E;&#x6846;&#x5B9A;&#x4E49;&#x4E3A;$\lbrace B_i \rbrace$&#xFF0C;$B_i=(x_0^{(i)},y_0^{(i)},x_1^{(i)},y_1^{(i)},c^{(i)})\in R^4&#xD7;\lbrace1,2&#x2026;C\rbrace$&#x3002;&#x5176;&#x4E2D;$(x_0^{(i)},y_0^{(i)})$&#x548C;$(x_1^{(i)},y_1^{(i)})$&#x5206;&#x522B;&#x4E3A;&#x8FB9;&#x754C;&#x6846;&#x5DE6;&#x4E0A;&#x89D2;&#x70B9;&#x548C;&#x53F3;&#x4E0B;&#x89D2;&#x70B9;&#x7684;&#x5750;&#x6807;&#xFF0C;$c^{(i)}$&#x4E3A;&#x8FB9;&#x754C;&#x6846;&#x5185;&#x7684;object&#x7684;&#x7C7B;&#x522B;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E; feature maps $F_i$ &#x4E0A;&#x7684;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x4F4D;&#x7F6E;$(x,y)$&#xFF0C;&#x6211;&#x4EEC;&#x90FD;&#x53EF;&#x4EE5;&#x5C06;&#x5176;&#x6620;&#x5C04;&#x56DE;&#x8F93;&#x5165;&#x56FE;&#x50CF;&#x7684;&#x5750;&#x6807;$(\lfloor\frac{s}{2}\rfloor+xs,\lfloor\frac{s}{2}\rfloor+ys)$&#xFF0C;&#x5B83;&#x5DEE;&#x4E0D;&#x591A;&#x521A;&#x597D;&#x4F4D;&#x4E8E;&#x4F4D;&#x7F6E;$(x,y)$&#x7684;&#x611F;&#x53D7;&#x91CE;&#x4E2D;&#x5FC3;&#x9644;&#x8FD1;&#x3002;&#x4E0E; anchor based detectors &#x5C06;&#x8F93;&#x5165;&#x56FE;&#x50CF;&#x4E0A;&#x7684;&#x4F4D;&#x7F6E;&#x89C6;&#x4E3A; anchor box &#x7684;&#x4E2D;&#x5FC3;&#x5E76;&#x5BF9;&#x8FD9;&#x4E9B; anchor box &#x7684;&#x76EE;&#x6807;&#x8FB9;&#x754C;&#x6846;&#x8FDB;&#x884C;&#x56DE;&#x5F52;&#x4E0D;&#x540C;&#xFF0C;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x56DE;&#x5F52;&#x6BCF;&#x4E2A;&#x4F4D;&#x7F6E;&#x7684;&#x76EE;&#x6807;&#x8FB9;&#x754C;&#x6846;&#x3002; &#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x6211;&#x4EEC;&#x7684; Detector &#x76F4;&#x63A5;&#x5C06; location &#x89C6;&#x4E3A;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#x800C;&#x4E0D;&#x662F;&#x5C06; anchor box &#x89C6;&#x4E3A;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#xFF0C;&#x8FD9;&#x4E0E;&#x7528;&#x4E8E;&#x8BED;&#x4E49;&#x5206;&#x5272;&#x7684;FCN&#x76F8;&#x540C;&#x3002;</p>
+<p>&#x5177;&#x4F53;&#x800C;&#x8A00;&#xFF0C;&#x5982;&#x679C;&#x4F4D;&#x7F6E;$(x,y)$&#x843D;&#x5165;&#x5230;&#x4EFB;&#x4F55; GT Box &#x5185;&#x90E8;, &#x90A3;&#x4E48;&#x4E45;&#x5C06;&#x5176;&#x89C6;&#x4E3A;&#x6B63;&#x6837;&#x672C;, &#x5E76;&#x4E14;&#x8BE5;&#x4F4D;&#x7F6E;&#x7684;&#x7C7B;&#x6807;&#x7B7E;$c^\star$&#x5C31;&#x662F;$B_i$&#x7684;&#x7C7B;&#x6807;&#x7B7E;&#xFF0C;&#x5426;&#x5219;&#x5B83;&#x5C31;&#x662F;&#x8D1F;&#x6837;&#x672C;&#x5E76;&#x4E14;$c^\star=0$&#xFF08;&#x80CC;&#x666F;&#x7C7B;&#xFF09;&#x3002;&#x9664;&#x4E86;&#x7528;&#x4E8E;&#x5206;&#x7C7B;&#x7684;&#x6807;&#x7B7E;&#x4E4B;&#x5916;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x6709;&#x4E00;&#x4E2A; 4D &#x7684;&#x5B9E;&#x6570;&#x5411;&#x91CF;$t^\star=(l^\star,t^\star,r^\star,b^\star)$, &#x8BE5;&#x5411;&#x91CF;&#x662F;&#x6BCF;&#x4E2A;&#x6837;&#x672C;&#x7684;&#x56DE;&#x5F52;&#x76EE;&#x6807;&#x3002;&#x8FD9;&#x91CC;$l^\star,t^\star,r^\star,b^\star$&#x662F;&#x4ECE; location &#x5230; bbox &#x56DB;&#x6761;&#x8FB9;&#x7684;&#x8DDD;&#x79BB;&#xFF0C;&#x5982;&#x56FE;1&#xFF08;&#x5DE6;&#xFF09;&#x6240;&#x793A;&#x3002;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x4F4D;&#x7F6E;&#x5C5E;&#x4E8E;&#x591A;&#x4E2A;&#x8FB9;&#x754C;&#x6846;&#xFF0C;&#x5219;&#x4F1A;&#x5C06;&#x5176;&#x89C6;&#x4E3A;&#x6A21;&#x7CCA;&#x6837;&#x672C;&#x3002;&#x73B0;&#x5728;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9009;&#x62E9;&#x5177;&#x6709;&#x6700;&#x5C0F;&#x9762;&#x79EF;&#x7684;&#x8FB9;&#x754C;&#x6846;&#x4F5C;&#x4E3A;&#x5176;&#x56DE;&#x5F52;&#x76EE;&#x6807;(&#x6700;&#x7B80;&#x5355;&#x7684;&#x7B56;&#x7565;)&#x3002; &#x5728;&#x4E0B;&#x4E00;&#x8282;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5C06; &#x5C55;&#x793A;&#x901A;&#x8FC7;&#x591A;&#x7EA7;&#x9884;&#x6D4B;&#xFF0C;&#x53EF;&#x4EE5;&#x663E;&#x8457;&#x51CF;&#x5C11;&#x6A21;&#x7CCA;&#x6837;&#x672C;&#x7684;&#x6570;&#x91CF;&#x3002; &#x5F62;&#x5F0F;&#x4E0A;&#xFF0C;&#x5982;&#x679C;&#x4F4D;&#x7F6E;$(x,y)$&#x4E0E;&#x8FB9;&#x754C;&#x6846;$B_i$&#x76F8;&#x5173;&#x8054;&#xFF0C;&#x5219;&#x8BE5;&#x4F4D;&#x7F6E;&#x7684;&#x8BAD;&#x7EC3;&#x56DE;&#x5F52;&#x76EE;&#x6807;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4E3A;:</p>
+<script type="math/tex; mode=display">
+\left \{
+  \begin{array}{lr}
+    l^\star=x-x_0^{(i)}, & t^\star=y-Y_0^{(i)} \\
+    r^\star=x_1^{(i)}-x, & b^\star=y_1^{(i)}-y
+  \end{array}
+\right.</script><p>&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;FCOS &#x53EF;&#x4EE5;&#x5229;&#x7528;&#x5C3D;&#x53EF;&#x80FD;&#x591A;&#x7684;&#x524D;&#x666F;&#x6837;&#x672C;&#x6765;&#x8BAD;&#x7EC3;&#x56DE;&#x5F52;&#x91CF;&#x3002;(GT box &#x5185;&#x7684;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x70B9;&#x90FD;&#x662F;&#x6B63;&#x6837;&#x672C;) &#x5B83;&#x4E0E;&#x57FA;&#x4E8E; anchor &#x7684;&#x63A2;&#x6D4B;&#x5668;&#x4E0D;&#x540C;&#xFF0C;anchor-based detectors &#x4EC5;&#x4EC5;&#x5C06;&#x4E0E; GT box &#x5177;&#x6709;&#x8DB3;&#x591F; IOU &#x7684;anchor box &#x4F5C;&#x4E3A;&#x6B63;&#x6837;&#x672C;&#x3002;&#x6211;&#x4EEC;&#x8BA4;&#x4E3A;&#xFF0C;&#x8FD9;&#x53EF;&#x80FD;&#x662F; FCOS &#x4F18;&#x4E8E; anchor-based &#x7684;&#x539F;&#x56E0;&#x4E4B;&#x4E00;&#x3002;</p>
+<p><strong>Network Outputs</strong><br>&#x5BF9;&#x5E94;&#x4E8E; training targets&#xFF0C;&#x6211;&#x4EEC;&#x7F51;&#x7EDC;&#x7684;&#x6700;&#x540E;&#x4E00;&#x5C42;&#x4F1A;&#x9884;&#x6D4B;&#x7528;&#x4E8E;&#x5206;&#x7C7B;&#x7684; 80D &#x5411;&#x91CF;$\vec{p}$&#x548C; bounding box &#x5750;&#x6807; 4D &#x5411;&#x91CF;$\vec{t}=(l&#xFF0C;t&#xFF0C;r&#xFF0C;b)$&#x3002;&#x8DDF;&#x968F; R-CNN &#x7684;&#x505A;&#x6CD5;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x662F;&#x8BAD;&#x7EC3;&#x591A;&#x7C7B;&#x5206;&#x7C7B;&#x5668;&#xFF0C;&#x800C;&#x662F;&#x8BAD;&#x7EC3; C &#x4E2A;&#x4E8C;&#x5143;&#x5206;&#x7C7B;&#x5668;&#x3002;&#x4E0E; R-CNN &#x7C7B;&#x4F3C;&#xFF0C;&#x6211;&#x4EEC;&#x5728; backbone &#x7F51;&#x7EDC;&#x7684;&#x7279;&#x5F81;&#x56FE;&#x8C31;&#x4E4B;&#x540E;&#x5206;&#x522B;&#x4E3A;&#x5206;&#x7C7B;&#x548C;&#x56DE;&#x5F52;&#x5206;&#x652F;&#x6DFB;&#x52A0;&#x4E86; &#x56DB;&#x4E2A;&#x5377;&#x79EF;&#x5C42;&#x3002;&#x6B64;&#x5916;&#xFF0C;&#x7531;&#x4E8E;&#x56DE;&#x5F52;&#x76EE;&#x6807;&#x603B;&#x662F;&#x6B63;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;$exp(x)$&#x5C06;&#x4EFB;&#x610F;&#x7684;&#x5B9E;&#x6570;&#x90FD;&#x6620;&#x5C04;&#x5230;&#x56DE;&#x5F52;&#x5206;&#x652F;&#x9876;&#x90E8;&#x7684;$(0,\infty)$&#x3002;&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;FCOS &#x7684;&#x7F51;&#x7EDC;&#x8F93;&#x51FA;&#x53D8;&#x91CF;&#x6BD4;&#x5E38;&#x7528;&#x7684; anchor based detectors &#x5C11; 9 &#x500D;&#xFF0C;&#x5176;&#x4E2D;&#x6BCF;&#x4E2A;&#x4F4D;&#x7F6E;&#x6709; 9 &#x4E2A; anchor boxes&#x3002;</p>
+<p><strong>Loss Function</strong><br>&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x6211;&#x4EEC;&#x7684;&#x8BAD;&#x7EC3;&#x635F;&#x5931;&#x51FD;&#x6570;&#x5982;&#x4E0B;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+L(\lbrace p_{x,y}\rbrace,\lbrace t_{x,y}\rbrace)=\frac{1}{N_{pos}}\sum_{x,y}L_cls(p_{x,y},c_{x,y}^\star)+\frac{\lambda}{N_pos}\sum_{x,y}I_{\lbrace c_{x,y}^\star >0\rbrace}L_{reg}(t_{x,y},t_{x,y}^\star)</script><p>&#x5176;&#x4E2D;$L_{cls}$&#x4E3A; focal loss&#xFF0C;$L_{reg}$&#x4E3A; IOU loss&#x3002;$N_{pos}$&#x4E3A;&#x6B63;&#x6837;&#x672C;&#x6570;&#xFF0C;$\lambda$&#x5728;&#x672C;&#x6587;&#x4E2D;&#x4E3A;1&#x6765;&#x5E73;&#x8861;$L_{reg}$&#x7684;&#x6743;&#x91CD;&#x3002;&#x6C42;&#x548C;&#x662F;&#x901A;&#x8FC7;&#x5BF9;feature maps $F_i$ &#x4E0A;&#x7684;&#x6240;&#x6709;&#x70B9;&#x8FDB;&#x884C;&#x8BA1;&#x7B97;&#x5F97;&#x5230;&#x7684;&#x3002;$I_{\lbrace c_{x,y}^\star &gt;0\rbrace}$&#x662F;&#x4E00;&#x4E2A;indicator function&#xFF0C;&#x5F53;$c_i^\star&gt;0$&#x65F6;&#x4E3A;1&#xFF0C;&#x5426;&#x5219;&#x4E3A;0&#x3002;</p>
+<p><strong>Inference</strong><br>FCOS &#x7684; Inference &#x5F88;&#x7B80;&#x5355;&#x3002;&#x7ED9;&#x5B9A;&#x8F93;&#x5165;&#x56FE;&#x50CF;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5176;&#x653E;&#x5165;&#x7F51;&#x7EDC;&#x8FDB;&#x884C;&#x4E00;&#x6B21; forward &#x8BA1;&#x7B97;, &#x5E76;&#x83B7;&#x5F97; feature map $F_i$ &#x4E0A;&#x7684;&#x6BCF;&#x4E2A;&#x4F4D;&#x7F6E;&#x7684;&#x5206;&#x7C7B;&#x5206;&#x6570;$p_{x,y}$&#x548C;&#x56DE;&#x5F52;&#x9884;&#x6D4B;&#x503C;$t_{x,y}$&#x3002; &#x8DDF;&#x968F; R-CNN &#x7684;&#x8BBE;&#x5B9A;&#xFF0C;&#x6211;&#x4EEC;&#x9009;&#x62E9;$p_{x,y}&gt;0.0$&#x7684;&#x4F4D;&#x7F6E;&#x4F5C;&#x4E3A;&#x6B63;&#x6837;&#x672C;&#x5E76;&#x901A;&#x8FC7;&#x4E0A;&#x8FF0;&#x516C;&#x5F0F;&#x6765;&#x83B7;&#x5F97;&#x9884;&#x6D4B;&#x7684;&#x8FB9;&#x754C;&#x6846;&#x3002;</p>
+<h2 id="Multi-level-Prediction-with-FPN-for-FCOS"><a href="#Multi-level-Prediction-with-FPN-for-FCOS" class="headerlink" title="Multi-level Prediction with FPN for FCOS"></a>Multi-level Prediction with FPN for FCOS</h2><p>&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x5C55;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x901A;&#x8FC7; FPN &#x7684;&#x591A;&#x7EA7;&#x9884;&#x6D4B;&#x6765;&#x89E3;&#x51B3;&#x6240;&#x63D0;&#x51FA;&#x7684; FCOS &#x5B58;&#x5728;&#x7684;&#x4E24;&#x4E2A;&#x53EF;&#x80FD;&#x95EE;&#x9898;&#x3002;</p>
+<ol>
+<li>CNN &#x4E2D;&#x6700;&#x540E;&#x7684; feature maps &#x7684;&#x5927;&#x6B65;&#x5E45;&#xFF08;&#x4F8B;&#x5982;&#xFF0C;16&#xFF09;&#x53EF;&#x80FD;&#x56DE;&#x5BFC;&#x81F4;&#x76F8;&#x5BF9;&#x8F83;&#x4F4E;&#x7684; best possible recall (BPR)&#x3002;&#x5BF9;&#x4E8E;&#x57FA;&#x4E8E; anchor &#x7684;&#x68C0;&#x6D4B;&#x5668;&#xFF0C;&#x7531;&#x4E8E;&#x5927;&#x6B65;&#x5E45;&#x5BFC;&#x81F4;&#x7684;&#x4F4E;&#x53EC;&#x56DE;&#x7387;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x964D;&#x4F4E; positive anchor boxes &#x6240;&#x9700;&#x7684; IOU &#x5206;&#x6570;&#x6765;&#x5728;&#x4E00;&#x5B9A;&#x7A0B;&#x5EA6;&#x4E0A;&#x5F97;&#x5230;&#x7F13;&#x89E3;&#x3002;&#x800C;&#x5BF9;&#x4E8E; FCOS&#xFF0C;&#x4E4D;&#x4E00;&#x770B;&#x53EF;&#x80FD;&#x8BA4;&#x4E3A;&#x5176; BPR &#x4F1A;&#x8FDC;&#x4F4E;&#x4E8E;&#x57FA;&#x4E8E; anchor &#x7684;&#x68C0;&#x6D4B;&#x5668;&#xFF0C;&#x56E0;&#x4E3A; &#x7F51;&#x7EDC;&#x65E0;&#x6CD5;&#x53EC;&#x56DE;&#x7531;&#x4E8E;&#x5927;&#x6B65;&#x5E45;&#x800C;&#x6700;&#x7EC8;&#x5728; feature map &#x4E0A;&#x6CA1;&#x6709;&#x4F4D;&#x7F6E;&#x7F16;&#x7801;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x51ED;&#x7ECF;&#x9A8C;&#x8BC1;&#x660E;&#xFF0C;&#x5373;&#x4F7F;&#x6B65;&#x5E45;&#x5F88;&#x5927;&#xFF0C;&#x57FA;&#x4E8E; FCN &#x7684; FCOS &#x4ECD;&#x7136;&#x80FD;&#x591F;&#x4EA7;&#x751F;&#x826F;&#x597D;&#x7684;BPR&#xFF0C;&#x5B83;&#x751A;&#x81F3;&#x53EF;&#x4EE5;&#x6BD4;&#x5B98;&#x65B9;&#x5B9E;&#x73B0;&#x7684; Detectron &#x4E2D;&#x57FA;&#x4E8E; anchor &#x7684;&#x68C0;&#x6D4B;&#x5668; RetinaNet &#x7684; BPR &#x66F4;&#x597D;&#x3002;&#xFF08;&#x53C2;&#x89C1;&#x8868;1&#xFF09;&#x3002;&#x56E0;&#x6B64;&#xFF0C;BPR &#x5B9E;&#x9645;&#x4E0A;&#x4E0D;&#x662F; FCOS &#x65E0;&#x6CD5;&#x89E3;&#x51B3;&#x7684;&#x95EE;&#x9898;&#x3002;&#x6B64;&#x5916;&#xFF0C;&#x5229;&#x7528;&#x591A;&#x7EA7; FPN &#x9884;&#x6D4B;&#xFF0C;&#x53EF;&#x4EE5;&#x8FDB;&#x4E00;&#x6B65;&#x6539;&#x8FDB; BPR &#x4EE5;&#x5339;&#x914D;&#x57FA;&#x4E8E; anchor &#x7684; RetinaNet &#x6700;&#x4F73;BPR&#x3002;</li>
+<li>&#x4E0E; GT box &#x7684;&#x591A;&#x4E2A;&#x91CD;&#x53E0;&#x4F1A;&#x5BFC;&#x81F4;&#x5728;&#x8BAD;&#x7EC3;&#x671F;&#x95F4;&#x4EA7;&#x751F;&#x96BE;&#x4EE5;&#x7406;&#x89E3;&#x7684;&#x6A21;&#x7CCA;&#x6027;&#xFF0C;&#x5373;&#x54EA;&#x4E2A;&#x8FB9;&#x754C;&#x6846;&#x5E94;&#x8BE5;&#x5728;&#x91CD;&#x53E0;&#x4F4D;&#x7F6E;&#x8FDB;&#x884C;&#x56DE;&#x5F52;&#xFF1F;&#x8FD9;&#x79CD;&#x6A21;&#x7CCA;&#x6027;&#x5BFC;&#x81F4;&#x57FA;&#x4E8E; FCN &#x7684;&#x68C0;&#x6D4B;&#x5668;&#x7684;&#x6027;&#x80FD;&#x4E0B;&#x964D;&#x3002;&#x5728;&#x672C;&#x6587;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x8868;&#x660E;&#xFF0C;&#x4F7F;&#x7528;&#x591A;&#x7EA7;&#x9884;&#x6D4B;&#x53EF;&#x4EE5;&#x6781;&#x5927;&#x5730;&#x89E3;&#x51B3;&#x6A21;&#x7CCA;&#x6027;&#xFF0C;&#x5E76;&#x4E14;&#x4E0E;&#x57FA;&#x4E8E; anchor &#x7684;&#x68C0;&#x6D4B;&#x5668;&#x76F8;&#x6BD4;&#xFF0C;&#x57FA;&#x4E8E; FCN &#x7684;&#x68C0;&#x6D4B;&#x5668;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x76F8;&#x540C;&#x7684;&#xFF0C;&#x6709;&#x65F6;&#x751A;&#x81F3;&#x66F4;&#x597D;&#x7684;&#x6027;&#x80FD;&#x3002;</li>
+</ol>
+<p>&#x6211;&#x4EEC;&#x5728;&#x4E0D;&#x540C;&#x7EA7;&#x522B;&#x7684;&#x7279;&#x5F81;&#x56FE;&#x4E0A;&#x68C0;&#x6D4B;&#x5230;&#x4E0D;&#x540C;&#x5927;&#x5C0F;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x5177;&#x4F53;&#x6765;&#x8BF4;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x5B9A;&#x4E49;&#x4E3A; $\lbrace P_3,P_4,P_5,P_6,P_7\rbrace$ &#x7684;&#x4E94;&#x4E2A;&#x7EA7;&#x522B;&#x7684; feature map&#x3002;$P_3$&#xFF0C;$P_4$ &#x548C; $P_5$ &#x7531; backbone CNN &#x7684;&#x7279;&#x5F81;&#x56FE; $C_3$&#xFF0C;$C_4$ &#x548C; $C_5$ &#x548C;&#x5177;&#x6709;&#x6A2A;&#x5411;&#x8FDE;&#x63A5;&#x7684;1&#xD7;1&#x5377;&#x79EF;&#x5C42;&#x4EA7;&#x751F;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;. $P_6$ &#x548C; $P_7$ &#x901A;&#x8FC7;&#x5206;&#x522B;&#x5728; $P_5$ &#x548C; $P_6$ &#x4E0A;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x6B65;&#x957F;&#x4E3A; 2 &#x7684;&#x5377;&#x79EF;&#x5C42;&#x4EA7;&#x751F;. &#x6700;&#x7EC8;&#xFF0C;&#x7279;&#x5F81;&#x5C42;&#x7EA7; $P_3$&#xFF0C;$P_4$&#xFF0C;$P_5$&#xFF0C;$P_6$ &#x548C; $P_7$ &#x5177;&#x6709;&#x7684;&#x6B65;&#x5E45;&#x5206;&#x522B;&#x4E3A; 8,16,32,64&#x548C;128&#x3002;</p>
+<p><img src="/2019/08/09/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;10/2.png" alt></p>
+<p>&#x4E0E; anchor based detectors &#x5C06;&#x4E0D;&#x540C;&#x5927;&#x5C0F;&#x7684; anchor &#x5206;&#x914D;&#x7ED9;&#x4E0D;&#x540C;&#x7684;&#x7279;&#x5F81;&#x7EA7;&#x522B;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x662F;&#xFF0C;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x9650;&#x5236;&#x8FB9;&#x754C;&#x6846;&#x56DE;&#x5F52;&#x7684;&#x8303;&#x56F4;&#x3002; &#x66F4;&#x5177;&#x4F53;&#x5730;&#x8BF4;&#xFF0C;&#x6211;&#x4EEC;&#x9996;&#x5148;&#x8BA1;&#x7B97;&#x6240;&#x6709;&#x7279;&#x5F81;&#x7EA7;&#x522B;&#x4E0A;&#x6BCF;&#x4E2A;&#x4F4D;&#x7F6E;&#x7684;&#x56DE;&#x5F52;&#x76EE;&#x6807;$l^\star$&#xFF0C;$t^\star$&#xFF0C;$r^\star$&#x548C;$b^\star$&#x3002;&#x5982;&#x679C;&#x4F4D;&#x7F6E;&#x6EE1;&#x8DB3; $max(l^\star,t^\star,r^\star,b^\star)&gt; m_i$&#x6216;$max(l^\star,t^\star,r^\star,b^\star)&lt; m_{i-1}$&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x5C06;&#x5176;&#x8BBE;&#x7F6E;&#x4E3A;&#x8D1F;&#x6837;&#x672C;&#x5E76;&#x4E14;&#x518D;&#x4E5F;&#x4E0D;&#x4F1A;&#x5BF9;&#x8BE5;&#x4F4D;&#x7F6E;&#x8FDB;&#x884C;&#x56DE;&#x5F52;&#x64CD;&#x4F5C;&#x3002;&#x8FD9;&#x91CC;&#x7684; $m_i$ &#x662F;&#x7279;&#x5F81;&#x5C42;&#x7EA7; $i$ &#x9700;&#x8981;&#x56DE;&#x5F52;&#x7684;&#x6700;&#x5927;&#x8DDD;&#x79BB;&#x3002;&#x5728;&#x672C;&#x6587;&#x4E2D;&#xFF0C;$m_2$&#xFF0C;$m_3$&#xFF0C;$m_4$&#xFF0C;$m_5$&#xFF0C;$m_6$&#x548C;$m_7$&#x5206;&#x522B;&#x8BBE;&#x7F6E;&#x4E3A;0,64,128,256,512&#x548C;$\infty$&#x3002; &#x7531;&#x4E8E; &#x5177;&#x6709;&#x4E0D;&#x540C;&#x5927;&#x5C0F;&#x7684;&#x5BF9;&#x8C61;&#x88AB;&#x5206;&#x914D;&#x7ED9;&#x4E0D;&#x540C;&#x7684;&#x7279;&#x5F81;&#x7EA7;&#x522B;(&#x8FD9;&#x91CC;&#x662F;&#x4E0E; FoveaBox &#x7684;&#x4E00;&#x5904;&#x91CD;&#x8981;&#x533A;&#x522B;) &#x5E76;&#x4E14; &#x5927;&#x591A;&#x6570;&#x91CD;&#x53E0;&#x53D1;&#x751F;&#x5728;&#x5177;&#x6709;&#x663E;&#x8457;&#x4E0D;&#x540C;&#x5927;&#x5C0F;&#x7684;&#x5BF9;&#x8C61;&#x4E4B;&#x95F4;&#xFF0C;&#x56E0;&#x6B64;&#x591A;&#x7EA7;&#x9884;&#x6D4B;&#x53EF;&#x4EE5;&#x5728;&#x5F88;&#x5927;&#x7A0B;&#x5EA6;&#x4E0A;&#x51CF;&#x8F7B;&#x4E0A;&#x8FF0;&#x6A21;&#x7CCA;&#x6027;&#x5E76;&#x4E14;&#x5C06;&#x57FA;&#x4E8E; FCN &#x7684;&#x68C0;&#x6D4B;&#x5668;&#x63D0;&#x5347;&#x5230;&#x4E0E;&#x57FA;&#x4E8E; anchor &#x7684;&#x68C0;&#x6D4B;&#x5668;&#x76F8;&#x540C;&#x7684;&#x68C0;&#x6D4B;&#x6027;&#x80FD;&#xFF0C;&#x5982;&#x6211;&#x4EEC;&#x540E;&#x9762;&#x7684;&#x5B9E;&#x9A8C;&#x6240;&#x793A;&#x3002;</p>
+<p>&#x6700;&#x540E;&#xFF0C;&#x8DDF;&#x968F; R-CNN &#x548C; Fast R-CNN &#x7684;&#x8BBE;&#x5B9A;&#xFF0C;&#x6211;&#x4EEC; &#x5171;&#x4EAB;&#x4E0D;&#x540C;&#x7279;&#x5F81;&#x7EA7;&#x522B;&#x4E4B;&#x95F4;&#x7684;&#x5934;&#x90E8;(&#x8FD9;&#x662F;&#x4E0E;&#x5176;&#x4ED6; Detector &#x7684;&#x4E0D;&#x540C;&#x4E4B;&#x5904;, &#x5176;&#x4ED6;&#x7684;&#x90FD;&#x662F;&#x6BCF;&#x4E2A;&#x7279;&#x5F81;&#x5C42;&#x7EA7;&#x72EC;&#x7ACB;&#x7684;&#x6267;&#x884C;&#x5206;&#x7C7B;&#x548C;&#x56DE;&#x5F52;)&#xFF0C;&#x8FD9;&#x6837;&#x4E0D;&#x4EC5;&#x4F7F;&#x68C0;&#x6D4B;&#x5668;&#x53C2;&#x6570;&#x9AD8;&#x6548;&#xFF0C;&#x800C;&#x4E14;&#x80FD;&#x591F;&#x63D0;&#x9AD8;&#x68C0;&#x6D4B;&#x6027;&#x80FD;&#x3002; &#x7136;&#x800C;&#xFF0C;&#x6211;&#x4EEC;&#x89C2;&#x5BDF;&#x5230;&#x4E0D;&#x540C;&#x7684;&#x7279;&#x5F81;&#x6C34;&#x5E73;&#x9700;&#x8981;&#x56DE;&#x5F52;&#x4E0D;&#x540C;&#x7684;&#x5C3A;&#x5BF8;&#x8303;&#x56F4;&#xFF08;&#x4F8B;&#x5982;&#xFF0C;$P_3$ &#x7684;&#x5C3A;&#x5BF8;&#x8303;&#x56F4;&#x662F; [0,64] &#x800C; $P_4$ &#x7684;&#x5C3A;&#x5BF8;&#x8303;&#x56F4;&#x662F; [64,128]&#xFF09;&#xFF0C;&#x56E0;&#x6B64; &#x5728;&#x4E0D;&#x540C;&#x7684;&#x7279;&#x5F81;&#x5C42;&#x4F7F;&#x7528;&#x76F8;&#x540C;&#x7684;&#x56DE;&#x5F52; heads &#x662F;&#x4E0D;&#x5408;&#x7406;&#x7684;&#x3002; &#x6545;&#x6B64;, &#x6211;&#x4EEC;&#x4E0D;&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x7684; $exp(x)$&#xFF0C;&#x800C;&#x662F;&#x4F7F;&#x7528;&#x5E26;&#x6709;&#x53EF;&#x8BAD;&#x7EC3;&#x6807;&#x91CF; $s_i% &#x7684; $exp(s_i x)$ &#x6765;&#x81EA;&#x52A8;&#x8C03;&#x6574;&#x7279;&#x5F81;&#x7EA7; $P_i$ &#x7684;&#x6307;&#x6570;&#x51FD;&#x6570;&#x7684;&#x57FA;&#x6570;&#xFF0C;&#x4ECE;&#x800C;&#x51ED;&#x7ECF;&#x9A8C;&#x63D0;&#x9AD8;&#x68C0;&#x6D4B;&#x6027;&#x80FD;&#x3002;</p>
+<h2 id="Center-ness-for-FCOS"><a href="#Center-ness-for-FCOS" class="headerlink" title="Center-ness for FCOS"></a>Center-ness for FCOS</h2><p>&#x5728; FCOS &#x4E2D;&#x4F7F;&#x7528;&#x591A;&#x7EA7;&#x9884;&#x6D4B;&#x540E;&#xFF0C;FCOS &#x548C; anchor based &#x7684;&#x68C0;&#x6D4B;&#x5668;&#x4E4B;&#x95F4;&#x4ECD;&#x5B58;&#x5728;&#x6027;&#x80FD;&#x5DEE;&#x8DDD;&#x3002; &#x6211;&#x4EEC;&#x89C2;&#x5BDF;&#x5230;&#x8FD9;&#x662F;&#x7531;&#x4E8E;&#x8FDC;&#x79BB;&#x7269;&#x4F53;&#x4E2D;&#x5FC3;&#x7684;&#x4F4D;&#x7F6E;&#x4EA7;&#x751F;&#x7684;&#x8BB8;&#x591A;&#x4F4E;&#x8D28;&#x91CF;&#x9884;&#x6D4B;&#x8FB9;&#x754C;&#x6846;&#x9020;&#x6210;&#x7684;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x63D0;&#x51FA;&#x4E86;&#x4E00;&#x79CD;&#x7B80;&#x5355;&#x800C;&#x6709;&#x6548;&#x7684;&#x7B56;&#x7565;&#x6765;&#x6291;&#x5236;&#x8FD9;&#x4E9B;&#x4F4E;&#x8D28;&#x91CF;&#x7684;&#x68C0;&#x6D4B;&#x8FB9;&#x754C;&#x6846;&#x800C;&#x4E0D;&#x5F15;&#x5165;&#x4EFB;&#x4F55;&#x8D85;&#x53C2;&#x6570;&#x3002; &#x5177;&#x4F53;&#x6765;&#x8BF4;&#xFF0C;&#x6211;&#x4EEC;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x5355;&#x5C42;&#x5206;&#x652F;&#xFF0C;&#x4E0E;&#x5206;&#x7C7B;&#x5206;&#x652F;&#x5E76;&#x884C;&#xFF0C;&#x4EE5;&#x9884;&#x6D4B;&#x4E00;&#x4E2A;&#x4F4D;&#x7F6E;&#x7684;&#x201C;&#x4E2D;&#x5FC3;&#x6982;&#x7387;(center-ness)&#x201D;&#xFF08;&#x5373;&#xFF0C;&#x4ECE;&#x8BE5;&#x4F4D;&#x7F6E;&#x5230;&#x8BE5;&#x4F4D;&#x7F6E;&#x6240;&#x8D1F;&#x8D23;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x4E2D;&#x5FC3;&#x7684;&#x8DDD;&#x79BB;&#xFF09;&#x5982;&#x56FE;2&#x6240;&#x793A;&#xFF0C; &#x7ED9;&#x5B9A;&#x4F4D;&#x7F6E;&#x7684;&#x56DE;&#x5F52;&#x76EE;&#x6807;$l^\star$&#xFF0C;$t^\star$&#xFF0C;$r^\star$&#x548C;$b^\star$&#xFF0C;center-ness target &#x5B9A;&#x4E49;&#x4E3A;</p>
+<script type="math/tex; mode=display">
+centerness^\star = \sqrt{\frac{min(l^\star,r^\star)}{max(l^\star,r^\star)}×\frac{min(t^\star,b^\star)}{max(t^\star,b^\star)}}</script><p>&#x6211;&#x4EEC;&#x5728;&#x8FD9;&#x91CC;&#x4F7F;&#x7528; sqrt &#x6765;&#x51CF;&#x7F13;&#x4E2D;&#x5FC3;&#x7684;&#x8870;&#x51CF;&#x3002;center-ness &#x4ECE;0&#x5230;1&#xFF0C;&#x56E0;&#x6B64;&#x7528; &#x4E8C;&#x5143;&#x4EA4;&#x53C9;&#x71B5;&#xFF08;BCE&#xFF09;&#x635F;&#x5931;&#x8BAD;&#x7EC3;&#x3002; &#x635F;&#x5931;&#x88AB;&#x6DFB;&#x52A0;&#x5230;&#x4E0A;&#x8FF0;&#x635F;&#x5931;&#x51FD;&#x6570;&#x516C;&#x5F0F;&#x4E2D;&#x3002; &#x5728;&#x6D4B;&#x8BD5;&#x65F6;&#xFF0C;&#x901A;&#x8FC7;&#x5C06;&#x9884;&#x6D4B;&#x7684; center-ness &#x4E0E;&#x76F8;&#x5E94;&#x7684;&#x5206;&#x7C7B;&#x5F97;&#x5206;&#x76F8;&#x4E58;&#x6765;&#x8BA1;&#x7B97;&#x6700;&#x7EC8;&#x5F97;&#x5206;&#xFF08;&#x7528;&#x4E8E;&#x5BF9;&#x68C0;&#x6D4B;&#x5230;&#x7684;&#x8FB9;&#x754C;&#x6846;&#x8FDB;&#x884C;&#x6392;&#x540D;&#xFF09;&#x3002;&#x56E0;&#x6B64;&#xFF0C;center-ness &#x53EF;&#x4EE5;&#x4F7F;&#x8FDC;&#x79BB;&#x7269;&#x4F53;&#x4E2D;&#x5FC3;&#x7684;&#x8FB9;&#x754C;&#x6846;&#x7684; scores &#x51CF;&#x5C0F;&#x3002;&#x7ED3;&#x679C;&#xFF0C;&#x8FD9;&#x4E9B;&#x4F4E;&#x8D28;&#x91CF;&#x7684;&#x8FB9;&#x754C;&#x6846;&#x5F88;&#x53EF;&#x80FD;&#x88AB;&#x6700;&#x7EC8;&#x7684;&#x975E;&#x6700;&#x5927;&#x6291;&#x5236;&#xFF08;NMS&#xFF09;&#x8FC7;&#x7A0B;&#x6EE4;&#x9664;&#xFF0C;&#x4ECE;&#x800C;&#x663E;&#x8457;&#x63D0;&#x9AD8;&#x4E86;&#x68C0;&#x6D4B;&#x6027;&#x80FD;&#x3002;</p>
+<p>&#x57FA;&#x4E8E; anchor &#x7684;&#x68C0;&#x6D4B;&#x5668;&#x4F7F;&#x7528;&#x4E24;&#x4E2A; IOU &#x9608;&#x503C; $T_{low}$ &#x548C; $T_{high}$ &#x5C06; anchor boxes &#x6807;&#x8BB0;&#x4E3A;&#x8D1F;&#x3001;&#x5FFD;&#x7565;&#x548C;&#x6B63;&#x6837;&#x672C;&#xFF0C;center-ness &#x53EF;&#x4EE5;&#x770B;&#x4F5C;&#x662F;&#x4E00;&#x4E2A; &#x8F6F;&#x9608;&#x503C;&#x3002;&#x5B83;&#x662F;&#x5728;&#x7F51;&#x7EDC;&#x8BAD;&#x7EC3;&#x4E2D;&#x5B66;&#x4E60;&#x7684;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x8C03;&#x6574;&#x3002;&#x6B64;&#x5916;&#xFF0C;&#x5229;&#x7528;&#x8BE5;&#x7B56;&#x7565;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x68C0;&#x6D4B;&#x5668;&#x4ECD;&#x7136;&#x53EF;&#x4EE5;&#x5C06;&#x4EFB;&#x4F55;&#x843D;&#x5728; GT Box &#x4E2D;&#x7684;&#x4F4D;&#x7F6E;&#x89C6;&#x4E3A;&#x6B63;&#x6837;&#x672C;&#xFF0C;&#x9664;&#x4E86;&#x4E0A;&#x8FF0;&#x591A;&#x5C42;&#x9884;&#x6D4B;&#x4E2D;&#x8BBE;&#x7F6E;&#x4E3A;&#x8D1F;&#x6837;&#x672C;&#x7684;&#x4F4D;&#x7F6E;&#x5916;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x4E3A;&#x56DE;&#x5F52;&#x5668;&#x4F7F;&#x7528;&#x5C3D;&#x53EF;&#x80FD;&#x591A;&#x7684;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#x3002;</p>
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p>&#x4E0D;&#x518D;&#x53D9;&#x8FF0;</p>
+<h2 id="Ablation-Study"><a href="#Ablation-Study" class="headerlink" title="Ablation Study"></a>Ablation Study</h2><h3 id="Multi-level-Prediction-with-FPN"><a href="#Multi-level-Prediction-with-FPN" class="headerlink" title="Multi-level Prediction with FPN"></a>Multi-level Prediction with FPN</h3><p><img src="/2019/08/09/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;10/3.png" alt></p>
+<h3 id="With-or-Without-Center-ness"><a href="#With-or-Without-Center-ness" class="headerlink" title="With or Without Center-ness"></a>With or Without Center-ness</h3><p><img src="/2019/08/09/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;10/4.png" alt></p>
+<h3 id="FCOS-vs-Anchor-based-Detectors"><a href="#FCOS-vs-Anchor-based-Detectors" class="headerlink" title="FCOS vs. Anchor-based Detectors"></a>FCOS vs. Anchor-based Detectors</h3><p><img src="/2019/08/09/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;10/5.png" alt></p>
+<h2 id="Comparison-with-State-of-the-art-Detectors"><a href="#Comparison-with-State-of-the-art-Detectors" class="headerlink" title="Comparison with State-of-the-art Detectors"></a>Comparison with State-of-the-art Detectors</h2><p><img src="/2019/08/09/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;10/6.png" alt></p>
+<h1 id="Extensions-on-Region-Proposal-Networks"><a href="#Extensions-on-Region-Proposal-Networks" class="headerlink" title="Extensions on Region Proposal Networks"></a>Extensions on Region Proposal Networks</h1><p><img src="/2019/08/09/&#x8BBA;&#x6587;&#x9605;&#x8BFB;&#x7B14;&#x8BB0;10/7.png" alt></p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>&#x6211;&#x4EEC;&#x63D0;&#x51FA;&#x4E86;&#x4E00;&#x79CD; anchor freee, proposal free &#x7684;&#x5355;&#x7EA7;&#x63A2;&#x6D4B;&#x5668;FCOS&#x3002; &#x5982;&#x5B9E;&#x9A8C;&#x6240;&#x793A;&#xFF0C;FCOS&#x4E0E;&#x6D41;&#x884C;&#x7684; anchor based &#x7684;&#x4E00;&#x7EA7;&#x63A2;&#x6D4B;&#x5668;&#x76F8;&#x6BD4;&#x66F4;&#x5177;&#x6709;&#x4F18;&#x52BF;&#xFF0C;&#x5305;&#x62EC;RetinaNet&#xFF0C;YOLO&#x548C;SSD&#xFF0C;&#x4F46;&#x8BBE;&#x8BA1;&#x590D;&#x6742;&#x6027;&#x8981;&#x4F4E;&#x5F97;&#x591A;&#x3002; FCOS&#x5B8C;&#x5168;&#x907F;&#x514D;&#x4E86;&#x4E0E; anchor &#x76F8;&#x5173;&#x7684;&#x6240;&#x6709;&#x8BA1;&#x7B97;&#x548C;&#x8D85;&#x53C2;&#x6570;&#xFF0C;&#x5E76;&#x4EE5;&#x6BCF;&#x50CF;&#x7D20;&#x9884;&#x6D4B;&#x65B9;&#x5F0F;&#x89E3;&#x51B3;&#x4E86;&#x5BF9;&#x8C61;&#x68C0;&#x6D4B;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;&#x5176;&#x4ED6;&#x5BC6;&#x96C6;&#x9884;&#x6D4B;&#x4EFB;&#x52A1;&#xFF0C;&#x4F8B;&#x5982;&#x8BED;&#x4E49;&#x5206;&#x5272;&#x3002; FCOS&#x8FD8;&#x5728;&#x4E00;&#x7EA7;&#x63A2;&#x6D4B;&#x5668;&#x4E2D;&#x5B9E;&#x73B0;&#x4E86;&#x6700;&#x5148;&#x8FDB;&#x7684;&#x6027;&#x80FD;&#x3002; &#x6211;&#x4EEC;&#x8FD8;&#x8868;&#x660E;&#xFF0C;FCOS&#x53EF;&#x7528;&#x4F5C;&#x4E24;&#x7EA7;&#x63A2;&#x6D4B;&#x5668;&#x4E2D;&#x7684;RPN&#xFF0C;&#x901F;&#x5EA6;&#x66F4;&#x5FEB;&#x7684;R-CNN&#xFF0C;&#x5E76;&#x4E14;&#x5927;&#x5E45;&#x4F18;&#x4E8E;&#x5176;RPN&#x3002; &#x9274;&#x4E8E;&#x5176;&#x6709;&#x6548;&#x6027;&#x548C;&#x6548;&#x7387;&#xFF0C;&#x6211;&#x4EEC;&#x5E0C;&#x671B;FCOS&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x5F53;&#x524D;&#x4E3B;&#x6D41;&#x951A;&#x70B9;&#x63A2;&#x6D4B;&#x5668;&#x7684;&#x5F3A;&#x5927;&#x800C;&#x7B80;&#x5355;&#x7684;&#x66FF;&#x4EE3;&#x65B9;&#x6848;&#x3002; &#x6211;&#x4EEC;&#x8FD8;&#x76F8;&#x4FE1;FCOS&#x53EF;&#x4EE5;&#x6269;&#x5C55;&#x5230;&#x89E3;&#x51B3;&#x8BB8;&#x591A;&#x5176;&#x4ED6;&#x5B9E;&#x4F8B;&#x7EA7;&#x8BC6;&#x522B;&#x4EFB;&#x52A1;&#x3002;</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags" id="post-tags">
+            
+              <a href="/tags/目标检测/" rel="tag"><i class="fa fa-tag"></i> 目标检测</a>
+            
+              <a href="/tags/anchor-free/" rel="tag"><i class="fa fa-tag"></i> anchor-free</a>
+            
+          </div>
+          <script type="text/javascript">
+            var tagsall=document.getElementsByClassName("post-tags")
+            for (var i = tagsall.length - 1; i >= 0; i--){
+                var tags=tagsall[i].getElementsByTagName("a");
+                for (var j = tags.length - 1; j >= 0; j--) {
+                    var r=Math.floor(Math.random()*75+130);
+                    var g=Math.floor(Math.random()*75+100);
+                    var b=Math.floor(Math.random()*75+80);
+                    tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                }
+            }                        
+          </script>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/08/tensorflow-slim/" rel="next" title="Tensorflow-Slim简介">
+                  <i class="fa fa-chevron-left"></i> Tensorflow-Slim简介
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/12/tf学习笔记10/" rel="prev" title="TensorFlow学习笔记10：Inception V3">
+                  TensorFlow学习笔记10：Inception V3 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+      <!--noindex-->
+        <div class="author-overview">
+            <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+              
+                <img class="site-author-image" itemprop="image"
+                  src="/images/1.jpeg"
+                  alt="Zheng Yujie">
+              
+              <p class="site-author-name" itemprop="name">Zheng Yujie</p>
+              <div class="site-description motion-element" itemprop="description">C++/Python/深度学习</div>
+            </div>
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                  
+                    <a href="/archives/">
+                  
+                    <span class="site-state-item-count">47</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                  
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                  
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://github.com/zhengyujie" title="GitHub &rarr; https://github.com/zhengyujie" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="mailto:zhengyujie97@126.com" title="E-Mail &rarr; mailto:zhengyujie97@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://music.163.com/#/playlist?id=327924141" title="Music &rarr; https://music.163.com/#/playlist?id=327924141" rel="noopener" target="_blank"><i class="fa fa-fw fa-headphones"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                
+                
+                
+                  
+                
+                  <a href="https://www.google.com" title="Google &rarr; https://www.google.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+
+          
+        </div>
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active" id="post-toc-wrap">
+          <div class="item_headline">
+            <i class="fa fa-list" aria-hidden="true">
+            </i><span>目录</span>
+          </div>
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Our-Approach"><span class="nav-number">4.</span> <span class="nav-text">Our Approach</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fully-Convolutional-One-Stage-Object-Detector"><span class="nav-number">4.1.</span> <span class="nav-text">Fully Convolutional One-Stage Object Detector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-level-Prediction-with-FPN-for-FCOS"><span class="nav-number">4.2.</span> <span class="nav-text">Multi-level Prediction with FPN for FCOS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Center-ness-for-FCOS"><span class="nav-number">4.3.</span> <span class="nav-text">Center-ness for FCOS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-number">5.</span> <span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ablation-Study"><span class="nav-number">5.1.</span> <span class="nav-text">Ablation Study</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-level-Prediction-with-FPN"><span class="nav-number">5.1.1.</span> <span class="nav-text">Multi-level Prediction with FPN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#With-or-Without-Center-ness"><span class="nav-number">5.1.2.</span> <span class="nav-text">With or Without Center-ness</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FCOS-vs-Anchor-based-Detectors"><span class="nav-number">5.1.3.</span> <span class="nav-text">FCOS vs. Anchor-based Detectors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparison-with-State-of-the-art-Detectors"><span class="nav-number">5.2.</span> <span class="nav-text">Comparison with State-of-the-art Detectors</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Extensions-on-Region-Proposal-Networks"><span class="nav-number">6.</span> <span class="nav-text">Extensions on Region Proposal Networks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-number">7.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
+    <span class="post-meta-divider">|</span>
+    <span title="站点总字数">全站共199k字</span>
+</div>
+
+<div class="BbeiAn-info">
+	浙ICP备 -
+	<a target="_blank"  href="http://www.miitbeian.gov.cn/">19035016号</a>
+	</a>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        <span>0%</span>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+<script>
+NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.9/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: true,
+    appId: 'QhpM05HufWMwqxw5TW8GGKHt-gzGzoHsz',
+    appKey: 'ReXaLSgoPNRCjW8dT9eEyR25',
+    placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧！',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

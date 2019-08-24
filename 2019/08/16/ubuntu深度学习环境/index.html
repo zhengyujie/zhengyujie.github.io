@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="前言上次搭建深度学习环境已经是很久以前了，但我还记得被其支配的恐惧，各种出错，各种版本对应不上，搞得我头皮发麻。这次因为系统奔溃需要重装系统，也就意味着我需要重新搭建Ubuntu的深度学习环境，我心里是一百个不愿意的。但也没有办法，只能硬着头皮上。但出乎意料，这次搭建过程还算顺利，只有在tensorflow运行出了点小状况(后面会提到)。本篇博客会详细记录我的整个搭建过程，说不定那天我的系统又被我">
+  <meta name="description" content="&amp;#x524D;&amp;#x8A00;&amp;#x4E0A;&amp;#x6B21;&amp;#x642D;&amp;#x5EFA;&amp;#x6DF1;&amp;#x5EA6;&amp;#x5B66;&amp;#x4E60;&amp;#x73AF;&amp;#x5883;&amp;#x5DF2;&amp;#x7ECF;&amp;#x662F;&amp;#x5F88;&amp;#x4E45;&amp;#x4EE5;&amp;#x524D;&amp;#x4E86;&amp;#xFF0C;&amp;#x4F46;&amp;#x6211;&amp;#x8FD8;&amp;#x8BB0;">
 <meta name="keywords" content="TensorFlow,Ubuntu,CUDA,cuDNN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu深度学习环境搭建">
 <meta property="og:url" content="http://zhengyujie.cn/2019/08/16/ubuntu深度学习环境/index.html">
 <meta property="og:site_name" content="浅笑の博客">
-<meta property="og:description" content="前言上次搭建深度学习环境已经是很久以前了，但我还记得被其支配的恐惧，各种出错，各种版本对应不上，搞得我头皮发麻。这次因为系统奔溃需要重装系统，也就意味着我需要重新搭建Ubuntu的深度学习环境，我心里是一百个不愿意的。但也没有办法，只能硬着头皮上。但出乎意料，这次搭建过程还算顺利，只有在tensorflow运行出了点小状况(后面会提到)。本篇博客会详细记录我的整个搭建过程，说不定那天我的系统又被我">
+<meta property="og:description" content="&amp;#x524D;&amp;#x8A00;&amp;#x4E0A;&amp;#x6B21;&amp;#x642D;&amp;#x5EFA;&amp;#x6DF1;&amp;#x5EA6;&amp;#x5B66;&amp;#x4E60;&amp;#x73AF;&amp;#x5883;&amp;#x5DF2;&amp;#x7ECF;&amp;#x662F;&amp;#x5F88;&amp;#x4E45;&amp;#x4EE5;&amp;#x524D;&amp;#x4E86;&amp;#xFF0C;&amp;#x4F46;&amp;#x6211;&amp;#x8FD8;&amp;#x8BB0;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-19T08:10:52.925Z">
+<meta property="og:updated_time" content="2019-08-24T03:07:16.288Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu深度学习环境搭建">
-<meta name="twitter:description" content="前言上次搭建深度学习环境已经是很久以前了，但我还记得被其支配的恐惧，各种出错，各种版本对应不上，搞得我头皮发麻。这次因为系统奔溃需要重装系统，也就意味着我需要重新搭建Ubuntu的深度学习环境，我心里是一百个不愿意的。但也没有办法，只能硬着头皮上。但出乎意料，这次搭建过程还算顺利，只有在tensorflow运行出了点小状况(后面会提到)。本篇博客会详细记录我的整个搭建过程，说不定那天我的系统又被我">
+<meta name="twitter:description" content="&amp;#x524D;&amp;#x8A00;&amp;#x4E0A;&amp;#x6B21;&amp;#x642D;&amp;#x5EFA;&amp;#x6DF1;&amp;#x5EA6;&amp;#x5B66;&amp;#x4E60;&amp;#x73AF;&amp;#x5883;&amp;#x5DF2;&amp;#x7ECF;&amp;#x662F;&amp;#x5F88;&amp;#x4E45;&amp;#x4EE5;&amp;#x524D;&amp;#x4E86;&amp;#xFF0C;&amp;#x4F46;&amp;#x6211;&amp;#x8FD8;&amp;#x8BB0;">
   <link rel="canonical" href="http://zhengyujie.cn/2019/08/16/ubuntu深度学习环境/">
 
 
@@ -174,7 +174,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">47</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -187,7 +187,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
 
   </li>
       
@@ -200,7 +200,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
 
   </li>
       
@@ -358,7 +358,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>上次搭建深度学习环境已经是很久以前了，但我还记得被其支配的恐惧，各种出错，各种版本对应不上，搞得我头皮发麻。这次因为系统奔溃需要重装系统，也就意味着我需要重新搭建Ubuntu的深度学习环境，我心里是一百个不愿意的。但也没有办法，只能硬着头皮上。但出乎意料，这次搭建过程还算顺利，只有在tensorflow运行出了点小状况(后面会提到)。本篇博客会详细记录我的整个搭建过程，说不定那天我的系统又被我玩崩溃了。先附上我的深度学习环境基本信息：</p>
+        <h1 id="&#x524D;&#x8A00;"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</h1><p>&#x4E0A;&#x6B21;&#x642D;&#x5EFA;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x73AF;&#x5883;&#x5DF2;&#x7ECF;&#x662F;&#x5F88;&#x4E45;&#x4EE5;&#x524D;&#x4E86;&#xFF0C;&#x4F46;&#x6211;&#x8FD8;&#x8BB0;&#x5F97;&#x88AB;&#x5176;&#x652F;&#x914D;&#x7684;&#x6050;&#x60E7;&#xFF0C;&#x5404;&#x79CD;&#x51FA;&#x9519;&#xFF0C;&#x5404;&#x79CD;&#x7248;&#x672C;&#x5BF9;&#x5E94;&#x4E0D;&#x4E0A;&#xFF0C;&#x641E;&#x5F97;&#x6211;&#x5934;&#x76AE;&#x53D1;&#x9EBB;&#x3002;&#x8FD9;&#x6B21;&#x56E0;&#x4E3A;&#x7CFB;&#x7EDF;&#x5954;&#x6E83;&#x9700;&#x8981;&#x91CD;&#x88C5;&#x7CFB;&#x7EDF;&#xFF0C;&#x4E5F;&#x5C31;&#x610F;&#x5473;&#x7740;&#x6211;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x642D;&#x5EFA;Ubuntu&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x73AF;&#x5883;&#xFF0C;&#x6211;&#x5FC3;&#x91CC;&#x662F;&#x4E00;&#x767E;&#x4E2A;&#x4E0D;&#x613F;&#x610F;&#x7684;&#x3002;&#x4F46;&#x4E5F;&#x6CA1;&#x6709;&#x529E;&#x6CD5;&#xFF0C;&#x53EA;&#x80FD;&#x786C;&#x7740;&#x5934;&#x76AE;&#x4E0A;&#x3002;&#x4F46;&#x51FA;&#x4E4E;&#x610F;&#x6599;&#xFF0C;&#x8FD9;&#x6B21;&#x642D;&#x5EFA;&#x8FC7;&#x7A0B;&#x8FD8;&#x7B97;&#x987A;&#x5229;&#xFF0C;&#x53EA;&#x6709;&#x5728;tensorflow&#x8FD0;&#x884C;&#x51FA;&#x4E86;&#x70B9;&#x5C0F;&#x72B6;&#x51B5;(&#x540E;&#x9762;&#x4F1A;&#x63D0;&#x5230;)&#x3002;&#x672C;&#x7BC7;&#x535A;&#x5BA2;&#x4F1A;&#x8BE6;&#x7EC6;&#x8BB0;&#x5F55;&#x6211;&#x7684;&#x6574;&#x4E2A;&#x642D;&#x5EFA;&#x8FC7;&#x7A0B;&#xFF0C;&#x8BF4;&#x4E0D;&#x5B9A;&#x90A3;&#x5929;&#x6211;&#x7684;&#x7CFB;&#x7EDF;&#x53C8;&#x88AB;&#x6211;&#x73A9;&#x5D29;&#x6E83;&#x4E86;&#x3002;&#x5148;&#x9644;&#x4E0A;&#x6211;&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x73AF;&#x5883;&#x57FA;&#x672C;&#x4FE1;&#x606F;&#xFF1A;</p>
 <ul>
 <li>Ubuntu: 16.04</li>
 <li>NVIDIA: GeForce GTX 1080TI</li>
@@ -368,62 +368,62 @@
 <li>TensorFlow: 1.13.1</li>
 </ul>
 <a id="more"></a>
-<h1 id="安装显卡驱动"><a href="#安装显卡驱动" class="headerlink" title="安装显卡驱动"></a>安装显卡驱动</h1><h2 id="禁用nouveau"><a href="#禁用nouveau" class="headerlink" title="禁用nouveau"></a>禁用nouveau</h2><p>打开终端输入：</p>
+<h1 id="&#x5B89;&#x88C5;&#x663E;&#x5361;&#x9A71;&#x52A8;"><a href="#&#x5B89;&#x88C5;&#x663E;&#x5361;&#x9A71;&#x52A8;" class="headerlink" title="&#x5B89;&#x88C5;&#x663E;&#x5361;&#x9A71;&#x52A8;"></a>&#x5B89;&#x88C5;&#x663E;&#x5361;&#x9A71;&#x52A8;</h1><h2 id="&#x7981;&#x7528;nouveau"><a href="#&#x7981;&#x7528;nouveau" class="headerlink" title="&#x7981;&#x7528;nouveau"></a>&#x7981;&#x7528;nouveau</h2><p>&#x6253;&#x5F00;&#x7EC8;&#x7AEF;&#x8F93;&#x5165;&#xFF1A;</p>
 <pre><code>sudo vim /etc/modprobe.d/blacklist.conf
-</code></pre><p>在文件最后加上：</p>
+</code></pre><p>&#x5728;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x52A0;&#x4E0A;&#xFF1A;</p>
 <pre><code>blacklist nouveau
 options nouveau modeset=0
-</code></pre><p>保存退出后输入命令：</p>
+</code></pre><p>&#x4FDD;&#x5B58;&#x9000;&#x51FA;&#x540E;&#x8F93;&#x5165;&#x547D;&#x4EE4;&#xFF1A;</p>
 <pre><code>sudo update-initramfs -u
-</code></pre><p>然后重启电脑，接着输入命令：</p>
+</code></pre><p>&#x7136;&#x540E;&#x91CD;&#x542F;&#x7535;&#x8111;&#xFF0C;&#x63A5;&#x7740;&#x8F93;&#x5165;&#x547D;&#x4EE4;&#xFF1A;</p>
 <pre><code>lsmod | grep nouveau
-</code></pre><p>若没有输出信息，说明禁用成功</p>
-<h2 id="安装驱动"><a href="#安装驱动" class="headerlink" title="安装驱动"></a>安装驱动</h2><p>首先去NVIDIA官网上下载对应的Linux版本的显卡驱动。</p>
-<p>然后按Ctrl+Alt+F1进入命令行模式，输入用户名和密码</p>
-<p>接着关闭图形界面：</p>
+</code></pre><p>&#x82E5;&#x6CA1;&#x6709;&#x8F93;&#x51FA;&#x4FE1;&#x606F;&#xFF0C;&#x8BF4;&#x660E;&#x7981;&#x7528;&#x6210;&#x529F;</p>
+<h2 id="&#x5B89;&#x88C5;&#x9A71;&#x52A8;"><a href="#&#x5B89;&#x88C5;&#x9A71;&#x52A8;" class="headerlink" title="&#x5B89;&#x88C5;&#x9A71;&#x52A8;"></a>&#x5B89;&#x88C5;&#x9A71;&#x52A8;</h2><p>&#x9996;&#x5148;&#x53BB;NVIDIA&#x5B98;&#x7F51;&#x4E0A;&#x4E0B;&#x8F7D;&#x5BF9;&#x5E94;&#x7684;Linux&#x7248;&#x672C;&#x7684;&#x663E;&#x5361;&#x9A71;&#x52A8;&#x3002;</p>
+<p>&#x7136;&#x540E;&#x6309;Ctrl+Alt+F1&#x8FDB;&#x5165;&#x547D;&#x4EE4;&#x884C;&#x6A21;&#x5F0F;&#xFF0C;&#x8F93;&#x5165;&#x7528;&#x6237;&#x540D;&#x548C;&#x5BC6;&#x7801;</p>
+<p>&#x63A5;&#x7740;&#x5173;&#x95ED;&#x56FE;&#x5F62;&#x754C;&#x9762;&#xFF1A;</p>
 <pre><code>sudo service lightdm stop
-</code></pre><p>然后<code>cd</code>进去驱动所在的文件夹，获取权限：</p>
+</code></pre><p>&#x7136;&#x540E;<code>cd</code>&#x8FDB;&#x53BB;&#x9A71;&#x52A8;&#x6240;&#x5728;&#x7684;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x83B7;&#x53D6;&#x6743;&#x9650;&#xFF1A;</p>
 <pre><code>sudo chmod a+x NVIDIA-Linux-x86_64-xxx.run
-</code></pre><p>安装驱动：</p>
-<pre><code>sudo ./NVIDIA-Linux-x86_64-410.78.run –no-x-check –no-nouveau-check –no-opengl-files
+</code></pre><p>&#x5B89;&#x88C5;&#x9A71;&#x52A8;&#xFF1A;</p>
+<pre><code>sudo ./NVIDIA-Linux-x86_64-410.78.run &#x2013;no-x-check &#x2013;no-nouveau-check &#x2013;no-opengl-files
 </code></pre><ul>
-<li>–no-x-check 安装驱动时关闭X服务</li>
-<li>–no-nouveau-check 安装驱动时禁用nouveau</li>
-<li>–no-opengl-files 只安装驱动文件，不安装OpenGL文件；安装了，如果是双显卡的话，会出现重复登录的问题</li>
+<li>&#x2013;no-x-check &#x5B89;&#x88C5;&#x9A71;&#x52A8;&#x65F6;&#x5173;&#x95ED;X&#x670D;&#x52A1;</li>
+<li>&#x2013;no-nouveau-check &#x5B89;&#x88C5;&#x9A71;&#x52A8;&#x65F6;&#x7981;&#x7528;nouveau</li>
+<li>&#x2013;no-opengl-files &#x53EA;&#x5B89;&#x88C5;&#x9A71;&#x52A8;&#x6587;&#x4EF6;&#xFF0C;&#x4E0D;&#x5B89;&#x88C5;OpenGL&#x6587;&#x4EF6;&#xFF1B;&#x5B89;&#x88C5;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x53CC;&#x663E;&#x5361;&#x7684;&#x8BDD;&#xFF0C;&#x4F1A;&#x51FA;&#x73B0;&#x91CD;&#x590D;&#x767B;&#x5F55;&#x7684;&#x95EE;&#x9898;</li>
 </ul>
-<p>完成安装后启动图形界面：</p>
+<p>&#x5B8C;&#x6210;&#x5B89;&#x88C5;&#x540E;&#x542F;&#x52A8;&#x56FE;&#x5F62;&#x754C;&#x9762;&#xFF1A;</p>
 <pre><code>sudo service lightdm start
-</code></pre><p>最后在终端输入：</p>
+</code></pre><p>&#x6700;&#x540E;&#x5728;&#x7EC8;&#x7AEF;&#x8F93;&#x5165;&#xFF1A;</p>
 <pre><code>nvidia-smi
-</code></pre><p>若有输出显卡信息，说明驱动安装成功</p>
-<h2 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h2><p>下载CUDA10.0，下载地址：<a href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-toolkit-archive</a></p>
-<p><code>cd</code>进入CUDA所在文件夹，赋予文件执行权限后安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x cuda_10.0.130_410.48_linux.run</span><br><span class="line">sudo ./cuda_10.0.130_410.48_linux.run</span><br></pre></td></tr></table></figure></p>
-<p>开始安装后需要按空格键阅读条款，时间比较长，等不及的可以直接Ctrl+C跳过。阅读完使用条款后开始配置，一步一步慢慢来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">accept/decline/quit: accept</span><br><span class="line"></span><br><span class="line">Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 410.48?</span><br><span class="line">(y)es/(n)o/(q)uit: n（这里不要再安装驱动了！！！）</span><br><span class="line"></span><br><span class="line">Install the CUDA 10.0 Toolkit?（是否安装CUDA 10 ，这里必须要安装）</span><br><span class="line">(y)es/(n)o/(q)uit: y</span><br><span class="line"></span><br><span class="line">Enter Toolkit Location（安装路径，使用默认，直接回车就行）</span><br><span class="line"> [ default is /usr/local/cuda-10.0 ]:  </span><br><span class="line"></span><br><span class="line">Do you want to install a symbolic link at /usr/local/cuda?（同意创建软链接）</span><br><span class="line">(y)es/(n)o/(q)uit: y</span><br><span class="line"></span><br><span class="line">Install the CUDA 10.0 Samples?</span><br><span class="line">(y)es/(n)o/(q)uit: y</span><br><span class="line"></span><br><span class="line">Installing the CUDA Toolkit in /usr/local/cuda-10.0 ...（开始安装）</span><br></pre></td></tr></table></figure></p>
-<p>安装完成后加入环境变量</p>
+</code></pre><p>&#x82E5;&#x6709;&#x8F93;&#x51FA;&#x663E;&#x5361;&#x4FE1;&#x606F;&#xFF0C;&#x8BF4;&#x660E;&#x9A71;&#x52A8;&#x5B89;&#x88C5;&#x6210;&#x529F;</p>
+<h2 id="&#x5B89;&#x88C5;CUDA"><a href="#&#x5B89;&#x88C5;CUDA" class="headerlink" title="&#x5B89;&#x88C5;CUDA"></a>&#x5B89;&#x88C5;CUDA</h2><p>&#x4E0B;&#x8F7D;CUDA10.0&#xFF0C;&#x4E0B;&#x8F7D;&#x5730;&#x5740;&#xFF1A;<a href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-toolkit-archive</a></p>
+<p><code>cd</code>&#x8FDB;&#x5165;CUDA&#x6240;&#x5728;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x8D4B;&#x4E88;&#x6587;&#x4EF6;&#x6267;&#x884C;&#x6743;&#x9650;&#x540E;&#x5B89;&#x88C5;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x cuda_10.0.130_410.48_linux.run</span><br><span class="line">sudo ./cuda_10.0.130_410.48_linux.run</span><br></pre></td></tr></table></figure></p>
+<p>&#x5F00;&#x59CB;&#x5B89;&#x88C5;&#x540E;&#x9700;&#x8981;&#x6309;&#x7A7A;&#x683C;&#x952E;&#x9605;&#x8BFB;&#x6761;&#x6B3E;&#xFF0C;&#x65F6;&#x95F4;&#x6BD4;&#x8F83;&#x957F;&#xFF0C;&#x7B49;&#x4E0D;&#x53CA;&#x7684;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;Ctrl+C&#x8DF3;&#x8FC7;&#x3002;&#x9605;&#x8BFB;&#x5B8C;&#x4F7F;&#x7528;&#x6761;&#x6B3E;&#x540E;&#x5F00;&#x59CB;&#x914D;&#x7F6E;&#xFF0C;&#x4E00;&#x6B65;&#x4E00;&#x6B65;&#x6162;&#x6162;&#x6765;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">accept/decline/quit: accept</span><br><span class="line"></span><br><span class="line">Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 410.48?</span><br><span class="line">(y)es/(n)o/(q)uit: n&#xFF08;&#x8FD9;&#x91CC;&#x4E0D;&#x8981;&#x518D;&#x5B89;&#x88C5;&#x9A71;&#x52A8;&#x4E86;&#xFF01;&#xFF01;&#xFF01;&#xFF09;</span><br><span class="line"></span><br><span class="line">Install the CUDA 10.0 Toolkit?&#xFF08;&#x662F;&#x5426;&#x5B89;&#x88C5;CUDA 10 &#xFF0C;&#x8FD9;&#x91CC;&#x5FC5;&#x987B;&#x8981;&#x5B89;&#x88C5;&#xFF09;</span><br><span class="line">(y)es/(n)o/(q)uit: y</span><br><span class="line"></span><br><span class="line">Enter Toolkit Location&#xFF08;&#x5B89;&#x88C5;&#x8DEF;&#x5F84;&#xFF0C;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#xFF0C;&#x76F4;&#x63A5;&#x56DE;&#x8F66;&#x5C31;&#x884C;&#xFF09;</span><br><span class="line"> [ default is /usr/local/cuda-10.0 ]:  </span><br><span class="line"></span><br><span class="line">Do you want to install a symbolic link at /usr/local/cuda?&#xFF08;&#x540C;&#x610F;&#x521B;&#x5EFA;&#x8F6F;&#x94FE;&#x63A5;&#xFF09;</span><br><span class="line">(y)es/(n)o/(q)uit: y</span><br><span class="line"></span><br><span class="line">Install the CUDA 10.0 Samples?</span><br><span class="line">(y)es/(n)o/(q)uit: y</span><br><span class="line"></span><br><span class="line">Installing the CUDA Toolkit in /usr/local/cuda-10.0 ...&#xFF08;&#x5F00;&#x59CB;&#x5B89;&#x88C5;&#xFF09;</span><br></pre></td></tr></table></figure></p>
+<p>&#x5B89;&#x88C5;&#x5B8C;&#x6210;&#x540E;&#x52A0;&#x5165;&#x73AF;&#x5883;&#x53D8;&#x91CF;</p>
 <pre><code>sudo gedit ~/.bashrc
-</code></pre><p>最后一行加入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export CUDA_HOME=/usr/local/cuda</span><br><span class="line">export PATH=$PATH:$CUDA_HOME/bin</span><br><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>保存退出后输入：</p>
+</code></pre><p>&#x6700;&#x540E;&#x4E00;&#x884C;&#x52A0;&#x5165;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export CUDA_HOME=/usr/local/cuda</span><br><span class="line">export PATH=$PATH:$CUDA_HOME/bin</span><br><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}</span><br></pre></td></tr></table></figure></p>
+<p>&#x4FDD;&#x5B58;&#x9000;&#x51FA;&#x540E;&#x8F93;&#x5165;&#xFF1A;</p>
 <pre><code>source .bashrc
-</code></pre><p>最后终端输入：</p>
+</code></pre><p>&#x6700;&#x540E;&#x7EC8;&#x7AEF;&#x8F93;&#x5165;&#xFF1A;</p>
 <pre><code>nvcc --version
-</code></pre><p>若输出CUDA版本信息说明安装成功</p>
-<h2 id="安装cuDNN"><a href="#安装cuDNN" class="headerlink" title="安装cuDNN"></a>安装cuDNN</h2><p>从 <a href="https://developer.nvidia.com/cudnn" target="_blank" rel="noopener">https://developer.nvidia.com/cudnn</a> 上下载cudnn相应版本的压缩包（需要注册或登录）。</p>
-<p>解压当前的.tgz格式的软件包</p>
+</code></pre><p>&#x82E5;&#x8F93;&#x51FA;CUDA&#x7248;&#x672C;&#x4FE1;&#x606F;&#x8BF4;&#x660E;&#x5B89;&#x88C5;&#x6210;&#x529F;</p>
+<h2 id="&#x5B89;&#x88C5;cuDNN"><a href="#&#x5B89;&#x88C5;cuDNN" class="headerlink" title="&#x5B89;&#x88C5;cuDNN"></a>&#x5B89;&#x88C5;cuDNN</h2><p>&#x4ECE; <a href="https://developer.nvidia.com/cudnn" target="_blank" rel="noopener">https://developer.nvidia.com/cudnn</a> &#x4E0A;&#x4E0B;&#x8F7D;cudnn&#x76F8;&#x5E94;&#x7248;&#x672C;&#x7684;&#x538B;&#x7F29;&#x5305;&#xFF08;&#x9700;&#x8981;&#x6CE8;&#x518C;&#x6216;&#x767B;&#x5F55;&#xFF09;&#x3002;</p>
+<p>&#x89E3;&#x538B;&#x5F53;&#x524D;&#x7684;.tgz&#x683C;&#x5F0F;&#x7684;&#x8F6F;&#x4EF6;&#x5305;</p>
 <pre><code>tar -xzvf cudnn-10.0-linux-x64-v7.5.1.10.tgz
-</code></pre><p>解压后的文件夹名为cuda，文件夹中包含两个文件夹：一个为include，另一个为lib64。最好把这个cuda文件夹放在home目录下，方便操作。</p>
-<p>将解压后的lib64文件夹关联到环境变量中：</p>
+</code></pre><p>&#x89E3;&#x538B;&#x540E;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x540D;&#x4E3A;cuda&#xFF0C;&#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;&#x5939;&#xFF1A;&#x4E00;&#x4E2A;&#x4E3A;include&#xFF0C;&#x53E6;&#x4E00;&#x4E2A;&#x4E3A;lib64&#x3002;&#x6700;&#x597D;&#x628A;&#x8FD9;&#x4E2A;cuda&#x6587;&#x4EF6;&#x5939;&#x653E;&#x5728;home&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x65B9;&#x4FBF;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x5C06;&#x89E3;&#x538B;&#x540E;&#x7684;lib64&#x6587;&#x4EF6;&#x5939;&#x5173;&#x8054;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x4E2D;&#xFF1A;</p>
 <pre><code>sudo gedit ~/.bashrc
-</code></pre><p>最后一行加入：</p>
+</code></pre><p>&#x6700;&#x540E;&#x4E00;&#x884C;&#x52A0;&#x5165;&#xFF1A;</p>
 <pre><code>export LD_LIBRARY_PATH=/home/cuda/lib64:$LD_LIBRARY_PATH
-</code></pre><p>保存退出后输入：</p>
+</code></pre><p>&#x4FDD;&#x5B58;&#x9000;&#x51FA;&#x540E;&#x8F93;&#x5165;&#xFF1A;</p>
 <pre><code>source .bashrc
-</code></pre><p>最后一步就是将解压后的/home/cuda/include目录下的一些文件拷贝到/usr/local/cuda/include中。由于进入了系统路径，因此执行该操作时需要获取管理员权限：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo cp cuda/include/cudnn.h /usr/local/cuda/include</span><br><span class="line">sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64</span><br><span class="line">sudo chmod a+r /usr/local/cuda/include/cudnn.h</span><br><span class="line">sudo chmod a+r /usr/local/cuda/lib64/libcudnn*</span><br></pre></td></tr></table></figure></p>
-<p>完成cuDNN的配置</p>
-<h2 id="安装TensorFlow"><a href="#安装TensorFlow" class="headerlink" title="安装TensorFlow"></a>安装TensorFlow</h2><p>这步比较简单，直接使用pip命令安装即可(我安装的是1.13.1版本)：</p>
+</code></pre><p>&#x6700;&#x540E;&#x4E00;&#x6B65;&#x5C31;&#x662F;&#x5C06;&#x89E3;&#x538B;&#x540E;&#x7684;/home/cuda/include&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x4E00;&#x4E9B;&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x5230;/usr/local/cuda/include&#x4E2D;&#x3002;&#x7531;&#x4E8E;&#x8FDB;&#x5165;&#x4E86;&#x7CFB;&#x7EDF;&#x8DEF;&#x5F84;&#xFF0C;&#x56E0;&#x6B64;&#x6267;&#x884C;&#x8BE5;&#x64CD;&#x4F5C;&#x65F6;&#x9700;&#x8981;&#x83B7;&#x53D6;&#x7BA1;&#x7406;&#x5458;&#x6743;&#x9650;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo cp cuda/include/cudnn.h /usr/local/cuda/include</span><br><span class="line">sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64</span><br><span class="line">sudo chmod a+r /usr/local/cuda/include/cudnn.h</span><br><span class="line">sudo chmod a+r /usr/local/cuda/lib64/libcudnn*</span><br></pre></td></tr></table></figure></p>
+<p>&#x5B8C;&#x6210;cuDNN&#x7684;&#x914D;&#x7F6E;</p>
+<h2 id="&#x5B89;&#x88C5;TensorFlow"><a href="#&#x5B89;&#x88C5;TensorFlow" class="headerlink" title="&#x5B89;&#x88C5;TensorFlow"></a>&#x5B89;&#x88C5;TensorFlow</h2><p>&#x8FD9;&#x6B65;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#xFF0C;&#x76F4;&#x63A5;&#x4F7F;&#x7528;pip&#x547D;&#x4EE4;&#x5B89;&#x88C5;&#x5373;&#x53EF;(&#x6211;&#x5B89;&#x88C5;&#x7684;&#x662F;1.13.1&#x7248;&#x672C;)&#xFF1A;</p>
 <pre><code>pip install tensorflow-gpu==1.13.1
-</code></pre><p>然后进入交互式命令行看看是否安装成功：</p>
+</code></pre><p>&#x7136;&#x540E;&#x8FDB;&#x5165;&#x4EA4;&#x4E92;&#x5F0F;&#x547D;&#x4EE4;&#x884C;&#x770B;&#x770B;&#x662F;&#x5426;&#x5B89;&#x88C5;&#x6210;&#x529F;&#xFF1A;</p>
 <pre><code>import tensorflow as tf
-</code></pre><p>接着就突然出现了FutureWarning警告信息，吓出我一身冷汗。我赶紧去网上查阅相关资料，看到有人说是因为numpy的版本是1.17太高了。我赶紧查看了我安装的numpy的版本，果然是1.17。于是我进行了降级安装，安装了1.16.4版本的numpy，最终问题得以完美解决。</p>
+</code></pre><p>&#x63A5;&#x7740;&#x5C31;&#x7A81;&#x7136;&#x51FA;&#x73B0;&#x4E86;FutureWarning&#x8B66;&#x544A;&#x4FE1;&#x606F;&#xFF0C;&#x5413;&#x51FA;&#x6211;&#x4E00;&#x8EAB;&#x51B7;&#x6C57;&#x3002;&#x6211;&#x8D76;&#x7D27;&#x53BB;&#x7F51;&#x4E0A;&#x67E5;&#x9605;&#x76F8;&#x5173;&#x8D44;&#x6599;&#xFF0C;&#x770B;&#x5230;&#x6709;&#x4EBA;&#x8BF4;&#x662F;&#x56E0;&#x4E3A;numpy&#x7684;&#x7248;&#x672C;&#x662F;1.17&#x592A;&#x9AD8;&#x4E86;&#x3002;&#x6211;&#x8D76;&#x7D27;&#x67E5;&#x770B;&#x4E86;&#x6211;&#x5B89;&#x88C5;&#x7684;numpy&#x7684;&#x7248;&#x672C;&#xFF0C;&#x679C;&#x7136;&#x662F;1.17&#x3002;&#x4E8E;&#x662F;&#x6211;&#x8FDB;&#x884C;&#x4E86;&#x964D;&#x7EA7;&#x5B89;&#x88C5;&#xFF0C;&#x5B89;&#x88C5;&#x4E86;1.16.4&#x7248;&#x672C;&#x7684;numpy&#xFF0C;&#x6700;&#x7EC8;&#x95EE;&#x9898;&#x5F97;&#x4EE5;&#x5B8C;&#x7F8E;&#x89E3;&#x51B3;&#x3002;</p>
 
     </div>
 
@@ -532,7 +532,7 @@ options nouveau modeset=0
                   
                     <a href="/archives/">
                   
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -559,7 +559,9 @@ options nouveau modeset=0
                   
                     
                   
-                  <span class="site-state-item-count">5</span>
+                    
+                  
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -634,43 +636,7 @@ options nouveau modeset=0
                   
                     
                   
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -763,7 +729,7 @@ options nouveau modeset=0
   </span>
   <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
     <span class="post-meta-divider">|</span>
-    <span title="站点总字数">全站共195k字</span>
+    <span title="站点总字数">全站共199k字</span>
 </div>
 
 <div class="BbeiAn-info">

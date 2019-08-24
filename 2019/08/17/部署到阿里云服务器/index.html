@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="前言这几天一折腾起来就发现完全停不下来了，前几天我把我的博客部署到了Coding平台，前天又手痒在阿里云上购买了一个域名。今早又没忍住购买了阿里云的学生服务器。于是我最终决定把我的博客部署到阿里云服务器上。在折腾了一个上午后，我终于成功的完成了博客的部署，这篇博客记录下我的整个部署流程。">
-<meta name="keywords" content="Hexo,Ubuntu,SSH,阿里云,Git,Nginx">
+  <meta name="description" content="&amp;#x524D;&amp;#x8A00;&amp;#x8FD9;&amp;#x51E0;&amp;#x5929;&amp;#x4E00;&amp;#x6298;&amp;#x817E;&amp;#x8D77;&amp;#x6765;&amp;#x5C31;&amp;#x53D1;&amp;#x73B0;&amp;#x5B8C;&amp;#x5168;&amp;#x505C;&amp;#x4E0D;&amp;#x4E0B;&amp;#x6765;&amp;#x4E86;&amp;#xFF0C;&amp;#x524D;&amp;#x51E0;&amp;#x5929;&amp;#x6211;">
+<meta name="keywords" content="Hexo,Ubuntu,阿里云,SSH,Git,Nginx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo博客部署到阿里云服务器">
 <meta property="og:url" content="http://zhengyujie.cn/2019/08/17/部署到阿里云服务器/index.html">
 <meta property="og:site_name" content="浅笑の博客">
-<meta property="og:description" content="前言这几天一折腾起来就发现完全停不下来了，前几天我把我的博客部署到了Coding平台，前天又手痒在阿里云上购买了一个域名。今早又没忍住购买了阿里云的学生服务器。于是我最终决定把我的博客部署到阿里云服务器上。在折腾了一个上午后，我终于成功的完成了博客的部署，这篇博客记录下我的整个部署流程。">
+<meta property="og:description" content="&amp;#x524D;&amp;#x8A00;&amp;#x8FD9;&amp;#x51E0;&amp;#x5929;&amp;#x4E00;&amp;#x6298;&amp;#x817E;&amp;#x8D77;&amp;#x6765;&amp;#x5C31;&amp;#x53D1;&amp;#x73B0;&amp;#x5B8C;&amp;#x5168;&amp;#x505C;&amp;#x4E0D;&amp;#x4E0B;&amp;#x6765;&amp;#x4E86;&amp;#xFF0C;&amp;#x524D;&amp;#x51E0;&amp;#x5929;&amp;#x6211;">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-19T08:11:43.453Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo博客部署到阿里云服务器">
-<meta name="twitter:description" content="前言这几天一折腾起来就发现完全停不下来了，前几天我把我的博客部署到了Coding平台，前天又手痒在阿里云上购买了一个域名。今早又没忍住购买了阿里云的学生服务器。于是我最终决定把我的博客部署到阿里云服务器上。在折腾了一个上午后，我终于成功的完成了博客的部署，这篇博客记录下我的整个部署流程。">
+<meta name="twitter:description" content="&amp;#x524D;&amp;#x8A00;&amp;#x8FD9;&amp;#x51E0;&amp;#x5929;&amp;#x4E00;&amp;#x6298;&amp;#x817E;&amp;#x8D77;&amp;#x6765;&amp;#x5C31;&amp;#x53D1;&amp;#x73B0;&amp;#x5B8C;&amp;#x5168;&amp;#x505C;&amp;#x4E0D;&amp;#x4E0B;&amp;#x6765;&amp;#x4E86;&amp;#xFF0C;&amp;#x524D;&amp;#x51E0;&amp;#x5929;&amp;#x6211;">
   <link rel="canonical" href="http://zhengyujie.cn/2019/08/17/部署到阿里云服务器/">
 
 
@@ -174,7 +174,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">47</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -187,7 +187,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
 
   </li>
       
@@ -200,7 +200,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
 
   </li>
       
@@ -358,38 +358,38 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这几天一折腾起来就发现完全停不下来了，前几天我把我的博客部署到了Coding平台，前天又手痒在阿里云上购买了一个域名。今早又没忍住购买了阿里云的学生服务器。于是我最终决定把我的博客部署到阿里云服务器上。在折腾了一个上午后，我终于成功的完成了博客的部署，这篇博客记录下我的整个部署流程。</p>
+        <h1 id="&#x524D;&#x8A00;"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</h1><p>&#x8FD9;&#x51E0;&#x5929;&#x4E00;&#x6298;&#x817E;&#x8D77;&#x6765;&#x5C31;&#x53D1;&#x73B0;&#x5B8C;&#x5168;&#x505C;&#x4E0D;&#x4E0B;&#x6765;&#x4E86;&#xFF0C;&#x524D;&#x51E0;&#x5929;&#x6211;&#x628A;&#x6211;&#x7684;&#x535A;&#x5BA2;&#x90E8;&#x7F72;&#x5230;&#x4E86;Coding&#x5E73;&#x53F0;&#xFF0C;&#x524D;&#x5929;&#x53C8;&#x624B;&#x75D2;&#x5728;&#x963F;&#x91CC;&#x4E91;&#x4E0A;&#x8D2D;&#x4E70;&#x4E86;&#x4E00;&#x4E2A;&#x57DF;&#x540D;&#x3002;&#x4ECA;&#x65E9;&#x53C8;&#x6CA1;&#x5FCD;&#x4F4F;&#x8D2D;&#x4E70;&#x4E86;&#x963F;&#x91CC;&#x4E91;&#x7684;&#x5B66;&#x751F;&#x670D;&#x52A1;&#x5668;&#x3002;&#x4E8E;&#x662F;&#x6211;&#x6700;&#x7EC8;&#x51B3;&#x5B9A;&#x628A;&#x6211;&#x7684;&#x535A;&#x5BA2;&#x90E8;&#x7F72;&#x5230;&#x963F;&#x91CC;&#x4E91;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x3002;&#x5728;&#x6298;&#x817E;&#x4E86;&#x4E00;&#x4E2A;&#x4E0A;&#x5348;&#x540E;&#xFF0C;&#x6211;&#x7EC8;&#x4E8E;&#x6210;&#x529F;&#x7684;&#x5B8C;&#x6210;&#x4E86;&#x535A;&#x5BA2;&#x7684;&#x90E8;&#x7F72;&#xFF0C;&#x8FD9;&#x7BC7;&#x535A;&#x5BA2;&#x8BB0;&#x5F55;&#x4E0B;&#x6211;&#x7684;&#x6574;&#x4E2A;&#x90E8;&#x7F72;&#x6D41;&#x7A0B;&#x3002;</p>
 <a id="more"></a>
-<h1 id="服务器环境搭建"><a href="#服务器环境搭建" class="headerlink" title="服务器环境搭建"></a>服务器环境搭建</h1><h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><p>这没啥好说的：</p>
+<h1 id="&#x670D;&#x52A1;&#x5668;&#x73AF;&#x5883;&#x642D;&#x5EFA;"><a href="#&#x670D;&#x52A1;&#x5668;&#x73AF;&#x5883;&#x642D;&#x5EFA;" class="headerlink" title="&#x670D;&#x52A1;&#x5668;&#x73AF;&#x5883;&#x642D;&#x5EFA;"></a>&#x670D;&#x52A1;&#x5668;&#x73AF;&#x5883;&#x642D;&#x5EFA;</h1><h2 id="&#x5B89;&#x88C5;Git"><a href="#&#x5B89;&#x88C5;Git" class="headerlink" title="&#x5B89;&#x88C5;Git"></a>&#x5B89;&#x88C5;Git</h2><p>&#x8FD9;&#x6CA1;&#x5565;&#x597D;&#x8BF4;&#x7684;&#xFF1A;</p>
 <pre><code>apt-get install git
-</code></pre><h2 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h2><ul>
-<li><p>安装nginx</p>
+</code></pre><h2 id="&#x914D;&#x7F6E;Nginx"><a href="#&#x914D;&#x7F6E;Nginx" class="headerlink" title="&#x914D;&#x7F6E;Nginx"></a>&#x914D;&#x7F6E;Nginx</h2><ul>
+<li><p>&#x5B89;&#x88C5;nginx</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install nginx</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>nginx</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service start nginx</span><br></pre></td></tr></table></figure>
-<p>  然后在浏览器输入服务器的公网地址，就可以看见nginx的默认页面。</p>
-<p>  <strong>注意:</strong> 这里有个超级大坑，一定要在服务器的安全组规则中添加80端口，否则不会有任何输出。这里耗费了我一个多小时的时间，说多了都是泪。</p>
+<p>  &#x7136;&#x540E;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x8F93;&#x5165;&#x670D;&#x52A1;&#x5668;&#x7684;&#x516C;&#x7F51;&#x5730;&#x5740;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x770B;&#x89C1;nginx&#x7684;&#x9ED8;&#x8BA4;&#x9875;&#x9762;&#x3002;</p>
+<p>  <strong>&#x6CE8;&#x610F;:</strong> &#x8FD9;&#x91CC;&#x6709;&#x4E2A;&#x8D85;&#x7EA7;&#x5927;&#x5751;&#xFF0C;&#x4E00;&#x5B9A;&#x8981;&#x5728;&#x670D;&#x52A1;&#x5668;&#x7684;&#x5B89;&#x5168;&#x7EC4;&#x89C4;&#x5219;&#x4E2D;&#x6DFB;&#x52A0;80&#x7AEF;&#x53E3;&#xFF0C;&#x5426;&#x5219;&#x4E0D;&#x4F1A;&#x6709;&#x4EFB;&#x4F55;&#x8F93;&#x51FA;&#x3002;&#x8FD9;&#x91CC;&#x8017;&#x8D39;&#x4E86;&#x6211;&#x4E00;&#x4E2A;&#x591A;&#x5C0F;&#x65F6;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x8BF4;&#x591A;&#x4E86;&#x90FD;&#x662F;&#x6CEA;&#x3002;</p>
 </li>
-<li><p>默认配置<br>  <code>cd</code>进入nginx的配置文件目录，然后使用<code>vim</code>打开文件</p>
+<li><p>&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;<br>  <code>cd</code>&#x8FDB;&#x5165;nginx&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;<code>vim</code>&#x6253;&#x5F00;&#x6587;&#x4EF6;</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/nginx/sites-available</span><br><span class="line">sudo vim default</span><br></pre></td></tr></table></figure>
-<p>  其中<code>server_name</code>修改为自己的域名，没有域名则无需修改。<br>  <code>root</code>修改为<code>/var/www/html/blog</code>，这是我们博客网站的根目录。</p>
+<p>  &#x5176;&#x4E2D;<code>server_name</code>&#x4FEE;&#x6539;&#x4E3A;&#x81EA;&#x5DF1;&#x7684;&#x57DF;&#x540D;&#xFF0C;&#x6CA1;&#x6709;&#x57DF;&#x540D;&#x5219;&#x65E0;&#x9700;&#x4FEE;&#x6539;&#x3002;<br>  <code>root</code>&#x4FEE;&#x6539;&#x4E3A;<code>/var/www/html/blog</code>&#xFF0C;&#x8FD9;&#x662F;&#x6211;&#x4EEC;&#x535A;&#x5BA2;&#x7F51;&#x7AD9;&#x7684;&#x6839;&#x76EE;&#x5F55;&#x3002;</p>
 </li>
 </ul>
-<h2 id="创建git用户"><a href="#创建git用户" class="headerlink" title="创建git用户"></a>创建git用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adduser git</span><br><span class="line">chmod 740 /etc/sudoers</span><br><span class="line">vim /etc/sudoers</span><br></pre></td></tr></table></figure>
-<p>找到以下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Allow root to run any commands anywhere</span><br><span class="line">root    ALL=(ALL)    ALL</span><br></pre></td></tr></table></figure></p>
-<p>在下面添加一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git ALL=(ALL) ALL</span><br></pre></td></tr></table></figure></p>
-<p>获得root权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd git</span><br></pre></td></tr></table></figure></p>
-<h2 id="设置SSH"><a href="#设置SSH" class="headerlink" title="设置SSH"></a>设置SSH</h2><p>切换为git用户，创建 ~/.ssh 文件夹和 ~/.ssh/authorized_keys 文件，并赋予相应的权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su git</span><br><span class="line">mkdir ~/.ssh</span><br><span class="line">vim ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure></p>
-<p>然后将客户端<code>.ssh</code>文件夹下的<code>id_rsa.pub</code>文件里的内容复制到<code>authorized_keys</code>中，接着赋予相应的权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 ~/.ssh/authorzied_keys</span><br><span class="line">chmod 700 ~/.ssh</span><br></pre></td></tr></table></figure></p>
-<p>然后我们在客户端终端上输入<code>ssh -v git@ip地址</code>就可以免密登录了</p>
-<h2 id="git仓库设置"><a href="#git仓库设置" class="headerlink" title="git仓库设置"></a>git仓库设置</h2><p>切换到git用户，然后再服务器上初始化一个git裸库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su git</span><br><span class="line">cd ~</span><br><span class="line">git init --bare blog.git</span><br></pre></td></tr></table></figure></p>
-<p>接着新建一个post-receive文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/blog.git/hooks/post-receive</span><br></pre></td></tr></table></figure></p>
-<p>在文件中输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#！/bin/sh</span><br><span class="line">git --work-tree=/var/www/html/blog --git-dir=/home/git/blog.git checkout -f</span><br></pre></td></tr></table></figure></p>
-<p>保存退出后再赋予该文件执行权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x ~/blog.git/hooks/post-receive</span><br></pre></td></tr></table></figure></p>
-<h1 id="本地设置"><a href="#本地设置" class="headerlink" title="本地设置"></a>本地设置</h1><p>这里nodejs,npm,git,hexo等的安装就不再叙述了。本地的设置就很简单，只需要修改博客配置文件即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo:</span><br><span class="line">    aliyun: git@ip地址:/home/git/blog.git,master</span><br></pre></td></tr></table></figure></p>
-<p>然后我们在终端执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
-<p>博客文件就会上传到我们在服务器上的git仓库，然后再部署到我们创建的博客根目录。我们在浏览器中访问服务器地址，就可以看到我们的博客了。</p>
+<h2 id="&#x521B;&#x5EFA;git&#x7528;&#x6237;"><a href="#&#x521B;&#x5EFA;git&#x7528;&#x6237;" class="headerlink" title="&#x521B;&#x5EFA;git&#x7528;&#x6237;"></a>&#x521B;&#x5EFA;git&#x7528;&#x6237;</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adduser git</span><br><span class="line">chmod 740 /etc/sudoers</span><br><span class="line">vim /etc/sudoers</span><br></pre></td></tr></table></figure>
+<p>&#x627E;&#x5230;&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Allow root to run any commands anywhere</span><br><span class="line">root    ALL=(ALL)    ALL</span><br></pre></td></tr></table></figure></p>
+<p>&#x5728;&#x4E0B;&#x9762;&#x6DFB;&#x52A0;&#x4E00;&#x884C;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git ALL=(ALL) ALL</span><br></pre></td></tr></table></figure></p>
+<p>&#x83B7;&#x5F97;root&#x6743;&#x9650;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd git</span><br></pre></td></tr></table></figure></p>
+<h2 id="&#x8BBE;&#x7F6E;SSH"><a href="#&#x8BBE;&#x7F6E;SSH" class="headerlink" title="&#x8BBE;&#x7F6E;SSH"></a>&#x8BBE;&#x7F6E;SSH</h2><p>&#x5207;&#x6362;&#x4E3A;git&#x7528;&#x6237;&#xFF0C;&#x521B;&#x5EFA; ~/.ssh &#x6587;&#x4EF6;&#x5939;&#x548C; ~/.ssh/authorized_keys &#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x8D4B;&#x4E88;&#x76F8;&#x5E94;&#x7684;&#x6743;&#x9650;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su git</span><br><span class="line">mkdir ~/.ssh</span><br><span class="line">vim ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure></p>
+<p>&#x7136;&#x540E;&#x5C06;&#x5BA2;&#x6237;&#x7AEF;<code>.ssh</code>&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x7684;<code>id_rsa.pub</code>&#x6587;&#x4EF6;&#x91CC;&#x7684;&#x5185;&#x5BB9;&#x590D;&#x5236;&#x5230;<code>authorized_keys</code>&#x4E2D;&#xFF0C;&#x63A5;&#x7740;&#x8D4B;&#x4E88;&#x76F8;&#x5E94;&#x7684;&#x6743;&#x9650;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 ~/.ssh/authorzied_keys</span><br><span class="line">chmod 700 ~/.ssh</span><br></pre></td></tr></table></figure></p>
+<p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x5728;&#x5BA2;&#x6237;&#x7AEF;&#x7EC8;&#x7AEF;&#x4E0A;&#x8F93;&#x5165;<code>ssh -v git@ip&#x5730;&#x5740;</code>&#x5C31;&#x53EF;&#x4EE5;&#x514D;&#x5BC6;&#x767B;&#x5F55;&#x4E86;</p>
+<h2 id="git&#x4ED3;&#x5E93;&#x8BBE;&#x7F6E;"><a href="#git&#x4ED3;&#x5E93;&#x8BBE;&#x7F6E;" class="headerlink" title="git&#x4ED3;&#x5E93;&#x8BBE;&#x7F6E;"></a>git&#x4ED3;&#x5E93;&#x8BBE;&#x7F6E;</h2><p>&#x5207;&#x6362;&#x5230;git&#x7528;&#x6237;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x521D;&#x59CB;&#x5316;&#x4E00;&#x4E2A;git&#x88F8;&#x5E93;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su git</span><br><span class="line">cd ~</span><br><span class="line">git init --bare blog.git</span><br></pre></td></tr></table></figure></p>
+<p>&#x63A5;&#x7740;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;post-receive&#x6587;&#x4EF6;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/blog.git/hooks/post-receive</span><br></pre></td></tr></table></figure></p>
+<p>&#x5728;&#x6587;&#x4EF6;&#x4E2D;&#x8F93;&#x5165;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#&#xFF01;/bin/sh</span><br><span class="line">git --work-tree=/var/www/html/blog --git-dir=/home/git/blog.git checkout -f</span><br></pre></td></tr></table></figure></p>
+<p>&#x4FDD;&#x5B58;&#x9000;&#x51FA;&#x540E;&#x518D;&#x8D4B;&#x4E88;&#x8BE5;&#x6587;&#x4EF6;&#x6267;&#x884C;&#x6743;&#x9650;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x ~/blog.git/hooks/post-receive</span><br></pre></td></tr></table></figure></p>
+<h1 id="&#x672C;&#x5730;&#x8BBE;&#x7F6E;"><a href="#&#x672C;&#x5730;&#x8BBE;&#x7F6E;" class="headerlink" title="&#x672C;&#x5730;&#x8BBE;&#x7F6E;"></a>&#x672C;&#x5730;&#x8BBE;&#x7F6E;</h1><p>&#x8FD9;&#x91CC;nodejs,npm,git,hexo&#x7B49;&#x7684;&#x5B89;&#x88C5;&#x5C31;&#x4E0D;&#x518D;&#x53D9;&#x8FF0;&#x4E86;&#x3002;&#x672C;&#x5730;&#x7684;&#x8BBE;&#x7F6E;&#x5C31;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x535A;&#x5BA2;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5373;&#x53EF;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo:</span><br><span class="line">    aliyun: git@ip&#x5730;&#x5740;:/home/git/blog.git,master</span><br></pre></td></tr></table></figure></p>
+<p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x5728;&#x7EC8;&#x7AEF;&#x6267;&#x884C;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
+<p>&#x535A;&#x5BA2;&#x6587;&#x4EF6;&#x5C31;&#x4F1A;&#x4E0A;&#x4F20;&#x5230;&#x6211;&#x4EEC;&#x5728;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x7684;git&#x4ED3;&#x5E93;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x90E8;&#x7F72;&#x5230;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x7684;&#x535A;&#x5BA2;&#x6839;&#x76EE;&#x5F55;&#x3002;&#x6211;&#x4EEC;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x8BBF;&#x95EE;&#x670D;&#x52A1;&#x5668;&#x5730;&#x5740;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6211;&#x4EEC;&#x7684;&#x535A;&#x5BA2;&#x4E86;&#x3002;</p>
 
     </div>
 
@@ -409,9 +409,9 @@
             
               <a href="/tags/Ubuntu/" rel="tag"><i class="fa fa-tag"></i> Ubuntu</a>
             
-              <a href="/tags/SSH/" rel="tag"><i class="fa fa-tag"></i> SSH</a>
-            
               <a href="/tags/阿里云/" rel="tag"><i class="fa fa-tag"></i> 阿里云</a>
+            
+              <a href="/tags/SSH/" rel="tag"><i class="fa fa-tag"></i> SSH</a>
             
               <a href="/tags/Git/" rel="tag"><i class="fa fa-tag"></i> Git</a>
             
@@ -502,7 +502,7 @@
                   
                     <a href="/archives/">
                   
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -529,7 +529,9 @@
                   
                     
                   
-                  <span class="site-state-item-count">5</span>
+                    
+                  
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -604,43 +606,7 @@
                   
                     
                   
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -733,7 +699,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
     <span class="post-meta-divider">|</span>
-    <span title="站点总字数">全站共195k字</span>
+    <span title="站点总字数">全站共199k字</span>
 </div>
 
 <div class="BbeiAn-info">

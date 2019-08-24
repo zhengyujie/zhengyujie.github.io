@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="前言一直想给自己的博客添加评论功能，比较靠谱的评论系统有GitHub上的gitment，gitalk，gitter，来必力(有点儿花哨)，以及一些国外的评论系统(需要翻墙)。偶然间了解到一款国人开发的评论系统叫Valine用的是LeanCloud作为数据库，洁面很简洁，不像来必力那样花哨只是单纯的评论，简洁到没有后台，删除和管理评论直接操作数据库，于是决定就是你了。本片博客用于记录添加Valine">
+  <meta name="description" content="&amp;#x524D;&amp;#x8A00;&amp;#x4E00;&amp;#x76F4;&amp;#x60F3;&amp;#x7ED9;&amp;#x81EA;&amp;#x5DF1;&amp;#x7684;&amp;#x535A;&amp;#x5BA2;&amp;#x6DFB;&amp;#x52A0;&amp;#x8BC4;&amp;#x8BBA;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x6BD4;&amp;#x8F83;&amp;#x9760;&amp;#x8C31;&amp;#x7684;&amp;#x8BC4;&amp;#x8BBA;">
 <meta name="keywords" content="Hexo,NexT,Valine">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo添加Valine评论功能">
 <meta property="og:url" content="http://zhengyujie.cn/2019/08/18/valine评论系统/index.html">
 <meta property="og:site_name" content="浅笑の博客">
-<meta property="og:description" content="前言一直想给自己的博客添加评论功能，比较靠谱的评论系统有GitHub上的gitment，gitalk，gitter，来必力(有点儿花哨)，以及一些国外的评论系统(需要翻墙)。偶然间了解到一款国人开发的评论系统叫Valine用的是LeanCloud作为数据库，洁面很简洁，不像来必力那样花哨只是单纯的评论，简洁到没有后台，删除和管理评论直接操作数据库，于是决定就是你了。本片博客用于记录添加Valine">
+<meta property="og:description" content="&amp;#x524D;&amp;#x8A00;&amp;#x4E00;&amp;#x76F4;&amp;#x60F3;&amp;#x7ED9;&amp;#x81EA;&amp;#x5DF1;&amp;#x7684;&amp;#x535A;&amp;#x5BA2;&amp;#x6DFB;&amp;#x52A0;&amp;#x8BC4;&amp;#x8BBA;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x6BD4;&amp;#x8F83;&amp;#x9760;&amp;#x8C31;&amp;#x7684;&amp;#x8BC4;&amp;#x8BBA;">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-18T03:42:26.436Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo添加Valine评论功能">
-<meta name="twitter:description" content="前言一直想给自己的博客添加评论功能，比较靠谱的评论系统有GitHub上的gitment，gitalk，gitter，来必力(有点儿花哨)，以及一些国外的评论系统(需要翻墙)。偶然间了解到一款国人开发的评论系统叫Valine用的是LeanCloud作为数据库，洁面很简洁，不像来必力那样花哨只是单纯的评论，简洁到没有后台，删除和管理评论直接操作数据库，于是决定就是你了。本片博客用于记录添加Valine">
+<meta name="twitter:description" content="&amp;#x524D;&amp;#x8A00;&amp;#x4E00;&amp;#x76F4;&amp;#x60F3;&amp;#x7ED9;&amp;#x81EA;&amp;#x5DF1;&amp;#x7684;&amp;#x535A;&amp;#x5BA2;&amp;#x6DFB;&amp;#x52A0;&amp;#x8BC4;&amp;#x8BBA;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x6BD4;&amp;#x8F83;&amp;#x9760;&amp;#x8C31;&amp;#x7684;&amp;#x8BC4;&amp;#x8BBA;">
   <link rel="canonical" href="http://zhengyujie.cn/2019/08/18/valine评论系统/">
 
 
@@ -174,7 +174,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">47</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -187,7 +187,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
 
   </li>
       
@@ -200,7 +200,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
 
   </li>
       
@@ -351,28 +351,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>一直想给自己的博客添加评论功能，比较靠谱的评论系统有GitHub上的gitment，gitalk，gitter，来必力(有点儿花哨)，以及一些国外的评论系统(需要翻墙)。偶然间了解到一款国人开发的评论系统叫Valine用的是LeanCloud作为数据库，洁面很简洁，不像来必力那样花哨只是单纯的评论，简洁到没有后台，删除和管理评论直接操作数据库，于是决定就是你了。本片博客用于记录添加Valine评论功能的完整过程。</p>
+        <h1 id="&#x524D;&#x8A00;"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</h1><p>&#x4E00;&#x76F4;&#x60F3;&#x7ED9;&#x81EA;&#x5DF1;&#x7684;&#x535A;&#x5BA2;&#x6DFB;&#x52A0;&#x8BC4;&#x8BBA;&#x529F;&#x80FD;&#xFF0C;&#x6BD4;&#x8F83;&#x9760;&#x8C31;&#x7684;&#x8BC4;&#x8BBA;&#x7CFB;&#x7EDF;&#x6709;GitHub&#x4E0A;&#x7684;gitment&#xFF0C;gitalk&#xFF0C;gitter&#xFF0C;&#x6765;&#x5FC5;&#x529B;(&#x6709;&#x70B9;&#x513F;&#x82B1;&#x54E8;)&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E9B;&#x56FD;&#x5916;&#x7684;&#x8BC4;&#x8BBA;&#x7CFB;&#x7EDF;(&#x9700;&#x8981;&#x7FFB;&#x5899;)&#x3002;&#x5076;&#x7136;&#x95F4;&#x4E86;&#x89E3;&#x5230;&#x4E00;&#x6B3E;&#x56FD;&#x4EBA;&#x5F00;&#x53D1;&#x7684;&#x8BC4;&#x8BBA;&#x7CFB;&#x7EDF;&#x53EB;Valine&#x7528;&#x7684;&#x662F;LeanCloud&#x4F5C;&#x4E3A;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x6D01;&#x9762;&#x5F88;&#x7B80;&#x6D01;&#xFF0C;&#x4E0D;&#x50CF;&#x6765;&#x5FC5;&#x529B;&#x90A3;&#x6837;&#x82B1;&#x54E8;&#x53EA;&#x662F;&#x5355;&#x7EAF;&#x7684;&#x8BC4;&#x8BBA;&#xFF0C;&#x7B80;&#x6D01;&#x5230;&#x6CA1;&#x6709;&#x540E;&#x53F0;&#xFF0C;&#x5220;&#x9664;&#x548C;&#x7BA1;&#x7406;&#x8BC4;&#x8BBA;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x4E8E;&#x662F;&#x51B3;&#x5B9A;&#x5C31;&#x662F;&#x4F60;&#x4E86;&#x3002;&#x672C;&#x7247;&#x535A;&#x5BA2;&#x7528;&#x4E8E;&#x8BB0;&#x5F55;&#x6DFB;&#x52A0;Valine&#x8BC4;&#x8BBA;&#x529F;&#x80FD;&#x7684;&#x5B8C;&#x6574;&#x8FC7;&#x7A0B;&#x3002;</p>
 <a id="more"></a>
-<h1 id="添加Valine评论"><a href="#添加Valine评论" class="headerlink" title="添加Valine评论"></a>添加Valine评论</h1><ol>
-<li><p>注册LeanCloud</p>
+<h1 id="&#x6DFB;&#x52A0;Valine&#x8BC4;&#x8BBA;"><a href="#&#x6DFB;&#x52A0;Valine&#x8BC4;&#x8BBA;" class="headerlink" title="&#x6DFB;&#x52A0;Valine&#x8BC4;&#x8BBA;"></a>&#x6DFB;&#x52A0;Valine&#x8BC4;&#x8BBA;</h1><ol>
+<li><p>&#x6CE8;&#x518C;LeanCloud</p>
 </li>
-<li><p>创建一个开发版应用</p>
+<li><p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5F00;&#x53D1;&#x7248;&#x5E94;&#x7528;</p>
 </li>
-<li><p>创建 Class<br> 在LeanCloud -&gt; 存储 -&gt; 创建Class -&gt; 无限制的Class</p>
+<li><p>&#x521B;&#x5EFA; Class<br> &#x5728;LeanCloud -&gt; &#x5B58;&#x50A8; -&gt; &#x521B;&#x5EFA;Class -&gt; &#x65E0;&#x9650;&#x5236;&#x7684;Class</p>
 </li>
-<li>关闭服务开关<br> 在LeanCloud -&gt; 设置 -&gt; 安全中心 -&gt; 服务开关，把除数据存储其他选项都关闭。</li>
-<li>添加域名<br> 在LeanCloud -&gt; 设置 -&gt; 安全中心 -&gt; Wwb安全域名，注意格式</li>
-<li><p>修改主题配置文件<br> 打开主题配置文件<code>_config.yml</code>，搜索找到<code>Valine</code>部分，填写appid以及appkey</p>
- <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Valine</span></span><br><span class="line"><span class="comment"># You can get your appid and appkey from https://leancloud.cn</span></span><br><span class="line"><span class="comment"># For more information: https://valine.js.org, https://github.com/xCss/Valine</span></span><br><span class="line"><span class="attr">valine:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span> <span class="comment"># When enable is set to be true, leancloud_visitors is recommended to be closed for the re-initialization problem within different leancloud adk version</span></span><br><span class="line"><span class="attr">appid:</span> <span class="comment"># your appid</span></span><br><span class="line"><span class="attr">appkey:</span> <span class="comment"># your appkey</span></span><br><span class="line"><span class="attr">notify:</span> <span class="literal">true</span> <span class="comment"># Mail notifier. See: https://github.com/xCss/Valine/wiki</span></span><br><span class="line"><span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line"><span class="attr">placeholder:</span> <span class="string">Just</span> <span class="string">go</span> <span class="string">go</span> <span class="comment"># Comment box placeholder</span></span><br><span class="line"><span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># Gravatar style</span></span><br><span class="line"><span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># Custom comment header</span></span><br><span class="line"><span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># Pagination size</span></span><br><span class="line"><span class="attr">language:</span> <span class="comment"># Language, available values: en, zh-cn</span></span><br><span class="line"><span class="attr">visitor:</span> <span class="literal">false</span> <span class="comment"># leancloud-counter-security is not supported for now. When visitor is set to be true, appid and appkey are recommended to be the same as leancloud_visitors' for counter compatibility. Article reading statistic https://valine.js.org/visitor.html</span></span><br><span class="line"><span class="attr">comment_count:</span> <span class="literal">true</span> <span class="comment"># If false, comment count will only be displayed in post page, not in home page</span></span><br></pre></td></tr></table></figure>
+<li>&#x5173;&#x95ED;&#x670D;&#x52A1;&#x5F00;&#x5173;<br> &#x5728;LeanCloud -&gt; &#x8BBE;&#x7F6E; -&gt; &#x5B89;&#x5168;&#x4E2D;&#x5FC3; -&gt; &#x670D;&#x52A1;&#x5F00;&#x5173;&#xFF0C;&#x628A;&#x9664;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x5176;&#x4ED6;&#x9009;&#x9879;&#x90FD;&#x5173;&#x95ED;&#x3002;</li>
+<li>&#x6DFB;&#x52A0;&#x57DF;&#x540D;<br> &#x5728;LeanCloud -&gt; &#x8BBE;&#x7F6E; -&gt; &#x5B89;&#x5168;&#x4E2D;&#x5FC3; -&gt; Wwb&#x5B89;&#x5168;&#x57DF;&#x540D;&#xFF0C;&#x6CE8;&#x610F;&#x683C;&#x5F0F;</li>
+<li><p>&#x4FEE;&#x6539;&#x4E3B;&#x9898;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<br> &#x6253;&#x5F00;&#x4E3B;&#x9898;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<code>_config.yml</code>&#xFF0C;&#x641C;&#x7D22;&#x627E;&#x5230;<code>Valine</code>&#x90E8;&#x5206;&#xFF0C;&#x586B;&#x5199;appid&#x4EE5;&#x53CA;appkey</p>
+ <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Valine</span></span><br><span class="line"><span class="comment"># You can get your appid and appkey from https://leancloud.cn</span></span><br><span class="line"><span class="comment"># For more information: https://valine.js.org, https://github.com/xCss/Valine</span></span><br><span class="line"><span class="attr">valine:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span> <span class="comment"># When enable is set to be true, leancloud_visitors is recommended to be closed for the re-initialization problem within different leancloud adk version</span></span><br><span class="line"><span class="attr">appid:</span> <span class="comment"># your appid</span></span><br><span class="line"><span class="attr">appkey:</span> <span class="comment"># your appkey</span></span><br><span class="line"><span class="attr">notify:</span> <span class="literal">true</span> <span class="comment"># Mail notifier. See: https://github.com/xCss/Valine/wiki</span></span><br><span class="line"><span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line"><span class="attr">placeholder:</span> <span class="string">Just</span> <span class="string">go</span> <span class="string">go</span> <span class="comment"># Comment box placeholder</span></span><br><span class="line"><span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># Gravatar style</span></span><br><span class="line"><span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># Custom comment header</span></span><br><span class="line"><span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># Pagination size</span></span><br><span class="line"><span class="attr">language:</span> <span class="comment"># Language, available values: en, zh-cn</span></span><br><span class="line"><span class="attr">visitor:</span> <span class="literal">false</span> <span class="comment"># leancloud-counter-security is not supported for now. When visitor is set to be true, appid and appkey are recommended to be the same as leancloud_visitors&apos; for counter compatibility. Article reading statistic https://valine.js.org/visitor.html</span></span><br><span class="line"><span class="attr">comment_count:</span> <span class="literal">true</span> <span class="comment"># If false, comment count will only be displayed in post page, not in home page</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>开启email通知<br> 若要开启邮件通知，首先修改主题配置文件：</p>
+<li><p>&#x5F00;&#x542F;email&#x901A;&#x77E5;<br> &#x82E5;&#x8981;&#x5F00;&#x542F;&#x90AE;&#x4EF6;&#x901A;&#x77E5;&#xFF0C;&#x9996;&#x5148;&#x4FEE;&#x6539;&#x4E3B;&#x9898;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF1A;</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">notify: true # Mail notifier. See: https://github.com/xCss/Valine/wiki</span><br></pre></td></tr></table></figure>
-<p> 然后在LeanCloud -&gt; 设置 -&gt; 邮件模板<br> 用于重置密码的邮件主题修改为：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">你在&#123;&#123;appname&#125;&#125; 的评论收到了新的回复</span><br></pre></td></tr></table></figure>
-<p> 内容修改为：</p>
- <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Hi, &#123;&#123;username&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">你在 &#123;&#123;appname&#125;&#125; 的评论收到了新的回复，请点击查看：</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"你的网址首页链接"</span> <span class="attr">style</span>=<span class="string">"display: inline-block; padding: 10px 20px; border-radius: 4px; background-color: #3090e4; color: #fff; text-decoration: none;"</span>&gt;</span>马上查看<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p> &#x7136;&#x540E;&#x5728;LeanCloud -&gt; &#x8BBE;&#x7F6E; -&gt; &#x90AE;&#x4EF6;&#x6A21;&#x677F;<br> &#x7528;&#x4E8E;&#x91CD;&#x7F6E;&#x5BC6;&#x7801;&#x7684;&#x90AE;&#x4EF6;&#x4E3B;&#x9898;&#x4FEE;&#x6539;&#x4E3A;&#xFF1A;</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x4F60;&#x5728;{{appname}} &#x7684;&#x8BC4;&#x8BBA;&#x6536;&#x5230;&#x4E86;&#x65B0;&#x7684;&#x56DE;&#x590D;</span><br></pre></td></tr></table></figure>
+<p> &#x5185;&#x5BB9;&#x4FEE;&#x6539;&#x4E3A;&#xFF1A;</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Hi, {{username}}<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">&#x4F60;&#x5728; {{appname}} &#x7684;&#x8BC4;&#x8BBA;&#x6536;&#x5230;&#x4E86;&#x65B0;&#x7684;&#x56DE;&#x590D;&#xFF0C;&#x8BF7;&#x70B9;&#x51FB;&#x67E5;&#x770B;&#xFF1A;</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&#x4F60;&#x7684;&#x7F51;&#x5740;&#x9996;&#x9875;&#x94FE;&#x63A5;&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display: inline-block; padding: 10px 20px; border-radius: 4px; background-color: #3090e4; color: #fff; text-decoration: none;&quot;</span>&gt;</span>&#x9A6C;&#x4E0A;&#x67E5;&#x770B;<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>最后欢迎大家在下方评论区测试评论</p>
+<li><p>&#x6700;&#x540E;&#x6B22;&#x8FCE;&#x5927;&#x5BB6;&#x5728;&#x4E0B;&#x65B9;&#x8BC4;&#x8BBA;&#x533A;&#x6D4B;&#x8BD5;&#x8BC4;&#x8BBA;</p>
 </li>
 </ol>
 
@@ -481,7 +481,7 @@
                   
                     <a href="/archives/">
                   
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -508,7 +508,9 @@
                   
                     
                   
-                  <span class="site-state-item-count">5</span>
+                    
+                  
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -583,43 +585,7 @@
                   
                     
                   
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -712,7 +678,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
     <span class="post-meta-divider">|</span>
-    <span title="站点总字数">全站共195k字</span>
+    <span title="站点总字数">全站共199k字</span>
 </div>
 
 <div class="BbeiAn-info">

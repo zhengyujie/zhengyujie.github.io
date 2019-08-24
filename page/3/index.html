@@ -172,7 +172,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">47</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">29</span></a>
 
   </li>
       
@@ -185,7 +185,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
 
   </li>
       
@@ -198,7 +198,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">47</span></a>
 
   </li>
       
@@ -263,6 +263,294 @@
     <div class="blog-show">
       
     </div>
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/08/tf学习笔记7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zheng Yujie">
+      <meta itemprop="description" content="C++/Python/深度学习">
+      <meta itemprop="image" content="/images/1.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅笑の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/08/08/tf学习笔记7/" class="post-title-link" itemprop="url">TensorFlow学习笔记7：卷积神经网络</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-08 15:07:32" itemprop="dateCreated datePublished" datetime="2019-08-08T15:07:32+08:00">2019-08-08</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/08/08/tf学习笔记7/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/08/tf学习笔记7/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>6.8k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="&#x76EE;&#x6807;"><a href="#&#x76EE;&#x6807;" class="headerlink" title="&#x76EE;&#x6807;"></a>&#x76EE;&#x6807;</h1><p>&#x7528;Tensorflow&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#xFF0C;&#x7528;&#x8FD9;&#x4E2A;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x6765;&#x8BC6;&#x522B;&#x624B;&#x5199;&#x6570;&#x5B57;&#x6570;&#x636E;&#x96C6;&#xFF08;MNIST&#xFF09;&#x3002;</p>
+          
+            <div class="home-post-tags">
+              
+                <a href="/tags/卷积网络/" rel="tag">卷积网络</a>
+              
+                <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
+              
+              <script type="text/javascript">
+                var tagsall=document.getElementsByClassName("home-post-tags")
+                for (var i = tagsall.length - 1; i >= 0; i--){
+                    var tags=tagsall[i].getElementsByTagName("a");
+                    for (var j = tags.length - 1; j >= 0; j--) {
+                        var r=Math.floor(Math.random()*255);
+                        var g=Math.floor(Math.random()*255);
+                        var b=Math.floor(Math.random()*255);
+                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                    }
+                }
+              </script>
+            </div>
+          
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/08/tf学习笔记7/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/08/tf学习笔记6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zheng Yujie">
+      <meta itemprop="description" content="C++/Python/深度学习">
+      <meta itemprop="image" content="/images/1.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅笑の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/08/08/tf学习笔记6/" class="post-title-link" itemprop="url">TensorFlow学习笔记6：逻辑回归</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-08 10:59:16" itemprop="dateCreated datePublished" datetime="2019-08-08T10:59:16+08:00">2019-08-08</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/08/08/tf学习笔记6/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/08/tf学习笔记6/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>3.1k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="&#x903B;&#x8F91;&#x56DE;&#x5F52;"><a href="#&#x903B;&#x8F91;&#x56DE;&#x5F52;" class="headerlink" title="&#x903B;&#x8F91;&#x56DE;&#x5F52;"></a>&#x903B;&#x8F91;&#x56DE;&#x5F52;</h1><p>&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x662F;&#x5E94;&#x7528;&#x975E;&#x5E38;&#x5E7F;&#x6CDB;&#x7684;&#x4E00;&#x4E2A;&#x5206;&#x7C7B;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7B97;&#x6CD5;&#xFF0C;&#x5B83;&#x5C06;&#x6570;&#x636E;&#x62DF;&#x5408;&#x5230;&#x4E00;&#x4E2A;logit&#x51FD;&#x6570;(&#x6216;&#x8005;&#x53EB;&#x505A;logistic&#x51FD;&#x6570;)&#x4E2D;&#xFF0C;&#x4ECE;&#x800C;&#x80FD;&#x591F;&#x5B8C;&#x6210;&#x5BF9;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x7684;&#x6982;&#x7387;&#x8FDB;&#x884C;&#x9884;&#x6D4B;&#x3002;</p>
+          
+            <div class="home-post-tags">
+              
+                <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
+              
+              <script type="text/javascript">
+                var tagsall=document.getElementsByClassName("home-post-tags")
+                for (var i = tagsall.length - 1; i >= 0; i--){
+                    var tags=tagsall[i].getElementsByTagName("a");
+                    for (var j = tags.length - 1; j >= 0; j--) {
+                        var r=Math.floor(Math.random()*255);
+                        var g=Math.floor(Math.random()*255);
+                        var b=Math.floor(Math.random()*255);
+                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
+                    }
+                }
+              </script>
+            </div>
+          
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/08/tf学习笔记6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
       
 
   <article class="post" itemscope itemtype="http://schema.org/Article">
@@ -359,13 +647,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><p>线性回归（Linear Regression）是一种通过属性的线性组合来进行预测的线性模型，其目的是找到一条直线或者一个平面或者更高维的超平面，使得预测值与真实值之间的误差最小化。</p>
+          <h1 id="&#x7EBF;&#x6027;&#x56DE;&#x5F52;"><a href="#&#x7EBF;&#x6027;&#x56DE;&#x5F52;" class="headerlink" title="&#x7EBF;&#x6027;&#x56DE;&#x5F52;"></a>&#x7EBF;&#x6027;&#x56DE;&#x5F52;</h1><p>&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#xFF08;Linear Regression&#xFF09;&#x662F;&#x4E00;&#x79CD;&#x901A;&#x8FC7;&#x5C5E;&#x6027;&#x7684;&#x7EBF;&#x6027;&#x7EC4;&#x5408;&#x6765;&#x8FDB;&#x884C;&#x9884;&#x6D4B;&#x7684;&#x7EBF;&#x6027;&#x6A21;&#x578B;&#xFF0C;&#x5176;&#x76EE;&#x7684;&#x662F;&#x627E;&#x5230;&#x4E00;&#x6761;&#x76F4;&#x7EBF;&#x6216;&#x8005;&#x4E00;&#x4E2A;&#x5E73;&#x9762;&#x6216;&#x8005;&#x66F4;&#x9AD8;&#x7EF4;&#x7684;&#x8D85;&#x5E73;&#x9762;&#xFF0C;&#x4F7F;&#x5F97;&#x9884;&#x6D4B;&#x503C;&#x4E0E;&#x771F;&#x5B9E;&#x503C;&#x4E4B;&#x95F4;&#x7684;&#x8BEF;&#x5DEE;&#x6700;&#x5C0F;&#x5316;&#x3002;</p>
           
             <div class="home-post-tags">
               
                 <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
-              
-                <a href="/tags/线性回归/" rel="tag">线性回归</a>
               
               <script type="text/javascript">
                 var tagsall=document.getElementsByClassName("home-post-tags")
@@ -504,13 +790,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h1><p>损失函数（loss function）是机器学习中非常重要的内容，它是度量模型输出值与目标值的差异，也就是作为评估模型效果的一种重要指标，损失函数越小，表明模型的鲁棒性就越好。</p>
+          <h1 id="&#x635F;&#x5931;&#x51FD;&#x6570;"><a href="#&#x635F;&#x5931;&#x51FD;&#x6570;" class="headerlink" title="&#x635F;&#x5931;&#x51FD;&#x6570;"></a>&#x635F;&#x5931;&#x51FD;&#x6570;</h1><p>&#x635F;&#x5931;&#x51FD;&#x6570;&#xFF08;loss function&#xFF09;&#x662F;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x4E2D;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x5B83;&#x662F;&#x5EA6;&#x91CF;&#x6A21;&#x578B;&#x8F93;&#x51FA;&#x503C;&#x4E0E;&#x76EE;&#x6807;&#x503C;&#x7684;&#x5DEE;&#x5F02;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x4F5C;&#x4E3A;&#x8BC4;&#x4F30;&#x6A21;&#x578B;&#x6548;&#x679C;&#x7684;&#x4E00;&#x79CD;&#x91CD;&#x8981;&#x6307;&#x6807;&#xFF0C;&#x635F;&#x5931;&#x51FD;&#x6570;&#x8D8A;&#x5C0F;&#xFF0C;&#x8868;&#x660E;&#x6A21;&#x578B;&#x7684;&#x9C81;&#x68D2;&#x6027;&#x5C31;&#x8D8A;&#x597D;&#x3002;</p>
           
             <div class="home-post-tags">
               
                 <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
-              
-                <a href="/tags/损失函数/" rel="tag">损失函数</a>
               
               <script type="text/javascript">
                 var tagsall=document.getElementsByClassName("home-post-tags")
@@ -649,13 +933,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="激励函数的作用"><a href="#激励函数的作用" class="headerlink" title="激励函数的作用"></a>激励函数的作用</h1><p>激励函数的作用就是将多个线性输入转换为非线性的关系。如果不使用激励函数，神经网络的每层都只是做线性变换，即使是多层输入叠加后也还是线性变换。通过使用激励函数引入非线性因素后，使神经网络的表示能力更强了。</p>
+          <h1 id="&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;"><a href="#&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;" class="headerlink" title="&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;"></a>&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;</h1><p>&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x7684;&#x4F5C;&#x7528;&#x5C31;&#x662F;&#x5C06;&#x591A;&#x4E2A;&#x7EBF;&#x6027;&#x8F93;&#x5165;&#x8F6C;&#x6362;&#x4E3A;&#x975E;&#x7EBF;&#x6027;&#x7684;&#x5173;&#x7CFB;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x4F7F;&#x7528;&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#xFF0C;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x6BCF;&#x5C42;&#x90FD;&#x53EA;&#x662F;&#x505A;&#x7EBF;&#x6027;&#x53D8;&#x6362;&#xFF0C;&#x5373;&#x4F7F;&#x662F;&#x591A;&#x5C42;&#x8F93;&#x5165;&#x53E0;&#x52A0;&#x540E;&#x4E5F;&#x8FD8;&#x662F;&#x7EBF;&#x6027;&#x53D8;&#x6362;&#x3002;&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x5F15;&#x5165;&#x975E;&#x7EBF;&#x6027;&#x56E0;&#x7D20;&#x540E;&#xFF0C;&#x4F7F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x8868;&#x793A;&#x80FD;&#x529B;&#x66F4;&#x5F3A;&#x4E86;&#x3002;</p>
           
             <div class="home-post-tags">
               
                 <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
-              
-                <a href="/tags/激励函数/" rel="tag">激励函数</a>
               
               <script type="text/javascript">
                 var tagsall=document.getElementsByClassName("home-post-tags")
@@ -794,7 +1076,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="http://pwbhioup3.bkt.clouddn.com/blog/20190816/TYchJjHiKGDp.png?imageslim" alt="mark"><br>计算图是TensorFlow的核心概念，使用图（Graph）来表示计算任务，由节点和边组成。TensorFlow由前端负责构建计算图，后端负责执行计算图。<br>为了执行图的计算，图必须在会话（Session）里面启动，会话将图的操作分发到CPU、GPU等设备上执行。<br>下面将介绍如何在TensorFlow里面创建会话、图以及基本操作。</p>
+          <p><img src="/2019/08/06/tf&#x5B66;&#x4E60;&#x7B14;&#x8BB0;2/1.png" alt><br>&#x8BA1;&#x7B97;&#x56FE;&#x662F;TensorFlow&#x7684;&#x6838;&#x5FC3;&#x6982;&#x5FF5;&#xFF0C;&#x4F7F;&#x7528;&#x56FE;&#xFF08;Graph&#xFF09;&#x6765;&#x8868;&#x793A;&#x8BA1;&#x7B97;&#x4EFB;&#x52A1;&#xFF0C;&#x7531;&#x8282;&#x70B9;&#x548C;&#x8FB9;&#x7EC4;&#x6210;&#x3002;TensorFlow&#x7531;&#x524D;&#x7AEF;&#x8D1F;&#x8D23;&#x6784;&#x5EFA;&#x8BA1;&#x7B97;&#x56FE;&#xFF0C;&#x540E;&#x7AEF;&#x8D1F;&#x8D23;&#x6267;&#x884C;&#x8BA1;&#x7B97;&#x56FE;&#x3002;<br>&#x4E3A;&#x4E86;&#x6267;&#x884C;&#x56FE;&#x7684;&#x8BA1;&#x7B97;&#xFF0C;&#x56FE;&#x5FC5;&#x987B;&#x5728;&#x4F1A;&#x8BDD;&#xFF08;Session&#xFF09;&#x91CC;&#x9762;&#x542F;&#x52A8;&#xFF0C;&#x4F1A;&#x8BDD;&#x5C06;&#x56FE;&#x7684;&#x64CD;&#x4F5C;&#x5206;&#x53D1;&#x5230;CPU&#x3001;GPU&#x7B49;&#x8BBE;&#x5907;&#x4E0A;&#x6267;&#x884C;&#x3002;<br>&#x4E0B;&#x9762;&#x5C06;&#x4ECB;&#x7ECD;&#x5982;&#x4F55;&#x5728;TensorFlow&#x91CC;&#x9762;&#x521B;&#x5EFA;&#x4F1A;&#x8BDD;&#x3001;&#x56FE;&#x4EE5;&#x53CA;&#x57FA;&#x672C;&#x64CD;&#x4F5C;&#x3002;</p>
           
             <div class="home-post-tags">
               
@@ -937,12 +1219,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="张量的概念"><a href="#张量的概念" class="headerlink" title="张量的概念"></a>张量的概念</h1><p>TensorFlow用张量这种数据结构来表示所有的数据.你可以把一个张量想象成一个n维的数组或列表.一个张量有一个静态类型和动态类型的维数.张量可以在图中的节点之间流通.零阶张量表示标量，一阶张量表示向量，也就是一个以为数组，第n阶张量为矩阵，也就是一个n维数组。<br>但张量在tf中并不是采用数组的形式，只是对TF的运算结果的引用。</p>
-<p>一个张量包含三个属性：名字name ，维度shape，类型 dtype：</p>
+          <h1 id="&#x5F20;&#x91CF;&#x7684;&#x6982;&#x5FF5;"><a href="#&#x5F20;&#x91CF;&#x7684;&#x6982;&#x5FF5;" class="headerlink" title="&#x5F20;&#x91CF;&#x7684;&#x6982;&#x5FF5;"></a>&#x5F20;&#x91CF;&#x7684;&#x6982;&#x5FF5;</h1><p>TensorFlow&#x7528;&#x5F20;&#x91CF;&#x8FD9;&#x79CD;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x6765;&#x8868;&#x793A;&#x6240;&#x6709;&#x7684;&#x6570;&#x636E;.&#x4F60;&#x53EF;&#x4EE5;&#x628A;&#x4E00;&#x4E2A;&#x5F20;&#x91CF;&#x60F3;&#x8C61;&#x6210;&#x4E00;&#x4E2A;n&#x7EF4;&#x7684;&#x6570;&#x7EC4;&#x6216;&#x5217;&#x8868;.&#x4E00;&#x4E2A;&#x5F20;&#x91CF;&#x6709;&#x4E00;&#x4E2A;&#x9759;&#x6001;&#x7C7B;&#x578B;&#x548C;&#x52A8;&#x6001;&#x7C7B;&#x578B;&#x7684;&#x7EF4;&#x6570;.&#x5F20;&#x91CF;&#x53EF;&#x4EE5;&#x5728;&#x56FE;&#x4E2D;&#x7684;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x6D41;&#x901A;.&#x96F6;&#x9636;&#x5F20;&#x91CF;&#x8868;&#x793A;&#x6807;&#x91CF;&#xFF0C;&#x4E00;&#x9636;&#x5F20;&#x91CF;&#x8868;&#x793A;&#x5411;&#x91CF;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x4EE5;&#x4E3A;&#x6570;&#x7EC4;&#xFF0C;&#x7B2C;n&#x9636;&#x5F20;&#x91CF;&#x4E3A;&#x77E9;&#x9635;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x4E00;&#x4E2A;n&#x7EF4;&#x6570;&#x7EC4;&#x3002;<br>&#x4F46;&#x5F20;&#x91CF;&#x5728;tf&#x4E2D;&#x5E76;&#x4E0D;&#x662F;&#x91C7;&#x7528;&#x6570;&#x7EC4;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x53EA;&#x662F;&#x5BF9;TF&#x7684;&#x8FD0;&#x7B97;&#x7ED3;&#x679C;&#x7684;&#x5F15;&#x7528;&#x3002;</p>
+<p>&#x4E00;&#x4E2A;&#x5F20;&#x91CF;&#x5305;&#x542B;&#x4E09;&#x4E2A;&#x5C5E;&#x6027;&#xFF1A;&#x540D;&#x5B57;name &#xFF0C;&#x7EF4;&#x5EA6;shape&#xFF0C;&#x7C7B;&#x578B; dtype&#xFF1A;</p>
 <ul>
-<li>name：张量的唯一标识。命名规范：“node:src_input” 。node 表示图的节点的名称，src_input 表示张量来自节点的第几个输入（从0开始）</li>
-<li>shape：描述张量的维度信息。</li>
-<li>dtype：每一个张量有一个唯一的类型。不同类型计算会报错。</li>
+<li>name&#xFF1A;&#x5F20;&#x91CF;&#x7684;&#x552F;&#x4E00;&#x6807;&#x8BC6;&#x3002;&#x547D;&#x540D;&#x89C4;&#x8303;&#xFF1A;&#x201C;node:src_input&#x201D; &#x3002;node &#x8868;&#x793A;&#x56FE;&#x7684;&#x8282;&#x70B9;&#x7684;&#x540D;&#x79F0;&#xFF0C;src_input &#x8868;&#x793A;&#x5F20;&#x91CF;&#x6765;&#x81EA;&#x8282;&#x70B9;&#x7684;&#x7B2C;&#x51E0;&#x4E2A;&#x8F93;&#x5165;&#xFF08;&#x4ECE;0&#x5F00;&#x59CB;&#xFF09;</li>
+<li>shape&#xFF1A;&#x63CF;&#x8FF0;&#x5F20;&#x91CF;&#x7684;&#x7EF4;&#x5EA6;&#x4FE1;&#x606F;&#x3002;</li>
+<li>dtype&#xFF1A;&#x6BCF;&#x4E00;&#x4E2A;&#x5F20;&#x91CF;&#x6709;&#x4E00;&#x4E2A;&#x552F;&#x4E00;&#x7684;&#x7C7B;&#x578B;&#x3002;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x8BA1;&#x7B97;&#x4F1A;&#x62A5;&#x9519;&#x3002;</li>
 </ul>
           
             <div class="home-post-tags">
@@ -997,7 +1279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/05/论文笔记9/">
+    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/05/论文阅读笔记9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zheng Yujie">
@@ -1011,7 +1293,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/08/05/论文笔记9/" class="post-title-link" itemprop="url">论文阅读笔记9：Scale-Aware Trident Networks for Object Detection</a>
+            <a href="/2019/08/05/论文阅读笔记9/" class="post-title-link" itemprop="url">论文阅读笔记9：Scale-Aware Trident Networks for Object Detection</a>
           
         </h1>
 
@@ -1054,7 +1336,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/08/05/论文笔记9/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/05/论文笔记9/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2019/08/05/论文阅读笔记9/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/05/论文阅读笔记9/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -1080,19 +1362,13 @@
 
       
           <blockquote>
-<p>论文地址：<a href="https://arxiv.org/pdf/1901.01892" target="_blank" rel="noopener">https://arxiv.org/pdf/1901.01892</a><br>代码地址：<a href="https://github.com/TuSimple/simpledet/tree/master/models/tridentnet" target="_blank" rel="noopener">https://github.com/TuSimple/simpledet/tree/master/models/tridentnet</a></p>
+<p>&#x8BBA;&#x6587;&#x5730;&#x5740;&#xFF1A;<a href="https://arxiv.org/pdf/1901.01892" target="_blank" rel="noopener">https://arxiv.org/pdf/1901.01892</a><br>&#x4EE3;&#x7801;&#x5730;&#x5740;&#xFF1A;<a href="https://github.com/TuSimple/simpledet/tree/master/models/tridentnet" target="_blank" rel="noopener">https://github.com/TuSimple/simpledet/tree/master/models/tridentnet</a></p>
 </blockquote>
-<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>尺度变换是目标检测中的关键挑战。在我们的工作中，我们首先提出了一个控制的实验来研究感受野在检测不同尺寸物体上的影响。基于探索实验的发现，我们提出了一个全新的Trident Net-work (TridentNet)，可以生成具有统一表征能力的特定尺度的feature map，我们构建了一个平行的多分支结构，在每一个分支中分享相同的转换参数，但是具有不同的感受野。然后，我们提出了一种规模感知的训练模式来，通过采样适当比例的对象实例来训练每一个分支。在COCO数据集中，我们的以ResNet-101作为特征提取网络的TridentNet获得了当前最先进的单一模型的结果，48.4的mAP。</p>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>&#x5C3A;&#x5EA6;&#x53D8;&#x6362;&#x662F;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x4E2D;&#x7684;&#x5173;&#x952E;&#x6311;&#x6218;&#x3002;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x5DE5;&#x4F5C;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x9996;&#x5148;&#x63D0;&#x51FA;&#x4E86;&#x4E00;&#x4E2A;&#x63A7;&#x5236;&#x7684;&#x5B9E;&#x9A8C;&#x6765;&#x7814;&#x7A76;&#x611F;&#x53D7;&#x91CE;&#x5728;&#x68C0;&#x6D4B;&#x4E0D;&#x540C;&#x5C3A;&#x5BF8;&#x7269;&#x4F53;&#x4E0A;&#x7684;&#x5F71;&#x54CD;&#x3002;&#x57FA;&#x4E8E;&#x63A2;&#x7D22;&#x5B9E;&#x9A8C;&#x7684;&#x53D1;&#x73B0;&#xFF0C;&#x6211;&#x4EEC;&#x63D0;&#x51FA;&#x4E86;&#x4E00;&#x4E2A;&#x5168;&#x65B0;&#x7684;Trident Net-work (TridentNet)&#xFF0C;&#x53EF;&#x4EE5;&#x751F;&#x6210;&#x5177;&#x6709;&#x7EDF;&#x4E00;&#x8868;&#x5F81;&#x80FD;&#x529B;&#x7684;&#x7279;&#x5B9A;&#x5C3A;&#x5EA6;&#x7684;feature map&#xFF0C;&#x6211;&#x4EEC;&#x6784;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x5E73;&#x884C;&#x7684;&#x591A;&#x5206;&#x652F;&#x7ED3;&#x6784;&#xFF0C;&#x5728;&#x6BCF;&#x4E00;&#x4E2A;&#x5206;&#x652F;&#x4E2D;&#x5206;&#x4EAB;&#x76F8;&#x540C;&#x7684;&#x8F6C;&#x6362;&#x53C2;&#x6570;&#xFF0C;&#x4F46;&#x662F;&#x5177;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x611F;&#x53D7;&#x91CE;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x63D0;&#x51FA;&#x4E86;&#x4E00;&#x79CD;&#x89C4;&#x6A21;&#x611F;&#x77E5;&#x7684;&#x8BAD;&#x7EC3;&#x6A21;&#x5F0F;&#x6765;&#xFF0C;&#x901A;&#x8FC7;&#x91C7;&#x6837;&#x9002;&#x5F53;&#x6BD4;&#x4F8B;&#x7684;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#x6765;&#x8BAD;&#x7EC3;&#x6BCF;&#x4E00;&#x4E2A;&#x5206;&#x652F;&#x3002;&#x5728;COCO&#x6570;&#x636E;&#x96C6;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x4EE5;ResNet-101&#x4F5C;&#x4E3A;&#x7279;&#x5F81;&#x63D0;&#x53D6;&#x7F51;&#x7EDC;&#x7684;TridentNet&#x83B7;&#x5F97;&#x4E86;&#x5F53;&#x524D;&#x6700;&#x5148;&#x8FDB;&#x7684;&#x5355;&#x4E00;&#x6A21;&#x578B;&#x7684;&#x7ED3;&#x679C;&#xFF0C;48.4&#x7684;mAP&#x3002;</p>
           
             <div class="home-post-tags">
               
-                <a href="/tags/注意力机制/" rel="tag">注意力机制</a>
-              
-                <a href="/tags/空洞卷积/" rel="tag">空洞卷积</a>
-              
                 <a href="/tags/目标检测/" rel="tag">目标检测</a>
-              
-                <a href="/tags/论文笔记/" rel="tag">论文笔记</a>
               
               <script type="text/javascript">
                 var tagsall=document.getElementsByClassName("home-post-tags")
@@ -1111,7 +1387,7 @@
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/05/论文笔记9/#more" rel="contents">
+              <a class="btn" href="/2019/08/05/论文阅读笔记9/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1142,7 +1418,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/03/论文笔记8/">
+    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/03/论文阅读笔记8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zheng Yujie">
@@ -1156,7 +1432,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/08/03/论文笔记8/" class="post-title-link" itemprop="url">论文阅读笔记8：Non-local Neural Networks</a>
+            <a href="/2019/08/03/论文阅读笔记8/" class="post-title-link" itemprop="url">论文阅读笔记8：Non-local Neural Networks</a>
           
         </h1>
 
@@ -1199,7 +1475,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/08/03/论文笔记8/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/03/论文笔记8/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2019/08/03/论文阅读笔记8/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/03/论文阅读笔记8/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -1225,17 +1501,13 @@
 
       
           <blockquote>
-<p>论文地址：<a href="https://arxiv.org/abs/1711.07971v3" target="_blank" rel="noopener">https://arxiv.org/abs/1711.07971v3</a><br>代码地址：<a href="https://github.com/facebookresearch/video-nonlocal-net" target="_blank" rel="noopener">https://github.com/facebookresearch/video-nonlocal-net</a></p>
+<p>&#x8BBA;&#x6587;&#x5730;&#x5740;&#xFF1A;<a href="https://arxiv.org/abs/1711.07971v3" target="_blank" rel="noopener">https://arxiv.org/abs/1711.07971v3</a><br>&#x4EE3;&#x7801;&#x5730;&#x5740;&#xFF1A;<a href="https://github.com/facebookresearch/video-nonlocal-net" target="_blank" rel="noopener">https://github.com/facebookresearch/video-nonlocal-net</a></p>
 </blockquote>
-<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>不论是卷积网络还是递归网络，它们都是作用在某一块局部区域(local neighborhood)的operations。在本文中，我们提出了non-local operations作为一种通用的神经网络的building blocks来捕捉基于long-range的依赖关系。受到经典的non-local means方法的启发，本文的non-local operation会将某一位置的响应当做是一种从特征图谱所有位置的加权和来计算。该building block可以插入到现在计算机视觉的许多模型当中，进而可以提升分类，检测，分割等视觉任务的性能表现。</p>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>&#x4E0D;&#x8BBA;&#x662F;&#x5377;&#x79EF;&#x7F51;&#x7EDC;&#x8FD8;&#x662F;&#x9012;&#x5F52;&#x7F51;&#x7EDC;&#xFF0C;&#x5B83;&#x4EEC;&#x90FD;&#x662F;&#x4F5C;&#x7528;&#x5728;&#x67D0;&#x4E00;&#x5757;&#x5C40;&#x90E8;&#x533A;&#x57DF;(local neighborhood)&#x7684;operations&#x3002;&#x5728;&#x672C;&#x6587;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x63D0;&#x51FA;&#x4E86;non-local operations&#x4F5C;&#x4E3A;&#x4E00;&#x79CD;&#x901A;&#x7528;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;building blocks&#x6765;&#x6355;&#x6349;&#x57FA;&#x4E8E;long-range&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x3002;&#x53D7;&#x5230;&#x7ECF;&#x5178;&#x7684;non-local means&#x65B9;&#x6CD5;&#x7684;&#x542F;&#x53D1;&#xFF0C;&#x672C;&#x6587;&#x7684;non-local operation&#x4F1A;&#x5C06;&#x67D0;&#x4E00;&#x4F4D;&#x7F6E;&#x7684;&#x54CD;&#x5E94;&#x5F53;&#x505A;&#x662F;&#x4E00;&#x79CD;&#x4ECE;&#x7279;&#x5F81;&#x56FE;&#x8C31;&#x6240;&#x6709;&#x4F4D;&#x7F6E;&#x7684;&#x52A0;&#x6743;&#x548C;&#x6765;&#x8BA1;&#x7B97;&#x3002;&#x8BE5;building block&#x53EF;&#x4EE5;&#x63D2;&#x5165;&#x5230;&#x73B0;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x7684;&#x8BB8;&#x591A;&#x6A21;&#x578B;&#x5F53;&#x4E2D;&#xFF0C;&#x8FDB;&#x800C;&#x53EF;&#x4EE5;&#x63D0;&#x5347;&#x5206;&#x7C7B;&#xFF0C;&#x68C0;&#x6D4B;&#xFF0C;&#x5206;&#x5272;&#x7B49;&#x89C6;&#x89C9;&#x4EFB;&#x52A1;&#x7684;&#x6027;&#x80FD;&#x8868;&#x73B0;&#x3002;</p>
           
             <div class="home-post-tags">
               
                 <a href="/tags/卷积网络/" rel="tag">卷积网络</a>
-              
-                <a href="/tags/注意力机制/" rel="tag">注意力机制</a>
-              
-                <a href="/tags/论文笔记/" rel="tag">论文笔记</a>
               
               <script type="text/javascript">
                 var tagsall=document.getElementsByClassName("home-post-tags")
@@ -1254,7 +1526,7 @@
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/03/论文笔记8/#more" rel="contents">
+              <a class="btn" href="/2019/08/03/论文阅读笔记8/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1285,7 +1557,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/02/论文笔记7/">
+    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/02/论文阅读笔记7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zheng Yujie">
@@ -1299,7 +1571,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/08/02/论文笔记7/" class="post-title-link" itemprop="url">论文阅读笔记7：Libra R-CNN:Towards Balanced Learning for Object Detection</a>
+            <a href="/2019/08/02/论文阅读笔记7/" class="post-title-link" itemprop="url">论文阅读笔记7：Libra R-CNN:Towards Balanced Learning for Object Detection</a>
           
         </h1>
 
@@ -1342,7 +1614,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/08/02/论文笔记7/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/02/论文笔记7/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2019/08/02/论文阅读笔记7/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/02/论文阅读笔记7/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -1367,19 +1639,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>相比模型的结构，关注度较少的训练过程对于检测器的成功检测也是十分重要的。本文发现，检测性能主要受限于训练过程中的三个levels上的不平衡——sample level,feature level,objective level的不平衡问题。为此，提出了Libra R-CNN，用于对平衡目标检测的学习的简单有效的框架。主要包含三个创新点：</p>
+          <h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>&#x76F8;&#x6BD4;&#x6A21;&#x578B;&#x7684;&#x7ED3;&#x6784;&#xFF0C;&#x5173;&#x6CE8;&#x5EA6;&#x8F83;&#x5C11;&#x7684;&#x8BAD;&#x7EC3;&#x8FC7;&#x7A0B;&#x5BF9;&#x4E8E;&#x68C0;&#x6D4B;&#x5668;&#x7684;&#x6210;&#x529F;&#x68C0;&#x6D4B;&#x4E5F;&#x662F;&#x5341;&#x5206;&#x91CD;&#x8981;&#x7684;&#x3002;&#x672C;&#x6587;&#x53D1;&#x73B0;&#xFF0C;&#x68C0;&#x6D4B;&#x6027;&#x80FD;&#x4E3B;&#x8981;&#x53D7;&#x9650;&#x4E8E;&#x8BAD;&#x7EC3;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x4E09;&#x4E2A;levels&#x4E0A;&#x7684;&#x4E0D;&#x5E73;&#x8861;&#x2014;&#x2014;sample level,feature level,objective level&#x7684;&#x4E0D;&#x5E73;&#x8861;&#x95EE;&#x9898;&#x3002;&#x4E3A;&#x6B64;&#xFF0C;&#x63D0;&#x51FA;&#x4E86;Libra R-CNN&#xFF0C;&#x7528;&#x4E8E;&#x5BF9;&#x5E73;&#x8861;&#x76EE;&#x6807;&#x68C0;&#x6D4B;&#x7684;&#x5B66;&#x4E60;&#x7684;&#x7B80;&#x5355;&#x6709;&#x6548;&#x7684;&#x6846;&#x67B6;&#x3002;&#x4E3B;&#x8981;&#x5305;&#x542B;&#x4E09;&#x4E2A;&#x521B;&#x65B0;&#x70B9;&#xFF1A;</p>
 <ul>
-<li>IoU-balanced sampling 用于减少采样过程中的不平衡</li>
-<li>balanced feature pyramid 用于减少feature 的不平衡</li>
-<li>balanced L1 loss 用于减少objective level的不平衡。</li>
+<li>IoU-balanced sampling &#x7528;&#x4E8E;&#x51CF;&#x5C11;&#x91C7;&#x6837;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x4E0D;&#x5E73;&#x8861;</li>
+<li>balanced feature pyramid &#x7528;&#x4E8E;&#x51CF;&#x5C11;feature &#x7684;&#x4E0D;&#x5E73;&#x8861;</li>
+<li>balanced L1 loss &#x7528;&#x4E8E;&#x51CF;&#x5C11;objective level&#x7684;&#x4E0D;&#x5E73;&#x8861;&#x3002;</li>
 </ul>
-<p>它在MSCOCO上的Average Precision(AP)相比FPN Faster R-CNN以及RetinaNet分别高出了2.5和2个点。</p>
+<p>&#x5B83;&#x5728;MSCOCO&#x4E0A;&#x7684;Average Precision(AP)&#x76F8;&#x6BD4;FPN Faster R-CNN&#x4EE5;&#x53CA;RetinaNet&#x5206;&#x522B;&#x9AD8;&#x51FA;&#x4E86;2.5&#x548C;2&#x4E2A;&#x70B9;&#x3002;</p>
           
             <div class="home-post-tags">
               
                 <a href="/tags/目标检测/" rel="tag">目标检测</a>
-              
-                <a href="/tags/论文笔记/" rel="tag">论文笔记</a>
               
                 <a href="/tags/R-CNN/" rel="tag">R-CNN</a>
               
@@ -1400,287 +1670,7 @@
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/02/论文笔记7/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/02/exponential-moving-average/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zheng Yujie">
-      <meta itemprop="description" content="C++/Python/深度学习">
-      <meta itemprop="image" content="/images/1.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="浅笑の博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/02/exponential-moving-average/" class="post-title-link" itemprop="url">滑动平均(exponential moving average)</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-02 09:22:34" itemprop="dateCreated datePublished" datetime="2019-08-02T09:22:34+08:00">2019-08-02</time>
-            </span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/08/02/exponential-moving-average/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/02/exponential-moving-average/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-          
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>3.5k</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="滑动平均"><a href="#滑动平均" class="headerlink" title="滑动平均"></a>滑动平均</h1><h2 id="什么是滑动平均"><a href="#什么是滑动平均" class="headerlink" title="什么是滑动平均"></a>什么是滑动平均</h2><p>滑动平均法是用一组最近的实际数据值来预测未来一期或几期内公司产品的需求量、公司产能等的一种常用方法。滑动平均法适用于即期预测。当产品需求既不快速增长也不快速下降，且不存在季节性因素时，滑动平均法能有效地消除预测中的随机波动，是非常有用的。滑动平均法根据预测时使用的各元素的权重不同</p>
-<p>滑动平均法是一种简单平滑预测技术，它的基本思想是：根据时间序列资料、逐项推移，依次计算包含一定项数的序时平均值，以反映长期趋势的方法。因此，当时间序列的数值由于受周期变动和随机波动的影响，起伏较大，不易显示出事件的发展趋势时，使用滑动平均法可以消除这些因素的影响，显示出事件的发展方向与趋势（即趋势线），然后依趋势线分析预测序列的长期趋势。</p>
-          
-            <div class="home-post-tags">
-              
-                <a href="/tags/TensorFlow/" rel="tag">TensorFlow</a>
-              
-              <script type="text/javascript">
-                var tagsall=document.getElementsByClassName("home-post-tags")
-                for (var i = tagsall.length - 1; i >= 0; i--){
-                    var tags=tagsall[i].getElementsByTagName("a");
-                    for (var j = tags.length - 1; j >= 0; j--) {
-                        var r=Math.floor(Math.random()*255);
-                        var g=Math.floor(Math.random()*255);
-                        var b=Math.floor(Math.random()*255);
-                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
-                    }
-                }
-              </script>
-            </div>
-          
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/02/exponential-moving-average/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhengyujie.cn/2019/08/01/论文笔记6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zheng Yujie">
-      <meta itemprop="description" content="C++/Python/深度学习">
-      <meta itemprop="image" content="/images/1.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="浅笑の博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/01/论文笔记6/" class="post-title-link" itemprop="url">论文阅读笔记6：Gradient Harmonized Single-stage Detector</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-01 15:42:05" itemprop="dateCreated datePublished" datetime="2019-08-01T15:42:05+08:00">2019-08-01</time>
-            </span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/08/01/论文笔记6/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/01/论文笔记6/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-          
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>2.7k</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>论文地址：<a href="https://arxiv.org/pdf/1811.05181.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1811.05181.pdf</a><br>代码地址：<a href="https://github.com/libuyu/GHM_Detection" target="_blank" rel="noopener">https://github.com/libuyu/GHM_Detection</a></p>
-</blockquote>
-<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>尽管单阶段的检测器速度较快，但在训练时存在以下几点不足，正负样本之间的巨大差距，同样，easy,hard样本的巨大差距。本文从梯度角度出发，指出了上面两个不足带来的影响。然后，作者进一步提出了梯度协调机制(GHM)用于避开上面的不足。GHM的思想可以嵌入到用于分类的交叉熵损失或者用于回归的Smooth-L1损失中，最后，本文修改过的损失函数GHM-C与GHM-R用于平衡anchor分类及回归二者的梯度。提出的`模型在COCO测试集上的mAP达到了41.6，与$Focal Loss(FL)+SL_{1}$相比，超过了0.8。</p>
-          
-            <div class="home-post-tags">
-              
-                <a href="/tags/损失函数/" rel="tag">损失函数</a>
-              
-                <a href="/tags/目标检测/" rel="tag">目标检测</a>
-              
-                <a href="/tags/论文笔记/" rel="tag">论文笔记</a>
-              
-              <script type="text/javascript">
-                var tagsall=document.getElementsByClassName("home-post-tags")
-                for (var i = tagsall.length - 1; i >= 0; i--){
-                    var tags=tagsall[i].getElementsByTagName("a");
-                    for (var j = tags.length - 1; j >= 0; j--) {
-                        var r=Math.floor(Math.random()*255);
-                        var g=Math.floor(Math.random()*255);
-                        var b=Math.floor(Math.random()*255);
-                        tags[j].style.background = "rgb("+r+","+g+","+b+")";
-                    }
-                }
-              </script>
-            </div>
-          
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/01/论文笔记6/#more" rel="contents">
+              <a class="btn" href="/2019/08/02/论文阅读笔记7/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1745,7 +1735,7 @@
                     
                         <a href="/archives/">
                     
-                        <span class="site-state-item-count">45</span>
+                        <span class="site-state-item-count">47</span>
                         <span class="site-state-item-name">日志</span>
                     </a>
                     </div>
@@ -1772,7 +1762,9 @@
                     
                         
                     
-                    <span class="site-state-item-count">5</span>
+                        
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">分类</span>
                     </a>
                     </div>
@@ -1847,43 +1839,7 @@
                     
                         
                     
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                    <span class="site-state-item-count">47</span>
+                    <span class="site-state-item-count">29</span>
                     <span class="site-state-item-name">标签</span>
                     </a>
                     </div>
@@ -1956,7 +1912,7 @@
                 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
                 <li class="blog-info-list">
                 <span class="blog-info-name">文章数目</span>
-                <span class="blogs-count">45</span>
+                <span class="blogs-count">47</span>
                 </li>
                 <li class="blog-info-list">
                 <span class="blog-info-name">运行天数</span>
@@ -2014,7 +1970,7 @@
             <span>分类</span>
             </div>
             <div>
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo框架/">Hexo框架</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Ubuntu/">Ubuntu</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂记/">杂记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/深度学习/">深度学习</a><span class="category-list-count">28</span></li></ul> 
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo框架/">Hexo框架</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Ubuntu/">Ubuntu</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂记/">杂记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/深度学习/">深度学习</a><span class="category-list-count">28</span></li></ul> 
             </div>
         </div>
         <div class="sidebar-tags">
@@ -2028,7 +1984,7 @@
             <div class="widget-wrap">
                 <div id="myCanvasContainer" class="widget tagcloud">
                 <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                    <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AlexNet/">AlexNet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/">CUDA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coding/">Coding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deformable-Convolution/">Deformable Convolution</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/">Django</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Embedding/">Embedding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Focal-Loss/">Focal Loss</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Heatmap/">Heatmap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/InceptionNet/">InceptionNet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MNIST/">MNIST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NexT/">NexT</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyTorch/">PyTorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python库/">Python库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/R-CNN/">R-CNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ResNet/">ResNet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VGGNet/">VGGNet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Valine/">Valine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anchor-free/">anchor-free</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuDNN/">cuDNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/">mathjax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关键点检测/">关键点检测</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卷积网络/">卷积网络</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小破站记事/">小破站记事</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感受野/">感受野</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/损失函数/">损失函数</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/注意力机制/">注意力机制</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码解读/">源码解读</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/激励函数/">激励函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目标检测/">目标检测</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/空洞卷积/">空洞卷积</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统安装/">系统安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性回归/">线性回归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/论文笔记/">论文笔记</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件安装/">软件安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逻辑回归/">逻辑回归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a><span class="tag-list-count">1</span></li></ul>
+                    <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/">CUDA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coding/">Coding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/">Django</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NexT/">NexT</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyTorch/">PyTorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python库/">Python库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/R-CNN/">R-CNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Valine/">Valine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anchor-free/">anchor-free</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuDNN/">cuDNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卷积网络/">卷积网络</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小破站记事/">小破站记事</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目标检测/">目标检测</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件安装/">软件安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a><span class="tag-list-count">2</span></li></ul>
                 </canvas>
                 </div>
             </div>
@@ -2074,7 +2030,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Zheng Yujie</span>
     <span class="post-meta-divider">|</span>
-    <span title="站点总字数">全站共195k字</span>
+    <span title="站点总字数">全站共199k字</span>
 </div>
 
 <div class="BbeiAn-info">
@@ -2169,11 +2125,11 @@
       
     
       
+    
+      
+    
+      
         
-      
-    
-      
-    
       
     
       
